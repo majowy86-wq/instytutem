@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Archon — Unisex Skin, Laser, and Beauty</title>
+<meta name="description" content="Just effective treatments for skin + body. Unisex skin, laser and beauty clinic in Teneriffe, Brisbane.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<!-- TODO: favicon / logo mark asset not yet available -->
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-nav" id="siteNav">
+  <div class="container nav-row">
+    <a class="logo" href="index.html">ARCHON<sup>TM</sup></a>
+
+    <nav aria-label="Main">
+      <ul class="nav-links">
+        <li>
+          <button class="nav-link" id="skinMenuBtn" aria-expanded="false" aria-controls="skinMegaPanel">
+            <span class="nav-type">Skin</span><span class="caret">▾</span>
+          </button>
+          <div class="mega-panel" id="skinMegaPanel" hidden>
+            <div class="mega-col">
+              <div class="cat">Facial Tiers</div>
+              <ul>
+                <li><a href="skin.html#tier-1">Tier 1 – Standard Facials</a></li>
+                <li><a href="skin.html#tier-2">Tier 2 – Moderate Facials</a></li>
+                <li><a href="skin.html#tier-3">Tier 3 – Advanced Facials</a></li>
+              </ul>
+            </div>
+            <div class="mega-col">
+              <div class="cat">Treatment Types</div>
+              <ul>
+                <li><a href="skin.html#fractional-rf">Fractional RF Tightening</a></li>
+                <li><a href="skin.html#microneedling">Skin Microneedling</a></li>
+                <li><a href="skin.html#microblading">Brow Microblading</a></li>
+                <li><a href="skin.html#lip-blush">Lip Blush Tattoo</a></li>
+                <li><a href="skin.html#microdermabrasion">Microdermabrasion</a></li>
+                <li><a href="skin.html#led">LED Light Therapy</a></li>
+              </ul>
+            </div>
+            <div class="mega-col">
+              <div class="cat">Treatment Plans</div>
+              <ul>
+                <li><a href="skin.html#membership">Annual Membership</a></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li><a class="nav-link" href="laser.html"><span class="nav-type">Laser</span></a></li>
+        <li><a class="nav-link" href="men.html"><span class="nav-type">Men</span></a></li>
+        <li><a class="nav-link" href="women.html"><span class="nav-type">Women</span></a></li>
+        <li><a class="nav-link" href="about.html"><span class="nav-type">About</span></a></li>
+        <li><a class="nav-link" href="#contact"><span class="nav-type">Contact</span></a></li>
+      </ul>
+    </nav>
+
+    <div class="nav-ctas">
+      <a class="abtn primary-olive" href="#book">Book Online</a>
+      <a class="abtn outline-dark" href="#voucher">Gift Vouchers</a>
+    </div>
+
+    <button class="hamburger" id="hamburgerBtn" aria-expanded="false" aria-controls="mobileDrawer" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-drawer" id="mobileDrawer" hidden>
+  <div class="mobile-drawer-head">
+    <span class="logo">ARCHON<sup>TM</sup></span>
+    <button class="hamburger" id="drawerCloseBtn" aria-label="Close menu"><span></span><span></span><span></span></button>
+  </div>
+  <nav aria-label="Mobile">
+    <ul>
+      <li>
+        <details>
+          <summary class="nav-link"><span class="nav-type">Skin</span></summary>
+          <ul>
+            <li><a href="skin.html#tier-1">Tier 1 – Standard Facials</a></li>
+            <li><a href="skin.html#tier-2">Tier 2 – Moderate Facials</a></li>
+            <li><a href="skin.html#tier-3">Tier 3 – Advanced Facials</a></li>
+            <li><a href="skin.html#fractional-rf">Fractional RF Tightening</a></li>
+            <li><a href="skin.html#microneedling">Skin Microneedling</a></li>
+            <li><a href="skin.html#microblading">Brow Microblading</a></li>
+            <li><a href="skin.html#lip-blush">Lip Blush Tattoo</a></li>
+            <li><a href="skin.html#microdermabrasion">Microdermabrasion</a></li>
+            <li><a href="skin.html#led">LED Light Therapy</a></li>
+            <li><a href="skin.html#membership">Annual Membership</a></li>
+          </ul>
+        </details>
+      </li>
+      <li><a class="nav-link" href="laser.html"><span class="nav-type">Laser</span></a></li>
+      <li><a class="nav-link" href="men.html"><span class="nav-type">Men</span></a></li>
+      <li><a class="nav-link" href="women.html"><span class="nav-type">Women</span></a></li>
+      <li><a class="nav-link" href="about.html"><span class="nav-type">About</span></a></li>
+      <li><a class="nav-link" href="#contact"><span class="nav-type">Contact</span></a></li>
+    </ul>
+  </nav>
+  <div class="drawer-ctas">
+    <a class="abtn primary-olive" href="#book">Book Online</a>
+    <a class="abtn outline-dark" href="#voucher">Gift Vouchers</a>
+  </div>
+</div>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg" role="img" aria-label="TODO: replace with real hero photo — moody botanical / skin macro shot, dark overlay"></div>
+    <div class="container hero-content">
+      <h1 class="h-display">Just effective treatments for skin + body</h1>
+      <div class="hero-actions">
+        <a class="abtn primary-black" href="#treatments">Treatments</a>
+        <a class="abtn outline-light" href="#book">Book Online</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHILOSOPHY -->
+  <section class="section--cream section-pad">
+    <div class="container">
+      <div class="title-rule">
+        <div class="eyebrow">Aesthetics + Beauty + Grooming</div>
+        <div class="divider-rule"></div>
+      </div>
+      <div class="two-col-grid">
+        <h2 class="h-section">If it matters to you, it matters to us.</h2>
+        <div>
+          <p class="lede">At Archon, we've been helping people rediscover skin, hair and body confidence through the latest non-invasive technologies. Our award-winning clinic and simplified treatment menu offers quality over quantity. We can achieve amazing results for scarring, aging, pigmentation, or that patch of hair you never used to have.</p>
+          <p class="lede" style="margin-top:1rem">Not sure where to begin? Just book in a free consult and we'll help guide you in the right direction.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="trick-row" id="treatments">
+      <a class="trick-card arch-img ph-gradient" href="#treatments" aria-label="Men's Laser Hair Removal — TODO: replace with real photo">
+        <p class="trick-cap">Men's Laser Hair Removal</p>
+      </a>
+      <a class="trick-card arch-img ph-gradient warm" href="#treatments" aria-label="LED Light Therapy — TODO: replace with real photo">
+        <p class="trick-cap">LED Light Therapy</p>
+      </a>
+      <a class="trick-card arch-img ph-gradient" href="#treatments" aria-label="Women's Laser Hair Removal — TODO: replace with real photo">
+        <p class="trick-cap">Women's Laser Hair Removal</p>
+      </a>
+      <a class="trick-card arch-img ph-gradient warm" href="#treatments" aria-label="Men's Waxing — TODO: replace with real photo">
+        <p class="trick-cap">Men's Waxing</p>
+      </a>
+      <a class="trick-card arch-img ph-gradient" href="#treatments" aria-label="Laser Genesis Facial — TODO: replace with real photo">
+        <p class="trick-cap">Laser Genesis Facial</p>
+      </a>
+      <a class="trick-card arch-img ph-gradient warm" href="#treatments" aria-label="Tier 2 Facials — TODO: replace with real photo">
+        <p class="trick-cap">Tier 2 Facials</p>
+      </a>
+      <a class="trick-card arch-img ph-gradient" href="#treatments" aria-label="Lip Blush Tattoo — TODO: replace with real photo">
+        <p class="trick-cap">Lip Blush Tattoo</p>
+      </a>
+      <a class="trick-card arch-img ph-gradient warm" href="#treatments" aria-label="Women's Waxing — TODO: replace with real photo">
+        <p class="trick-cap">Women's Waxing</p>
+      </a>
+      <a class="trick-card arch-img ph-gradient" href="#treatments" aria-label="Microneedling — TODO: replace with real photo">
+        <p class="trick-cap">Microneedling</p>
+      </a>
+      <a class="trick-card arch-img ph-gradient warm" href="#treatments" aria-label="Tattoo Removal — TODO: replace with real photo">
+        <p class="trick-cap">Tattoo Removal</p>
+      </a>
+      <a class="trick-card arch-img ph-gradient" href="#treatments" aria-label="Fractional RF Skin Tightening — TODO: replace with real photo">
+        <p class="trick-cap">Fractional RF Skin Tightening</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- WINTER RX FACIALS -->
+  <section class="section--olive section-pad">
+    <div class="container">
+      <div class="title-rule">
+        <div class="eyebrow">Winter Recommendations</div>
+        <div class="divider-rule"></div>
+      </div>
+      <div class="two-col-grid">
+        <h2 class="h-section">Looking for the perfect winter facial that supports skin renewal?</h2>
+        <p class="lede">RX Facials are progressive treatments, rather than purely aggressive ones. It is a common misconception that peels must show visible flaking or scabbing to be effective but this is not true for the majority of people seeking rejuvenation. We aim to infuse the skin with beneficial and nourishing ingredients that allow your skin to reach optimal health levels and the best environment for cell renewal.</p>
+      </div>
+
+      <details class="rx-include">
+        <summary>All RX Facials Include</summary>
+        <ul>
+          <li>A Skin Care Consultation</li>
+          <li>A Deep Cleanse</li>
+          <li>An Exfoliating Treatment and Extractions</li>
+          <li>A High Performance Mask</li>
+          <li>RX-Elite Deep Pore Cleanse</li>
+          <li>A Prescribed RX-Elite Mask</li>
+          <li>Speciality Eye Cream and Antioxidant Serum</li>
+          <li>SPF Sunscreen if required</li>
+          <li>A Complimentary Beer or Wine</li>
+        </ul>
+      </details>
+
+      <div class="tcard-row">
+        <article class="tcard card-radius">
+          <div class="ph ph-gradient" role="img" aria-label="TODO: replace with real photo — RX Benefactor Facial"></div>
+          <div class="body">
+            <h3 class="h-card">RX Benefactor Facial</h3>
+            <div class="price">$170 · 1 Hour</div>
+            <p class="desc">This mask is suitable for problem skin, including conditions associated with premature aging, photo-damage, hyper-pigmentation and scarring. The benefits include aiding in cell renewal, softening of the skin, and lightening and brightening the complexion.</p>
+            <a class="booklink" href="#book">Book Just This</a>
+          </div>
+        </article>
+        <article class="tcard card-radius">
+          <div class="ph ph-gradient warm" role="img" aria-label="TODO: replace with real photo — RX Illuminate Facial"></div>
+          <div class="body">
+            <h3 class="h-card">RX Illuminate Facial (NEW)</h3>
+            <div class="price">$170 · 1 Hour</div>
+            <p class="desc">This renewing and brightening treatment combines the power of Vitamin A and Vitamin C into one illuminating facial treatment. Featuring a mild retinol complex and a vitamin C-infused peel, it revitalises tired, lacklustre skin while encouraging the growth of healthy, youthful skin cells. A soothing facial massage, followed by a hydrating alginate mask and protective SPF, completes the experience.</p>
+            <a class="booklink" href="#book">Book Just This</a>
+          </div>
+        </article>
+        <article class="tcard card-radius">
+          <div class="ph ph-gradient" role="img" aria-label="TODO: replace with real photo — RX Detox Facial"></div>
+          <div class="body">
+            <h3 class="h-card">RX Detox Facial</h3>
+            <div class="price">$189 · 1 Hour</div>
+            <p class="desc">The RX Detox Facial is ideal for problematic skin that experiences redness, enlarged pores, mild scarring and general toxicity issues. The peel is beneficial for these conditions by helping to exfoliate, mattify, detoxify and calming down the overall nature of the skin.</p>
+            <a class="booklink" href="#book">Book Just This</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section--olive section-pad" aria-label="Customer testimonials">
+    <div class="container">
+      <h2 class="h-section">Some friendly customer feedback</h2>
+
+      <div class="testimonial-wrap">
+        <div class="testimonial-track" id="testimonialTrack">
+          <div class="testimonial-slide active" role="group" aria-roledescription="slide" aria-label="1 of 7">
+            <blockquote>"As someone who thought remedial/sport massages were most effective at treating mental and physical stress associated with hard training, I can confidently say the Swedish Massage is better! Most relaxed and free from tension that I've felt in a long time. Thanks Liz!"</blockquote>
+            <div class="testimonial-meta">Isaac W. · Google Review · 5 Stars</div>
+          </div>
+          <div class="testimonial-slide" role="group" aria-roledescription="slide" aria-label="2 of 7">
+            <blockquote>"Liz was wonderful and full of helpful information. The treatment (facial) was both indulgently relaxing and very effective. Definitely will be back. Thanks Liz."</blockquote>
+            <div class="testimonial-meta">Friederike R. · Google Review · 5 Stars</div>
+          </div>
+          <div class="testimonial-slide" role="group" aria-roledescription="slide" aria-label="3 of 7">
+            <blockquote>"A fantastic place, so warm and welcoming and my facial was simply amazing! Very friendly staff and I can't wait to go back"</blockquote>
+            <div class="testimonial-meta">Kaityln J. · Google Review · 5 Stars</div>
+          </div>
+          <div class="testimonial-slide" role="group" aria-roledescription="slide" aria-label="4 of 7">
+            <blockquote>"This is hands down my favourite spa, I will not go anywhere else to get my facials. The ladies are so lovely and welcoming and Anthony is the absolute best. I highly recommend, my skin has improved so much since going here!"</blockquote>
+            <div class="testimonial-meta">Zara K. · Google Review · 5 Stars</div>
+          </div>
+          <div class="testimonial-slide" role="group" aria-roledescription="slide" aria-label="5 of 7">
+            <blockquote>"After months of questioning and nerves I decided to book in with Anthony. My first appointment and subsequent appointments have all been fantastic. The team there &amp; Anthony provide a wonderful service and really help you feel calm and at ease. The work done has made a big difference in my self confidence and I would 110% recommend Archon to anyone who is contemplating booking in."</blockquote>
+            <div class="testimonial-meta">Joel P. · Google Review · 5 Stars</div>
+          </div>
+          <div class="testimonial-slide" role="group" aria-roledescription="slide" aria-label="6 of 7">
+            <blockquote>"Okay so I already had some pretty high expectations considering how many 5 star reviews these guys had received and if I tell you they exceeded the HELL out of all of them I would not be lying. Anthony and his team are so kind, considerate and easy to work with."</blockquote>
+            <div class="testimonial-meta">Lana M. · Google Review · 5 Stars</div>
+          </div>
+          <div class="testimonial-slide" role="group" aria-roledescription="slide" aria-label="7 of 7">
+            <blockquote>"This is luxury at affordable prices! Staff are so friendly yet professional, so good at what they do. Very satisfied with my waxing, very quick and relatively painless!"</blockquote>
+            <div class="testimonial-meta">Emma P. · Google Review · 5 Stars</div>
+          </div>
+        </div>
+
+        <div class="testimonial-controls">
+          <button class="tctrl" id="tPrev" aria-label="Previous testimonial">←</button>
+          <span class="tcounter" id="tCounter" aria-live="polite">Slide 1 of 7</span>
+          <button class="tctrl" id="tNext" aria-label="Next testimonial">→</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section--cream section-pad" id="contact">
+    <div class="container">
+      <div class="eyebrow">Contact Us</div>
+      <h2 class="h-section" style="margin-top:.75rem">Get in touch</h2>
+
+      <div class="contact-grid">
+        <div class="contact-col">
+          <h3>Call us</h3>
+          <p>Have a question? Give us a call and we'll help however we can. If we're with customers please leave a message.</p>
+          <a class="contact-value" href="tel:+61738525660">07 3852 5660</a>
+        </div>
+        <div class="contact-col">
+          <h3>Visit Us</h3>
+          <p>100 Commercial Road<br>Teneriffe QLD, 4005<br>Australia</p>
+          <a class="contact-value" href="https://maps.google.com/?q=100+Commercial+Road,+Teneriffe+QLD+4005,+Australia" target="_blank" rel="noopener">Get Directions</a>
+        </div>
+        <div class="contact-col">
+          <h3>Send an Email</h3>
+          <p>Have a question about your skin, treatment or a booking? Send us a message and/or a photo and we'll reply asap.</p>
+          <!-- TODO: confirm real contact email address -->
+          <a class="contact-value" href="mailto:info@archon.au">Email Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VOUCHERS -->
+  <section class="section--olive section-pad" id="voucher">
+    <div class="container">
+      <div class="title-rule">
+        <div class="eyebrow">Spa Package Gift Vouchers</div>
+        <div class="divider-rule"></div>
+      </div>
+      <div class="two-col-grid">
+        <h2 class="h-section">Buy a digital gift voucher for a loved one, friend, or colleague.</h2>
+        <div>
+          <p class="lede">Customise your digital voucher with your own message and immediately send it to your recipient's e-mail address (or send it to yourself to gift later). The perfect easy last-minute gift idea.</p>
+          <!-- TODO: link to real gift-card purchase platform -->
+          <a class="abtn white" href="#" style="margin-top:1.5rem">Buy a Digital Voucher</a>
+          <p class="fine-print">You can customise the value to suit your budget too.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING BANNER -->
+  <section class="section--olive section-pad banner-photo" id="book">
+    <div class="banner-photo-bg ph-gradient warm" role="img" aria-label="TODO: replace with real photo — spa interior, blurred"></div>
+    <div class="container banner-cta">
+      <div class="eyebrow">Easy Online Bookings</div>
+      <h2 class="h-section" style="margin-top:.75rem">Take a moment outside your usual.</h2>
+      <!-- TODO: link to real booking platform (Fresha / Timely / etc.) -->
+      <a class="abtn white" href="#">Book Online</a>
+    </div>
+  </section>
+
+  <!-- BENEFITS MARQUEE -->
+  <div class="section--cream marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Fall In Love With Your Skin And Body</span>
+      <span>Free Consultations + Skin Advice</span>
+      <span>Male + Female Therapists</span>
+      <span>Award-Winning Salon</span>
+      <span>Everyone Welcome</span>
+      <span>Fall In Love With Your Skin And Body</span>
+      <span>Free Consultations + Skin Advice</span>
+      <span>Male + Female Therapists</span>
+      <span>Award-Winning Salon</span>
+      <span>Everyone Welcome</span>
+    </div>
+  </div>
+
+  <!-- NEWSLETTER -->
+  <section class="section--cream section-pad">
+    <div class="container">
+      <div class="newsletter-box">
+        <h2 class="h-section">Archon Rewards — Free to Join</h2>
+        <p class="lede" style="margin-top:1rem">Enjoy $25 off your first visit, earn loyalty points, + $30 birthday bonus! We will e-mail you a voucher code that you can use straight away. Plus good emails, updates, promotions and future perks.</p>
+
+        <form class="newsletter-form" id="newsletterForm" novalidate>
+          <label class="visually-hidden" for="newsletterEmail">Email address</label>
+          <input type="email" id="newsletterEmail" name="email" placeholder="Your email address" required>
+          <button class="abtn primary-olive" type="submit">Join Now</button>
+        </form>
+        <p class="form-status" id="newsletterStatus" hidden></p>
+        <p class="form-note">By subscribing you agree to our Privacy Policy. Read more about our loyalty program here.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer section--cream">
+  <div class="container section-pad">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="logo" style="margin-bottom:1rem">ARCHON<sup>TM</sup></div>
+        <a class="contact-value" href="tel:+61738525660" style="display:block">07 3852 5660</a>
+        <a class="contact-value" href="mailto:info@archon.au" style="display:block;margin-top:.5rem">E-mail Us</a>
+        <a class="contact-value" href="https://maps.google.com/?q=100+Commercial+Road,+Teneriffe+QLD+4005,+Australia" target="_blank" rel="noopener" style="display:block;margin-top:.5rem">Our Location/s</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Skin Treatments</h4>
+        <ul>
+          <li><a href="skin.html#tier-1">Tier 1 Facials – Standard</a></li>
+          <li><a href="skin.html#tier-2">Tier 2 Facials – Moderate</a></li>
+          <li><a href="skin.html#tier-3">Tier 3 Facials – Advanced</a></li>
+          <li><a href="skin.html#microdermabrasion">Microdermabrasion</a></li>
+          <li><a href="skin.html#skin-needling">Skin Needling</a></li>
+          <li><a href="skin.html#led">LED Light Therapy</a></li>
+          <li><a href="skin.html#fractional-rf">Fractional RF Treatments</a></li>
+          <li><a href="skin.html#microblading">Brow Microblading</a></li>
+          <li><a href="skin.html#lip-blush">Lip Blush Tattoo</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Laser Treatments</h4>
+        <ul>
+          <li><a href="laser.html#hair-removal">Laser Hair Removal</a></li>
+          <li><a href="laser.html#tattoo-removal">Laser Tattoo Removal</a></li>
+          <li><a href="laser.html#pigmentation">Pigmentation Reduction</a></li>
+          <li><a href="laser.html#carbon-facial">Carbon Laser Facial</a></li>
+          <li><a href="laser.html#genesis">Laser Genesis Facial</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="about.html#loyalty">Loyalty Program</a></li>
+          <li><a href="about.html#careers">Careers</a></li>
+          <li><a href="about.html#business">Business Opportunities</a></li>
+          <li><a href="about.html#articles">Articles &amp; News</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Archon. All rights reserved.</span>
+      <span><a href="#">Privacy Policy</a><a href="#">Terms</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
