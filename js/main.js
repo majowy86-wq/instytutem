@@ -68,9 +68,23 @@
   /* ---------- mobile drawer ---------- */
   var hamburgerBtn = document.getElementById("hamburgerBtn");
   var drawer = document.getElementById("mobileDrawer");
+  var drawerDetails = drawer ? Array.prototype.slice.call(drawer.querySelectorAll("details")) : [];
+
+  /* accordion behaviour: opening one category collapses any other that was open */
+  drawerDetails.forEach(function (d) {
+    d.addEventListener("toggle", function () {
+      if (d.open) {
+        drawerDetails.forEach(function (other) {
+          if (other !== d) other.open = false;
+        });
+      }
+    });
+  });
 
   function openDrawer() {
     if (!drawer) return;
+    /* always start fully collapsed, regardless of how it was left last time it was open */
+    drawerDetails.forEach(function (d) { d.open = false; });
     drawer.hidden = false;
     requestAnimationFrame(function () { drawer.classList.add("open"); });
     hamburgerBtn.setAttribute("aria-expanded", "true");
@@ -99,7 +113,7 @@
     /* the hamburger/drawer are mobile-only (hidden above 900px) — if the drawer is left
        open and the viewport is then widened past that breakpoint, both toggles disappear
        with no way to close it and body scroll stays locked, so force-close automatically */
-    var desktopMQ = window.matchMedia("(min-width: 901px)");
+    var desktopMQ = window.matchMedia("(min-width: 1025px)");
     var handleDesktopChange = function (e) {
       if (e.matches) closeDrawer();
     };
@@ -196,5 +210,88 @@
       var pct = max > 0 ? (trickRow.scrollLeft / max) * 100 : 0;
       progressFill.style.width = pct + "%";
     });
+  }
+
+  /* ---------- treatments row — drag to scroll ---------- */
+  if (trickRow) {
+    var isDragging = false;
+    var dragMoved = false;
+    var dragStartX = 0;
+    var dragStartScroll = 0;
+
+    /* without this, starting the drag on a card (its <a>/<img>) triggers the
+       browser's native "drag this link/image" gesture instead of our own —
+       CSS -webkit-user-drag:none covers Chrome/Safari, this covers Firefox too */
+    trickRow.addEventListener("dragstart", function (e) {
+      e.preventDefault();
+    });
+
+    trickRow.addEventListener("mousedown", function (e) {
+      isDragging = true;
+      dragMoved = false;
+      dragStartX = e.pageX;
+      dragStartScroll = trickRow.scrollLeft;
+      trickRow.classList.add("dragging");
+    });
+
+    window.addEventListener("mousemove", function (e) {
+      if (!isDragging) return;
+      var delta = e.pageX - dragStartX;
+      if (Math.abs(delta) > 3) dragMoved = true;
+      trickRow.scrollLeft = dragStartScroll - delta;
+    });
+
+    window.addEventListener("mouseup", function () {
+      if (!isDragging) return;
+      isDragging = false;
+      trickRow.classList.remove("dragging");
+    });
+
+    /* a drag that actually moved the row shouldn't also activate the card link underneath */
+    trickRow.addEventListener("click", function (e) {
+      if (dragMoved) {
+        e.preventDefault();
+        e.stopPropagation();
+        dragMoved = false;
+      }
+    }, true);
+  }
+
+  /* ---------- treatments row — horizontal image parallax (matches archon.au) ----------
+     On archon.au each card's photo is rendered at 200% width (see .trick-img) and
+     shifted with translateX, recalculated continuously as the row scrolls, so the
+     image slides slightly within its frame instead of just riding along with the
+     card — a horizontal parallax. Measured directly off the live site: for every
+     card, translateX% correlates linearly with that card's own horizontal center
+     position in the browser window (translateX% ≈ -(centerX / windowWidth) * 47),
+     clamped to ±49% (just under the ±50% where the oversized image would start
+     showing a blank edge). Reproduced here with the same scale/clamp. */
+  /* only real photos — the ph-gradient placeholder cards (no photo yet) have no
+     image detail to slide, so skip them rather than shifting a flat gradient */
+  var trickImgs = trickRow ? Array.prototype.slice.call(trickRow.querySelectorAll("img.trick-img")) : [];
+  if (trickImgs.length) {
+    var PARALLAX_SCALE = 47;
+    var PARALLAX_CAP = 49;
+    var parallaxRAF = null;
+
+    function applyParallax() {
+      parallaxRAF = null;
+      var windowWidth = window.innerWidth;
+      trickImgs.forEach(function (img) {
+        var rect = img.getBoundingClientRect();
+        var centerX = rect.left + rect.width / 2;
+        var pct = -(centerX / windowWidth) * PARALLAX_SCALE;
+        if (pct > PARALLAX_CAP) pct = PARALLAX_CAP;
+        if (pct < -PARALLAX_CAP) pct = -PARALLAX_CAP;
+        img.style.transform = "translateX(" + pct.toFixed(3) + "%)";
+      });
+    }
+    function scheduleParallax() {
+      if (parallaxRAF === null) parallaxRAF = requestAnimationFrame(applyParallax);
+    }
+
+    trickRow.addEventListener("scroll", scheduleParallax);
+    window.addEventListener("resize", scheduleParallax);
+    applyParallax();
   }
 })();

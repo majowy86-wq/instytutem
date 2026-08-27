@@ -68,7 +68,7 @@ Dwa kroje na całą markę, ładowane z Google Fonts:
 | Rola | Krój / waga | Rozmiar / line-height | Tracking | Transform |
 |---|---|---|---|---|
 | Nagłówek hero / H1–H2 | Tenor Sans 400 | 64px / 76,8px (desktop) | -3,2px | none |
-| Nagłówek sekcji | Tenor Sans 400 | ~48px | -2,5px | none |
+| Nagłówek sekcji | Tenor Sans **500** | **30px / 36px, płaskie na każdej szerokości ekranu — bez skalowania** | **-1px** | none |
 | Etykieta duża (eyebrow) | Inter 700 | 15px / 21px | normal | capitalize |
 | Etykieta mała (label) | Inter 600 | 10–12px | +1px | UPPERCASE |
 | Nagłówek karty (H4) | Inter 500 | 16px / 24px | normal | capitalize |
@@ -76,6 +76,10 @@ Dwa kroje na całą markę, ładowane z Google Fonts:
 | Nawigacja | Inter 500 | 12px / 20,4px | normal | none |
 
 **Zasada:** etykiety (eyebrow/label) idą w przeciwną stronę niż nagłówki — dodatni tracking i wersaliki budują dyscyplinę informacyjną, kontrastującą z miękkością dużych nagłówków Tenor Sans. Nie mieszać tych dwóch charakterów w jednym elemencie.
+
+**Korekta 2026-08-27:** wiersz „Nagłówek sekcji" wcześniej podawał `~48px / -2,5px` — wartość nigdy nie zmierzoną bezpośrednio, tylko przybliżoną. Zweryfikowano bezpośrednio na żywej archon.au (`.heading.h2`, klasa dzieląca się między sekcją filozofii marki, RX Facials i opiniami klientów): realna wartość to **płaskie 30px/500/-1px/line-height 36px, bez żadnego skalowania względem szerokości okna** (brak media query zmieniającego `font-size` dla tej klasy). **Wyjątki, które NIE używają tego stylu** (zweryfikowane, że to inny, większy poziom nagłówka na oryginale — nie kopiować do nich wartości 30px):
+- Sekcja Kontakt („Get in touch") i cytat w sekcji Newsletter/programu lojalnościowego („Take a moment outside your usual.") — na archon.au to klasa `.heading.hero`/`.heading.display`, realnie **60px, waga 500, letter-spacing -1px do -2px** (line-height różni się między nimi: 60px dla Kontaktu, 94px dla Newslettera — prawdopodobnie inny wariant tej samej klasy pod dłuższy, zawijający się tekst). Nie zweryfikowano jeszcze, czy nasza strona to poprawnie odwzorowuje.
+- Baner „Archon Rewards" — na archon.au to w ogóle nie nagłówek sekcji, tylko mała etykieta wielkimi literami (`h4.uppercase`, 12px/600/uppercase/+0.5px) — bardzo bliska już istniejącej klasie `.eyebrow` w tym dokumencie. Nasza strona obecnie prawdopodobnie błędnie używa tam dużego nagłówka sekcji zamiast małej etykiety — niezweryfikowane w tej rundzie, do sprawdzenia osobno.
 
 ---
 

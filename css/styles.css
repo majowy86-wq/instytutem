@@ -86,9 +86,14 @@ h1,h2,h3{
   letter-spacing:-0.04em;
 }
 .h-section{
-  font-size:clamp(1.9rem,4vw,3rem);
-  line-height:1.12;
-  letter-spacing:-0.04em;
+  /* archon.au's real .heading.h2 (measured directly, not estimated): flat 30px
+     at every viewport width — no clamp/vw scaling at all — font-weight 500
+     (h1,h2,h3 default above is 400, so this must override it explicitly) */
+  font-size:30px;
+  font-weight:500;
+  line-height:36px;
+  letter-spacing:-1px;
+  margin-bottom:var(--sp-24);
 }
 .h-card{
   font-family:"Inter",sans-serif;
@@ -109,9 +114,18 @@ h1,h2,h3{
 
 .lede{
   font-family:"Inter",sans-serif;
-  font-size:1.05rem;
-  line-height:1.75;
-  max-width:60ch;
+  font-weight:400;
+  font-size:16px;
+  line-height:27.2px;
+  /* archon.au's real paragraph has no character-based cap at all (max-width:none)
+     — it just fills its 2fr grid column. 60ch was an unmeasured guess. */
+  max-width:none;
+  /* browsers give <p> a default 1em top+bottom margin — with no reset, that
+     default TOP margin pushed the paragraph below the grid row's start line,
+     visibly lower than the heading it's meant to align with (align-items:start
+     aligns the grid ITEM, not the text inside it, so the item's own child
+     margin still shows as a gap). archon.au's own paragraph has margin:0 top. */
+  margin:0;
 }
 
 .nav-type{
@@ -205,6 +219,10 @@ h1,h2,h3{
   display:flex;
   align-items:center;
   justify-content:space-between;
+  /* floor gap so the logo and nav group never crowd together as the viewport
+     narrows toward the mobile breakpoint — justify-content:space-between alone
+     lets them touch once combined content exactly fills the row */
+  gap:24px;
   height:80px;
 }
 .logo{
@@ -229,6 +247,7 @@ h1,h2,h3{
   padding:.5rem 7px;
   color:var(--a-olive-black);
   line-height:1;
+  white-space:nowrap;
   transition:color .2s;
 }
 /* desktop nav toggles fill the full 80px header height (matches archon.au .dropdown-menu-toggle)
@@ -321,7 +340,12 @@ h1,h2,h3{
   transform:translateX(4px);
 }
 
-@media (max-width:900px){
+/* breakpoint measured against the real content width of the desktop nav (logo +
+   6 links + 2 CTA buttons + the .nav-row floor gap, ~892px unconstrained) — below
+   ~991px the row runs out of room and would overflow/compress, so the switch to
+   hamburger happens with a small margin (~33px) to spare rather than at the exact
+   pixel it starts breaking, without giving up more horizontal-nav range than needed */
+@media (max-width:1024px){
   .nav-links, .nav-ctas .abtn.outline-dark{ display:none; }
   .hamburger{ display:block; }
   /* dock "Rezerwuj online" right next to the hamburger instead of letting
@@ -360,6 +384,11 @@ h1,h2,h3{
   letter-spacing:.5px;
   text-transform:capitalize;
 }
+/* the visible label is a nested .nav-type span, whose own global rule (font-size:14px,
+   used by the desktop nav) otherwise wins over the 16px set above — measured directly
+   against archon.au's real ".dropdown-menu-text" (font-size:16px, line-height:24px,
+   letter-spacing:0.5px, weight:500), so this must match, not inherit the desktop value */
+.mobile-drawer .nav-link .nav-type{ font-size:inherit; }
 .mobile-drawer summary.nav-link{ cursor:pointer; list-style:none; }
 .mobile-drawer summary.nav-link::-webkit-details-marker{ display:none; }
 .mobile-drawer .nav-link .caret{ opacity:1; }
@@ -379,8 +408,13 @@ h1,h2,h3{
   margin-top:.5rem;
 }
 .mobile-drawer .cat-label:first-child{ margin-top:0; }
-.mobile-drawer .drawer-ctas{ display:flex; flex-direction:column; gap:12px; margin-top:2.5rem; }
-.mobile-drawer .abtn{ width:100%; }
+/* three CTAs sit in a single row (matches archon.au's real mobile menu), not stacked —
+   each button shares the row equally instead of taking a fixed width. font-size:14px
+   and height:43px are archon.au's real measured values for this button row, kept
+   identical here; only the horizontal padding is reduced from their 18-23px so the
+   longer Polish button labels ("Rezerwuj online") still fit one row without wrapping */
+.mobile-drawer .drawer-ctas{ display:flex; flex-direction:row; gap:8px; margin-top:2.5rem; }
+.mobile-drawer .abtn{ flex:1; width:auto; padding:0 6px; }
 
 @media (prefers-reduced-motion: reduce){
   *{ transition:none !important; animation:none !important; }
@@ -448,40 +482,65 @@ h1,h2,h3{
    ============================================================ */
 .trick-wrap{
   margin-top:var(--sp-64);
-  max-width:100em;
-  margin-left:auto;
-  margin-right:auto;
-  padding:0 5%;
 }
 .trick-row{
   display:flex;
   gap:1em;
   overflow-x:auto;
+  /* left gutter matches the heading above (site container's own gutter, PLUS
+     the same centering offset .container gets from margin:auto past 1440px)
+     — but it's real padding on the scrollable element itself, not a margin on
+     the outer wrapper, so it scrolls away with everything before it and never
+     reappears once the user scrolls. No right padding, ever, at any width: the
+     row runs flush to the true viewport edge so cards scroll edge-to-edge. */
+  padding-left:calc(max(0px, calc((100% - var(--container-max)) / 2)) + clamp(20px, 5%, 72px));
   padding-bottom:var(--sp-16);
-  scroll-snap-type:x proximity;
-  scrollbar-width:thin;
+  cursor:grab;
+  user-select:none;
+  -webkit-user-select:none;
+  /* hide native scrollbar — this row is driven by drag-to-scroll, not a visible track */
+  scrollbar-width:none;
+  -ms-overflow-style:none;
 }
+.trick-row::-webkit-scrollbar{ display:none; }
+.trick-row.dragging{ cursor:grabbing; }
 .trick-card{
   flex:0 0 auto;
   width:22%;
+  /* bounds measured directly off archon.au across viewport widths, not guessed:
+     314–315px is the real peak card width (occurs ~1700px viewport — beyond
+     .homegallery's own max-width:1600px cap, its padding keeps growing with the
+     ever-wider viewport while the box itself stays capped, so the card actually
+     *shrinks* again past that point); 173px is their real width at 320px
+     viewport (the narrowest common device, using their ≤479px 60% rule) */
+  min-width:173px;
+  max-width:315px;
   height:50vh;
   position:relative;
   overflow:hidden;
   border-radius:150px 150px 20px 20px;
   transition:.5s;
-  scroll-snap-align:start;
 }
 .trick-card:hover{
+  /* archon.au also lifts translateY(-30px) here — dropped on explicit request
+     for this site; the arch-inversion + darkening overlay hover stays */
   border-radius:20px 20px 150px 150px;
-  transform:translateY(-30px);
 }
 .trick-img{
+  /* 200% width (matches archon.au's .parallaxhero exactly) gives the image room
+     to slide via JS translateX without ever exposing an edge — the visible
+     100%-wide window always stays inside this oversized image. right must stay
+     auto (not part of the inset shorthand) so left:0 + width:200% aren't
+     over-constrained by an implicit right:0. */
   position:absolute;
-  inset:0;
+  top:0; left:0; right:auto; bottom:0;
   z-index:1;
-  width:100%;
+  width:200%;
+  max-width:none;
   height:100%;
   object-fit:cover;
+  -webkit-user-drag:none;
+  pointer-events:none;
 }
 .trick-link{
   position:absolute;
@@ -491,11 +550,23 @@ h1,h2,h3{
   align-items:center;
   justify-content:center;
   transition:background-color .5s;
+  /* this <a> sits on top of the whole card (z-index above the image), so it's
+     what actually receives the mousedown that starts a drag-scroll — without
+     this, the browser's native "drag this link" gesture pre-empts our JS drag
+     the moment the pointer moves, so dragging only worked from the gaps
+     between cards (not covered by any link) instead of the cards themselves */
+  -webkit-user-drag:none;
+  user-select:none;
 }
 .trick-link:hover{ background-color:rgba(33,34,31,.31); }
 .trick-cap{
   margin:0;
   padding:0 10px;
+  max-width:100%;
+  /* flex items default to min-width:auto (the width of their widest unbreakable
+     content), which silently overrides max-width/overflow-wrap and lets the
+     caption overflow its flex parent (.trick-link) instead of shrinking */
+  min-width:0;
   text-align:center;
   font-family:"Tenor Sans",serif;
   font-weight:400;
@@ -504,6 +575,11 @@ h1,h2,h3{
   text-transform:capitalize;
   color:var(--a-white);
   font-size:2rem;
+  /* some real treatment names join two words with "/" (e.g. "Peelingi
+     medyczne/chemiczne") with no space either side — browsers don't reliably
+     treat "/" as a line-break opportunity, so that whole run can overflow the
+     narrow card on mobile widths unless breaking is explicitly allowed */
+  overflow-wrap:break-word;
 }
 .progress{
   background-color:rgba(0,0,0,.09);
@@ -606,12 +682,6 @@ h1,h2,h3{
 /* ============================================================
    Testimonials
    ============================================================ */
-.testimonial-section .h-section{
-  font-size:30px;
-  font-weight:500;
-  letter-spacing:-1px;
-  margin-bottom:24px;
-}
 .t-shell{
   display:flex;
   align-items:center;
