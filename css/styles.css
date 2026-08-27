@@ -682,6 +682,9 @@ h1,h2,h3{
 /* ============================================================
    Testimonials
    ============================================================ */
+.testimonial-section .h-section{
+  text-align:center;
+}
 .t-shell{
   display:flex;
   align-items:center;
@@ -724,11 +727,11 @@ h1,h2,h3{
   text-align:center;
 }
 .t-slide blockquote{
-  margin:0 0 30px;
+  margin:0 0 36px;
   font-family:"Inter",sans-serif;
   font-weight:400;
   font-size:16px;
-  line-height:27.2px;
+  line-height:30px;
   color:var(--a-cream);
 }
 .testimonial-name{
@@ -743,15 +746,31 @@ h1,h2,h3{
 .t-stars{
   display:flex;
   gap:4px;
+  margin-bottom:5px;
   color:var(--a-white);
 }
 .t-stars svg{ width:16px; height:20px; }
+.t-source{
+  margin:0;
+  font-family:"Inter",sans-serif;
+  font-weight:600;
+  font-size:12px;
+  line-height:24px;
+  color:var(--a-cream);
+}
 .t-dots{
   display:flex;
   align-items:center;
   justify-content:center;
   gap:12px;
   margin-top:22px;
+}
+.t-cta{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:16px;
+  margin-top:40px;
 }
 .t-dot{
   width:7px; height:7px;

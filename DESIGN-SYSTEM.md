@@ -190,7 +190,9 @@ Rozwijany panel na tle `#FFFFFF`, cień z sekcji 5, kolumny grupujące linki. Ka
 Tło `black-olive` lub `#1f2117`, zdjęcie zabiegu u góry (bez zaokrąglenia typu „łuk” — tu zwykłe 10px), nazwa zabiegu (Inter 500), cena w kolorze `--a-lime`, link „Book Just This” jako **ghost-link** (podkreślenie, nie pełny przycisk) — mniej szumu przy wielu kartach obok siebie.
 
 ### Testimoniale
-Karuzela na tle `black-olive`, cytat + imię i inicjał nazwiska + „Google Review · 5 Stars”, licznik slajdów w stylu „Slide 2 of 7”.
+Karuzela na tle `black-olive`, cytat + imię i inicjał nazwiska + gwiazdki + dopisek źródła („Google Review - 5 Stars” na archon.au; u nas „Opinia Google/Fresha - 5 Gwiazdek”, dopasowany do faktycznego źródła każdej opinii), nagłówek sekcji wyśrodkowany (`text-align:center`, jedyna różnica względem bazowej `.h-section`). Nagłówek dzieli bazową `.h-section` (30px/500/36px/-1px). Licznik slajdów w stylu „Slide 2 of 7” na archon.au — u nas kropki nawigacyjne zamiast licznika tekstowego (ustalone we wcześniejszej rundzie).
+
+**Świadome odejście od archon.au (na wyraźną prośbę użytkownika, Runda 33, 2026-08-27)**: cytat ma `line-height:30px` i `margin-bottom:36px` zamiast sitewide `16px/27,2px` (patrz sekcja 3) — nasza najdłuższa opinia (406 znaków) jest dłuższa niż najdłuższa na archon.au (384 znaków) i przy standardowym odstępie wyglądała na zbyt gęstą. Dotyczy wyłącznie tego komponentu, nie zmienia tokenu sitewide.
 
 ### Kontakt
 3 kolumny (Telefon / Adres / E-mail), każda z krótkim opisem i linkiem akcji.
