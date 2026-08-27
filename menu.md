@@ -1,20 +1,43 @@
-<!doctype html>
-<html lang="pl">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Archon — Zabiegi na Skórę, Laser i Uroda</title>
-<meta name="description" content="Po prostu skuteczne zabiegi na skórę i ciało. Klinika skóry, lasera i urody dla kobiet i mężczyzn w Teneriffe, Brisbane.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css">
-<!-- TODO: favicon / logo mark asset not yet available -->
-</head>
-<body>
+# Menu — podsumowanie i ostateczny kod
 
-<a class="skip-link" href="#main">Przejdź do treści</a>
+> Stan na 2026-08-27, po 19 rundach pracy nad menu (mega-menu w nagłówku, stopka, menu mobilne). Pełna, chronologiczna historia decyzji: [DOKUMENTACJA.md](DOKUMENTACJA.md).
 
+## Podsumowanie ustaleń
+
+**Struktura treści** — menu główne zastąpiło strukturę odziedziczoną 1:1 z archon.au (Skóra/Laser/Mężczyźni/Kobiety/O nas) nową, docelową strukturą instytutem.pl:
+
+- **Konsultacje** — 2 kolumny: Dla Twarzy / Dla Ciała
+- **Problem** — 2 kolumny: Na Twarzy / Na Ciele (kategoryzacja problem-based)
+- **Zabiegi** — 3 kolumny: Zabiegi Hi-Tech / Zabiegi Iniekcyjne / Zabiegi Manualne
+- **Cennik** — zwykły link, bez rozwijania
+- **O nas** — 2 kolumny: Dla Klientów / O INSTYTUTem. (druga kategoria czeka na treść od klienta — obecnie jeden bezpieczny link zastępczy, oznaczony `TODO` w kodzie)
+- **Kontakt** — zwykły link
+
+Adresy linków: gdzie pozycja odpowiadała realnemu, już zaindeksowanemu URL-owi z instytutem.pl (np. `/zabiegi/depilacja-laserowa-plock-lightsheer`), użyto dokładnie tego adresu — reszta to nowe adresy w tej samej konwencji (kebab-case, polskie, bez `.html`).
+
+**Styl mega-menu w nagłówku** — świadomie odwzorowany 1:1 z żywej archon.au (zmierzony bezpośrednio przez DOM, nie zgadywany):
+- Panel zaczyna się dokładnie na dole 80px nagłówka (przyciski nav wypełniają całą jego wysokość).
+- Hover linku = zmiana koloru na rdzawy `--a-rust` (`#C7642D`), bez podkreślenia.
+- Otwarta pozycja menu głównego = cienka oliwkowa linia u dołu przycisku (`box-shadow: inset`).
+- Mała strzałka (`::after`, maska CSS) pojawia się i przesuwa w prawo na hover linku; cały link też się lekko przesuwa (3px) — dokładnie jak na archon.au.
+- Padding panelu `20px 48px 36px` (dolny celowo zwiększony ponad 1:1 dla lepszego balansu wizualnego — jedyne świadome odejście od czystej wierności).
+- Szerokie panele (np. „Zabiegi”, 3 kolumny) pozycjonowane dynamicznie w JS, żeby zawsze mieściły się w viewport.
+
+**Stopka** — tożsama z menu w nagłówku (te same linki i podkategorie), plus realne dane kontaktowe z instytutem.pl (telefon, e-mail, adres z Google Maps, godziny, social media). 5 kolumn w jednym wierszu do 1024px, potem logo nad 4 kolumnami menu.
+
+**Menu mobilne** — przebudowane, żeby wizualnie i strukturalnie odpowiadało realnemu mobilnemu menu archon.au (zmierzone bezpośrednio: `padding:30px 0`, `font-size:16px/line-height:24px/letter-spacing:.5px`, linia-separator `rgba(202,199,192,.16)`, 3 przyciski CTA Zadzwoń/Rezerwuj online/Kup Voucher):
+- **Jeden, wspólny przełącznik** — hamburger w nagłówku zamienia się w X i zamyka menu ponownym kliknięciem. Usunięty został duplikat (osobne logo + X wewnątrz panelu), bo przykrywał prawdziwy hamburger i uniemożliwiał zobaczenie animacji X.
+- Panel wysuwa się **z pod nagłówka** (`top:80px`, `transform:translateY(-100%→0)`), a nie z prawej strony na pełnym ekranie.
+- Pozycje najwyższego poziomu (16px) wyraźnie większe niż podkategorie po rozwinięciu (14px) — naturalna hierarchia.
+- Menu automatycznie się zamyka, jeśli okno zostanie rozszerzone do szerokości desktop (wcześniej zostawało otwarte i zablokowane, bez możliwości zamknięcia).
+- Rdzawy hover na wszystkich linkach, łącznie z zagnieżdżonymi podkategoriami.
+
+## Ostateczny kod
+
+```html
+<!-- ============================================================
+     HEADER — nawigacja desktopowa + mega-menu + hamburger
+     ============================================================ -->
 <header class="site-nav" id="siteNav">
   <div class="container nav-row">
     <a class="logo" href="index.html"><img class="logo-mark" src="assets/images/instytutem-logo.svg" alt="INSTYTUTem"></a>
@@ -142,7 +165,7 @@
             <div class="mega-group">
               <div class="cat">O INSTYTUTem.</div>
               <ul>
-                <!-- TODO: treść tej kategorii do potwierdzenia z użytkownikiem — w dostarczonej treści była identyczna z "Dla Klientów" (Aktualne promocje / Program lojalnościowy / Vouchery), co wygląda na błąd kopiuj-wklej ze źródła. Tymczasowo jeden bezpieczny link do ogólnej strony "O nas". -->
+                <!-- TODO: treść tej kategorii do potwierdzenia z użytkownikiem — w dostarczonej treści była identyczna z "Dla Klientów", co wygląda na błąd kopiuj-wklej ze źródła. Tymczasowo jeden bezpieczny link do ogólnej strony "O nas". -->
                 <li><a href="/o-nas">O nas</a></li>
               </ul>
             </div>
@@ -164,9 +187,10 @@
   </div>
 </header>
 
-<!-- slides down from directly under the sticky header (top:80px) — the header itself, with its
-     own logo + hamburger/X toggle, stays visible and in place; no separate panel header/close
-     button, matching archon.au's real mobile menu (single persistent toggle, not a duplicate) -->
+<!-- ============================================================
+     MENU MOBILNE — wysuwa się z pod nagłówka (top:80px), jeden
+     wspólny przełącznik (hamburgerBtn), bez duplikatu logo/X
+     ============================================================ -->
 <div class="mobile-drawer" id="mobileDrawer" hidden>
   <nav aria-label="Mobilna">
     <ul>
@@ -270,326 +294,10 @@
   </div>
 </div>
 
-<main id="main">
-
-  <!-- HERO -->
-  <section class="hero">
-    <video class="hero-video" autoplay muted loop playsinline aria-hidden="true">
-      <source src="assets/video/hero-background.mp4" type="video/mp4">
-    </video>
-    <div class="hero-bg" aria-hidden="true"></div>
-    <div class="hero-content">
-      <div class="hero-content-inner">
-        <h1 class="h-display">Zabiegi których Twoja skóra + ciało potrzebują.</h1>
-        <div class="hero-actions">
-          <a class="abtn primary-black" href="#treatments">Poznaj nasze zabiegi</a>
-          <a class="abtn outline-light" href="https://bookings.gettimely.com/archonspas/book" target="_blank" rel="noopener">Rezerwuj online</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PHILOSOPHY -->
-  <section class="section--cream section-pad">
-    <div class="container">
-      <div class="title-rule">
-        <div class="eyebrow">Estetyka + Uroda + Pielęgnacja</div>
-        <div class="divider-rule"></div>
-      </div>
-      <div class="two-col-grid">
-        <h2 class="h-section">Jeśli to ważne dla Ciebie, jest ważne i dla nas.</h2>
-        <div>
-          <p class="lede">W Archon pomagamy ludziom odzyskać pewność siebie w kwestii skóry, owłosienia i ciała dzięki najnowszym nieinwazyjnym technologiom. Nasza nagradzana klinika i uproszczone menu zabiegów stawiają na jakość, nie ilość. Osiągamy świetne efekty w przypadku blizn, oznak starzenia, przebarwień czy tego fragmentu owłosienia, którego wcześniej nie było.</p>
-          <p class="lede" style="margin-top:1rem">Nie wiesz, od czego zacząć? Umów się na bezpłatną konsultację, a pomożemy Ci obrać właściwy kierunek.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- TODO: zdjęcia pobrane z archon.au (stockowe zdjęcia klientów australijskich) —
-         do podmiany na prawdziwe fotografie zabiegów instytutem.pl przed publikacją,
-         zgodnie z zasadą nadrzędną w CLAUDE.md. Na razie odwzorowują wizualnie oryginał 1:1. -->
-    <div class="trick-wrap">
-    <div class="trick-row" id="treatments">
-      <div class="trick-card">
-        <img class="trick-img" src="assets/images/treatments/mens-laser-hair-removal.jpg" alt="Mężczyzna podczas zabiegu depilacji laserowej">
-        <a class="trick-link" href="#treatments">
-          <p class="trick-cap">Depilacja Laserowa dla Mężczyzn</p>
-        </a>
-      </div>
-      <div class="trick-card">
-        <img class="trick-img" src="assets/images/treatments/led-light-therapy.jpg" alt="Kobieta podczas zabiegu terapii światłem LED">
-        <a class="trick-link" href="#treatments">
-          <p class="trick-cap">Terapia Światłem LED</p>
-        </a>
-      </div>
-      <div class="trick-card">
-        <img class="trick-img" src="assets/images/treatments/womens-laser-hair-removal.jpg" alt="Kobiety po zabiegu depilacji laserowej">
-        <a class="trick-link" href="#treatments">
-          <p class="trick-cap">Depilacja Laserowa dla Kobiet</p>
-        </a>
-      </div>
-      <div class="trick-card">
-        <img class="trick-img" src="assets/images/treatments/mens-waxing.jpg" alt="Mężczyzna po zabiegu depilacji woskiem">
-        <a class="trick-link" href="#treatments">
-          <p class="trick-cap">Depilacja Woskiem dla Mężczyzn</p>
-        </a>
-      </div>
-      <div class="trick-card">
-        <img class="trick-img" src="assets/images/treatments/laser-genesis-facial.jpg" alt="Kobieta po zabiegu Laser Genesis">
-        <a class="trick-link" href="#treatments">
-          <p class="trick-cap">Zabieg Laser Genesis</p>
-        </a>
-      </div>
-      <div class="trick-card">
-        <img class="trick-img" src="assets/images/treatments/tier-2-facials.jpg" alt="Kobieta po zabiegu na twarz Poziomu 2">
-        <a class="trick-link" href="#treatments">
-          <p class="trick-cap">Zabiegi Poziomu 2</p>
-        </a>
-      </div>
-      <div class="trick-card">
-        <img class="trick-img" src="assets/images/treatments/lip-blush-tattoo.jpg" alt="Makijaż permanentny ust">
-        <a class="trick-link" href="#treatments">
-          <p class="trick-cap">Makijaż Permanentny Ust</p>
-        </a>
-      </div>
-      <div class="trick-card">
-        <img class="trick-img" src="assets/images/treatments/womens-waxing.jpg" alt="Kobieta po zabiegu depilacji woskiem">
-        <a class="trick-link" href="#treatments">
-          <p class="trick-cap">Depilacja Woskiem dla Kobiet</p>
-        </a>
-      </div>
-      <div class="trick-card">
-        <img class="trick-img" src="assets/images/treatments/microneedling.jpg" alt="Zabieg mikronakłuwania skóry">
-        <a class="trick-link" href="#treatments">
-          <p class="trick-cap">Mikronakłuwanie</p>
-        </a>
-      </div>
-      <div class="trick-card">
-        <img class="trick-img" src="assets/images/treatments/tattoo-removal.jpg" alt="Mężczyzna rozważający usunięcie tatuażu laserem">
-        <a class="trick-link" href="#treatments">
-          <p class="trick-cap">Usuwanie Tatuaży</p>
-        </a>
-      </div>
-      <div class="trick-card">
-        <img class="trick-img" src="assets/images/treatments/fractional-rf.jpg" alt="Kobieta po zabiegu Frakcyjnego RF">
-        <a class="trick-link" href="#treatments">
-          <p class="trick-cap">Frakcyjny RF – Ujędrnianie Skóry</p>
-        </a>
-      </div>
-    </div>
-    <div class="progress"><div class="progress-fill"></div></div>
-    </div>
-  </section>
-
-  <!-- WINTER RX FACIALS -->
-  <section class="section--olive section-pad">
-    <div class="container">
-      <div class="title-rule">
-        <div class="eyebrow">Rekomendacje na Zimę</div>
-        <div class="divider-rule"></div>
-      </div>
-      <div class="two-col-grid">
-        <h2 class="h-section">Szukasz idealnego zimowego zabiegu na twarz wspierającego odnowę skóry?</h2>
-        <p class="lede">Zabiegi RX Facials to zabiegi progresywne, a nie wyłącznie agresywne. Powszechnym błędnym przekonaniem jest, że peeling musi powodować widoczne złuszczanie czy strupki, żeby był skuteczny — dla większości osób szukających odmłodzenia to nieprawda. Naszym celem jest nasycenie skóry korzystnymi, odżywczymi składnikami, które pozwalają jej osiągnąć optymalny poziom zdrowia i najlepsze warunki do odnowy komórkowej.</p>
-      </div>
-
-      <details class="rx-include">
-        <summary>Każdy Zabieg RX Facials Obejmuje</summary>
-        <ul>
-          <li>Konsultację Pielęgnacyjną</li>
-          <li>Głębokie Oczyszczanie</li>
-          <li>Zabieg Złuszczający i Oczyszczanie Manualne</li>
-          <li>Maskę o Wysokiej Skuteczności</li>
-          <li>Głębokie Oczyszczanie Porów RX-Elite</li>
-          <li>Dobraną Maskę RX-Elite</li>
-          <li>Specjalistyczny Krem pod Oczy i Serum Antyoksydacyjne</li>
-          <li>Filtr SPF w razie potrzeby</li>
-          <li>Piwo lub Wino Gratis</li>
-        </ul>
-      </details>
-
-      <div class="tcard-row">
-        <article class="tcard card-radius">
-          <div class="ph ph-gradient" role="img" aria-label="TODO: podmienić na prawdziwe zdjęcie — Zabieg RX Benefactor"></div>
-          <div class="body">
-            <h3 class="h-card">Zabieg RX Benefactor</h3>
-            <div class="price">170 $ · 1 godzina</div>
-            <p class="desc">Ta maska jest odpowiednia dla skóry problematycznej, w tym w przypadku przedwczesnego starzenia, uszkodzeń posłonecznych, przebarwień i blizn. Korzyści obejmują wspomaganie odnowy komórkowej, zmiękczenie skóry oraz rozjaśnienie i rozświetlenie cery.</p>
-            <a class="booklink" href="https://bookings.gettimely.com/archonspas/bb/book?category=331160" target="_blank" rel="noopener">Zarezerwuj Tylko To</a>
-          </div>
-        </article>
-        <article class="tcard card-radius">
-          <div class="ph ph-gradient warm" role="img" aria-label="TODO: podmienić na prawdziwe zdjęcie — Zabieg RX Illuminate"></div>
-          <div class="body">
-            <h3 class="h-card">Zabieg RX Illuminate (NOWOŚĆ)</h3>
-            <div class="price">170 $ · 1 godzina</div>
-            <p class="desc">Ten odnawiający i rozświetlający zabieg łączy moc witaminy A i witaminy C w jednym rozświetlającym zabiegu na twarz. Dzięki łagodnemu kompleksowi retinolowemu i peelingowi z witaminą C rewitalizuje zmęczoną, matową skórę, wspierając wzrost zdrowych, młodych komórek skóry. Kojący masaż twarzy, nawilżająca maska alginianowa i ochronny SPF dopełniają doświadczenie.</p>
-            <a class="booklink" href="https://bookings.gettimely.com/archonspas/bb/book?category=331160" target="_blank" rel="noopener">Zarezerwuj Tylko To</a>
-          </div>
-        </article>
-        <article class="tcard card-radius">
-          <div class="ph ph-gradient" role="img" aria-label="TODO: podmienić na prawdziwe zdjęcie — Zabieg RX Detox"></div>
-          <div class="body">
-            <h3 class="h-card">Zabieg RX Detox</h3>
-            <div class="price">189 $ · 1 godzina</div>
-            <p class="desc">Zabieg RX Detox jest idealny dla cery problematycznej z zaczerwienieniami, rozszerzonymi porami, drobnymi bliznami i ogólnymi objawami przeciążenia toksynami. Peeling pomaga złuszczać, matować, detoksykować i uspokajać skórę.</p>
-            <a class="booklink" href="https://bookings.gettimely.com/archonspas/bb/book?category=331160" target="_blank" rel="noopener">Zarezerwuj Tylko To</a>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- TESTIMONIALS -->
-  <section class="section--olive section-pad testimonial-section" aria-label="Opinie klientów">
-    <div class="container">
-      <h2 class="h-section">Kilka miłych opinii naszych klientów</h2>
-
-      <div class="t-shell">
-        <button class="t-arrow t-arrow--prev" id="tPrev" type="button" aria-label="Poprzednia opinia">
-          <svg class="t-arrow-icon" viewBox="0 0 22 16" aria-hidden="true"><path d="M8 1 1 8l7 7M1 8h20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-
-        <div class="t-mask" id="tMask">
-          <div class="t-track" id="testimonialTrack">
-            <div class="t-slide" role="group" aria-roledescription="slajd" aria-label="1 z 7">
-              <blockquote>"Jako osoba, która sądziła, że masaże lecznicze/sportowe najlepiej radzą sobie ze stresem psychicznym i fizycznym związanym z intensywnym treningiem, mogę śmiało powiedzieć, że masaż szwedzki jest lepszy! Dawno nie czułem się tak zrelaksowany i wolny od napięcia. Dzięki, Liz!"</blockquote>
-              <div class="testimonial-name">Isaac W.</div>
-              <div class="t-stars" aria-hidden="true"></div>
-            </div>
-            <div class="t-slide" role="group" aria-roledescription="slajd" aria-label="2 z 7">
-              <blockquote>"Liz była wspaniała i pełna przydatnych informacji. Zabieg (na twarz) był zarówno rozkosznie relaksujący, jak i bardzo skuteczny. Na pewno wrócę. Dziękuję, Liz."</blockquote>
-              <div class="testimonial-name">Friederike R.</div>
-              <div class="t-stars" aria-hidden="true"></div>
-            </div>
-            <div class="t-slide" role="group" aria-roledescription="slajd" aria-label="3 z 7">
-              <blockquote>"Fantastyczne miejsce, bardzo ciepłe i przyjazne, a mój zabieg na twarz był po prostu wspaniały! Bardzo miła obsługa i nie mogę się doczekać powrotu"</blockquote>
-              <div class="testimonial-name">Kaityln J.</div>
-              <div class="t-stars" aria-hidden="true"></div>
-            </div>
-            <div class="t-slide" role="group" aria-roledescription="slajd" aria-label="4 z 7">
-              <blockquote>"To zdecydowanie moje ulubione spa, nigdzie indziej nie robię już zabiegów na twarz. Panie są bardzo miłe i przyjazne, a Anthony jest po prostu najlepszy. Gorąco polecam — moja skóra bardzo się poprawiła, odkąd tu przychodzę!"</blockquote>
-              <div class="testimonial-name">Zara K.</div>
-              <div class="t-stars" aria-hidden="true"></div>
-            </div>
-            <div class="t-slide" role="group" aria-roledescription="slajd" aria-label="5 z 7">
-              <blockquote>"Po miesiącach wahania i nerwów zdecydowałem się umówić do Anthony'ego. Pierwsza wizyta i kolejne wizyty były fantastyczne. Zespół i Anthony zapewniają wspaniałą obsługę i naprawdę pomagają poczuć spokój i komfort. Efekty zrobiły ogromną różnicę w mojej pewności siebie i w 110% polecam Archon każdemu, kto rozważa wizytę."</blockquote>
-              <div class="testimonial-name">Joel P.</div>
-              <div class="t-stars" aria-hidden="true"></div>
-            </div>
-            <div class="t-slide" role="group" aria-roledescription="slajd" aria-label="6 z 7">
-              <blockquote>"Miałam już dość wysokie oczekiwania, biorąc pod uwagę, ile opinii z 5 gwiazdkami mieli ci ludzie, i jeśli powiem, że przebili je wszystkie, to nie będę kłamać. Anthony i jego zespół są tak mili, wyrozumiali i łatwo się z nimi współpracuje."</blockquote>
-              <div class="testimonial-name">Lana M.</div>
-              <div class="t-stars" aria-hidden="true"></div>
-            </div>
-            <div class="t-slide" role="group" aria-roledescription="slajd" aria-label="7 z 7">
-              <blockquote>"To luksus w przystępnych cenach! Obsługa jest przyjazna, a jednocześnie profesjonalna, naprawdę dobra w tym, co robi. Bardzo zadowolona z depilacji woskiem — szybko i stosunkowo bezboleśnie!"</blockquote>
-              <div class="testimonial-name">Emma P.</div>
-              <div class="t-stars" aria-hidden="true"></div>
-            </div>
-          </div>
-        </div>
-
-        <button class="t-arrow t-arrow--next" id="tNext" type="button" aria-label="Następna opinia">
-          <svg class="t-arrow-icon" viewBox="0 0 22 16" aria-hidden="true"><path d="M14 1l7 7-7 7M21 8H1" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-      </div>
-
-      <div class="t-dots" id="tDots" role="tablist" aria-label="Wybierz opinię"></div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section class="section--olive section-pad" id="contact">
-    <div class="container">
-      <div class="eyebrow">Skontaktuj się z Nami</div>
-      <h2 class="h-section" style="margin-top:.75rem">Bądźmy w kontakcie</h2>
-
-      <div class="contact-grid">
-        <div class="contact-box">
-          <h3>Zadzwoń do Nas</h3>
-          <p>Masz pytanie? Zadzwoń, a pomożemy najlepiej jak potrafimy. Jeśli akurat obsługujemy klientów, zostaw wiadomość.</p>
-          <a class="abtn gray" href="tel:+61738525660">3852 5660</a>
-        </div>
-        <div class="contact-box">
-          <h3>Odwiedź Nas</h3>
-          <p>100 Commercial Road<br>Teneriffe QLD, 4005<br>Australia</p>
-          <a class="abtn gray" href="https://maps.google.com/?q=100+Commercial+Road,+Teneriffe+QLD+4005,+Australia" target="_blank" rel="noopener">Wyznacz Trasę</a>
-        </div>
-        <div class="contact-box">
-          <h3>Wyślij E-mail</h3>
-          <p>Masz pytanie dotyczące skóry, zabiegu lub rezerwacji? Wyślij nam wiadomość i/lub zdjęcie, a odpowiemy najszybciej jak to możliwe.</p>
-          <a class="abtn gray" href="mailto:hello@archonspas.com.au?subject=Mam%20pytanie%3F">Napisz do Nas</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- VOUCHERS -->
-  <section class="section--olive section-pad" id="voucher">
-    <div class="container">
-      <div class="title-rule">
-        <div class="eyebrow">Bony Podarunkowe na Pakiety Spa</div>
-        <div class="divider-rule"></div>
-      </div>
-      <div class="two-col-grid">
-        <h2 class="h-section">Kup cyfrowy bon podarunkowy dla bliskiej osoby, przyjaciela lub współpracownika.</h2>
-        <div>
-          <p class="lede">Spersonalizuj swój cyfrowy bon własną wiadomością i wyślij go od razu na adres e-mail odbiorcy (lub do siebie, żeby podarować go później). Idealny, prosty pomysł na prezent w ostatniej chwili.</p>
-          <a class="abtn white" href="https://bookings.gettimely.com/archonspas/purchase" target="_blank" rel="noopener" style="margin-top:1.5rem">Kup Cyfrowy Bon</a>
-          <p class="fine-print">Możesz też dostosować wartość bonu do swojego budżetu.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- BOOKING BANNER -->
-  <section class="section--olive section-pad banner-photo" id="book">
-    <div class="banner-photo-bg ph-gradient warm" role="img" aria-label="TODO: podmienić na prawdziwe zdjęcie — wnętrze spa, rozmyte"></div>
-    <div class="container banner-cta">
-      <div class="eyebrow">Łatwe Rezerwacje Online</div>
-      <h2 class="h-section" style="margin-top:.75rem">Zrób sobie chwilę poza codziennością.</h2>
-      <a class="abtn white" href="https://bookings.gettimely.com/archonspas/book" target="_blank" rel="noopener">Zarezerwuj Online</a>
-    </div>
-  </section>
-
-  <!-- BENEFITS MARQUEE -->
-  <div class="section--cream marquee" aria-hidden="true">
-    <div class="marquee-track">
-      <span>Zakochaj Się w Swojej Skórze i Ciele</span>
-      <span>Bezpłatne Konsultacje + Porady Pielęgnacyjne</span>
-      <span>Terapeuci i Terapeutki</span>
-      <span>Nagradzany Salon</span>
-      <span>Każdy Mile Widziany</span>
-      <span>Zakochaj Się w Swojej Skórze i Ciele</span>
-      <span>Bezpłatne Konsultacje + Porady Pielęgnacyjne</span>
-      <span>Terapeuci i Terapeutki</span>
-      <span>Nagradzany Salon</span>
-      <span>Każdy Mile Widziany</span>
-    </div>
-  </div>
-
-  <!-- NEWSLETTER -->
-  <section class="section--cream section-pad">
-    <div class="container">
-      <div class="newsletter-box">
-        <h2 class="h-section">Archon Rewards — Dołącz za Darmo</h2>
-        <p class="lede" style="margin-top:1rem">Zyskaj 25 $ zniżki na pierwszą wizytę, zbieraj punkty lojalnościowe oraz 30 $ bonusu urodzinowego! Wyślemy Ci e-mailem kod rabatowy, który możesz wykorzystać od razu. Do tego dobre e-maile, nowości, promocje i przyszłe korzyści.</p>
-
-        <form class="newsletter-form" id="newsletterForm" novalidate>
-          <label class="visually-hidden" for="newsletterEmail">Adres e-mail</label>
-          <input type="email" id="newsletterEmail" name="email" placeholder="Twój adres e-mail" required>
-          <button class="abtn primary-olive" type="submit">Dołącz Teraz</button>
-        </form>
-        <p class="form-status" id="newsletterStatus" hidden></p>
-        <p class="form-note">Zapisując się, akceptujesz naszą Politykę Prywatności. Więcej o programie lojalnościowym przeczytasz tutaj.</p>
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<!-- FOOTER — te same pozycje i linki co menu w nagłówku, dane kontaktowe realne z instytutem.pl -->
+<!-- ============================================================
+     STOPKA — te same pozycje i linki co menu w nagłówku,
+     realne dane kontaktowe z instytutem.pl
+     ============================================================ -->
 <footer class="site-footer section--cream">
   <div class="container section-pad">
     <div class="footer-grid">
@@ -707,6 +415,321 @@
   </div>
 </footer>
 
-<script src="js/main.js"></script>
-</body>
-</html>
+<style>
+/* ============================================================
+   TOKENY — zmienne kolorów i odstępów użyte przez menu
+   (pełna paleta marki: DESIGN-SYSTEM.md §2)
+   ============================================================ */
+:root{
+  --a-cream:#F1EDE7;
+  --a-olive-black:#161810;
+  --a-olive:#3A412A;
+  --a-olive-deep:#232715;
+  --a-ink-warm:#3F3D3B;
+  --a-border-gray:#696969;
+  --a-gray:#7A7772;
+  --a-taupe:#D6D0C5;
+  --a-white:#FFFFFF;
+  --a-rust:#C7642D;
+  --sp-16:16px;
+  --sp-24:24px;
+  --sp-40:40px;
+  --sp-64:64px;
+  --container-max:1440px;
+}
+
+/* ============================================================
+   RESET / PODSTAWY wymagane przez menu
+   ============================================================ */
+*,*::before,*::after{ box-sizing:border-box; }
+a{ color:inherit; text-decoration:none; }
+button{ font-family:inherit; cursor:pointer; border:0; background:none; padding:0; }
+ul{ margin:0; padding:0; list-style:none; }
+.container{ max-width:var(--container-max); margin:0 auto; padding:0 clamp(20px, 5%, 72px); }
+.nav-type{ font-family:"Inter",sans-serif; font-weight:500; font-size:14px; }
+
+/* ============================================================
+   PRZYCISKI (warianty użyte w CTA menu / stopki)
+   ============================================================ */
+.abtn{
+  display:inline-flex; align-items:center; justify-content:center;
+  height:44px; padding:0 27px;
+  font-family:"Inter",sans-serif; font-size:.875rem; font-weight:500; white-space:nowrap;
+  border-radius:2px; border:0;
+  transition:transform .3s cubic-bezier(.25,.46,.45,.94), box-shadow .3s cubic-bezier(.25,.46,.45,.94);
+}
+.abtn:hover{ transform:translateY(-8px); box-shadow:0 9px 11px -2px rgba(0,0,0,.38); }
+.abtn.primary-olive{ background:var(--a-olive); color:var(--a-cream); border-radius:3px; padding:0 23px; }
+.abtn.outline-dark{ background:transparent; color:var(--a-olive-deep); border:1px solid var(--a-olive-deep); border-radius:3px; padding:0 23px; }
+.abtn.outline-gray{ background:transparent; color:var(--a-ink-warm); border:1px solid var(--a-border-gray); }
+
+/* ============================================================
+   NAV — pasek nagłówka
+   ============================================================ */
+.site-nav{ position:sticky; top:0; z-index:100; background:var(--a-cream); border-bottom:1px solid rgba(0,0,0,.06); }
+.nav-row{ display:flex; align-items:center; justify-content:space-between; height:80px; }
+.logo{ display:inline-flex; align-items:center; flex-shrink:0; }
+.logo-mark{ height:44px; width:auto; }
+.nav-right{ display:flex; align-items:center; gap:12px; }
+.nav-links{ display:flex; align-items:center; gap:0; }
+.nav-links > li{ position:relative; }
+.nav-link{
+  display:flex; align-items:center; gap:.3rem; padding:.5rem 7px;
+  color:var(--a-olive-black); line-height:1; transition:color .2s;
+}
+/* desktop nav toggles fill the full 80px header height (matches archon.au .dropdown-menu-toggle)
+   so an open mega-panel's top:100% lands exactly at the header's bottom edge, not mid-header */
+.nav-links > li > .nav-link{ height:80px; padding:0 7px; }
+.nav-link:hover{ color:var(--a-rust); }
+.nav-link[aria-expanded="true"]{ box-shadow:inset 0 -4px 0 -2px var(--a-olive); }
+.nav-link .caret{ width:10px; height:6px; flex-shrink:0; transition:transform .15s ease; opacity:.62; }
+.nav-link[aria-expanded="true"] .caret{ transform:rotate(180deg); }
+.nav-ctas{ display:flex; align-items:center; gap:10px; }
+
+/* ============================================================
+   HAMBURGER — jedyny przełącznik menu mobilnego (☰ ↔ ✕)
+   ============================================================ */
+.hamburger{ display:none; background:none; border:0; padding:.4rem; }
+.hamburger span{
+  display:block; width:22px; height:2px; background:var(--a-olive-black);
+  margin:5px 0; transition:transform .2s ease, opacity .2s ease;
+}
+.hamburger[aria-expanded="true"] span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+.hamburger[aria-expanded="true"] span:nth-child(2){ opacity:0; }
+.hamburger[aria-expanded="true"] span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+
+/* ============================================================
+   MEGA-MENU — panel kolumnowy pod przyciskiem nagłówka
+   (odstępy, hover i strzałka zmierzone 1:1 z archon.au)
+   ============================================================ */
+.mega-panel{
+  position:absolute; top:100%; left:0;
+  display:flex; gap:32px;
+  background:var(--a-white);
+  box-shadow:0 16px 20px -4px rgba(121,120,118,.15);
+  border-radius:0 0 5px 5px;
+  padding:20px 48px 36px;
+}
+.mega-panel[hidden]{ display:none; }
+.mega-group{ width:220px; flex-shrink:0; }
+.mega-group .cat{
+  font-family:"Inter",sans-serif; font-size:10px; font-weight:600; letter-spacing:1px;
+  text-transform:uppercase; color:var(--a-gray);
+  padding-top:20px; padding-bottom:10px; margin-bottom:6px;
+  border-bottom:1px solid rgba(122,119,114,.41);
+}
+.mega-group ul{ display:flex; flex-direction:column; }
+.mega-group a{
+  display:flex; align-items:center; justify-content:space-between; gap:8px;
+  padding:4px 0; font-size:14px; font-weight:500; line-height:1.3;
+  color:var(--a-olive-black); transform:translateX(0);
+  transition:color .2s, transform .2s ease;
+}
+.mega-group a:hover{ color:var(--a-rust); transform:translateX(3px); }
+/* mała strzałka — pojawia się i przesuwa w prawo na hover, dokładnie jak na archon.au */
+.mega-group a::after{
+  content:""; flex-shrink:0; width:14px; height:10px;
+  background-color:currentColor;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 12'%3E%3Cpath d='M15 6H1M10 11l5-5M10 1l5 5' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 12'%3E%3Cpath d='M15 6H1M10 11l5-5M10 1l5 5' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
+  opacity:0; transform:translateX(0);
+  transition:opacity .2s ease, transform .2s ease;
+}
+.mega-group a:hover::after{ opacity:1; transform:translateX(4px); }
+
+@media (max-width:900px){
+  .nav-links, .nav-ctas .abtn.outline-dark{ display:none; }
+  .hamburger{ display:block; }
+  /* dok przycisku "Rezerwuj online" przy hamburgerze zamiast rozstawiania przez space-between */
+  .nav-row{ justify-content:flex-start; gap:12px; }
+  .logo{ margin-right:auto; }
+}
+
+/* ============================================================
+   MENU MOBILNE — wysuwa się z pod nagłówka (nie z prawej,
+   nie na pełnym ekranie z własnym duplikatem logo/X)
+   ============================================================ */
+.mobile-drawer{
+  position:fixed; top:80px; left:0; right:0; bottom:0;
+  background:var(--a-cream); z-index:90;
+  padding:1.5rem clamp(20px, 5%, 72px);
+  overflow-y:auto;
+  transform:translateY(-100%);
+  transition:transform .3s ease;
+}
+.mobile-drawer.open{ transform:translateY(0); }
+.mobile-drawer[hidden]{ display:none; }
+.mobile-drawer nav ul{ display:flex; flex-direction:column; }
+/* wiersze najwyższego poziomu: padding 30px + cienka linia — zmierzone 1:1 z archon.au */
+.mobile-drawer nav > ul > li{ border-bottom:1px solid rgba(202,199,192,.16); }
+.mobile-drawer nav > ul > li:last-of-type{ border-bottom:none; }
+.mobile-drawer .nav-link{
+  width:100%; justify-content:space-between;
+  padding:30px 0; font-size:16px; line-height:24px; letter-spacing:.5px;
+  text-transform:capitalize;
+}
+.mobile-drawer summary.nav-link{ cursor:pointer; list-style:none; }
+.mobile-drawer summary.nav-link::-webkit-details-marker{ display:none; }
+.mobile-drawer .nav-link .caret{ opacity:1; }
+.mobile-drawer details[open] > summary .caret{ transform:rotate(180deg); }
+.mobile-drawer details ul{ padding-left:1rem; padding-bottom:24px; gap:.75rem; }
+/* podkategorie wyraźnie mniejsze (14px) niż pozycje główne (16px) — naturalna hierarchia */
+.mobile-drawer details ul a{ font-size:14px; font-weight:500; color:var(--a-ink-warm); transition:color .2s; }
+.mobile-drawer details ul a:hover{ color:var(--a-rust); }
+.mobile-drawer .cat-label{
+  font-family:"Inter",sans-serif; font-size:10px; font-weight:600; letter-spacing:1px;
+  text-transform:uppercase; color:var(--a-gray); margin-top:.5rem;
+}
+.mobile-drawer .cat-label:first-child{ margin-top:0; }
+.mobile-drawer .drawer-ctas{ display:flex; flex-direction:column; gap:12px; margin-top:2.5rem; }
+.mobile-drawer .abtn{ width:100%; }
+
+/* ============================================================
+   STOPKA — kolumny menu tożsame z nagłówkiem
+   ============================================================ */
+.site-footer{ border-top:1px solid var(--a-taupe); }
+.footer-grid{ display:grid; grid-template-columns:1.2fr repeat(4,1fr); gap:var(--sp-40) var(--sp-24); }
+.footer-col h4{
+  font-family:"Inter",sans-serif; font-weight:700; font-size:.7rem; letter-spacing:.09em;
+  text-transform:uppercase; color:var(--a-gray); margin-bottom:1rem;
+}
+.footer-col ul{ display:flex; flex-direction:column; gap:.65rem; }
+.footer-col .cat-label{
+  font-family:"Inter",sans-serif; font-size:10px; font-weight:600; letter-spacing:1px;
+  text-transform:uppercase; color:var(--a-gray);
+  margin-top:1.25rem; padding-bottom:8px; border-bottom:1px solid rgba(122,119,114,.41);
+}
+.footer-col .cat-label:first-child{ margin-top:0; }
+.footer-social{ display:flex; gap:1rem; margin-top:1.25rem; color:var(--a-ink-warm); }
+.footer-social a{ display:inline-flex; }
+.footer-social a:hover{ color:var(--a-olive); }
+.footer-col a{ display:block; font-size:.85rem; line-height:1.3; transition:color .2s; }
+.footer-col a:hover{ color:var(--a-rust); }
+.footer-bottom{
+  margin-top:var(--sp-64); padding-top:var(--sp-24); border-top:1px solid var(--a-taupe);
+  display:flex; justify-content:space-between; flex-wrap:wrap; gap:1rem;
+  font-size:.78rem; color:var(--a-gray);
+}
+.footer-bottom a{ margin-left:1rem; transition:color .2s; }
+.footer-bottom a:hover{ color:var(--a-rust); }
+@media (max-width:1024px){
+  /* kolumna logo/kontakt na pełną szerokość, 4 kolumny menu razem w jednym wierszu poniżej */
+  .footer-grid{ grid-template-columns:repeat(4,1fr); }
+  .footer-grid > .footer-col:first-child{ grid-column:1 / -1; }
+}
+@media (max-width:600px){ .footer-grid{ grid-template-columns:1fr 1fr; } }
+@media (max-width:480px){ .footer-grid{ grid-template-columns:1fr; } }
+</style>
+
+<script>
+(function () {
+  "use strict";
+
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- mega menu ---------- */
+  var megaMenus = ["konsultacje", "problem", "zabiegi", "onas"].map(function (name) {
+    return {
+      btn: document.getElementById(name + "MenuBtn"),
+      panel: document.getElementById(name + "MegaPanel")
+    };
+  }).filter(function (m) { return m.btn && m.panel; });
+
+  function closeMegaMenu(menu) {
+    menu.btn.setAttribute("aria-expanded", "false");
+    menu.panel.hidden = true;
+  }
+  function openMegaMenu(menu) {
+    megaMenus.forEach(closeMegaMenu);
+    menu.btn.setAttribute("aria-expanded", "true");
+    menu.panel.hidden = false;
+
+    /* clamp within the viewport — wide panels (e.g. 3-column "Zabiegi") would
+       otherwise overflow past the screen edge depending on where their toggle sits */
+    menu.panel.style.left = "0";
+    var li = menu.btn.closest("li");
+    var liLeft = li.getBoundingClientRect().left;
+    var maxLeft = window.innerWidth - menu.panel.offsetWidth - 20;
+    var desired = Math.min(liLeft, Math.max(20, maxLeft));
+    menu.panel.style.left = (desired - liLeft) + "px";
+  }
+
+  megaMenus.forEach(function (menu) {
+    menu.btn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var isOpen = menu.btn.getAttribute("aria-expanded") === "true";
+      isOpen ? closeMegaMenu(menu) : openMegaMenu(menu);
+    });
+  });
+
+  document.addEventListener("click", function (e) {
+    megaMenus.forEach(function (menu) {
+      if (!menu.panel.contains(e.target) && e.target !== menu.btn) {
+        closeMegaMenu(menu);
+      }
+    });
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") {
+      var openMenu = megaMenus.find(function (menu) {
+        return menu.btn.getAttribute("aria-expanded") === "true";
+      });
+      if (openMenu) {
+        closeMegaMenu(openMenu);
+        openMenu.btn.focus();
+      }
+    }
+  });
+
+  /* ---------- mobile drawer ---------- */
+  var hamburgerBtn = document.getElementById("hamburgerBtn");
+  var drawer = document.getElementById("mobileDrawer");
+
+  function openDrawer() {
+    if (!drawer) return;
+    drawer.hidden = false;
+    requestAnimationFrame(function () { drawer.classList.add("open"); });
+    hamburgerBtn.setAttribute("aria-expanded", "true");
+    hamburgerBtn.setAttribute("aria-label", "Zamknij menu");
+    document.body.style.overflow = "hidden";
+  }
+  function closeDrawer() {
+    if (!drawer) return;
+    drawer.classList.remove("open");
+    hamburgerBtn.setAttribute("aria-expanded", "false");
+    hamburgerBtn.setAttribute("aria-label", "Otwórz menu");
+    document.body.style.overflow = "";
+    window.setTimeout(function () { drawer.hidden = true; }, reduceMotion ? 0 : 250);
+  }
+
+  if (hamburgerBtn && drawer) {
+    hamburgerBtn.addEventListener("click", function () {
+      var isOpen = hamburgerBtn.getAttribute("aria-expanded") === "true";
+      isOpen ? closeDrawer() : openDrawer();
+    });
+  }
+  if (drawer) {
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && drawer.classList.contains("open")) closeDrawer();
+    });
+    /* the hamburger/drawer are mobile-only (hidden above 900px) — if the drawer is left
+       open and the viewport is then widened past that breakpoint, both toggles disappear
+       with no way to close it and body scroll stays locked, so force-close automatically */
+    var desktopMQ = window.matchMedia("(min-width: 901px)");
+    var handleDesktopChange = function (e) {
+      if (e.matches) closeDrawer();
+    };
+    if (desktopMQ.addEventListener) {
+      desktopMQ.addEventListener("change", handleDesktopChange);
+    } else if (desktopMQ.addListener) {
+      desktopMQ.addListener(handleDesktopChange);
+    }
+  }
+
+  /* ---------- footer year ---------- */
+  var yearEl = document.getElementById("year");
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+})();
+</script>
+```

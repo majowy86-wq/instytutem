@@ -42,9 +42,11 @@ Paleta jest wąska i zdyscyplinowana. Kremowe tło i niemal czarna oliwkowa ziel
 | `--a-taupe` | Taupe | `#D6D0C5` | 214, 208, 197 | Separatory, subtelne tła w kartach |
 | `--a-lime` | Lime | `#BFF751` | 191, 247, 81 | Rzadki akcent — jedna specjalna sekcja, cena w kartach zabiegów |
 | `--a-white` | White | `#FFFFFF` | 255, 255, 255 | Przycisk kontrastowy na ciemnym tle |
+| `--a-rust` | Rust | `#C7642D` | 199, 100, 45 | **Kolor hover dla wszystkich klikalnych linków tekstowych** (patrz sekcja 8, „Linki i stany hover”) |
 
 **Zasady użycia:**
 - Lime (`#BFF751`) nigdy jako kolor tła dużej powierzchni tekstu ani jako kolor tekstu — tylko jako akcent punktowy (tło jednej wyróżnionej sekcji, cena, mały highlight).
+- Rust (`#C7642D`) tylko jako stan `:hover` na klikalnych linkach tekstowych — nigdy jako domyślny kolor tekstu ani jako tło. Nie dotyczy przycisków (`.abtn`) ani ikon (social media, strzałki karuzeli) — te mają własny, osobny język interakcji (podniesienie + cień / zmiana koloru ikony).
 - Sekcje strony naprzemiennie przełączają tło między `cream` i `black-olive` — to jedyny mechanizm rytmu wizualnego strony (patrz sekcja 7).
 - Tekst na `cream` = `--a-ink-warm` lub `--a-olive-black`. Tekst na `black-olive` = `--a-cream` lub `--a-white`. Nigdy ciemny tekst na ciemnym tle ani jasny na jasnym.
 
@@ -170,6 +172,15 @@ Pasek **sticky**, tło `cream`, logotyp „ARCHON” (Tenor Sans, wersaliki, ma�
 
 ### Mega-menu
 Rozwijany panel na tle `#FFFFFF`, cień z sekcji 5, kolumny grupujące linki. Każda kolumna ma małą, wersalikową etykietę kategorii (Inter 700, ~10px, +1px tracking) podkreśloną cienką linią-separatorem (`--a-taupe`), a pod nią listę zwykłych linków (Inter 400/500, ~13–14px).
+
+### Linki i stany hover
+**Reguła obowiązująca w całym serwisie**: każdy klikalny link tekstowy (nawigacja, linki w mega-menu, stopka, linki w treści) zmienia kolor na `--a-rust` (`#C7642D`) na `:hover`, z płynnym przejściem `transition:color .2s`. Bez podkreślenia — sama zmiana koloru wystarcza jako sygnał interaktywności. Wzorzec ustalony pierwotnie w mega-menu, rozszerzony na całą stronę.
+
+**Wyjątki** (własny, odrębny język interakcji, nie rust):
+- Przyciski `.abtn` — hover to uniesienie (`translateY(-8px)`) + cień, bez zmiany koloru tekstu.
+- Ikony social media (stopka) — zmiana na `--a-olive`.
+- Strzałki karuzeli opinii — zmiana na `--a-taupe`.
+- Karty zabiegów („kadr łuk”) — własny hover (odwrócenie zaokrąglenia + uniesienie + przyciemnienie zdjęcia), nie kolor tekstu.
 
 ### Karty zabiegów
 Tło `black-olive` lub `#1f2117`, zdjęcie zabiegu u góry (bez zaokrąglenia typu „łuk” — tu zwykłe 10px), nazwa zabiegu (Inter 500), cena w kolorze `--a-lime`, link „Book Just This” jako **ghost-link** (podkreślenie, nie pełny przycisk) — mniej szumu przy wielu kartach obok siebie.
