@@ -87,10 +87,23 @@
 
   /* ---------- testimonial carousel ---------- */
   var slides = Array.prototype.slice.call(document.querySelectorAll(".testimonial-slide"));
-  var counter = document.getElementById("tCounter");
+  var dotsWrap = document.getElementById("tDots");
   var prevBtn = document.getElementById("tPrev");
   var nextBtn = document.getElementById("tNext");
   var current = 0;
+  var dots = [];
+
+  if (dotsWrap) {
+    slides.forEach(function (_, i) {
+      var dot = document.createElement("button");
+      dot.className = "tdot";
+      dot.type = "button";
+      dot.setAttribute("aria-label", "Go to testimonial " + (i + 1) + " of " + slides.length);
+      dot.addEventListener("click", function () { showSlide(i); });
+      dotsWrap.appendChild(dot);
+      dots.push(dot);
+    });
+  }
 
   function showSlide(index) {
     if (!slides.length) return;
@@ -98,8 +111,12 @@
     slides.forEach(function (slide, i) {
       slide.classList.toggle("active", i === current);
     });
-    if (counter) counter.textContent = "Slide " + (current + 1) + " of " + slides.length;
+    dots.forEach(function (dot, i) {
+      dot.classList.toggle("active", i === current);
+      dot.setAttribute("aria-current", i === current ? "true" : "false");
+    });
   }
+  showSlide(0);
 
   if (prevBtn) prevBtn.addEventListener("click", function () { showSlide(current - 1); });
   if (nextBtn) nextBtn.addEventListener("click", function () { showSlide(current + 1); });
@@ -128,24 +145,4 @@
   /* ---------- footer year ---------- */
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
-
-  /* ---------- subtle scroll reveal (skipped entirely under reduced motion) ---------- */
-  if (!reduceMotion && "IntersectionObserver" in window) {
-    var revealTargets = document.querySelectorAll(".section-pad");
-    revealTargets.forEach(function (el) {
-      el.style.opacity = "0";
-      el.style.transform = "translateY(16px)";
-      el.style.transition = "opacity .5s ease, transform .5s ease";
-    });
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = "1";
-          entry.target.style.transform = "translateY(0)";
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    revealTargets.forEach(function (el) { io.observe(el); });
-  }
 })();

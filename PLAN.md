@@ -16,38 +16,37 @@ Przy każdej zmianie w `index.html` / `css/styles.css` / `js/main.js`:
 
 ---
 
-## Checklista sekcji — stan po rundzie weryfikacji z 2026-08-26
+## Checklista sekcji — stan po rundzie weryfikacji z 2026-08-27 (Chrome DevTools MCP)
 
 | Sekcja | Zbudowane | Zgodne z archon.au | Uwagi |
 |---|---|---|---|
-| Nav (sticky, mega-menu Skin) | ✅ | ✅ | Poprawiono: kolejność przycisków (Book Online → Gift Vouchers), padding loga (konflikt CSS `.nav-row`/`.container`) |
-| Hero | ✅ | ✅ | Poprawiono: `max-width` nagłówka (680px→720px), `line-height` (1.08→1.2), `letter-spacing` (-0.05em→-0.04em) — teraz łamie się identycznie w 2 linie |
-| Marquee (pasek korzyści) | ✅ | ✅ | **Przeniesiony** — nie jest po hero, tylko między bannerem rezerwacji a newsletterem (błędne założenie na starcie). Tło zmienione cream→(było olive), kolor tekstu → `--a-gray` |
-| Filozofia marki | ✅ | ✅ | Przebudowana z 1-kolumnowego bloku na: linia-separator + eyebrow, potem siatka 1:2 (nagłówek / akapity) — dokładnie jak oryginał |
-| Rząd zabiegów (kadr „łuk”) | ✅ | ✅ | Przebudowany z „pigułek” tekstowych na poziomo przewijany rząd 11 kart w kadrze-łuku ze zdjęciem + podpisem — to jest właściwe miejsce sygnaturowego kształtu, nie pojedyncze zdjęcie obok tekstu |
-| RX Facials (zima) | ✅ | ✅ | Ten sam wzorzec linia+siatka 1:2 co Filozofia. 3 karty zabiegów bez zmian strukturalnych |
-| Opinie klientów (karuzela) | ✅ | ✅ | Licznik „Slide X of 7”, przyciski prev/next, klawiatura — działa |
-| Kontakt | ✅ | ✅ | Bez linii-separatora (oryginał też jej tu nie ma) |
-| Vouchery | ✅ | ✅ | Poprawiono: tło cream→**black-olive**, przycisk outline→**white**, wydzielono osobny fine-print pod przyciskiem, nagłówek podzielony na H2 (był częścią akapitu) |
-| Banner rezerwacji | ✅ | ✅ | Dodano warstwę zdjęcia-placeholderu (oryginał ma zdjęcie wnętrza, nie płaskie tło) |
-| Newsletter | ✅ | ✅ | Bez zmian względem pierwszej wersji |
-| Stopka | ✅ | ✅ | Bez zmian względem pierwszej wersji |
-| Responsywność (mobile/desktop) | ✅ | ✅ | Hamburger, drawer, siatki 1-kolumnowe poniżej 900px |
-| Dostępność (klawiatura) | ✅ | ✅ | Skip-link, focus-visible, mega-menu/hamburger/karuzela obsługiwane klawiaturą |
+| Nav (sticky, mega-menu Skin) | ✅ | ✅ | **Prawdziwe logo SVG** (nie tekst) pobrane z CDN archon.au. Dodano strzałki dropdown na Laser/Men/Women/About. Poprawiony margines kontenera (40px→72px/5%). **Runda 2**: usunięto domyślne obramowanie przycisku „Skin” (globalny reset `button{border:0;background:none}`), powiększono i ujednolicono strzałki (SVG chevron zamiast małego unikodu), **całkowicie przebudowano mega-menu „Skin”** z 3-kolumnowej siatki na jedną wąską kolumnę (300px, lewo-wyrównaną pod przyciskiem) — dokładnie jak oryginał, zweryfikowane przez realne kliknięcie na żywej stronie |
+| Hero | ✅ | ✅ | **Runda 2 — poprawiony realny błąd**: `.hero{display:flex}` powodowało, że `.hero-content` kurczyło się do szerokości nagłówka i centrowało przez `margin:auto`, zamiast rozciągać się na całą szerokość — stąd treść była "przyklejona" nie do tej samej krawędzi co nawigacja. Naprawione przez `position:absolute;inset:0` + wewnętrzny wrapper `width:100%`. Dodano animację hover na przyciskach (`translateY(-8px)` + cień, dokładnie jak oryginał) |
+| Filozofia marki | ✅ | ✅ | Poprawiony `letter-spacing` eyebrow (.14em→0.5px), margines kontenera |
+| Rząd zabiegów (kadr „łuk”) | ✅ | ✅ | Poprawiony rozmiar kart na desktop (243×600px → **282×450px**, gap 1.25rem→1rem) na podstawie realnego pomiaru na żywej stronie |
+| RX Facials (zima) | ✅ | ✅ | Bez dodatkowych zmian w tej rundzie |
+| Opinie klientów (karuzela) | ✅ | ✅ | **Przebudowana struktura**: wyśrodkowany układ (był lewostronny), dodano gwiazdki ★★★★★ i imię/nazwisko jako osobne linie, licznik tekstowy „Slide X of 7” zamieniony na **kropki paginacji** (7 kropek, klikalne) — dokładnie jak oryginał |
+| Kontakt | ✅ | ✅ | **Błędne wcześniej tło** — poprawione z cream na **black-olive**. Każda kolumna to teraz obramowany box (`border:1px solid var(--a-gray)`), wartości (telefon/adres/e-mail) jako pełnoszerokie przyciski `.abtn.gray` zamiast podkreślonych linków — dokładnie jak oryginał |
+| Vouchery | ✅ | ✅ | Bez dodatkowych zmian w tej rundzie |
+| Banner rezerwacji | ✅ | ✅ | Bez dodatkowych zmian w tej rundzie |
+| Newsletter | ✅ | ✅ | Bez zmian |
+| Stopka | ✅ | ✅ | Dodano ikony Facebook + Instagram (prawdziwe linki: facebook.com/archonaustralia, instagram.com/archon.australia) |
+| Responsywność (mobile/desktop) | ✅ | ✅ | Bez zmian w tej rundzie |
+| Dostępność (klawiatura) | ✅ | ✅ | Kropki karuzeli też klikalne i z `aria-label` |
+
+### Krytyczna poprawka: usunięto animację scroll-reveal
+
+Animacja pojawiania się sekcji przy scrollu (JS + IntersectionObserver, ustawiająca `opacity:0` na starcie) **nie zawsze się uruchamiała poprawnie i zostawiała całe sekcje niewidocznymi**. To był prawdziwy błąd w kodzie, nie usterka narzędzia — wykryty dzięki zrzutowi pełnej strony w Chrome DevTools MCP, gdzie widać było puste bloki tam, gdzie powinna być treść. Bardzo prawdopodobne, że to główny powód wcześniejszych odczuć „strona nie wygląda jak oryginał”. Usunięto całą funkcję (zgodnie z zasadą KISS — to była tylko dekoracja, niewarta ryzyka niewidocznej treści).
+
+**Poprawka procesu weryfikacji na przyszłość**: zrzut *pełnej strony* (`fullPage`) jest zawodny na stronach z animacjami scroll-reveal (dotyczy też samego archon.au — ich Webflow-owe animacje też nie odpalają się przy jednorazowym renderze pełnej wysokości). Weryfikacja powinna polegać na przewijaniu normalnym + zrzutach widoku (viewport), tak jak robi to prawdziwy użytkownik — nie na jednorazowym renderze całej strony.
 
 ---
 
 ## Otwarte TODO (pełna lista i szczegóły → [DOKUMENTACJA.md](DOKUMENTACJA.md))
 
 - [ ] 6 placeholderów zdjęć do podmiany (hero, kadr-łuk ×11 w rzędzie zabiegów, 3× RX Facials, banner rezerwacji)
-- [ ] Prawdziwy adres e-mail kontaktowy
-- [ ] Link do platformy rezerwacyjnej
-- [ ] Link do platformy voucherów
-- [ ] Podstrony `skin.html`, `laser.html`, `men.html`, `women.html`, `about.html`
+- [x] ~~Prawdziwy adres e-mail kontaktowy~~ — znalezione i wstawione (2026-08-27): `hello@archonspas.com.au` (kontakt), `hello@archon.au` (stopka)
+- [x] ~~Link do platformy rezerwacyjnej~~ — znalezione i wstawione (2026-08-27): `bookings.gettimely.com/archonspas/book`
+- [x] ~~Link do platformy voucherów~~ — znalezione i wstawione (2026-08-27): `bookings.gettimely.com/archonspas/purchase`
+- [ ] Podstrony `skin.html`, `laser.html`, `men.html`, `women.html`, `about.html` — w tym pełne mega-menu dla Laser/Men/Women/About (obecnie same strzałki bez treści; wiemy już, że to wąskie 1-kolumnowe dropdowny jak Skin, nie duże mega-menu — brakuje tylko realnej treści linków)
 - [ ] Podłączenie formularza newslettera pod realny ESP (Mailchimp/Klaviyo/Formspree)
-
----
-
-## Znane ograniczenie narzędziowe (nie dotyczy strony)
-
-Podczas tej rundy weryfikacji panel przeglądarki miał powtarzającą się usterkę: zrzuty ekranu czasem pokazywały puste/nieaktualne klatki mimo poprawnie wyrenderowanej strony (zweryfikowane niezależnie przez `getBoundingClientRect`/`getComputedStyle`/`elementFromPoint` — wartości zawsze poprawne). Otwarcie świeżej karty zwykle to rozwiązywało. Odnotowane na wypadek powtórki w przyszłości — to nie jest błąd w kodzie strony.
