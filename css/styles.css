@@ -95,6 +95,40 @@ h1,h2,h3{
   letter-spacing:-1px;
   margin-bottom:var(--sp-24);
 }
+.h-hero{
+  /* archon.au's real .heading.hero (measured directly): flat 60px, font-weight 500,
+     line-height:1 (tracks font-size 1:1), letter-spacing -2px, margin-bottom 35px */
+  font-size:60px;
+  font-weight:500;
+  line-height:1;
+  letter-spacing:-2px;
+  margin-bottom:35px;
+}
+.h-hero.center{ text-align:center; }
+@media (max-width:479px){
+  .h-hero{ font-size:42px; }
+}
+.h-quote{
+  /* archon.au's real .heading.display (Booking Banner "Take a moment outside
+     your usual."): flat 60px/waga 500/-1px above 991px, but grows to 72px on
+     tablet and shrinks to 51px on mobile (measured directly incl. source media
+     queries — a real, deliberate archon.au responsive quirk, not a guess) */
+  font-size:60px;
+  font-weight:500;
+  line-height:94px;
+  letter-spacing:-1px;
+  margin-top:20px;
+  margin-bottom:52px;
+}
+@media (max-width:991px){
+  .h-quote{ font-size:72px; line-height:71px; }
+}
+@media (max-width:479px){
+  .h-quote{ font-size:51px; line-height:52px; }
+}
+/* archon.au's real color here is pure white (not the usual --a-cream text on
+   black-olive sections) — max contrast against the parallax photo behind it */
+#book .h-quote{ color:var(--a-white); }
 .h-card{
   font-family:"Inter",sans-serif;
   font-weight:500;
@@ -110,7 +144,10 @@ h1,h2,h3{
   text-transform:uppercase;
   color:var(--a-gray);
 }
-.section--olive .eyebrow{ color:var(--a-taupe); }
+/* archon.au's real eyebrow/paragraph color on black-olive sections is cream,
+   not taupe (measured directly on .uppercase/.paragraph in the Gift Cards
+   section) — taupe was an unmeasured guess, wrong everywhere it's used */
+.section--olive .eyebrow{ color:var(--a-cream); }
 
 .lede{
   font-family:"Inter",sans-serif;
@@ -141,7 +178,7 @@ h1,h2,h3{
 .section--cream h1, .section--cream h2{ color:var(--a-olive-black); }
 .section--olive{ background:var(--a-olive-black); color:var(--a-cream); }
 .section--olive h1, .section--olive h2{ color:var(--a-cream); }
-.section--olive .lede{ color:var(--a-taupe); }
+.section--olive .lede{ color:var(--a-cream); }
 
 .section-pad{ padding-top:var(--sp-80); padding-bottom:var(--sp-80); }
 @media (max-width:640px){ .section-pad{ padding-top:var(--sp-64); padding-bottom:var(--sp-64); } }
@@ -785,11 +822,14 @@ h1,h2,h3{
 /* ============================================================
    Contact
    ============================================================ */
+#contact .eyebrow{ text-align:center; }
 .contact-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:var(--sp-40);
-  margin-top:var(--sp-40);
+  /* archon.au's real gap between "Get in touch" and the 3 contact columns
+     (.spacer.xlarge, measured directly) is 150px, not the 40px generic token */
+  margin-top:150px;
 }
 .contact-box{
   border:1px solid var(--a-gray);
@@ -808,21 +848,49 @@ h1,h2,h3{
 @media (max-width:800px){ .contact-grid{ grid-template-columns:1fr; gap:var(--sp-24); } }
 
 /* ============================================================
-   Vouchers / Booking banner
+   Gift cards / Booking banner
    ============================================================ */
-.banner-cta{ text-align:center; position:relative; }
-.banner-cta .abtn{ margin-top:var(--sp-24); }
+/* archon.au's real gap between the divider rule and the 2-column content
+   below it in this section is 55px (measured directly), not the shared
+   .title-rule 40px used elsewhere — scoped here since only this instance
+   is verified, not Philosophy/RX Facials */
+#gift-card .title-rule{ margin-bottom:55px; }
+
+.banner-cta{
+  text-align:center;
+  position:relative;
+  /* archon.au's real .main-container.display: fixed 600px height, flex-
+     centered content — flat across every breakpoint (measured directly,
+     confirmed in source media queries too) — not a padding-driven section */
+  height:600px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+/* no separate button margin — the h-quote heading's own 52px margin-bottom
+   already accounts for the full gap to the button (archon.au's button-wrapper
+   itself has margin:0) */
 
 .fine-print{
-  margin-top:.85rem;
-  font-size:.78rem;
-  color:var(--a-taupe);
+  /* archon.au's real .paragraph.small: 50px gap from the button above it,
+     flat 12px (not .78rem), cream at 52% opacity (not the taupe token) —
+     all measured directly, not estimated */
+  margin-top:50px;
+  font-size:12px;
+  color:rgba(241,237,231,.52);
 }
 
 .banner-photo{ position:relative; overflow:hidden; color:var(--a-white); }
 .banner-photo-bg{
   position:absolute; inset:0;
   z-index:0;
+  background-image:url("../assets/images/booking-banner.jpg");
+  background-size:cover;
+  /* top-aligned: the section is much wider than the photo's own aspect ratio,
+     so "cover" crops height — anchoring to the top keeps the face/phone in
+     frame and crops the lap/knee area at the bottom instead */
+  background-position:center top;
 }
 .banner-photo-bg::before{
   content:"";
@@ -830,7 +898,8 @@ h1,h2,h3{
   background:rgba(22,24,16,.45);
 }
 .banner-photo .container{ position:relative; z-index:1; }
-.banner-photo .eyebrow{ color:var(--a-taupe); }
+/* was color:var(--a-taupe) — measured directly on archon.au's "easy online
+   bookings" label, real color is cream, same fix as Round 35 elsewhere */
 
 /* ============================================================
    Newsletter
@@ -938,8 +1007,14 @@ h1,h2,h3{
   width:100%;
   height:1px;
   background:var(--a-gray);
-  margin-top:.75rem;
+  /* archon.au's real gap between the eyebrow label and the rule below it
+     (measured directly, also matches the Kontakt eyebrow's own margin) */
+  margin-top:20px;
 }
+/* archon.au's real divider on black-olive sections is a faint translucent
+   cream line (rgba(241,237,231,.16)), not the solid gray used on cream
+   sections — measured directly on the Gift Cards section's .divider-line.light */
+.section--olive .title-rule .divider-rule{ background:rgba(241,237,231,.16); }
 
 .two-col-grid{
   display:grid;
