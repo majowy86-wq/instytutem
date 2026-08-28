@@ -294,4 +294,67 @@
     window.addEventListener("resize", scheduleParallax);
     applyParallax();
   }
+
+  /* ---------- benefits marquee — scroll-linked, not a timed loop (matches archon.au) ----------
+     Measured directly off the live site: the ticker's position never changes on
+     its own — it sits frozen while the page is still, and only moves in response
+     to real scroll input, in either direction (scroll down shifts it one way,
+     scroll up reverses it). Reproduced here as a scroll delta applied to a
+     wrapping offset.
+
+     The HTML holds exactly ONE tile (one pass through the phrase list). A fixed
+     "duplicate it once" isn't enough — that only covers 2 tile-widths, and on a
+     wide viewport where one tile is narrower than the section, the wrap point
+     falls inside the visible area and the row visibly runs out of content mid-
+     scroll. Instead, clone the tile as many times as needed so the track always
+     covers (section width + one tile), which guarantees content is available
+     for every possible wrapped offset — recomputed on resize too, since the
+     tile's own width changes with the viewport (its font-size is vw-based). */
+  var marqueeTrack = document.getElementById("marqueeTrack");
+  if (marqueeTrack && !reduceMotion) {
+    var marqueeSection = marqueeTrack.closest(".marquee");
+    var marqueeTile = Array.prototype.slice.call(marqueeTrack.children);
+    var MARQUEE_SPEED = 0.26; // measured px-of-shift per px-of-scroll on archon.au
+    var marqueeHalfWidth = 0;
+    var marqueeOffset = 0;
+    var lastMarqueeScrollY = window.scrollY;
+    var marqueeRAF = null;
+
+    function fillMarquee() {
+      while (marqueeTrack.children.length > marqueeTile.length) {
+        marqueeTrack.removeChild(marqueeTrack.lastElementChild);
+      }
+      marqueeHalfWidth = marqueeTrack.scrollWidth;
+      var sectionWidth = marqueeSection.getBoundingClientRect().width;
+      while (marqueeTrack.scrollWidth < sectionWidth + marqueeHalfWidth) {
+        marqueeTile.forEach(function (el) {
+          marqueeTrack.appendChild(el.cloneNode(true));
+        });
+      }
+    }
+    function renderMarquee() {
+      marqueeTrack.style.transform = "translateX(" + (-marqueeOffset).toFixed(2) + "px)";
+    }
+    function applyMarquee() {
+      marqueeRAF = null;
+      var currentScrollY = window.scrollY;
+      var delta = currentScrollY - lastMarqueeScrollY;
+      lastMarqueeScrollY = currentScrollY;
+      marqueeOffset -= delta * MARQUEE_SPEED;
+      marqueeOffset = ((marqueeOffset % marqueeHalfWidth) + marqueeHalfWidth) % marqueeHalfWidth;
+      renderMarquee();
+    }
+    function scheduleMarquee() {
+      if (marqueeRAF === null) marqueeRAF = requestAnimationFrame(applyMarquee);
+    }
+    function recalcMarquee() {
+      fillMarquee();
+      marqueeOffset = ((marqueeOffset % marqueeHalfWidth) + marqueeHalfWidth) % marqueeHalfWidth;
+      renderMarquee();
+    }
+
+    fillMarquee();
+    window.addEventListener("scroll", scheduleMarquee, { passive: true });
+    window.addEventListener("resize", recalcMarquee);
+  }
 })();

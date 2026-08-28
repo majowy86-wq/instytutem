@@ -214,6 +214,35 @@ Tło `cream`, kolumny linków pogrupowane tematycznie (zabiegi skórne, laserowe
 | Overlay | Gradient do czerni pod tekstem w hero, ~40–60% krycia |
 | Kadrowanie produktowe | Kadr „łuk” (sekcja 5), bardziej nasycone, ciepłe światło niż tło hero |
 
+### Zdjęcia zabiegów generowane AI (Nano Banana / Gemini) — przewodnik po promptach
+
+Ustalone w rozmowach z użytkownikiem, Rundy 40–47 (2026-08-28). Dotyczy zdjęć w kadrze „łuk” (rząd `#treatments`) i tła bannera rezerwacji — miejsc, gdzie brakuje prawdziwej fotografii instytutem.pl i tymczasowo wypełniamy je AI.
+
+**Rdzeń stylu (stały, nie zmieniać bez nowego ustalenia z użytkownikiem):**
+> ...editorial beauty/skincare campaign style, matte skin with natural texture, dramatic warm side lighting sculpting the contour, shallow depth of field, cinematic desaturated warm color grading, shot on an 85mm lens at f/2, moody and confident, not clinical or documentary, fully appropriate for a professional business website.
+
+Uwaga: `not clinical or documentary` i `fully appropriate for a professional business website` to świadomie dodane klauzule bezpieczeństwa (Runda 47) — bez nich model bywa albo zbyt „medyczny"/stockowy (płaskie światło, zwykła odzież w kadrze), albo w skrajnym przypadku generuje nagość przy frazie w stylu „no clothing visible in frame". Jeśli w kadrze ma być bielizna/strój spa, pisać to wprost (`wearing plain neutral-toned fitted underwear`), nigdy nie polegać na domyśle modelu.
+
+**Model:** rysy i karnacja typowe dla mieszkańców Polski/Europy Środkowej (`Polish/Central European–featured model, fair to light-olive skin tone`) — to prawdziwy salon w Płocku, nie australijska klinika (ustalone po Rundzie 44).
+
+**Rekwizyty botaniczne (gałązki, kwiaty) — opcjonalne, nie wymagane.** Sprawdzone bezpośrednio na 4 różnych realnych zdjęciach zabiegów z archon.au (Runda 44): tylko jedno miało trzymaną gałązkę eukaliptusa, pozostałe (tors z tatuażem, profil twarzy w liściach w scenie, plecy) — żadnych rekwizytów. Nie dodawać automatycznie do każdego promptu.
+
+**Tło — rotować, nie powtarzać tego samego 2x pod rząd** (Runda 46, po tym jak 3 kolejne zdjęcia wyszły z tym samym brązem). Pula oparta o paletę marki z §2:
+
+| Fraza do promptu | Nawiązanie |
+|---|---|
+| `plain warm taupe-brown seamless studio backdrop` | `--a-taupe` |
+| `plain deep olive-green seamless studio backdrop, almost black in the shadows` | `--a-olive`/`--a-olive-deep` |
+| `plain warm neutral gray seamless studio backdrop` | `--a-gray` |
+| `plain dark warm charcoal-brown seamless studio backdrop` | `--a-ink-warm` |
+| `plain muted terracotta seamless studio backdrop, desaturated, not bright` | nawiązanie do `--a-rust`, stonowane — rdza to akcent hover, nie duża powierzchnia (§2) |
+
+**Treść — dla zabiegów redukujących/modelujących (kriolipoliza, karboksyterapia, lipoliza iniekcyjna itp.) pokazywać realną cechę, którą zabieg adresuje, nie już-idealny efekt końcowy** (ustalone Runda 47, zweryfikowane bezpośrednio na alt-tekstach realnych zdjęć archon.au — grupowe zdjęcia z faktycznie zróżnicowanym owłosieniem ciała, sylwetkami — nie tylko wyidealizowane rezultaty). Przykład: kriolipoliza → naturalne ciało z widocznymi wałeczkami, nie już wysportowane. Zawsze w tonie pewnym siebie/edytorialnym, nigdy wstydliwym czy klinicznym.
+
+**Wyjątek, skorygowany w Rundzie 49: epilacja laserowa/depilacja to NIE ten sam przypadek.** Pierwsza próba zastosowania powyższej zasady do epilacji (widoczne owłosienie zamiast gładkiej skóry) dała w praktyce nieapetyczny, odpychający rezultat — sprawdzone dopiero na realnym wygenerowanym zdjęciu, nie w teorii. Dla epilacji laserowej pokazywać **gładką, depilowaną skórę** (efekt końcowy), tak jak pierwotnie robiliśmy przed Rundą 48 — zasada „realna cecha, nie idealny efekt" dotyczy wyłącznie kategorii redukcja/modelowanie sylwetki, nie depilacji. Wniosek ogólny: przy niepewności, czy dana wytyczna faktycznie sprawdzi się wizualnie, weryfikować na wygenerowanym zdjęciu, nie zakładać z góry, że jedna zasada uogólnia się na wszystkie kategorie zabiegów.
+
+**Kadr — preferować makro zbliżenie na konkretny obszar/cechę zamiast całej twarzy/sylwetki** (ustalone Runda 54), gdy zabieg pokazuje „realną cechę" (blizna, zmarszczki, zaczerwienienie, tekstura/pory itd.). Zbliżenie czytelniej pokazuje, o co chodzi w zabiegu, niż ta sama cecha widoczna z daleka na całej postaci. Nie dotyczy zdjęć czysto idealizowanych (np. Bloomea, epilacja) — tam kompozycja zależy od tego, co ładniej wygląda w danym przypadku, nie ma sztywnej reguły kadru. **Ale nie za blisko**: zbliżenie musi zostawić widoczny punkt odniesienia (kawałek oka, ucha, linii szczęki, dłoni itd.), żeby jednoznacznie było wiadomo, jaka to część ciała i czyja (np. sama plama skóry bez żadnego punktu orientacyjnego jest nieczytelna) — w promptach dopisywać wprost, który fragment ma zostać w kadrze jako kotwica.
+
 ---
 
 ## 10. Zasady twarde (nie łamać)

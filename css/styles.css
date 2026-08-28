@@ -14,6 +14,9 @@
   --a-lime:#BFF751;
   --a-white:#FFFFFF;
   --a-rust:#C7642D;
+  /* measured directly on archon.au's benefits ticker dot (--green-yellow-2) —
+     a light peach, not rust; used only for that one dot separator */
+  --a-peach:#FFC8AA;
 
   /* spacing scale (8px based) */
   --sp-8:8px;
@@ -491,27 +494,49 @@ h1,h2,h3{
 .hero-actions{ display:flex; gap:1rem; margin-top:var(--sp-24); flex-wrap:wrap; }
 
 /* ============================================================
-   Marquee
+   Marquee — archon.au's real ".text-rotator" is scroll-linked, not a
+   self-playing timed loop (measured directly: position is frozen while the
+   page is still, only ever moves in response to a real scroll event, in
+   both directions) — driven by js/main.js, not a CSS @keyframes animation.
    ============================================================ */
-.marquee{ overflow:hidden; padding:var(--sp-16) 0; }
+.marquee{
+  overflow:hidden;
+  /* archon.au's real .text-rotator-first: padding-top/bottom 20px */
+  padding:20px 0;
+}
 .marquee-track{
   display:flex;
+  align-items:center;
   width:max-content;
-  gap:3rem;
-  animation:marquee 32s linear infinite;
 }
-.marquee-track span{
+.marquee-phrase{
   font-family:"Inter",sans-serif;
-  font-size:.72rem;
   font-weight:600;
-  letter-spacing:normal;
   text-transform:uppercase;
   color:var(--a-gray);
   white-space:nowrap;
+  /* archon.au's real .text-rotator font-size is viewport-relative, with 3
+     distinct breakpoints (measured directly in source media queries) —
+     counter-intuitively LARGER on tablet than on desktop */
+  font-size:1vw;
 }
-@keyframes marquee{
-  from{ transform:translateX(0); }
-  to{ transform:translateX(-50%); }
+@media (min-width:1440px){
+  .marquee-phrase{ font-size:.7vw; }
+}
+@media (max-width:991px){
+  .marquee-phrase{ font-size:2vw; }
+}
+@media (max-width:479px){
+  .marquee-phrase{ font-size:3vw; }
+}
+.marquee-dot{
+  /* archon.au's real .start-icon: 4x4px circle, 20px margin each side */
+  width:4px;
+  height:4px;
+  border-radius:100%;
+  background:var(--a-peach);
+  margin:0 20px;
+  flex:0 0 auto;
 }
 
 /* ============================================================
