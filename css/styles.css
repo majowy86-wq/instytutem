@@ -542,6 +542,17 @@ h1,h2,h3{
 /* ============================================================
    Philosophy — treatments row (measured 1:1 from archon.au .homegallery / .tricks-slider)
    ============================================================ */
+/* Scroll-jack: pins the row in place (vertically centered in the viewport,
+   never above the nav) while vertical scroll drives it sideways, revealing a
+   few extra cards before the page continues down. Height/top/margin of these
+   two are all set by JS (main.js) — see the comment there for why. */
+.trick-pin-outer{
+  position:relative;
+}
+.trick-pin-inner{
+  position:sticky;
+  top:80px; /* JS overrides this to center the row; this is just the no-JS fallback */
+}
 .trick-wrap{
   margin-top:var(--sp-64);
 }
@@ -553,9 +564,12 @@ h1,h2,h3{
      the same centering offset .container gets from margin:auto past 1440px)
      — but it's real padding on the scrollable element itself, not a margin on
      the outer wrapper, so it scrolls away with everything before it and never
-     reappears once the user scrolls. No right padding, ever, at any width: the
-     row runs flush to the true viewport edge so cards scroll edge-to-edge. */
+     reappears once the user scrolls. archon.au itself has no right padding
+     (cards run flush to the true viewport edge) — deliberate deviation here,
+     requested in chat, so the last card gets breathing room once fully
+     scrolled instead of touching the edge; mirrors the left gutter formula. */
   padding-left:calc(max(0px, calc((100% - var(--container-max)) / 2)) + clamp(20px, 5%, 72px));
+  padding-right:calc(max(0px, calc((100% - var(--container-max)) / 2)) + clamp(20px, 5%, 72px));
   padding-bottom:var(--sp-16);
   cursor:grab;
   user-select:none;
@@ -568,13 +582,28 @@ h1,h2,h3{
 .trick-row.dragging{ cursor:grabbing; }
 .trick-card{
   flex:0 0 auto;
-  width:22%;
+  /* base 22% is the real, measured archon.au value (see bounds below) — JS
+     (main.js, layoutCardHalfCut) overrides this with a nudged px value so
+     the row starts scrolled to 0 with an exact half-card cut off at the
+     right edge, never a random sliver — the signal that there's more to
+     scroll. Deliberate deviation from archon.au, requested in chat; the
+     nudge is small enough (a few px) that it doesn't visibly depart from
+     the measured proportions. Deliberately no scroll-snap to hold this
+     same fraction at every later scroll position too — tried that
+     (scroll-snap-type/-align), but it broke free dragging (settled with a
+     visible jump instead of following the cursor) and ate the left gutter
+     (snap-align:start pulled the resting scroll position past the padding,
+     flush to the browser edge, inconsistent with the rest of the page).
+     Reverted; the guarantee only holds for the first view now, which is
+     also where it matters most. */
+  width:var(--tc-card-w, 22%);
   /* bounds measured directly off archon.au across viewport widths, not guessed:
      314–315px is the real peak card width (occurs ~1700px viewport — beyond
      .homegallery's own max-width:1600px cap, its padding keeps growing with the
      ever-wider viewport while the box itself stays capped, so the card actually
      *shrinks* again past that point); 173px is their real width at 320px
-     viewport (the narrowest common device, using their ≤479px 60% rule) */
+     viewport (the narrowest common device, using their ≤479px 60% rule) —
+     also the safety clamp on the JS-computed --tc-card-w above. */
   min-width:173px;
   max-width:315px;
   height:50vh;
@@ -587,6 +616,21 @@ h1,h2,h3{
   /* archon.au also lifts translateY(-30px) here — dropped on explicit request
      for this site; the arch-inversion + darkening overlay hover stays */
   border-radius:20px 20px 150px 150px;
+}
+/* marks where the next treatment category starts (requested in chat, not on
+   archon.au) — a thin rule, same weight/color/opacity as .progress-tick
+   below (the matching mark on the progress bar's category map) and as
+   .divider-rule elsewhere, just vertical. A flex sibling of .trick-card
+   rather than a pseudo-element on it, so it isn't clipped by the card's
+   own overflow:hidden, and so the half-cut/scroll-jack math (which only
+   ever queries .trick-card) never has to account for it. */
+.trick-cat-divider{
+  flex:0 0 auto;
+  align-self:stretch;
+  width:1px;
+  margin:0 1.125em; /* +50% again on request, was .75em (originally .5em) */
+  background:var(--a-gray);
+  opacity:.4;
 }
 .trick-img{
   /* 200% width (matches archon.au's .parallaxhero exactly) gives the image room
@@ -643,11 +687,71 @@ h1,h2,h3{
      narrow card on mobile widths unless breaking is explicitly allowed */
   overflow-wrap:break-word;
 }
+/* category label + progress "map" (requested in chat, not on archon.au):
+   one small label per category (Zabiegi Hi-Tech / Iniekcyjne / Manualne —
+   the same 3 groups as the "Zabiegi" nav menu), each a <button> fixed at
+   the start of its own segment of the bar below (small left margin, not
+   flush with the tick), styled with the same eyebrow type and neutral gray
+   already used elsewhere. Clicking one scrolls the row to that category
+   (main.js) — same rust hover as every other clickable text link
+   sitewide (§8 of DESIGN-SYSTEM.md). The label matching whichever card is
+   centered in the viewport is highlighted (full opacity); the other two
+   stay dimmed, same 40% as the category dividers between cards and the
+   tick marks on the bar itself — one consistent "dimmed unless
+   active/present" visual language tying all three (divider, tick, label)
+   together, not three unrelated devices. */
+.trick-cat-label-wrap{
+  /* same width/centering formula as .progress-wrap directly below — the
+     labels' 0–100% positioning has to share the bar's own visible footprint,
+     not the full-bleed row, or they land outside where the bar actually is */
+  width:80%;
+  max-width:var(--container-max);
+  margin:var(--sp-16) auto 0;
+  position:relative;
+  height:1em;
+}
+.trick-cat-label{
+  /* <button> reset — browser defaults (border/background) otherwise leak
+     through, see CLAUDE.md's note on this exact class of bug. NOT `font:
+     inherit` — that shorthand resets font-family/size/weight too, and
+     because this rule comes after .eyebrow in the stylesheet it silently
+     overrode .eyebrow's explicit values with the button's plain default
+     font instead of the intended small-caps label look. */
+  background:none;
+  border:none;
+  cursor:pointer;
+  position:absolute;
+  top:0;
+  margin:0;
+  margin-left:var(--sp-8); /* breathing room from its segment's own start/tick */
+  padding:0;
+  white-space:nowrap;
+  /* left (JS-set %) marks its segment's start, not its center — this label
+     reads left-to-right from where its category begins on the bar */
+  opacity:.4;
+  transition:opacity .2s, color .2s;
+}
+.trick-cat-label.is-active{ opacity:1; }
+.trick-cat-label:hover{ color:var(--a-rust); }
+@media (max-width:767px){
+  /* 3 fixed labels this close together overlap once "Zabiegi Iniekcyjne"/
+     "Zabiegi Manualne" are wide enough relative to the narrower row — show
+     only the active one; the tick marks still carry the segment map. */
+  .trick-cat-label:not(.is-active){ display:none; }
+}
+.progress-wrap{
+  width:80%;
+  /* capped like the rest of the page's content (.container) — otherwise on
+     very wide viewports this keeps growing with the raw window instead of
+     the page's own max content width */
+  max-width:var(--container-max);
+  margin:var(--sp-16) auto 0;
+  position:relative;
+}
 .progress{
   background-color:rgba(0,0,0,.09);
-  width:80%;
+  width:100%;
   height:1.5px;
-  margin:2.5em auto 0;
   position:relative;
   overflow:hidden;
 }
@@ -657,8 +761,22 @@ h1,h2,h3{
   height:100%;
   position:relative;
 }
+.progress-ticks{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+}
+.progress-tick{
+  position:absolute;
+  top:50%;
+  transform:translate(-50%, -50%);
+  width:1px;
+  height:8px;
+  background:var(--a-gray);
+  opacity:.4; /* same weight as .trick-cat-divider — same mark, two places */
+}
 @media (max-width:991px){
-  .trick-card{ width:38%; height:60vh; }
+  .trick-card{ width:var(--tc-card-w, 38%); height:60vh; }
   .trick-cap{ font-size:2.4rem; }
 }
 @media (max-width:767px){
@@ -666,7 +784,7 @@ h1,h2,h3{
   .trick-cap{ font-size:1.6rem; }
 }
 @media (max-width:479px){
-  .trick-card{ width:60%; height:55vh; }
+  .trick-card{ width:var(--tc-card-w, 60%); height:55vh; }
   .trick-cap{ font-size:1.4rem; }
 }
 

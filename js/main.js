@@ -201,15 +201,142 @@
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
-  /* ---------- treatments row — scroll progress bar ---------- */
+  /* ---------- treatments row — scroll progress bar, category labels + map ----------
+     Requested in chat, not on archon.au: one small clickable label per
+     category (Zabiegi Hi-Tech / Iniekcyjne / Manualne — the same 3 groups
+     as the "Zabiegi" nav menu), fixed at the START of its own segment of
+     the bar below (small left margin, not flush with the tick); whichever
+     one matches the card CENTERED in the viewport is highlighted, the
+     other two stay dimmed. Two tick marks on the bar mark where the next
+     category starts — a miniature timeline — and share the exact dimmed
+     styling of the .trick-cat-divider rules between the cards themselves
+     (see CSS), so a divider and its tick read as the same marker in two
+     places, not two unrelated devices.
+
+     The viewport CENTER, not the leading/left edge, is what both "which
+     category is current" and "where a clicked label jumps to" are anchored
+     to — one consistent reference point for the whole feature, not a mix.
+
+     Progress (fill width) means "how far through the 24 cards" — a
+     fraction of CARD INDEX (centered card / (total - 1)), not of raw
+     scrollLeft/maxScroll pixels like the bar originally was. Pixel-based
+     fractions skew toward whatever's already visible at rest: with ~3-4
+     cards fitting in view at once, the last category (only 4 of 24 cards)
+     ended up squeezed into a sliver of the bar a few percent wide — easy to
+     miss entirely, which is exactly what got reported. Index-based, every
+     card (and so every category) gets its proportionate, honest share of
+     the bar regardless of viewport width. To still flow smoothly rather
+     than visibly jump at each of the 24 card boundaries, the fraction is
+     interpolated continuously between the current card and the next
+     (fractionalIndex), not snapped to whole numbers — only the *active
+     label* decision snaps (a label is either the current category or it
+     isn't, there's no "half current"). Tick and label positions are pure
+     constants (11/23, 20/23 of the way through) — they never need
+     recomputing on resize. */
   var trickRow = document.querySelector(".trick-row");
   var progressFill = document.querySelector(".progress-fill");
+  var catLabels = document.querySelectorAll(".trick-cat-label");
+  var progressTicks = document.getElementById("progressTicks");
   if (trickRow && progressFill) {
-    trickRow.addEventListener("scroll", function () {
-      var max = trickRow.scrollWidth - trickRow.clientWidth;
-      var pct = max > 0 ? (trickRow.scrollLeft / max) * 100 : 0;
-      progressFill.style.width = pct + "%";
+    var trickCards = trickRow.querySelectorAll(".trick-card");
+
+    /* bounds: category boundary positions as a % of the bar (one more
+       entry than categories — 0 and 100 bookend it, e.g. [0, 47.8, 87.0,
+       100] for 3 categories). firstIndex: the card index each category
+       starts at (e.g. [0, 11, 20]), same order as catLabels in the DOM. */
+    var categoryInfo = function () {
+      var bounds = [0];
+      var firstIndex = [0];
+      var prevCat = null;
+      for (var i = 0; i < trickCards.length; i++) {
+        var cat = trickCards[i].dataset.cat;
+        if (cat && cat !== prevCat && prevCat !== null) {
+          bounds.push((i / (trickCards.length - 1)) * 100);
+          firstIndex.push(i);
+        }
+        prevCat = cat || prevCat;
+      }
+      bounds.push(100);
+      return { bounds: bounds, firstIndex: firstIndex };
+    };
+
+    var layoutProgressTicks = function () {
+      if (!progressTicks || trickCards.length < 2) return;
+      progressTicks.innerHTML = "";
+      var bounds = categoryInfo().bounds;
+      for (var b = 1; b < bounds.length - 1; b++) {
+        var tick = document.createElement("div");
+        tick.className = "progress-tick";
+        tick.style.left = bounds[b] + "%";
+        progressTicks.appendChild(tick);
+      }
+    };
+
+    var layoutCatLabels = function () {
+      if (!catLabels.length || trickCards.length < 2) return;
+      var bounds = categoryInfo().bounds;
+      catLabels.forEach(function (label, i) {
+        if (bounds[i] === undefined) return;
+        label.style.left = bounds[i] + "%";
+      });
+    };
+
+    var centerCardIndex = function () {
+      var center = trickRow.scrollLeft + trickRow.clientWidth / 2;
+      var idx = 0;
+      for (var i = 0; i < trickCards.length; i++) {
+        if (trickCards[i].offsetLeft <= center) idx = i;
+      }
+      return idx;
+    };
+
+    var fractionalIndex = function (idx, center) {
+      var a = trickCards[idx].offsetLeft;
+      if (idx >= trickCards.length - 1) return idx;
+      var b = trickCards[idx + 1].offsetLeft;
+      var span = b - a;
+      var frac = span > 0 ? (center - a) / span : 0;
+      return idx + Math.max(0, Math.min(1, frac));
+    };
+
+    var updateProgress = function () {
+      if (trickCards.length < 2) return;
+      var center = trickRow.scrollLeft + trickRow.clientWidth / 2;
+      var idx = centerCardIndex();
+      var smoothPct = (fractionalIndex(idx, center) / (trickCards.length - 1)) * 100;
+      progressFill.style.width = smoothPct + "%";
+      var activeCat = trickCards[idx].dataset.cat;
+      catLabels.forEach(function (label) {
+        label.classList.toggle("is-active", label.dataset.cat === activeCat);
+      });
+    };
+
+    catLabels.forEach(function (label, i) {
+      label.addEventListener("click", function () {
+        /* a click is an explicit, deliberate scroll — never fight it with
+           the scroll-jack's auto-drive if the row happens to be pinned */
+        if (typeof takeOverRow === "function") takeOverRow();
+        if (i === 0) {
+          /* Zabiegi Hi-Tech: card 0 can't be meaningfully centered (there's
+             nothing before it to center against) — just the start */
+          trickRow.scrollTo({ left: 0, behavior: "smooth" });
+          return;
+        }
+        var cardIdx = categoryInfo().firstIndex[i];
+        var card = trickCards[cardIdx];
+        if (!card) return;
+        var target = card.offsetLeft - (trickRow.clientWidth - card.offsetWidth) / 2;
+        var maxScroll = trickRow.scrollWidth - trickRow.clientWidth;
+        target = Math.max(0, Math.min(maxScroll, target));
+        trickRow.scrollTo({ left: target, behavior: "smooth" });
+      });
     });
+
+    trickRow.addEventListener("scroll", updateProgress);
+    window.addEventListener("resize", updateProgress);
+    layoutProgressTicks();
+    layoutCatLabels();
+    updateProgress();
   }
 
   /* ---------- treatments row — drag to scroll ---------- */
@@ -255,6 +382,189 @@
         dragMoved = false;
       }
     }, true);
+  }
+
+  /* ---------- treatments row — always end on a half-cut card (requested in
+     chat: whichever card is last in view, unless it's genuinely the last
+     card in the whole row, should always be cut exactly in half by the
+     viewport edge — a constant, deliberate signal that there's more to
+     scroll. Applies at every viewport width, mobile included — unlike the
+     scroll-jack below, this isn't disabled there.
+
+     The row's real card width (measured off archon.au — see the CSS
+     comment on .trick-card) doesn't divide evenly into every possible
+     viewport width, so left alone the trailing card gets cut by a
+     different, arbitrary fraction depending on viewport width — sometimes
+     a sliver, sometimes almost whole. Fixed by solving for a slightly
+     nudged card width — --tc-card-w, a CSS custom property the base
+     width:22% falls back to — such that exactly (k + 0.5) cards fit the
+     row's visible width (after the left gutter) for some whole number k:
+     k full cards, then one cut exactly in half. Recomputed on resize;
+     min-width/max-width in CSS still clamp it to the archon.au-measured
+     bounds as a safety net.
+
+     This only guarantees the half-cut card at scrollLeft:0 (the first
+     view) — holding it at every later rest position too would need
+     scroll-snap, which was tried and reverted (see the CSS comment on
+     .trick-card): it broke free dragging and ate the left gutter. The
+     first view is where the signal matters most anyway. */
+  if (trickRow) {
+    var layoutCardHalfCut = function () {
+      var cards = trickRow.querySelectorAll(".trick-card");
+      if (cards.length < 2) return;
+      var cardWidth = cards[0].offsetWidth;
+      var step = cards[1].offsetLeft - cards[0].offsetLeft;
+      var gap = step - cardWidth;
+      /* at rest (scrollLeft:0, no snap pulling it anywhere else) the visible
+         window covers contentX [0, clientWidth) — card 0 starts only after
+         the row's own left padding, so that's dead space to subtract first. */
+      var paddingLeft = parseFloat(getComputedStyle(trickRow).paddingLeft) || 0;
+      var usable = trickRow.clientWidth - paddingLeft;
+      var wholeCards = Math.max(1, Math.floor(usable / step));
+      var newCardWidth = (usable - wholeCards * gap) / (wholeCards + 0.5);
+      /* the width solved for a given card count can land outside the
+         archon.au-measured bounds (173–315px, see CSS) — e.g. "2.5 wide
+         cards" fitting a mid-size viewport might solve to ~330px, past the
+         max. Rather than let min/max-width clamp it (which would silently
+         break the half-cut math, since the clamped width no longer matches
+         what was solved for), pick a different card COUNT whose solved
+         width actually fits the bounds. */
+      var guard = 0;
+      while ((newCardWidth > 315 || newCardWidth < 173) && guard < 20) {
+        wholeCards += newCardWidth > 315 ? 1 : -1;
+        if (wholeCards < 1) { wholeCards = 1; break; }
+        newCardWidth = (usable - wholeCards * gap) / (wholeCards + 0.5);
+        guard++;
+      }
+      newCardWidth = Math.max(173, Math.min(315, newCardWidth));
+      trickRow.style.setProperty("--tc-card-w", newCardWidth + "px");
+    };
+    layoutCardHalfCut();
+    window.addEventListener("resize", layoutCardHalfCut);
+  }
+
+  /* ---------- treatments row — scroll-jack: a few cards scroll sideways before
+     the page continues scrolling down (requested in chat — not present on
+     archon.au, a deliberate deviation, documented in DOKUMENTACJA.md).
+
+     Deliberately NOT wheel-event interception (that reads differently per
+     device — mouse wheel vs trackpad vs touch — and this project has twice
+     been burned by scroll-linked JS that only half-worked, see CLAUDE.md).
+     Instead: .trick-pin-outer wraps the WHOLE section's content — the
+     heading/intro text AND the row, not just the row — and is a plain block
+     whose height JS sets to (that content's natural height + reveal
+     distance); .trick-pin-inner inside it is CSS position:sticky, held
+     centered in the viewport (never above the nav). Pinning just the row
+     left the heading/intro scrolling away on its own beforehand, so by the
+     time the row reached its pinned position the top of the section was
+     long gone — pinning the pair together keeps the heading in view right
+     above the cards for the whole reveal, instead of leaving it stranded
+     above the fold. As the user scrolls down with ANY input method, the
+     browser's own sticky implementation holds this whole block in place
+     while .trick-pin-outer's extra height passes by underneath — we just
+     read how much of that extra height has passed (via getBoundingClientRect,
+     recalculated on the real "scroll" event, not simulated) and mirror that
+     progress onto trickRow.scrollLeft. Once fully consumed, the sticky box
+     naturally runs out of room and releases — ordinary page scroll resumes
+     with no explicit "hand back control" step needed.
+
+     Mobile (<=1024px, the site's own hamburger-nav breakpoint) skips all of
+     this — a finger already scrolls the row directly and naturally there,
+     and there's no scroll wheel to hijack in the first place.
+
+     Accepted trade-off: that reserved extra height is genuinely part of the
+     document while this row's section is around — the section after it (RX
+     Facials) ends up sitting reveal-distance further down than it would
+     without this feature. An earlier version clawed that space back with a
+     negative margin-bottom on .trick-pin-outer, but margin doesn't affect
+     when CSS sticky itself releases (that's governed by the box's own
+     height only) — so the next section's document position moved up while
+     the release point didn't, and it started sliding into view from behind
+     the still-frozen row well before the reveal finished. Removed: a
+     slightly larger permanent gap is the honest cost of a real freeze, not
+     something to paper over with a mismatched hack.
+
+     Manual scroll of the row is never blocked — it's always real native
+     scrolling — and takes over instantly and unambiguously from the input
+     event itself (mousedown, touchstart, or a wheel event with more
+     horizontal than vertical delta), not by inferring intent from trickRow's
+     own "scroll" event. The earlier version did the latter with a
+     set-flag-before-write/clear-flag-after dance, which raced against the
+     browser's own (async, sometimes coalesced) firing of that scroll event:
+     a run of rapid scroll ticks could clear the flag before the write it
+     belonged to was actually observed, so a later, purely auto-driven write
+     got misread as a manual takeover and silently froze the row until the
+     page was reloaded. Reading real input events sidesteps that entirely.
+     Scrolling back above the pinned zone re-arms auto-driving for the next
+     pass, instead of it staying off for the rest of the page's life. */
+  if (trickRow) {
+    var pinOuter = document.getElementById("trickPinOuter");
+    var pinInner = pinOuter ? pinOuter.querySelector(".trick-pin-inner") : null;
+    if (pinOuter && pinInner) {
+      var revealDistance = 0;
+      var stuckAt = 80;
+      var userTookOverRow = false;
+
+      var computeRevealDistance = function () {
+        var cards = trickRow.querySelectorAll(".trick-card");
+        if (cards.length < 2) return 0;
+        var step = cards[1].offsetLeft - cards[0].offsetLeft;
+        var cardsToReveal = Math.min(4, cards.length - 1);
+        var maxScroll = trickRow.scrollWidth - trickRow.clientWidth;
+        return Math.max(0, Math.min(step * cardsToReveal, maxScroll));
+      };
+
+      var MOBILE_MAX_WIDTH = 1024; /* matches the site's own mobile/hamburger breakpoint */
+
+      var layoutPin = function () {
+        if (window.innerWidth <= MOBILE_MAX_WIDTH) {
+          /* touch already scrolls the row directly with a finger — no
+             scroll-jack on mobile, so no pin either (not even a fleeting
+             one — the CSS position:sticky fallback is turned off outright,
+             not just left with nothing to hold onto) */
+          revealDistance = 0;
+          pinInner.style.position = "static";
+          pinInner.style.top = "";
+          pinOuter.style.height = "";
+          return;
+        }
+        pinInner.style.position = "";
+        revealDistance = computeRevealDistance();
+        /* center the pinned block in the viewport; 80px (nav height) is the
+           floor so it never sits underneath/above the sticky nav */
+        stuckAt = Math.max(80, Math.round((window.innerHeight - pinInner.offsetHeight) / 2));
+        pinInner.style.top = stuckAt + "px";
+        pinOuter.style.height = pinInner.offsetHeight + revealDistance + "px";
+      };
+
+      var onPageScroll = function () {
+        var rectTop = pinOuter.getBoundingClientRect().top;
+        if (userTookOverRow) {
+          /* scrolled back above the pinned zone entirely — safe to re-arm */
+          if (rectTop > stuckAt + 4) userTookOverRow = false;
+          return;
+        }
+        if (revealDistance <= 0) return;
+        var scrolledIntoPin = Math.max(0, Math.min(revealDistance, stuckAt - rectTop));
+        if (Math.abs(trickRow.scrollLeft - scrolledIntoPin) > 1) {
+          trickRow.scrollLeft = scrolledIntoPin;
+        }
+      };
+
+      var takeOverRow = function () {
+        userTookOverRow = true;
+      };
+      trickRow.addEventListener("mousedown", takeOverRow);
+      trickRow.addEventListener("touchstart", takeOverRow, { passive: true });
+      trickRow.addEventListener("wheel", function (e) {
+        if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) takeOverRow();
+      }, { passive: true });
+
+      window.addEventListener("scroll", onPageScroll, { passive: true });
+      window.addEventListener("resize", layoutPin);
+      layoutPin();
+      onPageScroll();
+    }
   }
 
   /* ---------- treatments row — horizontal image parallax (matches archon.au) ----------
