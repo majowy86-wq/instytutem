@@ -55,7 +55,8 @@ To jest **jedyne, aktualne** miejsce śledzenia zadań — nie duplikować w DOK
 - [ ] Podłączenie formularza newslettera pod realny ESP (Mailchimp/Klaviyo/Formspree).
 - [ ] 3 linki „Zarezerwuj Tylko To” w RX Facials prowadzą na ogólny link Fresha, nie deep-link per zabieg — podmienić, jeśli Fresha udostępni linki per-usługa.
 - [ ] Odstęp nagłówek→siatka w sekcji Kontakt: archon.au ma 150px, u nas 40px — do decyzji, czy dociągnąć czy zostawić jako świadome odejście.
-- [ ] Nagłówek „Archon Rewards — Dołącz za Darmo” prawdopodobnie zły styl (powinna być mała etykieta `.eyebrow`-podobna, nie duży `.h-section`) — niezweryfikowane dokładnie.
+- [ ] Nagłówek sekcji Newsletter „Pakiet Powitalny — Dołącz za Darmo” prawdopodobnie zły styl (powinna być mała etykieta `.eyebrow`-podobna, nie duży `.h-section`) — niezweryfikowane dokładnie. Treść nazwy zaktualizowana w Rundzie 85 (usuwanie śladów Archon), styl wciąż otwarty.
 - [ ] Zdjęcia kart **RX Benefactor / RX Illuminate / RX Detox Facial** (3 placeholdery poza galerią `#treatments`).
+- [ ] **Karty RX Benefactor/Illuminate/Detox mają ceny w dolarach (`170 $`/`189 $`) i opisy zabiegów, które nie odpowiadają żadnej realnej usłudze z instytutem.pl** (Runda 85) — to nie tylko kwestia waluty, cała treść tych 3 kart wygląda na nieprzetłumaczoną ofertę Archon. Wymaga potwierdzenia: czy instytutem.pl ma odpowiednik tej usługi (jakiej, w jakiej cenie w PLN), czy tę sekcję usunąć całkowicie — nie zgadywać.
 - [ ] **Tło hero** (`.hero-bg`) — pełnoekranowe zdjęcie botaniczne/makro w ciemnym klimacie + overlay, wciąż placeholder.
 - [ ] **Favicon** — logo mark już mamy (`instytutem-logo.svg`), favicon (16×16/32×32) jeszcze nie wygenerowany.

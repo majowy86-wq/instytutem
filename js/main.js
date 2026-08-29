@@ -202,7 +202,7 @@
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
   /* ---------- treatments row — scroll progress bar, category labels + map ----------
-     Requested in chat, not on archon.au: one small clickable label per
+     Requested in chat, not on the reference site: one small clickable label per
      category (Zabiegi Hi-Tech / Iniekcyjne / Manualne — the same 3 groups
      as the "Zabiegi" nav menu), fixed at the START of its own segment of
      the bar below (small left margin, not flush with the tick); whichever
@@ -391,7 +391,7 @@
      scroll. Applies at every viewport width, mobile included — unlike the
      scroll-jack below, this isn't disabled there.
 
-     The row's real card width (measured off archon.au — see the CSS
+     The row's real card width (measured off the reference site — see the CSS
      comment on .trick-card) doesn't divide evenly into every possible
      viewport width, so left alone the trailing card gets cut by a
      different, arbitrary fraction depending on viewport width — sometimes
@@ -400,8 +400,8 @@
      width:22% falls back to — such that exactly (k + 0.5) cards fit the
      row's visible width (after the left gutter) for some whole number k:
      k full cards, then one cut exactly in half. Recomputed on resize;
-     min-width/max-width in CSS still clamp it to the archon.au-measured
-     bounds as a safety net.
+     min-width/max-width in CSS still clamp it to the bounds measured on the
+     reference site as a safety net.
 
      This only guarantees the half-cut card at scrollLeft:0 (the first
      view) — holding it at every later rest position too would need
@@ -423,7 +423,7 @@
       var wholeCards = Math.max(1, Math.floor(usable / step));
       var newCardWidth = (usable - wholeCards * gap) / (wholeCards + 0.5);
       /* the width solved for a given card count can land outside the
-         archon.au-measured bounds (173–315px, see CSS) — e.g. "2.5 wide
+         the bounds measured on the reference site (173–315px, see CSS) — e.g. "2.5 wide
          cards" fitting a mid-size viewport might solve to ~330px, past the
          max. Rather than let min/max-width clamp it (which would silently
          break the half-cut math, since the clamped width no longer matches
@@ -445,7 +445,7 @@
 
   /* ---------- treatments row — scroll-jack: a few cards scroll sideways before
      the page continues scrolling down (requested in chat — not present on
-     archon.au, a deliberate deviation, documented in DOKUMENTACJA.md).
+     the reference site, a deliberate deviation, documented in DOKUMENTACJA.md).
 
      Deliberately NOT wheel-event interception (that reads differently per
      device — mouse wheel vs trackpad vs touch — and this project has twice
@@ -567,8 +567,8 @@
     }
   }
 
-  /* ---------- treatments row — horizontal image parallax (matches archon.au) ----------
-     On archon.au each card's photo is rendered at 200% width (see .trick-img) and
+  /* ---------- treatments row — horizontal image parallax (matches the reference site) ----------
+     On the reference site each card's photo is rendered at 200% width (see .trick-img) and
      shifted with translateX, recalculated continuously as the row scrolls, so the
      image slides slightly within its frame instead of just riding along with the
      card — a horizontal parallax. Measured directly off the live site: for every
@@ -605,7 +605,7 @@
     applyParallax();
   }
 
-  /* ---------- benefits marquee — scroll-linked, not a timed loop (matches archon.au) ----------
+  /* ---------- benefits marquee — scroll-linked, not a timed loop (matches the reference site) ----------
      Measured directly off the live site: the ticker's position never changes on
      its own — it sits frozen while the page is still, and only moves in response
      to real scroll input, in either direction (scroll down shifts it one way,
@@ -624,7 +624,7 @@
   if (marqueeTrack && !reduceMotion) {
     var marqueeSection = marqueeTrack.closest(".marquee");
     var marqueeTile = Array.prototype.slice.call(marqueeTrack.children);
-    var MARQUEE_SPEED = 0.26; // measured px-of-shift per px-of-scroll on archon.au
+    var MARQUEE_SPEED = 0.26; // measured px-of-shift per px-of-scroll on the reference site
     var marqueeHalfWidth = 0;
     var marqueeOffset = 0;
     var lastMarqueeScrollY = window.scrollY;

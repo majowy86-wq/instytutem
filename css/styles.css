@@ -1,5 +1,5 @@
 /* ============================================================
-   ARCHON — design tokens (verbatim from DESIGN-SYSTEM.md §2–§6)
+   Design tokens (verbatim from DESIGN-SYSTEM.md §2–§6)
    ============================================================ */
 :root{
   /* brand colors */
@@ -14,7 +14,7 @@
   --a-lime:#BFF751;
   --a-white:#FFFFFF;
   --a-rust:#C7642D;
-  /* measured directly on archon.au's benefits ticker dot (--green-yellow-2) —
+  /* measured directly on the reference site's benefits ticker dot (--green-yellow-2) —
      a light peach, not rust; used only for that one dot separator */
   --a-peach:#FFC8AA;
 
@@ -89,7 +89,7 @@ h1,h2,h3{
   letter-spacing:-0.04em;
 }
 .h-section{
-  /* archon.au's real .heading.h2 (measured directly, not estimated): flat 30px
+  /* the reference site's real .heading.h2 (measured directly, not estimated): flat 30px
      at every viewport width — no clamp/vw scaling at all — font-weight 500
      (h1,h2,h3 default above is 400, so this must override it explicitly) */
   font-size:30px;
@@ -99,7 +99,7 @@ h1,h2,h3{
   margin-bottom:var(--sp-24);
 }
 .h-hero{
-  /* archon.au's real .heading.hero (measured directly): flat 60px, font-weight 500,
+  /* the reference site's real .heading.hero (measured directly): flat 60px, font-weight 500,
      line-height:1 (tracks font-size 1:1), letter-spacing -2px, margin-bottom 35px */
   font-size:60px;
   font-weight:500;
@@ -112,10 +112,10 @@ h1,h2,h3{
   .h-hero{ font-size:42px; }
 }
 .h-quote{
-  /* archon.au's real .heading.display (Booking Banner "Take a moment outside
+  /* the reference site's real .heading.display (Booking Banner "Take a moment outside
      your usual."): flat 60px/waga 500/-1px above 991px, but grows to 72px on
      tablet and shrinks to 51px on mobile (measured directly incl. source media
-     queries — a real, deliberate archon.au responsive quirk, not a guess) */
+     queries — a real, deliberate responsive quirk in the reference site, not a guess) */
   font-size:60px;
   font-weight:500;
   line-height:94px;
@@ -129,7 +129,7 @@ h1,h2,h3{
 @media (max-width:479px){
   .h-quote{ font-size:51px; line-height:52px; }
 }
-/* archon.au's real color here is pure white (not the usual --a-cream text on
+/* the reference site's real color here is pure white (not the usual --a-cream text on
    black-olive sections) — max contrast against the parallax photo behind it */
 #book .h-quote{ color:var(--a-white); }
 .h-card{
@@ -147,7 +147,7 @@ h1,h2,h3{
   text-transform:uppercase;
   color:var(--a-gray);
 }
-/* archon.au's real eyebrow/paragraph color on black-olive sections is cream,
+/* the reference site's real eyebrow/paragraph color on black-olive sections is cream,
    not taupe (measured directly on .uppercase/.paragraph in the Gift Cards
    section) — taupe was an unmeasured guess, wrong everywhere it's used */
 .section--olive .eyebrow{ color:var(--a-cream); }
@@ -157,14 +157,14 @@ h1,h2,h3{
   font-weight:400;
   font-size:16px;
   line-height:27.2px;
-  /* archon.au's real paragraph has no character-based cap at all (max-width:none)
+  /* the reference site's real paragraph has no character-based cap at all (max-width:none)
      — it just fills its 2fr grid column. 60ch was an unmeasured guess. */
   max-width:none;
   /* browsers give <p> a default 1em top+bottom margin — with no reset, that
      default TOP margin pushed the paragraph below the grid row's start line,
      visibly lower than the heading it's meant to align with (align-items:start
      aligns the grid ITEM, not the text inside it, so the item's own child
-     margin still shows as a gap). archon.au's own paragraph has margin:0 top. */
+     margin still shows as a gap). the reference site's own paragraph has margin:0 top. */
   margin:0;
 }
 
@@ -290,7 +290,7 @@ h1,h2,h3{
   white-space:nowrap;
   transition:color .2s;
 }
-/* desktop nav toggles fill the full 80px header height (matches archon.au .dropdown-menu-toggle)
+/* desktop nav toggles fill the full 80px header height (matches the reference site's .dropdown-menu-toggle)
    so an open mega-panel's top:100% lands exactly at the header's bottom edge, not mid-header */
 .nav-links > li > .nav-link{ height:80px; padding:0 7px; }
 .nav-link:hover{ color:var(--a-rust); }
@@ -362,7 +362,7 @@ h1,h2,h3{
   transition:color .2s, transform .2s ease;
 }
 .mega-group a:hover{ color:var(--a-rust); transform:translateX(3px); }
-/* small reveal arrow, matches archon.au's mega-menu link interaction (fades in + slides right on hover) */
+/* small reveal arrow, matches the reference site's mega-menu link interaction (fades in + slides right on hover) */
 .mega-group a::after{
   content:"";
   flex-shrink:0;
@@ -411,7 +411,7 @@ h1,h2,h3{
 .mobile-drawer.open{ transform:translateY(0); }
 .mobile-drawer[hidden]{ display:none; }
 .mobile-drawer nav ul{ display:flex; flex-direction:column; }
-/* top-level rows: 30px vertical padding + hairline divider, measured 1:1 from archon.au's mobile nav
+/* top-level rows: 30px vertical padding + hairline divider, measured 1:1 from the reference site's mobile nav
    (.dropdown-menu-toggle padding:30px 0, .dropdown-menu border-bottom:1px solid rgba(202,199,192,.16)) */
 .mobile-drawer nav > ul > li{ border-bottom:1px solid rgba(202,199,192,.16); }
 .mobile-drawer nav > ul > li:last-of-type{ border-bottom:none; }
@@ -426,7 +426,7 @@ h1,h2,h3{
 }
 /* the visible label is a nested .nav-type span, whose own global rule (font-size:14px,
    used by the desktop nav) otherwise wins over the 16px set above — measured directly
-   against archon.au's real ".dropdown-menu-text" (font-size:16px, line-height:24px,
+   against the reference site's real ".dropdown-menu-text" (font-size:16px, line-height:24px,
    letter-spacing:0.5px, weight:500), so this must match, not inherit the desktop value */
 .mobile-drawer .nav-link .nav-type{ font-size:inherit; }
 .mobile-drawer summary.nav-link{ cursor:pointer; list-style:none; }
@@ -448,9 +448,9 @@ h1,h2,h3{
   margin-top:.5rem;
 }
 .mobile-drawer .cat-label:first-child{ margin-top:0; }
-/* three CTAs sit in a single row (matches archon.au's real mobile menu), not stacked —
+/* three CTAs sit in a single row (matches the reference site's real mobile menu), not stacked —
    each button shares the row equally instead of taking a fixed width. font-size:14px
-   and height:43px are archon.au's real measured values for this button row, kept
+   and height:43px are the reference site's real measured values for this button row, kept
    identical here; only the horizontal padding is reduced from their 18-23px so the
    longer Polish button labels ("Rezerwuj online") still fit one row without wrapping */
 .mobile-drawer .drawer-ctas{ display:flex; flex-direction:row; gap:8px; margin-top:2.5rem; }
@@ -494,14 +494,14 @@ h1,h2,h3{
 .hero-actions{ display:flex; gap:1rem; margin-top:var(--sp-24); flex-wrap:wrap; }
 
 /* ============================================================
-   Marquee — archon.au's real ".text-rotator" is scroll-linked, not a
+   Marquee — the reference site's real ".text-rotator" is scroll-linked, not a
    self-playing timed loop (measured directly: position is frozen while the
    page is still, only ever moves in response to a real scroll event, in
    both directions) — driven by js/main.js, not a CSS @keyframes animation.
    ============================================================ */
 .marquee{
   overflow:hidden;
-  /* archon.au's real .text-rotator-first: padding-top/bottom 20px */
+  /* the reference site's real .text-rotator-first: padding-top/bottom 20px */
   padding:20px 0;
 }
 .marquee-track{
@@ -515,7 +515,7 @@ h1,h2,h3{
   text-transform:uppercase;
   color:var(--a-gray);
   white-space:nowrap;
-  /* archon.au's real .text-rotator font-size is viewport-relative, with 3
+  /* the reference site's real .text-rotator font-size is viewport-relative, with 3
      distinct breakpoints (measured directly in source media queries) —
      counter-intuitively LARGER on tablet than on desktop */
   font-size:1vw;
@@ -530,7 +530,7 @@ h1,h2,h3{
   .marquee-phrase{ font-size:3vw; }
 }
 .marquee-dot{
-  /* archon.au's real .start-icon: 4x4px circle, 20px margin each side */
+  /* the reference site's real .start-icon: 4x4px circle, 20px margin each side */
   width:4px;
   height:4px;
   border-radius:100%;
@@ -540,7 +540,7 @@ h1,h2,h3{
 }
 
 /* ============================================================
-   Philosophy — treatments row (measured 1:1 from archon.au .homegallery / .tricks-slider)
+   Philosophy — treatments row (measured 1:1 from the reference site's .homegallery / .tricks-slider)
    ============================================================ */
 /* Scroll-jack: pins the row in place (vertically centered in the viewport,
    never above the nav) while vertical scroll drives it sideways, revealing a
@@ -564,7 +564,7 @@ h1,h2,h3{
      the same centering offset .container gets from margin:auto past 1440px)
      — but it's real padding on the scrollable element itself, not a margin on
      the outer wrapper, so it scrolls away with everything before it and never
-     reappears once the user scrolls. archon.au itself has no right padding
+     reappears once the user scrolls. the reference site itself has no right padding
      (cards run flush to the true viewport edge) — deliberate deviation here,
      requested in chat, so the last card gets breathing room once fully
      scrolled instead of touching the edge; mirrors the left gutter formula. */
@@ -582,11 +582,11 @@ h1,h2,h3{
 .trick-row.dragging{ cursor:grabbing; }
 .trick-card{
   flex:0 0 auto;
-  /* base 22% is the real, measured archon.au value (see bounds below) — JS
+  /* base 22% is the real value measured on the reference site (see bounds below) — JS
      (main.js, layoutCardHalfCut) overrides this with a nudged px value so
      the row starts scrolled to 0 with an exact half-card cut off at the
      right edge, never a random sliver — the signal that there's more to
-     scroll. Deliberate deviation from archon.au, requested in chat; the
+     scroll. Deliberate deviation from the reference site, requested in chat; the
      nudge is small enough (a few px) that it doesn't visibly depart from
      the measured proportions. Deliberately no scroll-snap to hold this
      same fraction at every later scroll position too — tried that
@@ -597,7 +597,7 @@ h1,h2,h3{
      Reverted; the guarantee only holds for the first view now, which is
      also where it matters most. */
   width:var(--tc-card-w, 22%);
-  /* bounds measured directly off archon.au across viewport widths, not guessed:
+  /* bounds measured directly off the reference site across viewport widths, not guessed:
      314–315px is the real peak card width (occurs ~1700px viewport — beyond
      .homegallery's own max-width:1600px cap, its padding keeps growing with the
      ever-wider viewport while the box itself stays capped, so the card actually
@@ -613,12 +613,12 @@ h1,h2,h3{
   transition:.5s;
 }
 .trick-card:hover{
-  /* archon.au also lifts translateY(-30px) here — dropped on explicit request
+  /* the reference site also lifts translateY(-30px) here — dropped on explicit request
      for this site; the arch-inversion + darkening overlay hover stays */
   border-radius:20px 20px 150px 150px;
 }
 /* marks where the next treatment category starts (requested in chat, not on
-   archon.au) — a thin rule, same weight/color/opacity as .progress-tick
+   the reference site) — a thin rule, same weight/color/opacity as .progress-tick
    below (the matching mark on the progress bar's category map) and as
    .divider-rule elsewhere, just vertical. A flex sibling of .trick-card
    rather than a pseudo-element on it, so it isn't clipped by the card's
@@ -633,7 +633,7 @@ h1,h2,h3{
   opacity:.4;
 }
 .trick-img{
-  /* 200% width (matches archon.au's .parallaxhero exactly) gives the image room
+  /* 200% width (matches the reference site's .parallaxhero exactly) gives the image room
      to slide via JS translateX without ever exposing an edge — the visible
      100%-wide window always stays inside this oversized image. right must stay
      auto (not part of the inset shorthand) so left:0 + width:200% aren't
@@ -687,7 +687,7 @@ h1,h2,h3{
      narrow card on mobile widths unless breaking is explicitly allowed */
   overflow-wrap:break-word;
 }
-/* category label + progress "map" (requested in chat, not on archon.au):
+/* category label + progress "map" (requested in chat, not on the reference site):
    one small label per category (Zabiegi Hi-Tech / Iniekcyjne / Manualne —
    the same 3 groups as the "Zabiegi" nav menu), each a <button> fixed at
    the start of its own segment of the bar below (small left margin, not
@@ -970,7 +970,7 @@ h1,h2,h3{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:var(--sp-40);
-  /* archon.au's real gap between "Get in touch" and the 3 contact columns
+  /* the reference site's real gap between "Get in touch" and the 3 contact columns
      (.spacer.xlarge, measured directly) is 150px, not the 40px generic token */
   margin-top:150px;
 }
@@ -993,7 +993,7 @@ h1,h2,h3{
 /* ============================================================
    Gift cards / Booking banner
    ============================================================ */
-/* archon.au's real gap between the divider rule and the 2-column content
+/* the reference site's real gap between the divider rule and the 2-column content
    below it in this section is 55px (measured directly), not the shared
    .title-rule 40px used elsewhere — scoped here since only this instance
    is verified, not Philosophy/RX Facials */
@@ -1002,7 +1002,7 @@ h1,h2,h3{
 .banner-cta{
   text-align:center;
   position:relative;
-  /* archon.au's real .main-container.display: fixed 600px height, flex-
+  /* the reference site's real .main-container.display: fixed 600px height, flex-
      centered content — flat across every breakpoint (measured directly,
      confirmed in source media queries too) — not a padding-driven section */
   height:600px;
@@ -1012,11 +1012,11 @@ h1,h2,h3{
   justify-content:center;
 }
 /* no separate button margin — the h-quote heading's own 52px margin-bottom
-   already accounts for the full gap to the button (archon.au's button-wrapper
+   already accounts for the full gap to the button (the reference site's button-wrapper
    itself has margin:0) */
 
 .fine-print{
-  /* archon.au's real .paragraph.small: 50px gap from the button above it,
+  /* the reference site's real .paragraph.small: 50px gap from the button above it,
      flat 12px (not .78rem), cream at 52% opacity (not the taupe token) —
      all measured directly, not estimated */
   margin-top:50px;
@@ -1041,7 +1041,7 @@ h1,h2,h3{
   background:rgba(22,24,16,.45);
 }
 .banner-photo .container{ position:relative; z-index:1; }
-/* was color:var(--a-taupe) — measured directly on archon.au's "easy online
+/* was color:var(--a-taupe) — measured directly on the reference site's "easy online
    bookings" label, real color is cream, same fix as Round 35 elsewhere */
 
 /* ============================================================
@@ -1150,11 +1150,11 @@ h1,h2,h3{
   width:100%;
   height:1px;
   background:var(--a-gray);
-  /* archon.au's real gap between the eyebrow label and the rule below it
+  /* the reference site's real gap between the eyebrow label and the rule below it
      (measured directly, also matches the Kontakt eyebrow's own margin) */
   margin-top:20px;
 }
-/* archon.au's real divider on black-olive sections is a faint translucent
+/* the reference site's real divider on black-olive sections is a faint translucent
    cream line (rgba(241,237,231,.16)), not the solid gray used on cream
    sections — measured directly on the Gift Cards section's .divider-line.light */
 .section--olive .title-rule .divider-rule{ background:rgba(241,237,231,.16); }
