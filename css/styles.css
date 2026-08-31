@@ -84,9 +84,20 @@ h1,h2,h3{
   text-wrap:balance;
 }
 .h-display{
-  font-size:clamp(2.4rem,6vw,4rem);
+  /* the reference site's real .h1-heading.max-width-medium (hero title), measured directly
+     at multiple viewport widths — flat per-breakpoint values, not a fluid vw/clamp scale:
+     64px above 767px, 48px at 480-767px, 38px at ≤479px. line-height is always 1.2x and
+     letter-spacing always -0.04em of font-size at every breakpoint (76.8/57.6/45.6px and
+     -2.56/-1.92/-1.52px respectively), so only font-size needs to change per breakpoint. */
+  font-size:64px;
   line-height:1.2;
   letter-spacing:-0.04em;
+}
+@media (max-width:767px){
+  .h-display{ font-size:48px; }
+}
+@media (max-width:479px){
+  .h-display{ font-size:38px; }
 }
 .h-section{
   /* the reference site's real .heading.h2 (measured directly, not estimated): flat 30px
@@ -784,7 +795,16 @@ h1,h2,h3{
   .trick-cap{ font-size:1.6rem; }
 }
 @media (max-width:479px){
-  .trick-card{ width:var(--tc-card-w, 60%); height:55vh; }
+  .trick-card{
+    width:var(--tc-card-w, 60%);
+    /* on request: 2.5 cards visible on mobile instead of the reference-site-
+       matched 1.5 (see main.js layoutCardHalfCut) — narrower cards than the
+       173px reference-site minimum below need their own, smaller floor here,
+       and a shorter height so they don't read as unnaturally tall/thin at
+       that width. */
+    min-width:100px;
+    height:42vh;
+  }
   .trick-cap{ font-size:1.4rem; }
 }
 

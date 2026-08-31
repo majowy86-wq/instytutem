@@ -407,8 +407,22 @@
      view) — holding it at every later rest position too would need
      scroll-snap, which was tried and reverted (see the CSS comment on
      .trick-card): it broke free dragging and ate the left gutter. The
-     first view is where the signal matters most anyway. */
+     first view is where the signal matters most anyway.
+
+     On mobile (≤479px, same tier the rest of this file treats as
+     "mobile") the card count is fixed at 2.5 instead of auto-solved —
+     requested in chat, so cards read as a compact carousel on a phone
+     screen instead of the 1.5 cards the reference-site bounds would
+     otherwise produce there. That means going narrower than the
+     173–315px bounds measured off the reference site (deliberate
+     deviation, this tier already isn't reference-matched — see the
+     mobile-only min-width override in the CSS .trick-card rule). */
   if (trickRow) {
+    var CARD_MOBILE_MAX_WIDTH = 479; /* matches the CSS ≤479px card tier */
+    var CARD_MOBILE_MIN_W = 100;
+    var CARD_MOBILE_MAX_W = 250;
+    var CARD_MIN_W = 173;
+    var CARD_MAX_W = 315;
     var layoutCardHalfCut = function () {
       var cards = trickRow.querySelectorAll(".trick-card");
       if (cards.length < 2) return;
@@ -420,23 +434,29 @@
          the row's own left padding, so that's dead space to subtract first. */
       var paddingLeft = parseFloat(getComputedStyle(trickRow).paddingLeft) || 0;
       var usable = trickRow.clientWidth - paddingLeft;
-      var wholeCards = Math.max(1, Math.floor(usable / step));
+      var isMobile = window.innerWidth <= CARD_MOBILE_MAX_WIDTH;
+      var minW = isMobile ? CARD_MOBILE_MIN_W : CARD_MIN_W;
+      var maxW = isMobile ? CARD_MOBILE_MAX_W : CARD_MAX_W;
+      var wholeCards = isMobile ? 2 : Math.max(1, Math.floor(usable / step));
       var newCardWidth = (usable - wholeCards * gap) / (wholeCards + 0.5);
-      /* the width solved for a given card count can land outside the
-         the bounds measured on the reference site (173–315px, see CSS) — e.g. "2.5 wide
-         cards" fitting a mid-size viewport might solve to ~330px, past the
-         max. Rather than let min/max-width clamp it (which would silently
-         break the half-cut math, since the clamped width no longer matches
-         what was solved for), pick a different card COUNT whose solved
-         width actually fits the bounds. */
-      var guard = 0;
-      while ((newCardWidth > 315 || newCardWidth < 173) && guard < 20) {
-        wholeCards += newCardWidth > 315 ? 1 : -1;
-        if (wholeCards < 1) { wholeCards = 1; break; }
-        newCardWidth = (usable - wholeCards * gap) / (wholeCards + 0.5);
-        guard++;
+      if (!isMobile) {
+        /* the width solved for a given card count can land outside the
+           bounds measured on the reference site (173–315px, see CSS) — e.g. "2.5 wide
+           cards" fitting a mid-size viewport might solve to ~330px, past the
+           max. Rather than let min/max-width clamp it (which would silently
+           break the half-cut math, since the clamped width no longer matches
+           what was solved for), pick a different card COUNT whose solved
+           width actually fits the bounds. Mobile skips this — the count is
+           fixed at 2.5 there by design, not auto-solved. */
+        var guard = 0;
+        while ((newCardWidth > maxW || newCardWidth < minW) && guard < 20) {
+          wholeCards += newCardWidth > maxW ? 1 : -1;
+          if (wholeCards < 1) { wholeCards = 1; break; }
+          newCardWidth = (usable - wholeCards * gap) / (wholeCards + 0.5);
+          guard++;
+        }
       }
-      newCardWidth = Math.max(173, Math.min(315, newCardWidth));
+      newCardWidth = Math.max(minW, Math.min(maxW, newCardWidth));
       trickRow.style.setProperty("--tc-card-w", newCardWidth + "px");
     };
     layoutCardHalfCut();
