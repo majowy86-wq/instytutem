@@ -3,6 +3,55 @@
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* ---------- page scroll-progress bar (above the header, every page) ----------
+     archon.au's real bar doesn't snap to the scroll ratio — it eases toward it,
+     still visibly catching up for ~1s after scrolling stops (measured live: an
+     instant window.scrollTo with no native scroll momentum still left the bar's
+     scaleX interpolating for ~900ms). Sampled the decay rate directly
+     (residual shrinks to ~0.858x every ~51ms, i.e. every ~3 frames at 60fps) —
+     that resolves to ~0.05 (5%) closer to the target per animation frame, a
+     standard lerp, not a CSS transition (which wouldn't restart correctly on
+     every scroll event). Animates `width` (not `transform:scaleX`, which
+     archon.au itself uses) — scaleX renders through GPU texture scaling and
+     showed a real, visible soft/blurred trailing edge at fractional scale
+     factors (screenshot-confirmed); `width` goes through normal layout/paint
+     and is always pixel-crisp, so a deliberate 1:1 departure from archon.au's
+     own implementation detail here, not from its visible behavior. */
+  var progressBar = document.querySelector(".progress-bar");
+  if (progressBar) {
+    var progressTarget = 0;
+    var progressCurrent = 0;
+    var progressRunning = false;
+    var tickProgressBar = function () {
+      progressCurrent += (progressTarget - progressCurrent) * 0.05;
+      if (Math.abs(progressTarget - progressCurrent) < 0.0005) {
+        progressCurrent = progressTarget;
+        progressBar.style.width = progressCurrent * 100 + "%";
+        progressRunning = false; /* idle once converged — an rAF loop that never
+          stops keeps the layer mid-transform forever, which on some browsers
+          renders a continuously-animating thin bar slightly soft/anti-aliased
+          instead of crisp; stopping once settled avoids that entirely */
+        return;
+      }
+      progressBar.style.width = progressCurrent * 100 + "%";
+      requestAnimationFrame(tickProgressBar);
+    };
+    var updateProgressTarget = function () {
+      var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      progressTarget = scrollable > 0 ? window.scrollY / scrollable : 0;
+      if (reduceMotion) {
+        progressCurrent = progressTarget;
+        progressBar.style.width = progressTarget * 100 + "%";
+      } else if (!progressRunning) {
+        progressRunning = true;
+        requestAnimationFrame(tickProgressBar);
+      }
+    };
+    window.addEventListener("scroll", updateProgressTarget, { passive: true });
+    window.addEventListener("resize", updateProgressTarget);
+    updateProgressTarget();
+  }
+
   /* ---------- hero video autoplay fallback ---------- */
   var heroVideo = document.querySelector(".hero-video");
   if (heroVideo && !reduceMotion) {
@@ -275,9 +324,15 @@
     var layoutCatLabels = function () {
       if (!catLabels.length || trickCards.length < 2) return;
       var bounds = categoryInfo().bounds;
+      /* on mobile (≤767px, same tier the CSS already hides every label but
+         the active one) the label is pinned to the bar's start instead of
+         its own segment's start — requested in chat, so whichever category
+         is active always reads in the same spot ("Zabiegi Hi-Tech"'s spot),
+         rather than jumping around the bar as different segments activate. */
+      var mobile = window.innerWidth <= 767;
       catLabels.forEach(function (label, i) {
         if (bounds[i] === undefined) return;
-        label.style.left = bounds[i] + "%";
+        label.style.left = mobile ? "0%" : bounds[i] + "%";
       });
     };
 
@@ -334,6 +389,7 @@
 
     trickRow.addEventListener("scroll", updateProgress);
     window.addEventListener("resize", updateProgress);
+    window.addEventListener("resize", layoutCatLabels);
     layoutProgressTicks();
     layoutCatLabels();
     updateProgress();
@@ -686,5 +742,124 @@
     fillMarquee();
     window.addEventListener("scroll", scheduleMarquee, { passive: true });
     window.addEventListener("resize", recalcMarquee);
+  }
+
+  /* ---------- treatment page — sticky quick-nav tabs (scroll-spy + smooth scroll) ---------- */
+  var treatmentTabs = document.querySelectorAll(".treatment-tab");
+  if (treatmentTabs.length) {
+    var tabSections = [];
+    treatmentTabs.forEach(function (tab) {
+      var id = tab.getAttribute("href").slice(1);
+      var section = document.getElementById(id);
+      if (section) tabSections.push({ tab: tab, section: section });
+    });
+    var setActiveTab = function () {
+      var pos = window.scrollY + 160;
+      var current = tabSections[0];
+      tabSections.forEach(function (entry) {
+        if (entry.section.offsetTop <= pos) current = entry;
+      });
+      tabSections.forEach(function (entry) {
+        entry.tab.classList.toggle("is-active", entry === current);
+      });
+    };
+    window.addEventListener("scroll", setActiveTab, { passive: true });
+    setActiveTab();
+
+    /* the reference site scrolls smoothly to the target section instead of
+       jumping instantly — offset is the sticky nav (80px) + sticky tabs bar's
+       own height, so the section heading lands clear of both, not hidden
+       underneath them */
+    var siteNav = document.querySelector(".site-nav");
+    var tabsBar = document.querySelector(".treatment-tabs");
+    tabSections.forEach(function (entry) {
+      entry.tab.addEventListener("click", function (e) {
+        e.preventDefault();
+        var offset = (siteNav ? siteNav.offsetHeight : 0) + (tabsBar ? tabsBar.offsetHeight : 0);
+        var top = entry.section.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top: top, behavior: reduceMotion ? "auto" : "smooth" });
+      });
+    });
+  }
+
+  /* ---------- treatment page — Care sub-tabs (Przygotowanie/Przebieg/Pielęgnacja) ---------- */
+  var careTabs = document.querySelectorAll(".care-tab");
+  if (careTabs.length) {
+    careTabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        var targetId = tab.getAttribute("aria-controls");
+        careTabs.forEach(function (t) { t.classList.toggle("is-active", t === tab); });
+        document.querySelectorAll(".care-panel").forEach(function (panel) {
+          panel.hidden = panel.id !== targetId;
+        });
+      });
+    });
+  }
+
+  /* ---------- treatment page — accordion (Efekty/Technologia/Przeciwwskazania/FAQ):
+     smooth height+opacity open/close, replacing the native <details> instant snap.
+     Matches archon.au's real "Accordion Open"/"Accordion Close" IX2 action lists
+     (measured via window.Webflow.require('ix2').store.getState(): height→auto and
+     opacity 0→1 both 300ms outQuad, arrow rotate 300ms) — outQuad's CSS equivalent
+     is the same cubic-bezier(.25,.46,.45,.94) already used elsewhere on this site. */
+  document.querySelectorAll(".treatment-accordion-body").forEach(function (body) {
+    var inner = document.createElement("div");
+    inner.className = "treatment-accordion-body-inner";
+    while (body.firstChild) inner.appendChild(body.firstChild);
+    body.appendChild(inner);
+  });
+  document.querySelectorAll(".treatment-accordion details").forEach(function (details) {
+    var summary = details.querySelector(":scope > summary");
+    var body = details.querySelector(":scope > .treatment-accordion-body");
+    if (!summary || !body) return;
+    summary.addEventListener("click", function (e) {
+      e.preventDefault();
+      if (reduceMotion) {
+        details.open = !details.open;
+        body.style.height = "";
+        body.style.opacity = "";
+        return;
+      }
+      if (details.open) {
+        var closeFrom = body.scrollHeight;
+        body.style.height = closeFrom + "px";
+        body.getBoundingClientRect();
+        requestAnimationFrame(function () {
+          body.style.height = "0px";
+          body.style.opacity = "0";
+        });
+        window.setTimeout(function () { details.open = false; }, 300);
+      } else {
+        details.open = true;
+        var openTo = body.scrollHeight;
+        body.style.height = "0px";
+        body.style.opacity = "0";
+        body.getBoundingClientRect();
+        requestAnimationFrame(function () {
+          body.style.height = openTo + "px";
+          body.style.opacity = "1";
+        });
+        window.setTimeout(function () { body.style.height = ""; }, 300);
+      }
+    });
+  });
+
+  /* ---------- treatment page — scroll-reveal (the reference site's real
+     "slideInBottom"/"fadeIn" IX2 presets, see the CSS comment on [data-reveal]) --------- */
+  var revealEls = document.querySelectorAll("[data-reveal]");
+  if (revealEls.length) {
+    if (reduceMotion || !("IntersectionObserver" in window)) {
+      revealEls.forEach(function (el) { el.classList.add("is-revealed"); });
+    } else {
+      var revealObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-revealed");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      revealEls.forEach(function (el) { revealObserver.observe(el); });
+    }
   }
 })();

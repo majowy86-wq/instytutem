@@ -51,6 +51,21 @@ button{ font-family:inherit; cursor:pointer; border:0; background:none; padding:
 ul{ margin:0; padding:0; list-style:none; }
 ::selection{ background:var(--a-olive); color:var(--a-cream); }
 
+.progress-bar{
+  position:fixed;
+  top:0;
+  left:0;
+  width:0%;
+  height:5px; /* zmierzone na żywej archon.au (getComputedStyle .progress-bar): 5px, nie 3px */
+  background:var(--a-olive-black);
+  z-index:999;
+  /* animowane przez JS jako `width` (layout), NIE `transform:scaleX()` — scaleX
+     renderuje się przez kompozytor GPU jako przeskalowana tekstura, co przy
+     ułamkowych współczynnikach dawało realnie widoczną, miękką/rozmytą krawędź
+     paska (zrzut ekranu użytkownika, potwierdzone też własnym zrzutem); `width`
+     idzie przez zwykły layout/paint, więc krawędź jest zawsze ostra. */
+}
+
 .skip-link{
   position:absolute;
   left:-9999px;
@@ -69,9 +84,13 @@ ul{ margin:0; padding:0; list-style:none; }
 }
 
 .container{
-  max-width:var(--container-max);
+  /* archon.au's real .main-container has no max-width at all — verified live
+     at 1440/2560/3840px (width always tracks the viewport minus a constant
+     ~15px, never plateaus). Removed sitewide (header/footer included), not
+     just on the treatment page — confirmed archon.au's own nav is uncapped
+     too (.nav-container: 3825px at a 3840px viewport). */
   margin:0 auto;
-  padding:0 clamp(20px, 5%, 72px);
+  padding:0 max(20px, 5%);
 }
 
 /* ============================================================
@@ -264,7 +283,9 @@ h1,h2,h3{
   top:0;
   z-index:100;
   background:var(--a-cream);
-  border-bottom:1px solid rgba(0,0,0,.06);
+  /* no border-bottom — the reference site's own nav has none (measured:
+     border/box-shadow both "none" on every nav-related element), this was
+     an unmeasured guess, removed on request */
 }
 .nav-row{
   display:flex;
@@ -414,7 +435,7 @@ h1,h2,h3{
   bottom:0;
   background:var(--a-cream);
   z-index:90;
-  padding:1.5rem clamp(20px, 5%, 72px);
+  padding:1.5rem max(20px, 5%);
   overflow-y:auto;
   transform:translateY(-100%);
   transition:transform .3s ease;
@@ -498,7 +519,7 @@ h1,h2,h3{
   margin:0 auto;
   display:flex;
   align-items:center;
-  padding:clamp(20px, 5%, 72px);
+  padding:max(20px, 5%);
 }
 .hero-content-inner{ width:100%; }
 .hero-content h1{ max-width:720px; }
@@ -571,16 +592,18 @@ h1,h2,h3{
   display:flex;
   gap:1em;
   overflow-x:auto;
-  /* left gutter matches the heading above (site container's own gutter, PLUS
-     the same centering offset .container gets from margin:auto past 1440px)
-     — but it's real padding on the scrollable element itself, not a margin on
-     the outer wrapper, so it scrolls away with everything before it and never
+  /* left gutter matches the heading above (site container's own gutter) — but
+     it's real padding on the scrollable element itself, not a margin on the
+     outer wrapper, so it scrolls away with everything before it and never
      reappears once the user scrolls. the reference site itself has no right padding
      (cards run flush to the true viewport edge) — deliberate deviation here,
      requested in chat, so the last card gets breathing room once fully
-     scrolled instead of touching the edge; mirrors the left gutter formula. */
-  padding-left:calc(max(0px, calc((100% - var(--container-max)) / 2)) + clamp(20px, 5%, 72px));
-  padding-right:calc(max(0px, calc((100% - var(--container-max)) / 2)) + clamp(20px, 5%, 72px));
+     scrolled instead of touching the edge; mirrors the left gutter formula.
+     No longer adds a centering offset past --container-max — .container
+     itself has no max-width any more (Round 48), so this row's gutter just
+     matches .container's own padding directly, same as everything else. */
+  padding-left:max(20px, 5%);
+  padding-right:max(20px, 5%);
   padding-bottom:var(--sp-16);
   cursor:grab;
   user-select:none;
@@ -714,9 +737,13 @@ h1,h2,h3{
 .trick-cat-label-wrap{
   /* same width/centering formula as .progress-wrap directly below — the
      labels' 0–100% positioning has to share the bar's own visible footprint,
-     not the full-bleed row, or they land outside where the bar actually is */
-  width:80%;
-  max-width:var(--container-max);
+     not the full-bleed row, or they land outside where the bar actually is.
+     On request: matches .container's own gutter exactly (width/max-width
+     via calc instead of padding — .progress-ticks below is `inset:0`, which
+     ignores an ancestor's own padding, so the gutter has to come from a
+     narrower width here, not from padding, or ticks/labels would spill past
+     the visible bar). */
+  width:calc(100% - 2 * max(20px, 5%));
   margin:var(--sp-16) auto 0;
   position:relative;
   height:1em;
@@ -751,11 +778,12 @@ h1,h2,h3{
   .trick-cat-label:not(.is-active){ display:none; }
 }
 .progress-wrap{
-  width:80%;
-  /* capped like the rest of the page's content (.container) — otherwise on
-     very wide viewports this keeps growing with the raw window instead of
-     the page's own max content width */
-  max-width:var(--container-max);
+  /* on request: same viewport-width + gutter formula as .trick-cat-label-wrap
+     above (which itself matches .container) — always full viewport width
+     with the same margins as the rest of the page's content, not a fixed 80%.
+     No longer capped at --container-max — .container itself has no
+     max-width any more (Round 48), so this stays consistent with it. */
+  width:calc(100% - 2 * max(20px, 5%));
   margin:var(--sp-16) auto 0;
   position:relative;
 }
@@ -982,6 +1010,23 @@ h1,h2,h3{
 }
 .t-dot.active{ background:#fff; }
 
+/* light ("cream") variant of the testimonial component — archon.au's real
+   .section.testimonial.cream (measured live, getComputedStyle): heading/quote/
+   name/source all rgb(63,61,59) = --a-ink-warm, stars rgb(58,65,42) = --a-olive.
+   Their arrows/dots use white icons + filter:invert(1) to read dark on a light
+   section (measured: .dark wrapper classes carry that filter) — we reuse our
+   own currentColor-based icons instead (simpler, same convention already used
+   for the mega-menu arrow) and set the color directly rather than inverting. */
+.section--cream .testimonial-section .h-section{ color:var(--a-ink-warm); }
+.section--cream .t-slide blockquote{ color:var(--a-ink-warm); }
+.section--cream .testimonial-name{ color:var(--a-ink-warm); }
+.section--cream .t-source{ color:var(--a-ink-warm); }
+.section--cream .t-stars{ color:var(--a-olive); }
+.section--cream .t-arrow{ color:var(--a-olive-black); }
+.section--cream .t-arrow:hover{ color:var(--a-rust); }
+.section--cream .t-dot{ background:rgba(22,24,16,.3); }
+.section--cream .t-dot.active{ background:var(--a-olive-black); }
+
 /* ============================================================
    Contact
    ============================================================ */
@@ -1065,34 +1110,105 @@ h1,h2,h3{
    bookings" label, real color is cream, same fix as Round 35 elsewhere */
 
 /* ============================================================
-   Newsletter
+   Newsletter — 1:1 with the reference site's .footer-cta (a cream card
+   full-bleed on a dark olive-deep section, not a heading floating on the
+   page's own cream background like the rest of the site). Measured
+   directly at 375/479/767/991/1425/2000px viewport widths.
    ============================================================ */
 .newsletter-box{
-  max-width:640px;
+  background:var(--a-cream);
+  /* uncapped 5%/10%/50px — deliberately NOT the sitewide clamp(20px,5%,72px)
+     gutter: measured directly up to 2000px viewport and it just keeps
+     growing with width, no cap, unlike .container elsewhere on the page. */
+  padding:5%;
+  transition:background-color .7s cubic-bezier(.25,.46,.45,.94);
+}
+.newsletter-box:hover{
+  /* the reference site's real .footer-cta:hover — measured via its
+     stylesheet rules (--dark-cream custom property), same value as our
+     existing --a-taupe token */
+  background:var(--a-taupe);
+}
+@media (max-width:991px){
+  .newsletter-box{ padding-top:10%; padding-bottom:10%; }
+}
+@media (max-width:767px){
+  .newsletter-box{ padding-top:50px; padding-bottom:50px; }
+}
+.newsletter-title .eyebrow{
+  /* base .eyebrow is --a-gray (right for the cream *page* background
+     elsewhere) — this eyebrow sits on the newsletter's own cream *card*,
+     where the reference site's real color is ink-warm, same family as its
+     other cream-on-cream text. Also wins over .section--olive .eyebrow
+     (cream) below it in source order — this card isn't olive itself. */
+  color:var(--a-ink-warm);
+  margin-bottom:20px;
+}
+.newsletter-heading{
+  font-family:"Tenor Sans",Georgia,serif;
+  font-weight:400;
+  font-size:28px;
+  line-height:1.7;
+  letter-spacing:-1px;
+  color:var(--a-ink-warm);
+  margin:0 0 10px;
+}
+@media (max-width:479px){
+  .newsletter-heading{ font-size:22px; }
 }
 .newsletter-form{
   display:flex;
-  gap:.75rem;
+  gap:1rem;
   margin-top:var(--sp-24);
-  flex-wrap:wrap;
 }
 .newsletter-form input[type="email"]{
   flex:1;
-  min-width:220px;
+  min-width:0;
   height:44px;
-  padding:0 1rem;
-  border:1px solid var(--a-border-gray);
-  border-radius:2px;
-  background:var(--a-white);
+  padding:8px 12px 8px 0;
+  border:0;
+  border-bottom:1px solid var(--a-ink-warm);
+  border-radius:0;
+  background:none;
   font-family:"Inter",sans-serif;
-  font-size:.9rem;
+  font-size:14px;
+  font-weight:600;
   color:var(--a-ink-warm);
+}
+.newsletter-form input[type="email"]::placeholder{
+  color:var(--a-ink-warm);
+  opacity:1;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  font-size:11px;
+}
+.newsletter-form input[type="email"]:focus{
+  /* the reference site's real focus state — from its own stylesheet
+     (.w-input:focus{border-color:#3898EC; outline:0}), a stock Webflow blue
+     not in our brand palette. Only the underline visibly reacts because the
+     other 3 border sides are already border-style:none above. */
+  outline:none;
+  border-bottom-color:#3898EC;
+}
+.newsletter-form .abtn{
+  /* .primary-olive already gives the right background (var(--a-olive)) and
+     border-radius (3px) — measured this button's own text color/size/padding
+     separately since they differ from that shared button's other use (nav
+     "Book Online"), a distinct component on the reference site too. */
+  color:var(--a-white);
+  font-size:15px;
+  padding:9px 15px;
+}
+.newsletter-form .abtn:hover{
+  background:var(--a-olive-deep);
 }
 .form-note{
   margin-top:.75rem;
-  font-size:.75rem;
-  color:var(--a-gray);
+  font-size:12px;
+  line-height:20.4px;
+  color:var(--a-ink-warm);
 }
+.form-note a{ text-decoration:underline; }
 .form-status{
   margin-top:.75rem;
   font-size:.85rem;
@@ -1103,7 +1219,9 @@ h1,h2,h3{
 /* ============================================================
    Footer
    ============================================================ */
-.site-footer{ border-top:1px solid var(--a-taupe); }
+/* .site-footer: no border-top — the reference site's real .footer-base/
+   .footer-cta have no border/box-shadow between them (measured directly),
+   this was an unmeasured guess, removed on request */
 .footer-grid{
   display:grid;
   grid-template-columns:1.2fr repeat(4,1fr);
@@ -1194,4 +1312,897 @@ h1,h2,h3{
   overflow:hidden;
   clip:rect(0,0,0,0);
   white-space:nowrap;
+}
+
+/* ============================================================
+   Strona zabiegu (usługi) — styl 1:1 z archon.au (podstrona przykładowa:
+   /treatments/women/womens-laser-hair-removal), treść z instytutem.pl.
+   Domyślny szablon dla wszystkich przyszłych podstron zabiegów.
+   Pełny zapis pomiarów i decyzji: DOKUMENTACJA.md.
+   ============================================================ */
+/* on request: hero + price strip together always exactly fill the viewport
+   (100vh), so the fold ends flush with the bottom of the dark price strip —
+   a deliberate departure from the reference site, whose own hero (90vh) +
+   price strip together run slightly taller than 100vh. The wrap is the 100vh
+   box; the hero flexes to fill whatever the strip's own content height
+   doesn't use, instead of the reference site's flat 90vh.
+   ONLY above 991px, though — the reference site's own hero is a completely
+   different, content-driven (not vh-locked) layout at ≤991px (see below), so
+   forcing 100vh there would fight the real structure instead of matching it. */
+.treatment-hero-wrap{
+  /* 100vh minus the sticky nav's own 80px — .site-nav sits in normal document
+     flow above this (position:sticky, not fixed/overlay), so it already
+     consumes 80px of the visible viewport before this wrap even starts */
+  height:calc(100vh - 80px);
+  display:flex;
+  flex-direction:column;
+}
+@media (max-width:991px){ .treatment-hero-wrap{ height:auto; } }
+.treatment-hero{
+  position:relative;
+  flex:1 1 auto;
+  min-height:0;
+  display:flex;
+  align-items:center;
+  color:var(--a-cream);
+  overflow:hidden;
+}
+.treatment-hero-bg{
+  position:absolute; inset:0;
+  background-size:cover;
+  background-position:center;
+}
+.treatment-hero-bg::before{
+  /* the reference site's real overlay: flat linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5))
+     — i.e. a uniform 50% black wash, not a top-to-bottom gradient. Only above
+     991px — the reference site's own overlay is display:none at ≤991px (see below). */
+  content:"";
+  position:absolute; inset:0;
+  background:rgba(0,0,0,.5);
+}
+.treatment-hero .container{ position:relative; z-index:1; }
+.treatment-hero-inner{
+  /* the reference site's real hero text column: a centered 720px box (measured:
+     equal ~281px gaps on both sides within the wider container at 1440px),
+     h1/lede text-align:center inside it too — but only above 991px (measured
+     breakpoint: text-align switches to left at ≤991px, confirmed at 767/991
+     both left, 1200 already center); eyebrow stays centered at every width. */
+  max-width:720px;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+}
+@media (max-width:991px){
+  .treatment-hero-inner{ align-items:flex-start; text-align:left; }
+}
+.treatment-hero .eyebrow{
+  color:var(--a-cream);
+  margin-bottom:var(--sp-16);
+  /* always centered regardless of breakpoint — measured directly, unlike h1/lede below */
+  text-align:center;
+  align-self:center;
+}
+.treatment-hero h1{
+  /* the reference site's real .heading.h1.treatment: 50px/weight 500/line-height
+     60px (1.2×) — measured directly, distinct from the homepage hero's .h-display.
+     Mobile size (32px) measured to switch at ≤479px, the sitewide breakpoint. */
+  font-family:"Tenor Sans",Georgia,serif;
+  font-weight:500;
+  font-size:50px;
+  line-height:1.2;
+  margin:0 0 var(--sp-24);
+}
+@media (max-width:479px){ .treatment-hero h1{ font-size:32px; } }
+.treatment-hero .lede{
+  /* the reference site's real intro paragraph on the photo is weight 500, not
+     the sitewide .lede's 400 — same size/line-height otherwise. margin-bottom
+     measured directly (26px, flat across breakpoints) — this is the paragraph's
+     OWN contribution to the gap above the buttons, on top of the button
+     wrapper's own margin-top below; missing this the first time is why that
+     gap read as too tight. */
+  font-weight:500;
+  color:var(--a-cream);
+  margin-bottom:26px;
+}
+
+/* ≤991px: a COMPLETELY different, content-driven layout on the reference
+   site — not a smaller version of the desktop overlay. Confirmed by direct
+   screenshot + DOM inspection (not just individual property checks, which
+   is how this got missed the first time): the photo becomes a plain 45vh
+   block at the top (position:static, no overlay — the reference site's own
+   .image-overlay-layer is display:none here), and the text sits BELOW it in
+   normal flow on the page's own cream background, dark ink text, left-
+   aligned. The breakpoint is exactly 991/992px (measured), matching this
+   project's existing tier. The text panel overlaps up into the bottom of
+   the photo by a measured ~84px at a 812px-tall viewport (~10vh) — a
+   deliberate overlapping-card effect, approximated here as a clean -10vh
+   (exact Webflow nested-wrapper padding math not fully reverse-engineered,
+   but this is visually within a few px of the real site). */
+@media (max-width:991px){
+  .treatment-hero{
+    position:static;
+    display:block;
+    overflow:visible;
+    color:var(--a-olive-black);
+  }
+  .treatment-hero-bg{
+    position:static;
+    height:45vh;
+    width:100%;
+  }
+  .treatment-hero-bg::before{ display:none; }
+  .treatment-hero .container{
+    position:relative;
+    margin-top:-10vh;
+    background:var(--a-cream);
+    padding-top:var(--sp-40);
+    padding-bottom:var(--sp-40);
+  }
+  .treatment-hero .eyebrow{
+    color:var(--a-olive-black);
+    /* archon.au's own eyebrow at this breakpoint is left-aligned with the
+       heading, not centered like the desktop overlay version — measured
+       directly (text-align:left) on the reference site's ≤991px layout. */
+    text-align:left;
+    align-self:flex-start;
+  }
+  .treatment-hero .lede{ color:var(--a-olive-black); }
+  .treatment-hero-ctas{
+    /* .treatment-hero-inner switches to align-items:flex-start above (for the
+       left-aligned text), but that also makes a flex row CHILD like this one
+       shrink-wrap to its own content width instead of filling the column —
+       confirmed as the real cause of the buttons not reaching the container's
+       right edge (measured: ctas stopped 20px short of h1/lede's own right
+       edge). archon.au's equivalent button-wrapper has an explicit width
+       instead of relying on stretch, so it isn't affected by the same
+       shrink-wrap — same fix here. */
+    width:100%;
+  }
+}
+
+/* the reference site's real hero CTA row — re-measured precisely (these are
+   NOT the shared .abtn.primary-black, they have their own distinct padding):
+   both 43px tall, radius 2px, 14px/500 white-on-olive-black — identical to
+   .abtn EXCEPT padding, which is 0 18px (plain button) and 0 13px 0 18px
+   (button with the arrow icon, asymmetric to keep the icon visually centered
+   in its own 24px box). Wrapper: margin-top 25px (>479px) / 10px (≤479px,
+   both measured directly), gap 20px between the two buttons. */
+.treatment-hero-ctas{
+  display:flex;
+  gap:20px;
+  margin-top:25px;
+}
+@media (max-width:479px){ .treatment-hero-ctas{ margin-top:10px; } }
+.treatment-hero-ctas .abtn{
+  padding:0 18px;
+}
+.treatment-hero-ctas .abtn.has-arrow{ padding:0 13px 0 18px; }
+@media (max-width:767px){
+  /* the reference site's real mobile behaviour, measured directly (both
+     buttons flex:1 1 0% — confirmed exactly at ≤767px, still content-width
+     at 768px+): buttons stretch to share the full row width equally,
+     "rozciągnięte na całą szerokość viewportu z uwzględnieniem marginesu".
+     white-space:normal + min-width:0 override the shared .abtn's nowrap/auto —
+     on archon.au the label wraps to 2 lines at very narrow widths (confirmed
+     at 320px: "View prices" wraps, button height stays fixed) instead of the
+     row overflowing past the container edge. */
+  .treatment-hero-ctas .abtn{ flex:1 1 0%; min-width:0; white-space:normal; text-align:center; }
+}
+/* the reference site's real arrow: an actual asset ("Arrow long - right.svg",
+   fetched and inlined here as the same path data — not a hand-drawn chevron),
+   in a 24×24 box with the 12×12 glyph centered, rotated 90deg to point down.
+   The reference site's own asset has a hardcoded near-black fill and uses
+   filter:invert(1) to read white on the dark button — our inlined copy uses
+   fill="currentColor" instead (inherits the button's own white text color
+   directly), same visual result without the redundant invert. Spacing to
+   the button text: display:flex + justify-content:space-around on the
+   button (not a fixed gap) — measured ~11.5px in practice. */
+.treatment-hero-ctas .abtn.has-arrow{
+  justify-content:space-around;
+}
+.treatment-hero-ctas .down-arrow-wrap{
+  width:24px;
+  height:24px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden; /* archon.au's .down_arrow_wrapper: overflow:hidden — clips the arrow
+                       during the jump so it never visibly leaves the button */
+}
+.treatment-hero-ctas .down-arrow{
+  width:12px;
+  height:12px;
+  transform:rotate(90deg);
+}
+/* the reference site's real hover animation on this arrow — read directly out
+   of its Webflow IX2 action list ("Jump Arrow Down", triggered on MOUSE_OVER):
+   translateY 0→30px (200ms) → instantly to -30px (0ms, a teleport) → back to
+   0 (200ms), both eased "easeInOut". Net visual effect: the arrow drops down
+   and bounces back on hover. Expressed here as one CSS keyframe animation
+   played on :hover (the instant jump has to land on an exact keyframe
+   percentage, hence 50%/50.01%). */
+@keyframes treatment-arrow-jump{
+  0%{ transform:translateY(0) rotate(90deg); }
+  50%{ transform:translateY(30px) rotate(90deg); }
+  50.01%{ transform:translateY(-30px) rotate(90deg); }
+  100%{ transform:translateY(0) rotate(90deg); }
+}
+.treatment-hero-ctas .abtn:hover .down-arrow{
+  animation:treatment-arrow-jump .4s ease-in-out;
+}
+
+/* dark price/financing strip directly under the hero — the reference site's
+   real .treatment-cta-block (measured 1:1): flex space-between, padding
+   20px + the sitewide 5% gutter (71.25px measured, matches clamp(20px,5%,72px)
+   used everywhere else), "Treatments from: $80 / 15 Minutes" + Afterpay logo
+   (image wrapper with filter:invert(1) to read white on the dark strip,
+   measured 1:1) + note. Adapted for a price RANGE ("od X zł", not a fixed $
+   figure) and MediRaty instead of Afterpay. Margin-bottom below: the
+   reference site's real 20px gap to the sticky tabs bar (.section-links),
+   measured identically at both mobile and desktop. */
+.treatment-price-strip{
+  background:var(--a-olive-black);
+  color:var(--a-cream);
+  flex:0 0 auto;
+  margin-bottom:20px;
+}
+.treatment-price-strip-inner{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px max(20px, 5%);
+}
+.treatment-price-strip-row{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+@media (max-width:767px){
+  /* the reference site's real mobile layout (measured at 375/767, breakpoint
+     confirmed exactly at 767/768): stacks into 2 rows, flat 160px height
+     (not content-driven), space-between distributes the rows within it,
+     no vertical padding needed (space-between handles the spacing). Each row
+     is itself 80px tall; the price row gets a bottom divider (real color:
+     var(--a-gray) — measured rgb(122,119,114), exactly this token — with
+     20px padding-bottom creating the gap above it), and its price (giant+
+     suffix) becomes flex:1 with justify-content:flex-end so it's pushed to
+     the row's right edge while the label stays left — real technique on the
+     reference site, not space-between on the row itself. */
+  .treatment-price-strip-inner{
+    flex-direction:column;
+    align-items:stretch;
+    height:160px;
+    padding-top:0;
+    padding-bottom:0;
+  }
+  .treatment-price-strip-row{
+    height:80px;
+    border-bottom:1px solid var(--a-gray);
+    /* archon.au's real .price-block: fixed height:80px PLUS padding:20px 0,
+       centering its content instead of leaving it flush to one edge —
+       measured directly. padding-bottom stacks with the divider gap below. */
+    padding:20px 0;
+  }
+  .treatment-price-wrap{
+    flex:1 1 0%;
+    justify-content:flex-end;
+  }
+  .treatment-financing-wrap{
+    height:80px;
+    /* same fix as the row above (archon.au's .afterpay-wrapper: height:80px +
+       padding:20px 0 + align-items:center) — our version keeps align-items:
+       flex-end (not center) because the MediRaty baseline trick above needs
+       a flex-end reference; adding this padding still centers the block as a
+       whole within the 80px row (both bottom-aligned img/text move up
+       together, off the row's bottom edge, so their relative — and already
+       measured — baseline alignment is unaffected). */
+    padding:20px 0;
+  }
+  /* on request: mirror the price row's left-label/right-value layout — the
+     logo stays pinned to the row's left edge (same column as "Cena już od:"),
+     the caption is pushed to the row's right edge (same column as "179 zł")
+     instead of trailing right after the logo with dead space beyond it. The
+     available width for the caption to wrap within doesn't change (still the
+     row's width minus the logo minus the gap), so this only repositions the
+     already-decided wrapped lines — the JS baseline alignment measures the
+     result live regardless of text-align, so it needs no change here. */
+  .treatment-financing{
+    flex:1 1 0%;
+    text-align:right;
+  }
+}
+.treatment-financing-wrap{
+  display:flex;
+  /* archon.au's real .afterpay-wrapper uses plain align-items:center (measured
+     directly) — earlier rounds here tried to match the caption's text
+     baseline to the MediRaty wordmark's own letter-baseline specifically
+     (excluding the heart icon), which needed a live JS measurement to get
+     right and never looked as level as simple centering. Matching the
+     reference site's simpler approach instead, on request. */
+  align-items:center;
+  gap:24px;
+}
+.treatment-financing-logo{
+  /* the reference site's real Afterpay logo: filter:invert(1) on the wrapper
+     (not the img itself) so a dark-on-transparent logo reads white on this
+     dark strip — same technique applied to the MediRaty logo here */
+  filter:invert(1);
+  display:flex;
+  align-items:center;
+}
+.treatment-financing-logo img{
+  /* on request: bigger than the Afterpay-matched 17px for legibility — MediRaty's
+     mark has more visual detail than Afterpay's simple wordmark and reads poorly
+     that small. The row/strip height itself stays as measured from Afterpay
+     (94px desktop / 160px mobile) — only the logo image grows within it.
+     Bumped +15% twice on request (28px→32px→37px). */
+  height:37px;
+  width:auto;
+}
+.treatment-price-label{
+  font-family:"Inter",sans-serif;
+  font-weight:600;
+  font-size:14px;
+  line-height:23.8px;
+  margin:0;
+}
+.treatment-price-wrap{
+  display:flex;
+  align-items:baseline;
+  gap:2px;
+}
+.treatment-price-giant{
+  font-family:"Inter",sans-serif;
+  font-weight:400;
+  font-size:44.8px;
+  line-height:53.76px;
+  margin:0;
+}
+@media (max-width:767px){ .treatment-price-giant{ font-size:40px; } }
+.treatment-price-suffix{
+  font-family:"Inter",sans-serif;
+  font-weight:400;
+  font-size:14px;
+  line-height:23.8px;
+  margin:0;
+}
+.treatment-financing{
+  font-family:"Inter",sans-serif;
+  font-weight:500;
+  font-size:12px;
+  line-height:20.4px;
+  margin:0;
+}
+
+.treatment-tabs{
+  position:sticky;
+  top:80px; /* JS overrides to sit flush under the real nav height, same pattern as elsewhere */
+  z-index:50;
+  background:var(--a-cream);
+}
+.treatment-tabs-inner{
+  display:flex;
+  gap:5px; /* zmierzone na żywej archon.au (getBoundingClientRect między kolejnymi
+              linkami FAQ/CONCERNS/COSTS/CARE): 5px, nie sitewide --sp-24 (24px) */
+  overflow-x:auto;
+  /* stays scrollable (touch swipe, trackpad, click-drag) but hides the
+     browser's own scrollbar chrome underneath it, on request — the tab
+     labels are longer here than on archon.au's own shortest labels ("faq",
+     "care"), which never need to scroll at any width there, so there's no
+     1:1 reference for this specific bar; hiding the scrollbar UI while
+     keeping the scroll behavior is the standard technique for this. */
+  scrollbar-width:none;
+  -ms-overflow-style:none;
+}
+.treatment-tabs-inner::-webkit-scrollbar{ display:none; }
+.treatment-tab{
+  font-family:"Inter",sans-serif;
+  font-weight:600;
+  font-size:12px;
+  letter-spacing:0.5px;
+  text-transform:uppercase;
+  color:var(--a-ink-warm);
+  white-space:nowrap;
+  padding:5px;
+}
+/* archon.au's real first tab has margin-left:-5px (measured live), canceling
+   its own 5px left padding so the text lines up with the container's edge
+   like the rest of the page — without it the first tab's text sits 5px right
+   of everything else. Only the first tab needs this; the others' spacing is
+   already correct via .treatment-tabs-inner's own gap. */
+.treatment-tab:first-child{ margin-left:-5px; }
+
+.treatment-accordion details{
+  /* the reference site's real .accordion-item divider color, measured directly:
+     rgba(212,212,212,.15) — a faint light-gray hairline, same family as --a-gray */
+  border-bottom:1px solid rgba(212,212,212,.15);
+}
+.section--cream .treatment-accordion details{
+  /* on cream sections the same hairline needs a dark-family color instead —
+     no reference-site cream instance of this component to measure, so this
+     mirrors the existing dark-on-cream divider already used elsewhere
+     (.title-rule .divider-rule) rather than reusing the olive-section value verbatim */
+  border-bottom-color:var(--a-taupe);
+}
+.treatment-accordion summary{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:var(--sp-16);
+  padding:20px 0;
+  cursor:pointer;
+  list-style:none;
+}
+.treatment-accordion summary::-webkit-details-marker{ display:none; }
+.treatment-accordion-q{
+  /* the reference site's real .faq-title: Inter 500 16px/24px — matches the
+     "Nagłówek karty (H4)" row in DESIGN-SYSTEM.md §3, but without the
+     text-transform:capitalize that .h-card carries (would mangle real
+     sentence-case question text), so a dedicated class instead of reusing .h-card */
+  font-family:"Inter",sans-serif;
+  font-weight:500;
+  font-size:16px;
+  line-height:24px;
+  margin:0;
+}
+.treatment-accordion summary .caret{
+  width:12px; height:8px;
+  flex:0 0 auto;
+  /* the reference site's real "Accordion Open/Close" arrow rotate (measured via
+     ix2 store): 300ms, not the previously-unmeasured 200ms this had before */
+  transition:transform .3s;
+}
+.treatment-accordion details[open] summary .caret{ transform:rotate(180deg); }
+.treatment-accordion-body{
+  /* the reference site's real .accordion-content-wrapper (measured via ix2 store):
+     height 0↔auto and opacity 0↔1, both 300ms outQuad — driven here by JS
+     (main.js) since native <details> can't transition its own show/hide; outQuad's
+     CSS equivalent is the same cubic-bezier already used elsewhere on this site.
+     Rest-state height/opacity keyed off [open] (not a JS-only default) so a
+     details that starts open renders correctly before main.js even runs — no
+     flash of hidden content while the script loads. */
+  overflow:hidden;
+  height:0;
+  opacity:0;
+  transition:height .3s cubic-bezier(.25,.46,.45,.94), opacity .3s;
+}
+.treatment-accordion details[open] .treatment-accordion-body{
+  height:auto;
+  opacity:1;
+}
+.treatment-accordion-body-inner{ padding:0 0 var(--sp-24); max-width:720px; }
+.treatment-accordion-teaser{
+  /* collapsed-state one-line teaser under the question, shown only while closed */
+  color:var(--a-gray);
+  font-size:14px;
+  margin-top:4px;
+}
+.treatment-accordion details[open] .treatment-accordion-teaser{ display:none; }
+
+/* the reference site's real "Women's laser hair removal in Brisbane" intro
+   section (.content-wrapper): a small uppercase eyebrow label, a full-width
+   1px divider line below it, then a 2-column grid (heading left, paragraph
+   right) — all measured directly. Reuses the sitewide .eyebrow/.lede classes
+   (already matching this section's exact type: 12px/600/uppercase and
+   16px/400/27.2px respectively) rather than introducing duplicate rules. */
+.treatment-intro-title-line .eyebrow{
+  /* this section's real eyebrow color is the darker ink-warm, not the
+     sitewide .eyebrow default (gray) — measured directly, distinct from the
+     Gift Cards section's own eyebrow that set that default. */
+  color:var(--a-ink-warm);
+  margin-bottom:20px;
+}
+.treatment-intro-divider{
+  height:1px;
+  background:#1E1D1D;
+}
+.treatment-intro-grid{
+  display:grid;
+  grid-template-columns:1fr 2fr;
+  column-gap:40px;
+  row-gap:64px;
+  align-items:start;
+  /* measured directly on the reference site: divider→heading gap is 25px at
+     every width, PLUS an extra 30px only ≥992px (55px total there) — on
+     archon.au that's the divider's own margin-bottom (25px) plus a separate
+     margin-bottom on its parent .section-title-line (30px, desktop-only),
+     which for some reason don't collapse into each other there. Standard CSS
+     margin collapsing (adjacent-sibling AND parent↔last-child) would merge
+     those two into whichever is larger instead of summing them if split back
+     out into two separate margins here, so the combined totals are set once,
+     directly, on this grid's own margin-top instead — avoids depending on a
+     collapsing quirk we can't explain, for the same visual result. */
+  margin-top:55px;
+}
+.treatment-intro-grid h2{
+  font-family:"Tenor Sans",Georgia,serif;
+  font-weight:500;
+  font-size:30px;
+  line-height:36px;
+  letter-spacing:-1px;
+  margin:0;
+  /* explicit, not relying on cascade order to beat .section--cream h2's
+     olive-black default — this section's real heading color is ink-warm,
+     measured directly (matches the eyebrow/paragraph color here too). */
+  color:var(--a-ink-warm);
+}
+@media (max-width:991px){
+  /* the reference site's real breakpoint for this grid is 991/992px — the
+     same tablet tier used by the hero's own restructuring, NOT the 767px
+     used elsewhere on this page (buttons, price strip). Confirmed by
+     bisecting: still 2-column at 991px, switches to 1-column exactly at
+     992px. Using 767px here left a cramped ~213px heading column between
+     768–991px that the reference site doesn't have at all. */
+  .treatment-intro-grid{
+    grid-template-columns:1fr;
+    row-gap:40px;
+    margin-top:25px;
+  }
+}
+
+/* FAQ section (#faq): reuses .treatment-intro-grid (same measured 1fr/2fr ratio and
+   40px/64px gaps as archon.au's own #faq ._2-column-grid — confirmed identical via
+   getComputedStyle, not a new component) but on a dark .section--olive background
+   with no divider above it (archon.au's real #faq has ~0px gap between its eyebrow
+   and the grid — margin-top:0 here, relying on the eyebrow's own margin-bottom
+   instead of the intro section's divider-driven 55px). */
+#faq .treatment-intro-grid{ margin-top:0; }
+#faq .eyebrow{ margin:0 0 20px; }
+.section--olive .treatment-intro-grid h2{ color:var(--a-cream); }
+/* archon.au's real #faq accordion colors (measured via getComputedStyle on
+   .accordion-item/.faq-title/.accordion-paragraph/.accordion-title), distinct
+   from the rgba(212,212,212,.15) divider already measured for a different real
+   accordion instance (Efekty/Technologia) — not overwriting that shared rule. */
+/* archon.au's real #faq accordion divider is a LEADING element (.divider-line,
+   first child of each .accordion-item) — not a trailing border like our shared
+   .treatment-accordion rule. Confirmed live: every item (incl. the first) has
+   one before it, the last item has none after it. border-top replicates that
+   exactly: a divider before every details, nothing after the final one. */
+#faq .treatment-accordion details{ border-bottom:none; border-top:1px solid var(--a-gray); }
+#faq .treatment-accordion-body-inner .lede{ color:var(--a-taupe); }
+#faq .treatment-accordion summary{ opacity:.8; transition:opacity .2s; }
+#faq .treatment-accordion summary:hover{ opacity:1; }
+
+.treatment-benefits{ margin-top:var(--sp-24); }
+.treatment-benefit{
+  display:flex;
+  gap:var(--sp-24);
+  align-items:baseline;
+  padding:var(--sp-16) 0;
+  border-bottom:1px solid rgba(212,212,212,.15);
+}
+.section--cream .treatment-benefit{ border-bottom-color:var(--a-taupe); }
+.treatment-benefit-num{
+  font-family:"Inter",sans-serif;
+  font-weight:600;
+  font-size:12px;
+  color:var(--a-gray);
+  flex:0 0 auto;
+}
+/* the reference site's real .number grows on mobile (12px→15px, measured
+   directly at 375px) — a real, deliberate quirk, not a guess */
+@media (max-width:767px){ .treatment-benefit-num{ font-size:15px; } }
+
+/* the reference site's real "15-Minute Block" / "30-Minute Block" / "1-Hour Block"
+   cards (.treatment-cards): square photo, bold 15px h3, 1px divider, bold 16px
+   price, 14px duration, 14px description, then an underlined "Book Just this"
+   link with a trailing arrow pinned to the card's bottom — all measured
+   directly on archon.au. display:flex + flex-wrap:wrap (not grid) is archon's
+   own mechanism for going from 3-across to stacked at narrow widths, so this
+   reuses the same approach instead of a media query. */
+.treatment-cards{
+  display:flex;
+  flex-wrap:wrap;
+  gap:30px 20px;
+  margin-top:var(--sp-24);
+}
+.treatment-card{
+  /* the reference site's real flex sizing (measured directly, not the
+     flex-basis:300px this had before): flex-basis:0%, min-width:31%,
+     max-width:50% — the max-width is what matters: it caps a lone card
+     wrapped onto its own row at half-width instead of flex-grow stretching
+     it to fill the whole row, which is what a bare `flex:1 1 300px` (no
+     upper bound) was doing here. */
+  flex:1 1 0%;
+  min-width:31%;
+  max-width:50%;
+  display:flex;
+  flex-direction:column;
+  /* the reference site's real hover: measured directly on archon.au as a
+     plain CSS :hover (not a Webflow IX2 interaction) on .treatment-cards-wrapper
+     — padding:20px is part of that same rule (the card lifts and a white
+     card-shape appears behind the padded content, not flush against the
+     photo's edge), transition 0.3s cubic-bezier(.25,.46,.45,.94) (the same
+     easing already used elsewhere on this site, e.g. .abtn:hover). */
+  padding:20px;
+  transition:transform .3s cubic-bezier(.25,.46,.45,.94), box-shadow .3s cubic-bezier(.25,.46,.45,.94), background-color .3s cubic-bezier(.25,.46,.45,.94);
+}
+.treatment-card:hover{
+  transform:translateY(-8px);
+  transform-origin:50% 100%;
+  border-radius:4px;
+  background-color:rgba(255,255,255,.66);
+  box-shadow:0 12px 14px -7px rgba(122,119,114,.26);
+}
+@media (max-width:479px){
+  /* the reference site's real breakpoint (measured: still 31%/50% at 480px,
+     switches to 100%/100% exactly at 479px) — same tier used sitewide for
+     the narrowest mobile rules. */
+  .treatment-card{ min-width:100%; max-width:100%; }
+}
+.treatment-card-image-link{
+  position:relative;
+  overflow:hidden;
+  aspect-ratio:1/1;
+  display:block;
+}
+.treatment-card-image{ width:100%; height:100%; object-fit:cover; }
+.treatment-card h3{
+  font-family:"Inter",sans-serif;
+  font-weight:700;
+  font-size:15px;
+  color:var(--a-cream);
+  margin:20px 0 10px;
+}
+.section--cream .treatment-card h3{ color:var(--a-ink-warm); }
+.treatment-card-divider{
+  height:1px;
+  background:rgba(212,212,212,.15);
+  margin-bottom:10px;
+}
+.section--cream .treatment-card-divider{ background:var(--a-taupe); }
+.treatment-card-price{
+  font-family:"Inter",sans-serif;
+  font-weight:700;
+  font-size:16px;
+  color:var(--a-cream);
+  margin:0;
+}
+.section--cream .treatment-card-price{ color:var(--a-olive-black); }
+.treatment-card-time{
+  font-family:"Inter",sans-serif;
+  font-weight:400;
+  font-size:14px;
+  /* dimmed cream, as an actual color value rather than element opacity — an
+     opacity:.8 here would collide with the scroll-reveal system's own
+     opacity toggle on this same element ([data-reveal], added below), since
+     both would fight over the one CSS property. */
+  color:rgba(241,237,231,.8);
+  margin:0 0 20px;
+}
+.section--cream .treatment-card-time{ color:var(--a-ink-warm); }
+.treatment-card-desc{
+  font-family:"Inter",sans-serif;
+  font-weight:400;
+  font-size:14px;
+  color:rgba(241,237,231,.8);
+  margin:0 0 20px;
+}
+.section--cream .treatment-card-desc{ color:var(--a-ink-warm); }
+.treatment-card-cta{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  overflow:hidden; /* archon.au's .arrow-button: clips the underline's horizontal
+                       hover-jump, measured live (getComputedStyle) rather than guessed */
+  align-self:flex-start;
+  margin-top:auto;
+  font-family:"Inter",sans-serif;
+  font-weight:500;
+  font-size:14px;
+  color:var(--a-cream);
+}
+.section--cream .treatment-card-cta{ color:var(--a-olive-black); }
+.treatment-card-cta-title-wrap{
+  display:flex;
+  align-items:center;
+  gap:6px; /* archon.au .title-wrapper: measured gap between text and arrow is 6px, not 8px */
+}
+.treatment-card-cta-underline{
+  width:100%;
+  height:1px;
+  background:var(--a-cream);
+}
+.section--cream .treatment-card-cta-underline{ background:var(--a-olive-black); }
+@keyframes cta-underline-jump{
+  0%{ transform:translateX(0); }
+  50%{ transform:translateX(100%); }
+  50.01%{ transform:translateX(-100%); }
+  100%{ transform:translateX(0); }
+}
+.treatment-card-cta:hover .treatment-card-cta-underline{
+  animation:cta-underline-jump .6s ease-out; /* archon.au IX2 "Arrow Button Hover In"
+    (a-33): TRANSFORM_MOVE .button-underline x:100% 300ms easeOut, teleport to
+    -100%, slide back to 0 in 300ms easeOut — runs in parallel with the arrow */
+}
+.treatment-card-cta-arrow{
+  width:14px;
+  height:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden; /* archon.au's .button-arrow-3 wrapper: clips the arrow during
+                       the hover jump so it never visibly leaves the button */
+  flex:0 0 auto;
+}
+.treatment-card-cta-arrow svg{ width:14px; height:10px; }
+@keyframes cta-arrow-jump{
+  0%{ transform:translateX(0); }
+  50%{ transform:translateX(15px); }
+  50.01%{ transform:translateX(-15px); }
+  100%{ transform:translateX(0); }
+}
+.treatment-card-cta:hover .treatment-card-cta-arrow svg{
+  animation:cta-arrow-jump .6s ease-out; /* archon.au IX2 "Arrow Button Hover In"
+    (a-33): TRANSFORM_MOVE .button-arrow-3 x:15px 300ms easeOut, teleport to
+    -15px, slide back to 0 in 300ms easeOut — measured via ix2 store, not guessed */
+}
+
+/* the reference site's real "Never had Laser? Get 50% off..." split-2 promo:
+   text column left (eyebrow+divider+h2+paragraph+CTA) / photo column right,
+   both full section height — all measured directly, including the ≥992px
+   breakpoint (the same tablet tier as the intro grid and hero, confirmed
+   again here rather than assumed) and the mobile column-reverse stacking
+   (photo first, text below, not the other way round). No .container/max-width
+   here on purpose — archon.au's own version has none either (confirmed: its
+   image column runs flush to the viewport edge on the right, zero gutter).
+   A prior round wrapped this in the sitewide .container to give it the same
+   margins as the rest of the page, which technically worked but produced a
+   visible dark gap between the photo and the viewport edge that archon.au
+   doesn't have — reverted on request, back to archon.au's real mechanism:
+   the LEFT gutter comes from .treatment-split-content's own padding-left
+   (equal to the sitewide clamp(20px,5%,72px), same value, just applied here
+   as padding instead of a wrapping container), while the RIGHT side (the
+   photo) bleeds all the way to the viewport edge with no cap, matching. */
+.treatment-split{
+  display:flex;
+  flex-direction:column-reverse;
+}
+@media (min-width:992px){
+  .treatment-split{
+    display:grid;
+    grid-template-columns:1fr 2fr;
+  }
+}
+.treatment-split-content{
+  padding:56.25px 18.75px;
+  display:flex;
+  flex-direction:column;
+}
+@media (min-width:992px){
+  /* clamp() here must use vw, not the sitewide %, unlike .container's own
+     clamp(20px,5%,72px) — that % correctly resolves against the viewport
+     because .container has no narrower ancestor constraining it, but this
+     element is a grid ITEM inside .treatment-split (a 1fr column, 475px at
+     1440px wide), so a % here would resolve against that narrow column
+     instead (measured bug: 24px instead of ~72px) — vw always resolves
+     against the viewport regardless of nesting, giving the same real gutter. */
+  .treatment-split-content{
+    padding:47.5px 47.5px 47.5px max(20px, 5vw);
+    /* the reference site's real mechanism for "paragraph+button stuck to the
+     bottom of the banner": .left-content is a 2-row CSS grid (measured:
+     grid-template-rows come out as two near-identical halves, i.e. 1fr 1fr)
+     — NOT a fixed margin-top on the heading. A fixed px gap (what this used
+     to be) only ever matches archon.au's own photo's specific height; with a
+     different photo (different aspect ratio → different section height) the
+     footer would sit at the wrong spot. The 1fr/1fr split + the footer's own
+     justify-content:flex-end (below) reproduces the real, height-independent
+     behavior instead. */
+    display:grid;
+    grid-template-rows:1fr 1fr;
+  }
+}
+.treatment-split-top{ margin-bottom:44px; }
+@media (min-width:992px){
+  /* the grid row split above already provides the spacing on desktop —
+     measured directly as 0 extra margin between the two halves. */
+  .treatment-split-top{ margin-bottom:0; }
+}
+.treatment-split-title-line{ margin-bottom:20px; }
+.treatment-split-divider{
+  height:1px;
+  background:#1E1D1D;
+  margin-bottom:22px;
+}
+@media (min-width:992px){ .treatment-split-divider{ margin-bottom:27px; } }
+.treatment-split-heading{
+  font-family:"Tenor Sans",Georgia,serif;
+  font-weight:500;
+  font-size:30px;
+  line-height:36px;
+  letter-spacing:-1px;
+  color:var(--a-cream);
+  margin:0;
+}
+.treatment-split-footer{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+}
+@media (min-width:992px){
+  /* pushes the paragraph+CTA to the bottom of this row's own half of the
+     content box — measured directly (button's own bottom edge sits flush
+     with the row's bottom edge, 0px gap) — this is the real "stuck to the
+     bottom" archon.au behavior. */
+  .treatment-split-footer{ justify-content:flex-end; }
+}
+.treatment-split-footer p{
+  font-family:"Inter",sans-serif;
+  font-size:16px;
+  line-height:27.2px;
+  color:var(--a-cream);
+  margin:0 0 10px;
+}
+.treatment-split-image-wrapper{
+  position:relative;
+  overflow:hidden;
+  height:450px;
+}
+@media (min-width:992px){ .treatment-split-image-wrapper{ height:auto; } }
+.treatment-split-image{ width:100%; height:100%; object-fit:cover; display:block; }
+
+.care-tabs{
+  display:flex;
+  gap:var(--sp-24);
+  margin-bottom:var(--sp-24);
+  flex-wrap:wrap;
+}
+.care-tab{
+  background:none;
+  border:none;
+  padding:0;
+  font-family:"Inter",sans-serif;
+  font-size:16px;
+  font-weight:500;
+  color:var(--a-gray);
+}
+.care-tab.is-active{ color:var(--a-cream); font-weight:700; }
+.section--cream .care-tab.is-active{ color:var(--a-ink-warm); }
+.care-panel[hidden]{ display:none; }
+
+/* clearly-flagged placeholder content (user-approved, style-matched to the
+   reference site's sections we have no real instytutem.pl copy for yet —
+   see PLAN.md TODO and DOKUMENTACJA.md) */
+.todo-content{ outline:1px dashed var(--a-rust); outline-offset:8px; }
+.todo-tag{
+  display:inline-block;
+  font-family:"Inter",sans-serif;
+  font-weight:600;
+  font-size:10px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:var(--a-rust);
+  margin-bottom:8px;
+}
+
+/* scroll-reveal — the reference site's own real, confirmed IX2 presets
+   ("slideInBottom"/"fadeIn"), read directly out of its Webflow.require('ix2')
+   store rather than guessed: opacity 0→1 (+ translateY(100px)→0 for the
+   "slide" variant), duration 1000ms, easing "outQuart" (the standard
+   ease-out-quartic curve, cubic-bezier(.25,1,.5,1)). JS (main.js) adds
+   .is-revealed via IntersectionObserver, which fires immediately for
+   anything already in view on load — so nothing gets stuck invisible if a
+   user never scrolls, unlike the scroll-reveal mistake documented in
+   CLAUDE.md's "Błędy, które popełniliśmy" #4. */
+[data-reveal]{ opacity:0; }
+[data-reveal="slide"]{ transform:translateY(100px); }
+[data-reveal].is-revealed{
+  opacity:1;
+  transform:none;
+  transition:opacity 1s cubic-bezier(.25,1,.5,1), transform 1s cubic-bezier(.25,1,.5,1);
+}
+/* the reference site's real "Divider Scroll into View" preset (read the same
+   way, via ix2 store, not guessed): width 0%→100%, 300ms, "easeIn" (the
+   standard CSS ease-in curve). Unlike the fade/slide variants above, the
+   reference site's own divider never has opacity:0 — only width animates —
+   so this variant overrides the shared opacity:0 back to fully opaque. */
+[data-reveal="grow"]{ opacity:1; width:0%; }
+[data-reveal="grow"].is-revealed{
+  width:100%;
+  transition:width .3s ease-in;
+}
+@media (prefers-reduced-motion: reduce){
+  [data-reveal]{ opacity:1 !important; transform:none !important; width:100% !important; }
 }
