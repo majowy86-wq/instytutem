@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/styles.css?v=93">
+<link rel="stylesheet" href="/css/styles.css?v=114">
 <!-- TODO: favicon / logo mark asset not yet available -->
 </head>
 <body>
@@ -319,7 +319,7 @@
   <div class="treatment-tabs">
     <div class="container treatment-tabs-inner">
       <a class="treatment-tab" href="#faq">FAQ</a>
-      <a class="treatment-tab" href="#obawy">Obawy</a>
+      <a class="treatment-tab" href="#wskazania">Wskazania</a>
       <a class="treatment-tab" href="#cennik">Cennik</a>
       <a class="treatment-tab" href="#postepowanie">Postępowanie</a>
     </div>
@@ -375,7 +375,7 @@
       <div class="treatment-cards">
         <div class="treatment-card">
           <a class="treatment-card-image-link" href="https://www.fresha.com/pl/a/instytutem-tm-plock-1-maja-6-jrr27hgf/booking?offerItemId=s%3A9410150" target="_blank" rel="noopener">
-            <img class="treatment-card-image" src="/assets/images/treatments/epilacja-laserowa-block-s.jpg" alt="Depilacja laserowa — mała partia ciała" loading="lazy">
+            <img class="treatment-card-image" src="/assets/images/treatments/epilacja-laserowa-block-s.jpg?v=3" alt="Depilacja laserowa — mała partia ciała" loading="lazy">
           </a>
           <h3 data-reveal>(S) Mała partia ciała</h3>
           <div class="treatment-card-divider" data-reveal="grow"></div>
@@ -392,7 +392,7 @@
         </div>
         <div class="treatment-card">
           <a class="treatment-card-image-link" href="https://www.fresha.com/pl/a/instytutem-tm-plock-1-maja-6-jrr27hgf/booking?offerItemId=s%3A9410878" target="_blank" rel="noopener">
-            <img class="treatment-card-image" src="/assets/images/treatments/epilacja-laserowa-block-m.jpg" alt="Depilacja laserowa — standardowa partia ciała" loading="lazy">
+            <img class="treatment-card-image" src="/assets/images/treatments/epilacja-laserowa-block-m.jpg?v=3" alt="Depilacja laserowa — standardowa partia ciała" loading="lazy">
           </a>
           <h3 data-reveal>(M) Standardowa partia ciała</h3>
           <div class="treatment-card-divider" data-reveal="grow"></div>
@@ -409,7 +409,7 @@
         </div>
         <div class="treatment-card">
           <a class="treatment-card-image-link" href="https://www.fresha.com/pl/a/instytutem-tm-plock-1-maja-6-jrr27hgf/booking?offerItemId=s%3A24457937" target="_blank" rel="noopener">
-            <img class="treatment-card-image" src="/assets/images/treatments/epilacja-laserowa-block-l.jpg" alt="Depilacja laserowa — duża partia ciała" loading="lazy">
+            <img class="treatment-card-image" src="/assets/images/treatments/epilacja-laserowa-block-l.jpg?v=2" alt="Depilacja laserowa — duża partia ciała" loading="lazy">
           </a>
           <h3 data-reveal>(L) Duża partia ciała</h3>
           <div class="treatment-card-divider" data-reveal="grow"></div>
@@ -578,23 +578,238 @@
     </div>
   </section>
 
-  <!-- DLACZEGO WARTO — styl 1:1 z archon.au .concern (lista numerowana), treść wyprowadzona
-       z realnych akapitów Efekty/Technologia poniżej (nie jest to nowa, wymyślona treść).
-       To realna zawartość zakładki "CONCERNS" z archon.au sticky sub-nav (zmierzone
-       na #concerns: "This treatment helps with:" + ta sama lista 01-07) — stąd id="obawy"
-       i pozycja w małym menu (Runda 42), nie tylko dodatkowy komponent bez odpowiednika. -->
-  <section class="section--cream section-pad" id="obawy">
-    <div class="container">
-      <div data-reveal="slide">
-      <div class="treatment-benefits">
-        <div class="treatment-benefit"><span class="treatment-benefit-num">01</span><p class="lede">Trwała redukcja owłosienia — efekt utrzymuje się nawet do kilku lat</p></div>
-        <div class="treatment-benefit"><span class="treatment-benefit-num">02</span><p class="lede">Bezpieczny i praktycznie bezbolesny dzięki systemowi chłodzenia</p></div>
-        <div class="treatment-benefit"><span class="treatment-benefit-num">03</span><p class="lede">Można wykonać na dowolnej partii ciała — twarz, nogi, pachy, bikini, plecy</p></div>
-        <div class="treatment-benefit"><span class="treatment-benefit-num">04</span><p class="lede">Nawet 3x szybszy zabieg dzięki laserowi diodowemu LightSheer® DUET™</p></div>
-        <div class="treatment-benefit"><span class="treatment-benefit-num">05</span><p class="lede">Pierwsze efekty widoczne niemal od razu po zabiegu</p></div>
-        <div class="treatment-benefit"><span class="treatment-benefit-num">06</span><p class="lede">Bezpłatna konsultacja i próba laserowa przed rozpoczęciem serii</p></div>
-        <div class="treatment-benefit"><span class="treatment-benefit-num">07</span><p class="lede">Certyfikowany sprzęt — Lumenis® LightSheer® DUET™ z certyfikatem FDA</p></div>
+  <!-- CENNIK (banner) — styl 1:1 z archon.au .split-1 ("ONE PRICE FOR ALL"), lustrzane
+       odbicie sekcji promo powyżej (zdjęcie po lewej, tekst po prawej; siatka 2fr/1fr
+       zamiast 1fr/2fr; jasne tło zamiast ciemnego). Pozycja w kolejności sekcji 1:1 z
+       archon.au: FAQ → ONE PRICE FOR ALL → CONCERNS (u nas: FAQ → to → Dlaczego warto).
+       Copy NIE jest tłumaczeniem — archon.au promuje "jedna cena bez względu na partię
+       ciała", co jest odwrotnością naszego realnego cennika (S/M/L wg wielkości partii,
+       179/349/698 zł) — treść napisana od nowa, żeby uczciwie opisywać nasz model. Zdjęcie
+       tymczasowo reużyte z hero tej strony (patrz PLAN.md) — do podmiany na dedykowane. -->
+  <section class="section--cream">
+    <div class="treatment-split treatment-split--price">
+      <div class="treatment-split-image-wrapper">
+        <img class="treatment-split-image" src="/assets/images/treatments/przejrzysty-cennik-banner.jpg" alt="Sylwetka podzielona liniami na strefy zabiegowe depilacji laserowej" loading="lazy">
       </div>
+      <div class="treatment-split-content">
+        <div class="treatment-split-top">
+          <div class="treatment-split-title-line">
+            <p class="eyebrow">Przejrzysty cennik</p>
+          </div>
+          <h2 class="treatment-split-heading">Proste ceny, dopasowane do wielkości zabiegu.</h2>
+          <p>Nie płacisz za cały zabieg, jeśli potrzebujesz mniej. Nasz cennik dzieli się na trzy jasne warianty — małą, standardową i dużą partię ciała — a cena i czas trwania są znane od razu, bez ukrytych kosztów i niespodzianek przy kasie.</p>
+        </div>
+        <div class="treatment-split-footer">
+          <a class="treatment-card-cta" href="#cennik">
+            <span class="treatment-card-cta-title-wrap">
+              <span>Zobacz cennik</span>
+              <span class="treatment-card-cta-arrow"><svg viewBox="0 0 16 12" aria-hidden="true"><path d="M15,6H1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,11l5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,1l5,5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </span>
+            <span class="treatment-card-cta-underline"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WSKAZANIA — styl 1:1 z archon.au #concerns (Runda 60). Treść (Runda 62, na
+       prośbę użytkownika) świadomie NIE jest już listą obaw/pytań — użytkownik
+       zauważył, że to pokrywałoby się z sekcją FAQ (tam już są pytania o ból,
+       trwałość, skuteczność na jasny włos, bezpieczeństwo skóry). Ta sekcja
+       odpowiada na INNE pytanie: kiedy/dla kogo ten zabieg jest pomocny (realne
+       wskazania), nie czy warto się bać. Treść wyprowadzona z hero (podrażnienia/
+       wrastające włoski po goleniu) i sekcji Efekty (partie ciała) poniżej —
+       żadnego nowego, niepotwierdzonego twierdzenia. -->
+  <section class="section--olive section-pad" id="wskazania">
+    <div class="container" data-reveal="slide">
+      <p class="eyebrow">Wskazania do zabiegu</p>
+      <h2 class="h-section">Ten zabieg pomoże, jeśli:</h2>
+      <div class="treatment-benefits">
+        <div class="treatment-benefit"><span class="treatment-benefit-num">01</span><p class="lede">Masz dość podrażnień, wrastających włosków i krostek po każdym goleniu</p></div>
+        <div class="treatment-benefit"><span class="treatment-benefit-num">02</span><p class="lede">Chcesz zrezygnować z częstego golenia lub depilacji woskiem na rzecz trwałego efektu</p></div>
+        <div class="treatment-benefit"><span class="treatment-benefit-num">03</span><p class="lede">Zależy Ci na gładkiej twarzy — wąsiku, brodzie czy policzkach</p></div>
+        <div class="treatment-benefit"><span class="treatment-benefit-num">04</span><p class="lede">Owłosienie na nogach, ramionach czy plecach ogranicza Twój codzienny komfort</p></div>
+        <div class="treatment-benefit"><span class="treatment-benefit-num">05</span><p class="lede">Szukasz skutecznej metody na strefę bikini i pachy</p></div>
+        <div class="treatment-benefit"><span class="treatment-benefit-num">06</span><p class="lede">Masz ciemne, dość gęste owłosienie — na taki typ laser działa najskuteczniej</p></div>
+        <div class="treatment-benefit"><span class="treatment-benefit-num">07</span><p class="lede">Chcesz odzyskać czas, który dotąd poświęcałaś na częstą depilację</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CENNIK — styl 1:1 z archon.au #cost ("PRICE LIST"): eyebrow + divider-line,
+       treatment-intro-grid (heading/paragraph), lista cen w formie akordeonu z
+       "leading divider" przed każdym wierszem (ten sam wzorzec co FAQ/Wskazania).
+       Grupujemy wg naszych realnych stref S/M/L (zamiast regionów ciała jak na
+       archon.au) — to bezpośrednio pokazuje, do jakiej strefy należy dana partia
+       ciała. Ceny i czasy zabiegów zmierzone bezpośrednio na żywym widżecie Fresha
+       (fresha.com/pl/a/instytutem-tm-plock-1-maja-6-jrr27hgf), nie zgadywane. -->
+  <section class="section--cream section-pad" id="cennik">
+    <div class="container" data-reveal="slide">
+      <div class="treatment-intro-title-line">
+        <p class="eyebrow">Cennik</p>
+        <div class="treatment-intro-divider"></div>
+      </div>
+      <div class="treatment-intro-grid">
+        <h2>Cena zależy od partii ciała</h2>
+        <div>
+          <p class="lede">Zabiegi dzielimy na trzy strefy — (S) mała partia ciała, (M) standardowa partia ciała i (L) duża partia ciała. Poniżej sprawdzisz, do której strefy należy Twoja partia ciała i ile kosztuje zabieg.</p>
+        </div>
+      </div>
+
+      <div class="price-list treatment-accordion">
+        <details class="price-tier" open>
+          <summary>
+            <span class="price-tier-label">
+              <h3 class="treatment-accordion-q">(S) Mała partia ciała</h3>
+              <span class="price-tier-badge">179 zł</span>
+            </span>
+            <svg class="caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </summary>
+          <div class="treatment-accordion-body">
+            <div class="price-tier-rows">
+              <div class="price-row"><p>Szpara międzypośladkowa <span>· 15 min</span></p><p>179 zł</p></div>
+              <div class="price-row"><p>Kolana <span>· 20 min</span></p><p>179 zł</p></div>
+              <div class="price-row"><p>Baki <span>· 20 min</span></p><p>179 zł</p></div>
+              <div class="price-row"><p>Stopy <span>· 20 min</span></p><p>179 zł</p></div>
+              <div class="price-row"><p>Kark <span>· 20 min</span></p><p>179 zł</p></div>
+              <div class="price-row"><p>Sutki <span>· 20 min</span></p><p>179 zł</p></div>
+              <div class="price-row"><p>Dłonie <span>· 20 min</span></p><p>179 zł</p></div>
+              <div class="price-row"><p>Policzki <span>· 20 min</span></p><p>179 zł</p></div>
+              <div class="price-row"><p>Broda <span>· 20 min</span></p><p>179 zł</p></div>
+              <div class="price-row"><p>Wąsik <span>· 20 min</span></p><p>179 zł</p></div>
+              <div class="price-row"><p>Linia brzucha <span>· 20 min</span></p><p>179 zł</p></div>
+            </div>
+          </div>
+        </details>
+        <details class="price-tier">
+          <summary>
+            <span class="price-tier-label">
+              <h3 class="treatment-accordion-q">(M) Standardowa partia ciała</h3>
+              <span class="price-tier-badge">349 zł</span>
+            </span>
+            <svg class="caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </summary>
+          <div class="treatment-accordion-body">
+            <div class="price-tier-rows">
+              <div class="price-row"><p>Cała twarz <span>wąsik, broda, policzki, baki · 25 min</span></p><p>349 zł</p></div>
+              <div class="price-row"><p>Ramiona <span>· 25 min</span></p><p>349 zł</p></div>
+              <div class="price-row"><p>Pośladki <span>· 25 min</span></p><p>349 zł</p></div>
+              <div class="price-row"><p>Bikini pełne <span>pełne lub niepełne — ta sama cena · 25 min</span></p><p>349 zł</p></div>
+              <div class="price-row"><p>Brzuch <span>brzuch i linia brzucha · 25 min</span></p><p>349 zł</p></div>
+              <div class="price-row"><p>Pachy <span>· 25 min</span></p><p>349 zł</p></div>
+              <div class="price-row"><p>Przedramiona <span>· 20 min</span></p><p>349 zł</p></div>
+              <div class="price-row"><p>Szyja <span>· 20 min</span></p><p>349 zł</p></div>
+              <div class="price-row"><p>Uda <span>· 20 min</span></p><p>349 zł</p></div>
+              <div class="price-row"><p>Klatka piersiowa <span>· 30 min</span></p><p>349 zł</p></div>
+              <div class="price-row"><p>Łydki <span>· 30 min</span></p><p>349 zł</p></div>
+              <div class="price-row"><p>Plecy <span>· 35 min</span></p><p>349 zł</p></div>
+            </div>
+          </div>
+        </details>
+        <details class="price-tier">
+          <summary>
+            <span class="price-tier-label">
+              <h3 class="treatment-accordion-q">(L) Duża partia ciała</h3>
+              <span class="price-tier-badge">698 zł</span>
+            </span>
+            <svg class="caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </summary>
+          <div class="treatment-accordion-body">
+            <div class="price-tier-rows">
+              <div class="price-row"><p>Całe nogi <span>stopy, łydki, kolana, uda · 1 godz. 5 min</span></p><p>698 zł</p></div>
+              <div class="price-row"><p>Całe ręce <span>dłonie, przedramiona, ramiona · 1 godz. 5 min</span></p><p>698 zł</p></div>
+            </div>
+          </div>
+        </details>
+      </div>
+
+      <!-- PAKIETY — realne dane z instytutem.pl/pakiety (nie z archon.au — archon
+           promuje model jednej ceny, więc nie ma tam odpowiednika tej sekcji).
+           Karty wizualnie spójne ze stroną: reużywają .treatment-cards/.treatment-card
+           (ten sam komponent co karty S/M/L wyżej), bez zdjęcia. -->
+      <div class="price-packages">
+        <div class="treatment-intro-title-line">
+          <p class="eyebrow">Pakiety</p>
+          <div class="treatment-intro-divider"></div>
+        </div>
+        <div class="treatment-intro-grid">
+          <h2>Zapłać z góry i zyskaj więcej</h2>
+          <div>
+            <p class="lede">Pakiety obejmują zabiegi w strefie (M) — standardowej partii ciała w cenie 349 zł. Zapłać z góry za określoną liczbę takich zabiegów na dowolną partię z tej strefy i ciesz się zniżką, dodatkowymi środkami na inne zabiegi oraz voucherami dla bliskich.</p>
+          </div>
+        </div>
+        <div class="treatment-cards price-package-cards">
+          <div class="treatment-card price-package-card">
+            <h3>mini 6</h3>
+            <div class="treatment-card-divider"></div>
+            <div class="price-package-per-treatment">
+              <span class="price-package-per-treatment-num">315 zł</span>
+              <span class="price-package-per-treatment-suffix">/ zabieg</span>
+            </div>
+            <p class="price-package-per-treatment-compare">zamiast 349 zł za zabieg poza pakietem</p>
+            <p class="treatment-card-time">1890 zł za pakiet · 6 zabiegów · ważny 12 miesięcy</p>
+            <p class="treatment-card-desc">Idealny pakiet na początek — skuteczna depilacja w 6 sesjach i dodatkowe vouchery dla bliskich.</p>
+            <ul class="price-package-list">
+              <li>6 zabiegów o wartości 349 zł każdy</li>
+              <li>3 vouchery o wartości 50 zł dla znajomych</li>
+            </ul>
+            <a class="treatment-card-cta" href="https://www.fresha.com/book-now/testem-xh2mr620/packages?id=23e836dd-ad04-5a88-9afb-f8d5b3df86cb&share=true&pId=602910" target="_blank" rel="noopener">
+              <span class="treatment-card-cta-title-wrap">
+                <span>Kup pakiet</span>
+                <span class="treatment-card-cta-arrow"><svg viewBox="0 0 16 12" aria-hidden="true"><path d="M15,6H1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,11l5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,1l5,5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </span>
+              <span class="treatment-card-cta-underline"></span>
+            </a>
+          </div>
+          <div class="treatment-card price-package-card price-package-card--featured">
+            <p class="price-package-badge">Najczęściej wybierany</p>
+            <h3>comfort 10</h3>
+            <div class="treatment-card-divider"></div>
+            <div class="price-package-per-treatment">
+              <span class="price-package-per-treatment-num">289 zł</span>
+              <span class="price-package-per-treatment-suffix">/ zabieg</span>
+            </div>
+            <p class="price-package-per-treatment-compare">zamiast 349 zł za zabieg poza pakietem</p>
+            <p class="treatment-card-time">2890 zł za pakiet · 10 zabiegów · ważny 12 miesięcy</p>
+            <p class="treatment-card-desc">Najczęściej wybierany pakiet — więcej sesji, dodatkowe środki na inne zabiegi i prezenty dla znajomych.</p>
+            <ul class="price-package-list">
+              <li>10 zabiegów o wartości 349 zł każdy</li>
+              <li>100 zł do wykorzystania na inne zabiegi</li>
+              <li>3 vouchery o wartości 50 zł dla znajomych</li>
+            </ul>
+            <a class="treatment-card-cta" href="https://www.fresha.com/book-now/testem-xh2mr620/packages?id=0e9f9b1b-15e6-559d-a6b3-cdd683884324&share=true&pId=602910" target="_blank" rel="noopener">
+              <span class="treatment-card-cta-title-wrap">
+                <span>Kup pakiet</span>
+                <span class="treatment-card-cta-arrow"><svg viewBox="0 0 16 12" aria-hidden="true"><path d="M15,6H1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,11l5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,1l5,5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </span>
+              <span class="treatment-card-cta-underline"></span>
+            </a>
+          </div>
+          <div class="treatment-card price-package-card">
+            <h3>premium 20</h3>
+            <div class="treatment-card-divider"></div>
+            <div class="price-package-per-treatment">
+              <span class="price-package-per-treatment-num">239,50 zł</span>
+              <span class="price-package-per-treatment-suffix">/ zabieg</span>
+            </div>
+            <p class="price-package-per-treatment-compare">zamiast 349 zł za zabieg poza pakietem</p>
+            <p class="treatment-card-time">4790 zł za pakiet · 20 zabiegów · ważny 18 miesięcy</p>
+            <p class="treatment-card-desc">Pakiet premium dla wymagających — najniższa cena za zabieg, stabilna cena w czasie i dodatkowe benefity.</p>
+            <ul class="price-package-list">
+              <li>20 zabiegów o wartości 349 zł każdy</li>
+              <li>200 zł do wykorzystania na inne zabiegi</li>
+              <li>5 voucherów o wartości 50 zł dla znajomych</li>
+            </ul>
+            <a class="treatment-card-cta" href="https://www.fresha.com/book-now/testem-xh2mr620/packages?id=0f0f807b-b1fa-5b81-8756-8dc92a0ec9af&share=true&pId=602910" target="_blank" rel="noopener">
+              <span class="treatment-card-cta-title-wrap">
+                <span>Kup pakiet</span>
+                <span class="treatment-card-cta-arrow"><svg viewBox="0 0 16 12" aria-hidden="true"><path d="M15,6H1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,11l5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,1l5,5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </span>
+              <span class="treatment-card-cta-underline"></span>
+            </a>
+          </div>
+        </div>
+        <p class="price-packages-note">*Pakiety dotyczą wyłącznie zabiegów strefy (M) w cenie 349 zł — nie obejmują małych partii ciała (S, 179 zł) ani dużych partii ciała (L, 698 zł). W skład pakietów wchodzą zabiegi na wszystkie części ciała w regularnej cenie 349 zł (m.in. bikini pełne, brzuch, cała twarz, klatka piersiowa, łydki, pachy, plecy, pośladki, przedramiona, ramiona, szyja, uda). Środków do wykorzystania na inne zabiegi nie można wykorzystać na zabiegi depilacji laserowej. Szczegóły i pełny regulamin pakietów dostępne w salonie.</p>
       </div>
     </div>
   </section>
@@ -686,13 +901,6 @@
           <li>Przyjmowanie niektórych leków światłouczulających</li>
         </ul>
       </div>
-    </div>
-  </section>
-
-  <section class="section--olive section-pad" id="cennik">
-    <div class="container" data-reveal="slide">
-      <h2 class="h-section">Cennik</h2>
-      <p class="lede">Poznaj aktualne ceny zabiegu — cena zależy od zabiegowej partii ciała.</p>
     </div>
   </section>
 

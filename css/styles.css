@@ -1375,7 +1375,11 @@ h1,h2,h3{
   text-align:center;
 }
 @media (max-width:991px){
-  .treatment-hero-inner{ align-items:flex-start; text-align:left; }
+  /* the reference site's real hero column at ≤991px: still capped at 720px,
+     but no longer centered (margin-left:0, not auto) — measured directly at
+     970px, where our leftover margin:0 auto was adding a real, visible
+     ~70px extra left indent versus the rest of the page's content. */
+  .treatment-hero-inner{ align-items:flex-start; text-align:left; margin:0; }
 }
 .treatment-hero .eyebrow{
   color:var(--a-cream);
@@ -1865,25 +1869,257 @@ h1,h2,h3{
 #faq .treatment-accordion summary{ opacity:.8; transition:opacity .2s; }
 #faq .treatment-accordion summary:hover{ opacity:1; }
 
-.treatment-benefits{ margin-top:var(--sp-24); }
+/* archon.au's real #concerns (measured directly, live): heading→list gap is
+   64px at every width (not the sitewide --sp-24=24px this had before); each
+   item's divider is a LEADING element (border-top, same pattern as #faq's
+   accordion — a divider before every item including the first, none after
+   the last), color rgb(122,119,114)=--a-gray (not the faint rgba(212,212,212,.15)
+   or --a-taupe this had before, which were never actually measured for THIS
+   component); 24px gap from divider to the number/text row; number+paragraph
+   are both --a-cream (not --a-gray for the number — also unmeasured before). */
+.treatment-benefits{ margin-top:64px; }
 .treatment-benefit{
   display:flex;
-  gap:var(--sp-24);
+  gap:15px;
   align-items:baseline;
-  padding:var(--sp-16) 0;
-  border-bottom:1px solid rgba(212,212,212,.15);
+  border-top:1px solid var(--a-gray);
+  padding-top:24px;
 }
-.section--cream .treatment-benefit{ border-bottom-color:var(--a-taupe); }
+.treatment-benefit .lede{ margin:0 0 10px; }
 .treatment-benefit-num{
   font-family:"Inter",sans-serif;
   font-weight:600;
   font-size:12px;
-  color:var(--a-gray);
+  color:var(--a-cream);
   flex:0 0 auto;
 }
+.section--cream .treatment-benefit-num{ color:var(--a-olive-black); }
 /* the reference site's real .number grows on mobile (12px→15px, measured
    directly at 375px) — a real, deliberate quirk, not a guess */
 @media (max-width:767px){ .treatment-benefit-num{ font-size:15px; } }
+/* eyebrow→heading gap for THIS section specifically (measured live: 47px at
+   1440px, 17px at 375px) — distinct from other sections' own measured gaps
+   for the same eyebrow/heading pattern elsewhere on this page. */
+#wskazania .eyebrow{ margin-bottom:47px; }
+@media (max-width:767px){ #wskazania .eyebrow{ margin-bottom:17px; } }
+
+/* CENNIK (#cennik): reuses .treatment-intro-grid (same as FAQ) + .treatment-accordion
+   (same details/summary mechanism as FAQ) for the S/M/L price tiers, styled after
+   archon.au's real #cost price list — now on a light .section--cream, matching
+   archon.au's own real #cost (a plain, light .section, not black-olive; the first
+   version of this section wrongly stayed dark "to match this page's rhythm" —
+   corrected on request to the actual measured archon.au style). Eyebrow+divider
+   reuses .treatment-intro-title-line/.treatment-intro-divider (same component as
+   the "Zabiegi Hi-Tech" intro higher up), but with the divider color measured
+   directly on archon.au's own #cost .section-title-line .divider-line
+   (rgb(122,119,114)=--a-gray), not that other section's #1E1D1D — two different
+   real measurements, not one value reused as a guess for the other. */
+#cennik .treatment-intro-divider{ background:var(--a-gray); }
+/* heading→list gap matches the sitewide convention already established for the
+   analogous "heading+intro-text → item list below" pattern (#wskazania's
+   .treatment-benefits, measured 64px from archon.au's #concerns) — the previous
+   24px reused .treatment-cards' own gap, a different, unrelated component. */
+.price-list{ margin-top:64px; }
+.price-tier summary{ gap:var(--sp-16); }
+.price-tier-label{ display:flex; align-items:center; gap:var(--sp-16); }
+/* archon.au's real #cost accordion group title (e.g. "Treatment Blocks", measured
+   directly on its own h3, live): Inter 15px/700/21px — distinct from FAQ's own
+   .faq-title (500/16/24, Round 43), which .treatment-accordion-q was tuned for.
+   Skips the real text-transform:capitalize for the same reason as the row text
+   above (would mangle our correctly-cased Polish tier names). */
+#cennik .treatment-accordion-q{
+  font-family:"Inter",sans-serif;
+  font-weight:700;
+  font-size:15px;
+  line-height:21px;
+}
+/* archon.au's real #cost .price-table price value (measured directly, live:
+   getComputedStyle on the 2nd <p> of a .price-table): Inter 16px/400/27.2px, NOT
+   bold — the 700 this had before was an unmeasured guess. Our own inline S/M/L
+   price badge (not a literal archon element — archon never shows a price next to
+   its group h3) reuses that same real "price value" typography for consistency,
+   since it displays the same kind of value. */
+.price-tier-badge{
+  font-family:"Inter",sans-serif;
+  font-weight:400;
+  font-size:16px;
+  color:var(--a-ink-warm);
+}
+/* archon.au's real #faq accordion divider is a LEADING element (border-top before
+   every item incl. the first, none after the last) — on request, the price-tier
+   accordion now matches that same mechanism instead of the base .treatment-accordion
+   rule's trailing border-bottom. Taupe matches the already-established cream-section
+   divider convention (.section--cream .treatment-card-divider, .section--cream
+   .treatment-accordion details). */
+#cennik .treatment-accordion details{ border-bottom:none; border-top:1px solid var(--a-taupe); }
+/* main.js wraps EVERY .treatment-accordion-body's children in its own freshly
+   created .treatment-accordion-body-inner div (for the height-animation system —
+   see main.js, "document.querySelectorAll('.treatment-accordion-body').forEach"),
+   regardless of section. That wrapper's own max-width:720px (sized for FAQ's prose
+   answers) was still capping the price rows even after giving .price-tier-rows
+   itself max-width:none, because the JS-made wrapper is a SEPARATE, outer element —
+   not the one carrying that class in this file. #cennik-scoped override (specificity
+   beats the plain .treatment-accordion-body-inner rule via the ID) removes the cap
+   only where it doesn't belong, so the price rows span the full .container width
+   like every other full-width element on the page, not a narrow reading column. */
+#cennik .treatment-accordion-body-inner{ max-width:none; }
+.price-tier-rows{ display:flex; flex-direction:column; }
+.price-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:var(--sp-16);
+  padding-top:var(--sp-16);
+  margin-top:var(--sp-16);
+  border-top:1px solid var(--a-taupe);
+}
+.price-row:first-child{ margin-top:0; }
+/* archon.au's real #cost .price-table row text (measured directly, live): Inter
+   16px/400/27.2px for BOTH the name and the price — 15px/1.4 and a bold price
+   were unmeasured guesses. Skips the real text-transform:capitalize measured on
+   archon's own item names (an English title-case convention) — same documented
+   exception already applied to FAQ's own dedicated heading class, since our real
+   Polish body-area names are already correctly cased and capitalize would mangle
+   them word-by-word. */
+.price-row p{
+  margin:0;
+  font-family:"Inter",sans-serif;
+  font-size:16px;
+  font-weight:400;
+  line-height:27.2px;
+  color:var(--a-ink-warm);
+}
+.price-row p:first-child span{ color:var(--a-gray); font-size:14px; }
+.price-row p:last-child{ flex:0 0 auto; }
+
+/* PAKIETY sub-section: real data from instytutem.pl/pakiety, not archon.au (archon
+   has no package-pricing equivalent — its whole pitch is "one price for all"). Reuses
+   .treatment-cards/.treatment-card verbatim (same component as the S/M/L cards
+   higher up this page) without the image block, so no new card visual language is
+   introduced for content this page-specific. */
+/* more air on request: bumped from the sitewide sp-80 section gap to sp-120 —
+   Pakiety reads as its own distinct block, not just a continuation of the price
+   list right above it. */
+.price-packages{ margin-top:var(--sp-120); }
+/* same real #cost divider color as the Cennik eyebrow above — reused here for
+   visual consistency between the two sub-sections sharing this one light section
+   (archon.au has no packages equivalent to measure directly for this one). */
+.price-packages .treatment-intro-divider{ background:var(--a-gray); }
+.price-package-card h3{ margin-top:0; }
+/* on request: the per-treatment price is the main thing a customer's eye should
+   land on in each card (it's the number that actually communicates the discount
+   — "315 zł / zabieg" vs the regular 349 zł — better than the total package price
+   does on its own), so it gets the biggest, boldest treatment in the card, well
+   above the now-secondary total/count/validity line (reusing .treatment-card-time
+   for that, unchanged). */
+.price-package-per-treatment{
+  display:flex;
+  align-items:baseline;
+  gap:6px;
+  margin:16px 0 4px;
+}
+.price-package-per-treatment-num{
+  font-family:"Inter",sans-serif;
+  font-weight:700;
+  font-size:36px;
+  line-height:1.15;
+  color:var(--a-ink-warm);
+}
+.price-package-per-treatment-suffix{
+  font-family:"Inter",sans-serif;
+  font-weight:400;
+  font-size:15px;
+  color:var(--a-gray);
+}
+.price-package-per-treatment-compare{
+  font-family:"Inter",sans-serif;
+  font-size:13px;
+  color:var(--a-gray);
+  margin:0 0 16px;
+}
+.price-package-card{ position:relative; }
+/* on the light section, the featured card needs real contrast against the cream
+   page instead of the rgba(255,255,255,.66) lift used elsewhere (that trick is for
+   OLIVE backgrounds — on cream it would barely register): a solid white card with
+   a taupe border, same shadow already used sitewide for lifted cards. */
+.price-package-card--featured{
+  border-radius:4px;
+  background-color:var(--a-white);
+  border:1px solid var(--a-taupe);
+  box-shadow:0 12px 14px -7px rgba(122,119,114,.26);
+}
+/* on request: the 3 package names should sit at the same level across cards. The
+   badge used to be an in-flow first child, pushing "comfort 10" down below where
+   "mini 6"/"premium 20" start (they carry no badge) — positioned as an absolute
+   "ribbon" hanging off the card's top edge instead, so it no longer consumes flow
+   height and every card's h3 starts at the same padding-top position. Centered
+   (left:50%/translateX(-50%), on request) rather than pinned to the card's own
+   left padding. Accent color is the sitewide rust hover/accent (--a-rust, already
+   used for nav-link/mega-menu/footer hovers and this section's own bullet dashes)
+   — not the brand lime, which was only ever used here as an unrelated one-off pick. */
+.price-package-badge{
+  position:absolute;
+  top:-13px;
+  left:50%;
+  transform:translateX(-50%);
+  /* absolutely-positioned + left:50% (no matching `right`) shrink-to-fit sizing
+     measures its "available width" from `left` to the containing block's right
+     edge — effectively half the card's width — so at card widths around 900px
+     viewport (~250px), the badge text wrapped to 2 lines even though it fits
+     comfortably on one. That taller, wrapped badge poked further above the card
+     (fixed top:-13px), eating into the gap from the paragraph above and reading
+     as "too close" exactly at that range. nowrap sizes it to its real content
+     width regardless of that constraint, keeping badge height constant. */
+  white-space:nowrap;
+  font-family:"Inter",sans-serif;
+  font-weight:700;
+  font-size:11px;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  color:var(--a-cream);
+  background:var(--a-rust);
+  display:inline-block;
+  padding:4px 10px;
+  border-radius:2px;
+  margin:0;
+}
+/* .treatment-card-cta's own margin-top:auto already pins the button to the card's
+   bottom edge, but since .treatment-cards stretches all 3 cards to equal height,
+   the tallest card (comfort 10, with the most list items) ends up with almost no
+   gap between its list and button — the auto margin has nothing left to consume.
+   Both margins here guarantee real breathing room on both sides of the list
+   (description→list, list→button) in every card, not just the shorter ones that
+   already had slack from the equal-height stretch. */
+.price-package-list{
+  list-style:none;
+  margin:var(--sp-24) 0 var(--sp-40);
+  padding:0;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.price-package-list li{
+  font-family:"Inter",sans-serif;
+  font-size:14px;
+  line-height:20px;
+  color:var(--a-ink-warm);
+  padding-left:16px;
+  position:relative;
+}
+.price-package-list li::before{ content:"–"; position:absolute; left:0; color:var(--a-rust); }
+/* archon.au's real fine-print asterisk note (measured directly on #cost
+   .paragraph.asterisk.dark, live): Inter 12px/400/20.4px, color rgb(63,61,59)
+   = --a-ink-warm — NOT the muted --a-gray/13px/1.5 this had before, which was
+   never actually measured for this specific component. margin-top 40px already
+   matched (--sp-40). */
+.price-packages-note{
+  font-family:"Inter",sans-serif;
+  font-size:12px;
+  font-weight:400;
+  line-height:20.4px;
+  color:var(--a-ink-warm);
+  margin:var(--sp-40) 0 0;
+}
 
 /* the reference site's real "15-Minute Block" / "30-Minute Block" / "1-Hour Block"
    cards (.treatment-cards): square photo, bold 15px h3, 1px divider, bold 16px
@@ -1898,6 +2134,16 @@ h1,h2,h3{
   gap:30px 20px;
   margin-top:var(--sp-24);
 }
+/* more air on request, one step up the sitewide 8px spacing scale from the 64px
+   "heading→list" convention used elsewhere (#wskazania, .price-list above) — this
+   particular gap (description paragraph → cards) reads tighter than those since
+   the cards themselves are visually heavier (bordered/padded boxes, not bare text
+   rows), so it earns the extra room. Placed AFTER .treatment-cards (same
+   specificity, so source order decides) — an earlier attempt at this same
+   position lost to .treatment-cards' own 24px and never actually took effect,
+   the same class-ordering bug already found and fixed for the mobile breakpoint
+   below (Round 70). */
+.price-package-cards{ margin-top:var(--sp-120); }
 .treatment-card{
   /* the reference site's real flex sizing (measured directly, not the
      flex-basis:300px this had before): flex-basis:0%, min-width:31%,
@@ -1932,6 +2178,27 @@ h1,h2,h3{
      the narrowest mobile rules. */
   .treatment-card{ min-width:100%; max-width:100%; }
 }
+/* on request: one package box per row on mobile (3 stacked rows), not the shared
+   .treatment-card breakpoint above (479px, measured for the S/M/L cards higher up
+   this page — a different, archon-original component this must not affect) —
+   package cards are our own content and, being 3-wide with generous 32px padding,
+   read as cramped in the ~480-767px range where the shared component still shows
+   2-up. Placed after .treatment-card's own rules (same specificity, so source
+   order decides) so this actually wins in that range. */
+@media (max-width:767px){
+  .price-package-card{ min-width:100%; max-width:100%; }
+}
+/* package cards are our own content, not a literal archon.au component (unlike the
+   S/M/L cards, which reuse this same .treatment-card class 1:1 from a measured
+   archon element) — safe to give them more interior breathing room on request
+   without touching that shared, measured padding used by the S/M/L cards too.
+   Extra bottom padding specifically for more air below the "Kup pakiet" button.
+   Placed after .treatment-card's own padding:20px rule above (equal specificity,
+   so source order decides) — an earlier attempt at this same position lost to
+   that rule and never actually took effect; verified this time via
+   getComputedStyle, not just a screenshot (same class-ordering pitfall as
+   Rounds 70/72, logged as lesson #20 in the "Ważne odkrycia" section above). */
+.price-package-card{ padding:32px 32px 56px; }
 .treatment-card-image-link{
   position:relative;
   overflow:hidden;
@@ -2067,7 +2334,13 @@ h1,h2,h3{
   }
 }
 .treatment-split-content{
-  padding:56.25px 18.75px;
+  /* horizontal was a fixed 18.75px, only correct at the 375px width it was
+     originally measured at — it's really the same sitewide gutter formula
+     as everywhere else (measured directly on archon.au's .left-content at
+     815px: 40px = max(20px,5%), same mechanism as .container), just never
+     switched from the flat px value to the formula. Vertical (56.25px)
+     left as-is — that one genuinely isn't a simple %-of-width formula. */
+  padding:56.25px max(20px, 5%);
   display:flex;
   flex-direction:column;
 }
@@ -2142,6 +2415,43 @@ h1,h2,h3{
 }
 @media (min-width:992px){ .treatment-split-image-wrapper{ height:auto; } }
 .treatment-split-image{ width:100%; height:100%; object-fit:cover; display:block; }
+
+/* .treatment-split--price: mirrored variant for the "ONE PRICE FOR ALL"-style
+   banner (archon.au's real .split-1 — measured live: image LEFT/text RIGHT,
+   grid-template-columns:2fr 1fr at ≥992px, i.e. the exact opposite ratio and
+   side of the promo section's .split-2). Image already comes first in the
+   HTML here, so mobile just needs plain column (not column-reverse — no flip
+   needed, unlike the promo section where DOM order was text-then-photo). */
+.treatment-split--price{ flex-direction:column; }
+@media (min-width:992px){
+  .treatment-split--price{ grid-template-columns:2fr 1fr; }
+  /* mirrored padding: small inner gap on the left (next to the image), the
+     real sitewide gutter on the right (outer edge) — measured directly on
+     archon.au's .right-content: 47.5px 71.25px 47.5px 47.5px. */
+  .treatment-split--price .treatment-split-content{ padding:47.5px max(20px, 5vw) 47.5px 47.5px; }
+}
+/* archon.au's real text here is ink-warm (rgb(63,61,59)), not the cream this
+   component's base rules assume (built for the dark promo section only) —
+   this is a light .section--cream context, so override explicitly. Simpler
+   content split than the promo section too: real archon.au groups the
+   paragraph with the eyebrow/heading (not with the button), and its footer
+   row isn't an even 1fr/1fr split (measured: 279px/45px, content-sized, not
+   halves) — reusing .treatment-split-top/-footer as generic "text block" and
+   "button block" containers instead of replicating that exact asymmetric
+   grid, since the visual difference is negligible on a section this short. */
+.treatment-split--price .eyebrow{ color:var(--a-ink-warm); }
+.treatment-split--price .treatment-split-heading{ color:var(--a-ink-warm); }
+.treatment-split-top p:not(.eyebrow){
+  /* :not(.eyebrow) matters — the eyebrow is also a bare <p>, and without this
+     exclusion this rule's font-size (16px) was winning over .eyebrow's own
+     .75rem (higher specificity: class+element beats class alone), silently
+     resizing the eyebrow instead of just styling the description paragraph. */
+  font-family:"Inter",sans-serif;
+  font-size:16px;
+  line-height:27.2px;
+  color:var(--a-ink-warm);
+  margin:16px 0 0;
+}
 
 .care-tabs{
   display:flex;
