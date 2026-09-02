@@ -183,6 +183,14 @@
   var current = 0;
   var dots = [];
 
+  if (track && slides.length) {
+    track.style.width = slides.length * 100 + "%";
+    slides.forEach(function (slide) {
+      slide.style.flex = "0 0 " + 100 / slides.length + "%";
+      slide.style.width = 100 / slides.length + "%";
+    });
+  }
+
   var STAR_PATH = "M10 0l2.9 6.9 7.1.7-5.5 5 1.7 7.2-6.2-4-6.2 4 1.7-7.2-5.5-5 7.1-.7z";
   slides.forEach(function (slide) {
     var starsWrap = slide.querySelector(".t-stars");
@@ -782,16 +790,43 @@
     });
   }
 
-  /* ---------- treatment page — Care sub-tabs (Przygotowanie/Przebieg/Pielęgnacja) ---------- */
+  /* ---------- treatment page — Care sub-tabs (Przeciwwskazania/Przygotowanie/Postępowanie) ----------
+     archon.au's real tab-pane switch (measured on the live Webflow w-tabs element:
+     data-duration-in="300" data-duration-out="100" data-easing="ease") — cross-fades
+     out the old panel then fades in the new one, instead of an instant hidden-attribute
+     swap. */
   var careTabs = document.querySelectorAll(".care-tab");
   if (careTabs.length) {
     careTabs.forEach(function (tab) {
       tab.addEventListener("click", function () {
+        if (tab.classList.contains("is-active")) return;
         var targetId = tab.getAttribute("aria-controls");
+        var targetPanel = document.getElementById(targetId);
+        var currentPanel = document.querySelector(".care-panel:not([hidden])");
         careTabs.forEach(function (t) { t.classList.toggle("is-active", t === tab); });
-        document.querySelectorAll(".care-panel").forEach(function (panel) {
-          panel.hidden = panel.id !== targetId;
-        });
+        if (reduceMotion || !currentPanel || currentPanel === targetPanel) {
+          document.querySelectorAll(".care-panel").forEach(function (panel) {
+            panel.hidden = panel.id !== targetId;
+          });
+          return;
+        }
+        currentPanel.style.transition = "opacity .1s ease";
+        currentPanel.style.opacity = "0";
+        window.setTimeout(function () {
+          currentPanel.hidden = true;
+          currentPanel.style.opacity = "";
+          currentPanel.style.transition = "";
+          targetPanel.hidden = false;
+          targetPanel.style.transition = "none";
+          targetPanel.style.opacity = "0";
+          targetPanel.getBoundingClientRect();
+          targetPanel.style.transition = "opacity .3s ease";
+          requestAnimationFrame(function () { targetPanel.style.opacity = "1"; });
+          window.setTimeout(function () {
+            targetPanel.style.opacity = "";
+            targetPanel.style.transition = "";
+          }, 300);
+        }, 100);
       });
     });
   }
@@ -843,6 +878,90 @@
       }
     });
   });
+
+  /* ---------- magnetic button (archon.au's real .magnetic-wrapper effect on
+     its CTA banner "Book Now" button) — measured directly on the live site:
+     synthetic mousemove events don't trigger it (same tooling limitation as
+     DOKUMENTACJA.md's "Ważne odkrycia" #11/15/18/19), so probed with a tiny
+     marker element placed at a known offset inside the button, then a real
+     hover on that marker: resulting pull was translate3d(-0.66em, -0.18em)
+     for a cursor offset of (-65px, -19.5px) from the button's own center —
+     i.e. a pull strength of ≈0.15-0.16× the offset on both axes. Also
+     confirmed transitionDuration:0s on the live element (both mid-hover and
+     right after leaving) — no CSS transition is involved, consistent with a
+     JS-driven per-frame follow rather than an eased transition, so
+     implemented the same way: a requestAnimationFrame loop lerping the
+     current offset toward the target. Strength bumped from the raw-measured
+     0.15 to 0.35 per direct user feedback comparing our button side-by-side
+     with the live archon.au one ("BARDZIEJ ruszać, w większym zakresie" —
+     should move more, in a larger range). */
+  if (!reduceMotion) {
+    document.querySelectorAll(".magnetic-btn").forEach(function (btn) {
+      var strength = 0.35;
+      var targetX = 0, targetY = 0, curX = 0, curY = 0, raf = null;
+      function loop() {
+        curX += (targetX - curX) * 0.2;
+        curY += (targetY - curY) * 0.2;
+        btn.style.transform = "translate(" + curX.toFixed(2) + "px, " + curY.toFixed(2) + "px)";
+        if (Math.abs(targetX - curX) > 0.1 || Math.abs(targetY - curY) > 0.1) {
+          raf = requestAnimationFrame(loop);
+        } else {
+          curX = targetX; curY = targetY;
+          btn.style.transform = "translate(" + curX.toFixed(2) + "px, " + curY.toFixed(2) + "px)";
+          raf = null;
+        }
+      }
+      btn.addEventListener("mousemove", function (e) {
+        var r = btn.getBoundingClientRect();
+        targetX = (e.clientX - r.left - r.width / 2) * strength;
+        targetY = (e.clientY - r.top - r.height / 2) * strength;
+        if (!raf) raf = requestAnimationFrame(loop);
+      });
+      btn.addEventListener("mouseleave", function () {
+        targetX = 0;
+        targetY = 0;
+        if (!raf) raf = requestAnimationFrame(loop);
+      });
+    });
+  }
+
+  /* ---------- CTA banner parallax (archon.au's real #Solution .section-parallax:
+     an oversized <img> — measured 1200px tall inside a 400px-tall section, i.e.
+     800px of vertical slack — translated on scroll via a Webflow IX2 scroll
+     trigger). Measured live on archon.au by reading the img's computed
+     transform at controlled scroll positions: roughly linear, translateY ≈
+     -0.22 × the section's own viewport-relative top offset, over the section's
+     full transit through the viewport (the exact edges of Webflow's own IX2
+     curve weren't cleanly reproducible from outside — same class of limitation
+     as the magnetic button — so this is the measured core ratio, not a guess,
+     applied with a plain scroll-linked rAF loop instead of chasing Webflow's
+     internal easing). Our own image is oversized by 180px (90px top+bottom,
+     see .cta-banner-image CSS) — offset is clamped to that slack so the
+     oversized image never reveals an empty edge. */
+  (function () {
+    var img = document.querySelector(".cta-banner-image");
+    if (!img || reduceMotion) return;
+    var section = img.closest(".cta-banner");
+    var ticking = false;
+    function update() {
+      var rect = section.getBoundingClientRect();
+      var maxOffset = (img.offsetHeight - rect.height) / 2;
+      var offset = -0.22 * rect.top;
+      if (offset > maxOffset) offset = maxOffset;
+      if (offset < -maxOffset) offset = -maxOffset;
+      img.style.transform = "translateY(" + offset.toFixed(2) + "px)";
+      ticking = false;
+    }
+    function onScroll() {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    update();
+  })();
 
   /* ---------- treatment page — scroll-reveal (the reference site's real
      "slideInBottom"/"fadeIn" IX2 presets, see the CSS comment on [data-reveal]) --------- */
