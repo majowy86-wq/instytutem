@@ -814,12 +814,20 @@ h1,h2,h3{
   background:var(--a-gray);
   opacity:.4; /* same weight as .trick-cat-divider — same mark, two places */
 }
+/* Below 992px, height switches from vh to aspect-ratio (0.64, the real desktop
+   width/height ratio measured live at 1440px: 286.6/450) so it tracks the
+   card's own WIDTH instead of the viewport's height. A vh-based height and a
+   %-based width move independently — on a phone or tablet held in LANDSCAPE
+   (viewport height shrinks, width grows) that combination flipped the cards
+   from tall arches into short, wide rectangles (measured: 812x375 landscape
+   gave ratio 1.29, i.e. wider than tall, vs desktop's 0.64). aspect-ratio
+   keeps the same proportions as desktop in every orientation, portrait or
+   landscape, without needing separate per-orientation rules. */
 @media (max-width:991px){
-  .trick-card{ width:var(--tc-card-w, 38%); height:60vh; }
+  .trick-card{ width:var(--tc-card-w, 38%); height:auto; aspect-ratio:0.64; }
   .trick-cap{ font-size:2.4rem; }
 }
 @media (max-width:767px){
-  .trick-card{ height:50vh; }
   .trick-cap{ font-size:1.6rem; }
 }
 @media (max-width:479px){
@@ -827,11 +835,8 @@ h1,h2,h3{
     width:var(--tc-card-w, 60%);
     /* on request: 2.5 cards visible on mobile instead of the reference-site-
        matched 1.5 (see main.js layoutCardHalfCut) — narrower cards than the
-       173px reference-site minimum below need their own, smaller floor here,
-       and a shorter height so they don't read as unnaturally tall/thin at
-       that width. */
+       173px reference-site minimum below need their own, smaller floor here. */
     min-width:100px;
-    height:42vh;
   }
   .trick-cap{ font-size:1.4rem; }
 }

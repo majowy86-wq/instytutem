@@ -713,6 +713,7 @@
     var marqueeOffset = 0;
     var lastMarqueeScrollY = window.scrollY;
     var marqueeRAF = null;
+    var marqueeInView = true; // IntersectionObserver corrects this before the first tick if unsupported
 
     function fillMarquee() {
       while (marqueeTrack.children.length > marqueeTile.length) {
@@ -729,17 +730,32 @@
     function renderMarquee() {
       marqueeTrack.style.transform = "translateX(" + (-marqueeOffset).toFixed(2) + "px)";
     }
-    function applyMarquee() {
+    /* Polls scrollY every animation frame instead of reacting to "scroll" events —
+       real mobile Safari (and several Android browsers) only fire "scroll" a
+       handful of times during a touch/momentum-scroll gesture rather than
+       continuously like desktop, which left this frozen or stuttering on
+       mobile/tablet. A self-scheduling rAF loop samples scroll position on every
+       painted frame regardless of how the browser throttles the event, so it
+       tracks touch scrolling exactly like a mouse-wheel scroll. Gated by
+       IntersectionObserver so it stops spending frames once the section scrolls
+       out of view. */
+    function tickMarquee() {
       marqueeRAF = null;
       var currentScrollY = window.scrollY;
       var delta = currentScrollY - lastMarqueeScrollY;
       lastMarqueeScrollY = currentScrollY;
-      marqueeOffset -= delta * MARQUEE_SPEED;
-      marqueeOffset = ((marqueeOffset % marqueeHalfWidth) + marqueeHalfWidth) % marqueeHalfWidth;
-      renderMarquee();
+      if (delta !== 0) {
+        marqueeOffset -= delta * MARQUEE_SPEED;
+        marqueeOffset = ((marqueeOffset % marqueeHalfWidth) + marqueeHalfWidth) % marqueeHalfWidth;
+        renderMarquee();
+      }
+      if (marqueeInView) marqueeRAF = requestAnimationFrame(tickMarquee);
     }
-    function scheduleMarquee() {
-      if (marqueeRAF === null) marqueeRAF = requestAnimationFrame(applyMarquee);
+    function startMarqueeLoop() {
+      if (marqueeRAF === null) {
+        lastMarqueeScrollY = window.scrollY;
+        marqueeRAF = requestAnimationFrame(tickMarquee);
+      }
     }
     function recalcMarquee() {
       fillMarquee();
@@ -748,8 +764,15 @@
     }
 
     fillMarquee();
-    window.addEventListener("scroll", scheduleMarquee, { passive: true });
     window.addEventListener("resize", recalcMarquee);
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        marqueeInView = entries[0].isIntersecting;
+        if (marqueeInView) startMarqueeLoop();
+      }).observe(marqueeSection);
+    } else {
+      startMarqueeLoop();
+    }
   }
 
   /* ---------- treatment page — sticky quick-nav tabs (scroll-spy + smooth scroll) ---------- */
