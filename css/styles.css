@@ -942,6 +942,12 @@ h1,h2,h3{
 }
 .t-track{
   display:flex;
+  align-items:flex-start; /* flex row's default cross-axis stretch was forcing every
+    .t-slide to the height of the TALLEST slide, so main.js's per-slide
+    mask.style.height = slides[current].offsetHeight always read that same stretched
+    height regardless of which slide was current — a short review sat top-aligned in
+    a box sized for the longest one, leaving a gap before .t-dots/.t-cta below. Each
+    slide now reports its own intrinsic height. */
   width:700%;
   transition:transform .5s ease;
 }
@@ -2067,11 +2073,29 @@ h1,h2,h3{
   color:var(--a-ink-warm);
 }
 .price-row p:first-child span{ color:var(--a-gray); font-size:14px; }
-.price-row p:last-child{ flex:0 0 auto; }
+.price-row > :last-child{ flex:0 0 auto; }
 /* current, bookable price next to a struck-through .price-old regular price —
    rust ties it back visually to the "Promocja" badge on the Konsultacje
-   accordion header itself, without repeating the badge on every row. */
-.price-row .price-promo{ color:var(--a-rust); }
+   accordion header itself, without repeating the badge on every row. Full size
+   (16px, matching every other .price-row price), not the .price-old's de-emphasized
+   14px — this is the real, payable price, not a secondary detail.
+   Selector needs p:first-child + the class (not just .price-row .price-promo)
+   because the price <p> sits inside .price-row-buy, making it a :first-child
+   itself — .price-row p:first-child span (the row-label's gray/14px duration
+   span rule, above) outranks a plain two-class selector and was winning. Same
+   specificity pitfall as the original badge-inside-.price-row bug this session. */
+.price-row p:first-child .price-promo{ color:var(--a-rust); font-size:16px; }
+
+/* Per-row booking button: reuses .treatment-card-cta verbatim (same "Kup pakiet"
+   link style as the package cards) — wrapped with its price in .price-row-buy so
+   .price-row keeps exactly two flex children and its existing space-between/
+   :last-child rules above still apply unchanged. */
+.price-row-buy{ display:flex; align-items:center; gap:var(--sp-24); }
+.price-row .treatment-card-cta{ margin-top:0; align-self:center; }
+@media (max-width:767px){
+  .price-row{ flex-wrap:wrap; row-gap:var(--sp-8); }
+  .price-row-buy{ width:100%; justify-content:space-between; }
+}
 
 /* PAKIETY sub-section: real data from instytutem.pl/pakiety, not archon.au (archon
    has no package-pricing equivalent — its whole pitch is "one price for all"). Reuses
