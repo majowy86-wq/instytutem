@@ -28,7 +28,7 @@ Reprezentatywne cytaty (oryginalne, EN — ton do naśladowania):
 
 ## 2. Kolory
 
-Paleta jest wąska i zdyscyplinowana. Kremowe tło i niemal czarna oliwkowa zieleń niosą 90% interfejsu; limonkowy akcent jest **rzadki i celowy**.
+Paleta jest wąska i zdyscyplinowana. Kremowe tło i niemal czarna oliwkowa zieleń niosą 90% interfejsu. Na archon.au limonkowy akcent jest rzadki i celowy — **na tej stronie jego rolę świadomie przejął rdzawy** (patrz `--a-lime` niżej).
 
 | Token | Nazwa | HEX | RGB | Zastosowanie |
 |---|---|---|---|---|
@@ -40,13 +40,13 @@ Paleta jest wąska i zdyscyplinowana. Kremowe tło i niemal czarna oliwkowa ziel
 | `--a-border-gray` | Border Gray | `#696969` | 105, 105, 105 | Cienkie obwódki, przycisk „Call Us” |
 | `--a-gray` | Muted Gray | `#7A7772` | 122, 119, 114 | Przycisk z numerem telefonu |
 | `--a-taupe` | Taupe | `#D6D0C5` | 214, 208, 197 | Separatory, subtelne tła w kartach |
-| `--a-lime` | Lime | `#BFF751` | 191, 247, 81 | Rzadki akcent — jedna specjalna sekcja, cena w kartach zabiegów |
+| `--a-lime` | Lime | `#BFF751` | 191, 247, 81 | **Nieużywane na tej stronie** (patrz notatka niżej) — na archon.au rzadki akcent punktowy |
 | `--a-white` | White | `#FFFFFF` | 255, 255, 255 | Przycisk kontrastowy na ciemnym tle |
-| `--a-rust` | Rust | `#C7642D` | 199, 100, 45 | **Kolor hover dla wszystkich klikalnych linków tekstowych** (patrz sekcja 8, „Linki i stany hover”) |
+| `--a-rust` | Rust | `#C7642D` | 199, 100, 45 | **Kolor hover dla wszystkich klikalnych linków tekstowych** (patrz sekcja 8, „Linki i stany hover”) — **oraz, na wyraźną prośbę, domyślny kolor akcentu w całej witrynie zamiast lime** (fokus klawiatury, cena w kartach „Rekomendacje sezonowe”) |
 
 **Zasady użycia:**
-- Lime (`#BFF751`) nigdy jako kolor tła dużej powierzchni tekstu ani jako kolor tekstu — tylko jako akcent punktowy (tło jednej wyróżnionej sekcji, cena, mały highlight).
-- Rust (`#C7642D`) tylko jako stan `:hover` na klikalnych linkach tekstowych — nigdy jako domyślny kolor tekstu ani jako tło. Nie dotyczy przycisków (`.abtn`) ani ikon (social media, strzałki karuzeli) — te mają własny, osobny język interakcji (podniesienie + cień / zmiana koloru ikony).
+- **Lime nieużywany, ustalone 2026-09-03.** Token zostaje w kodzie jako udokumentowana wartość referencyjna z archon.au (na wypadek przyszłej potrzeby), ale świadomie nie jest już nigdzie stosowany — rdzawy przejął rolę „domyślnego akcentu" strony (fokus klawiatury `:focus-visible`, cena w kartach sekcji „Rekomendacje sezonowe" — nawet tam, gdzie realny, zmierzony na żywo kolor tej ceny na archon.au to zwykła biel, nie lime). Wcześniejsza treść tej sekcji („Lime nigdy jako kolor tła… tylko jako akcent punktowy”) opisywała archon.au, nie już nasz stan.
+- Rust (`#C7642D`) — stan `:hover` na klikalnych linkach tekstowych (jak dotąd) **oraz** domyślny akcent (patrz wyżej) — nigdy jako domyślny kolor DUŻEJ powierzchni tekstu ani jako tło. Nie dotyczy przycisków (`.abtn`) ani ikon (social media, strzałki karuzeli) — te mają własny, osobny język interakcji (podniesienie + cień / zmiana koloru ikony).
 - Sekcje strony naprzemiennie przełączają tło między `cream` i `black-olive` — to jedyny mechanizm rytmu wizualnego strony (patrz sekcja 7).
 - Tekst na `cream` = `--a-ink-warm` lub `--a-olive-black`. Tekst na `black-olive` = `--a-cream` lub `--a-white`. Nigdy ciemny tekst na ciemnym tle ani jasny na jasnym.
 

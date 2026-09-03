@@ -79,7 +79,7 @@ ul{ margin:0; padding:0; list-style:none; }
 .skip-link:focus{ left:var(--sp-16); top:var(--sp-16); }
 
 :focus-visible{
-  outline:2px solid var(--a-lime);
+  outline:2px solid var(--a-rust);
   outline-offset:2px;
 }
 
@@ -162,12 +162,6 @@ h1,h2,h3{
 /* the reference site's real color here is pure white (not the usual --a-cream text on
    black-olive sections) — max contrast against the parallax photo behind it */
 #book .h-quote{ color:var(--a-white); }
-.h-card{
-  font-family:"Inter",sans-serif;
-  font-weight:500;
-  font-size:1rem;
-  text-transform:capitalize;
-}
 
 .eyebrow{
   font-family:"Inter",sans-serif;
@@ -256,7 +250,6 @@ h1,h2,h3{
   border-radius:150px 150px 20px 20px;
   overflow:hidden;
 }
-.card-radius{ border-radius:10px; overflow:hidden; }
 
 .ph-gradient{
   background:
@@ -842,75 +835,39 @@ h1,h2,h3{
 }
 
 /* ============================================================
-   RX Facials
-   ============================================================ */
-.rx-include{
-  margin-top:var(--sp-40);
-  border-top:1px solid rgba(241,237,231,.15);
-  padding-top:var(--sp-24);
+   Rekomendacje sezonowe (dawniej "RX Facials")
+   Reuses .treatment-cards/.treatment-card verbatim — the SAME component
+   already built for the S/M/L cards on the strona zabiegu — but that shared
+   component's own base background/:hover (transparent at rest, lifts
+   translateY(-8px) + white tint + shadow on hover) was itself measured off a
+   DIFFERENT archon.au card ("15/30/1-Hour Block" cards, per the comment on
+   .treatment-cards below) that happens to reuse the same Webflow class name.
+   THIS section's real archon.au component (.treatment-cards-wrapper.dark) has
+   its own, different real values, confirmed via genuine synthetic-pointer
+   :hover (a plain CSS :hover, not IX2 — dispatched JS mouseenter events don't
+   trigger it, which is why an earlier pass here missed it): rgba(58,56,52,.2)
+   background AT REST (not just on hover), fading to fully transparent on
+   hover with border-radius softening 0→4px — no lift, no shadow, no tint.
+   All scoped to .section--olive so the S/M/L cards (always in a
+   .section--cream context) keep their own, untouched behavior. Price color
+   also deviates here on request (rust, not archon's real white/the old lime). */
+.section--olive .treatment-card-price{ color:var(--a-rust); }
+.section--olive .treatment-card{
+  background:rgba(58,56,52,.2);
+  border-radius:0;
 }
-.rx-include summary{
-  font-family:"Inter",sans-serif;
-  font-weight:600;
-  font-size:.85rem;
-  letter-spacing:.04em;
-  text-transform:uppercase;
-  cursor:pointer;
-  color:var(--a-cream);
+.section--olive .treatment-card:hover{
+  background:transparent;
+  border-radius:4px;
+  transform:none;
+  box-shadow:none;
 }
-.rx-include ul{
-  margin-top:1rem;
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:.6rem 2rem;
-}
-.rx-include li{
-  font-size:.9rem;
-  color:var(--a-taupe);
-  padding-left:1.1rem;
-  position:relative;
-}
-.rx-include li::before{
-  content:"";
-  position:absolute; left:0; top:.55em;
-  width:6px; height:6px;
-  background:var(--a-lime);
-  border-radius:50%;
-}
-@media (max-width:640px){ .rx-include ul{ grid-template-columns:1fr; } }
-
-.tcard-row{
-  margin-top:var(--sp-64);
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:var(--sp-24);
-}
-.tcard{ background:#1f2117; }
-.tcard .ph{ height:190px; }
-.tcard .body{ padding:1.25rem 1.4rem 1.5rem; }
-.tcard .price{
-  font-family:"Inter",sans-serif;
-  font-weight:600;
-  font-size:.85rem;
-  color:var(--a-lime);
-  margin-top:.4rem;
-}
-.tcard p.desc{
-  font-size:.85rem;
-  color:var(--a-taupe);
-  margin-top:.75rem;
-  line-height:1.6;
-}
-.tcard .booklink{
-  display:inline-block;
-  margin-top:1rem;
-  font-size:.8rem;
-  color:var(--a-cream);
-  text-decoration:underline;
-  text-underline-offset:3px;
-  transition:color .2s;
-}
-.tcard .booklink:hover{ color:var(--a-rust); }
+/* archon.au's real margin above this specific card row (measured directly on
+   its "winter recommendations" section: 100px) — .treatment-cards' own 24px
+   was measured off a different archon.au component (see comment on that rule)
+   that happens to share the same Webflow class name; scoped the same way as
+   the price override above so the S/M/L cards keep their own 24px. */
+.section--olive .treatment-cards{ margin-top:100px; }
 
 /* ============================================================
    Testimonials
@@ -2730,6 +2687,19 @@ h1,h2,h3{
 [data-reveal="grow"].is-revealed{
   width:100%;
   transition:width .3s ease-in;
+}
+/* the reference site's real image reveal on the "Rekomendacje sezonowe" cards
+   (`.treatment-cards-wrapper.dark img`): opacity stays at 1 throughout — only a
+   slow scale-in, measured by sampling its live computed transform every ~50ms
+   during the actual scroll-into-view transition (not guessed): scale(1) settling
+   to scale(1.085) over roughly 2.5s, easing slow→fast→slow (approximated here
+   with a symmetric ease-in-out cubic-bezier — Webflow's exact internal curve for
+   this specific effect isn't exposed via its IX2 store, unlike the shared fade/
+   slide/grow presets above, which are read directly from it). */
+[data-reveal="zoom"]{ opacity:1; transform:scale(1); }
+[data-reveal="zoom"].is-revealed{
+  transform:scale(1.085);
+  transition:transform 2.5s cubic-bezier(.65,0,.35,1);
 }
 @media (prefers-reduced-motion: reduce){
   [data-reveal]{ opacity:1 !important; transform:none !important; width:100% !important; }

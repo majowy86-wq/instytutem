@@ -703,9 +703,16 @@
      scroll. Instead, clone the tile as many times as needed so the track always
      covers (section width + one tile), which guarantees content is available
      for every possible wrapped offset — recomputed on resize too, since the
-     tile's own width changes with the viewport (its font-size is vw-based). */
+     tile's own width changes with the viewport (its font-size is vw-based).
+
+     Deliberately NOT gated on !reduceMotion (unlike the hero video/other
+     autoplaying motion on this page) — confirmed live on the reference site
+     with "Reduce Motion" turned on at the OS level: its ticker still moves.
+     It's user-driven (only shifts in direct response to the visitor's own
+     scroll input, never on its own), not the kind of autoplaying/parallax
+     motion prefers-reduced-motion is meant to suppress. */
   var marqueeTrack = document.getElementById("marqueeTrack");
-  if (marqueeTrack && !reduceMotion) {
+  if (marqueeTrack) {
     var marqueeSection = marqueeTrack.closest(".marquee");
     var marqueeTile = Array.prototype.slice.call(marqueeTrack.children);
     var MARQUEE_SPEED = 0.26; // measured px-of-shift per px-of-scroll on the reference site
