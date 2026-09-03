@@ -38,7 +38,7 @@ Kolumna „Uwagi” to **skrót stanu bieżącego, jedno-dwa zdania, nie histori
 
 Pełny status per zabieg (24 pozycji, plik/AI/CDN archon.au/placeholder) → **wyłącznie** [Lista zabiegów, DOKUMENTACJA.md](DOKUMENTACJA.md#lista-zabiegów-oferta-—-źródło-prawdy). Podsumowanie na dziś:
 
-- **23 z 24** kart ma zdjęcie — jedyna bez to **Mezoterapia mikroigłowa**, celowo wstrzymana, patrz TODO niżej (możliwy duplikat SkinPen).
+- **23 z 24** kart ma zdjęcie — jedyna bez to **Mezoterapia mikroigłowa** (od Rundy 119 w kategorii Zabiegi Iniekcyjne, nie Manualne — potwierdzone przez użytkownika, że to nie duplikat SkinPen), czeka na wygenerowane zdjęcie z gotowego promptu w DOKUMENTACJA.md.
 - **Wszystkie 11 oryginalnych zdjęć CDN archon.au podmienione na AI** — galeria `#treatments` jest teraz wolna od treści z Australii.
 - Poza galerią: hero, banner rezerwacji — patrz „Otwarte TODO” (Rekomendacje sezonowe zamknięte Runda 114).
 
@@ -49,7 +49,6 @@ Pełny status per zabieg (24 pozycji, plik/AI/CDN archon.au/placeholder) → **w
 To jest **jedyne, aktualne** miejsce śledzenia zadań — nie duplikować w DOKUMENTACJA.md ani gdzie indziej, i nie trzymać tu ukończonych zadań (te mają swoją historię w DOKUMENTACJA.md, tutaj usuwane po zamknięciu). Pełny opis decyzji stojących za poszczególnymi punktami → [DOKUMENTACJA.md](DOKUMENTACJA.md#log-decyzji-i-konsultacji-dokumentacji).
 
 - [ ] **Potwierdzić treść kategorii „O INSTYTUTem.”** (dropdown „O nas”) — dostarczona treść była identyczna z „Dla Klientów” (błąd kopiuj-wklej), tymczasowo jeden link zastępczy `/o-nas`.
-- [ ] **Potwierdzić, czy „Mezoterapia mikroigłowa” i „Mikronakłuwanie SkinPen®” to zdublowana usługa** (Runda 68) — SkinPen to marka urządzenia do mezoterapii mikroigłowej, mogą to być dwie nazwy tego samego zabiegu (analogicznie do potwierdzonego duplikatu niżej). Użytkownik musi dopytać w salonie. Do odpowiedzi karta zostaje bez zdjęcia.
 - [ ] **Potwierdzić, czy „LPG® Ergolift” i realny URL `/zabiegi/endermologia-twarzy-plock-lpg-endermolift` to ten sam zabieg** — użytkownik w innej rundzie już raz odrzucił podobną pozycję jako duplikat, więc nie zmieniać bez ponownego potwierdzenia.
 - [ ] **Zbudować realne podstrony dla nowego menu** (~50 pozycji pod Konsultacje/Problem/Zabiegi/O nas, dziś 404) — 14 z nich to już realne, zaindeksowane URL-e z listy SEO (zachować 1:1), reszta to nowe adresy własnego autorstwa do potwierdzenia przed budową treści.
 - [ ] Cała pozostała treść `index.html` poza tym, co już podmienione (hero, dane wizytówki poza Kontaktem/stopką) — zachować listę URL 1:1 (sekcja SEO w DOKUMENTACJA.md).
