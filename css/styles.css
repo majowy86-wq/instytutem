@@ -163,6 +163,70 @@ h1,h2,h3{
    black-olive sections) — max contrast against the parallax photo behind it */
 #book .h-quote{ color:var(--a-white); }
 
+/* the reference site's real legal/policy-page H1 (archon.au/privacy-policy,
+   class "heading h1-split") — a distinct size from both .h-hero (64px) and
+   .h-section (30px), measured directly: flat 35px/500/-1px/line-height 42px,
+   no responsive scaling found in its own stylesheet. Shared template for every
+   "regulamin"/"zasady" page, not just this one. */
+.h-legal{
+  font-family:"Tenor Sans",serif;
+  font-weight:500;
+  font-size:35px;
+  line-height:42px;
+  letter-spacing:-1px;
+  /* no color set here — inherits the sitewide .section--cream h1/h2 rule
+     (olive-black) below, the same established convention every other
+     heading on a cream section already follows, rather than the raw
+     archon.au measurement (ink-warm) that would fight it on specificity. */
+  margin:0;
+}
+/* the reference site's real in-body subheading on that same page (a plain
+   ".heading.h3"-classed <p>, not a real heading element there — reproduced
+   here as a real <h2> for accessibility, same visual result): Inter 700 15px/
+   21px, identical values to .treatment-card h3 elsewhere on this site — the
+   same underlying archon.au component recurring in a third place. */
+.legal-content h2{
+  font-family:"Inter",sans-serif;
+  font-weight:700;
+  font-size:15px;
+  line-height:21px;
+  margin:20px 0 10px;
+}
+.legal-content h2:first-child{ margin-top:0; }
+.legal-content p{
+  /* color not set — inherits .section--cream's own ink-warm base text color */
+  font-family:"Inter",sans-serif;
+  font-weight:400;
+  font-size:16px;
+  line-height:27.2px;
+  margin:0 0 10px;
+}
+.legal-content a{ color:inherit; text-decoration:underline; text-underline-offset:2px; }
+.legal-content a:hover{ color:var(--a-rust); }
+/* reuses .price-package-list's own hyphen-bullet pattern (rust "–" marker,
+   list-style:none) for plain sub-lists, and adds a matching rust-numbered
+   variant for the one real ordered list (Polityka Cookies) — same visual
+   language, not a new one. */
+.legal-content ul, .legal-content ol{
+  margin:0 0 10px;
+  padding-left:0;
+  list-style:none;
+}
+.legal-content ul li, .legal-content ol > li{
+  font-family:"Inter",sans-serif;
+  font-weight:400;
+  font-size:16px;
+  line-height:27.2px;
+  padding-left:22px;
+  position:relative;
+  margin-bottom:6px;
+}
+.legal-content ul li::before{ content:"–"; position:absolute; left:2px; color:var(--a-rust); }
+.legal-content ol{ counter-reset:legal-ol; }
+.legal-content ol > li{ counter-increment:legal-ol; }
+.legal-content ol > li::before{ content:counter(legal-ol)"."; position:absolute; left:0; color:var(--a-rust); font-weight:600; }
+.legal-content ol > li ul{ margin:6px 0 0; }
+
 .eyebrow{
   font-family:"Inter",sans-serif;
   font-weight:600;
