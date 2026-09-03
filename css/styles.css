@@ -1846,6 +1846,54 @@ h1,h2,h3{
   }
 }
 
+/* TECHNOLOGIA (#technologia) — new editorial "hairline grid" component (Runda 104), no
+   archon.au equivalent to measure. 1 column on mobile → 4 on desktop, thin --a-taupe
+   dividers between cells (bottom on mobile since cells stack, right on desktop since
+   they sit side by side) instead of boxed cards — the "zero krzykliwych boksów" luxury-
+   minimal look the brief asked for. Kicker/title/body inside each cell reuse .eyebrow/
+   .treatment-accordion-q/.lede verbatim (see comment on the section in the HTML) — only
+   their margins needed resetting here, since those classes are normally used standalone,
+   not stacked three deep inside one grid cell. */
+.tech-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  margin-top:var(--sp-64);
+  border-top:1px solid var(--a-taupe);
+}
+@media (min-width:992px){
+  .tech-grid{ grid-template-columns:repeat(4,1fr); }
+}
+.tech-item{
+  padding:var(--sp-64) var(--sp-40);
+  border-bottom:1px solid var(--a-taupe);
+}
+.tech-item:last-child{ border-bottom:none; }
+@media (min-width:992px){
+  .tech-item{ border-bottom:none; border-right:1px solid var(--a-taupe); }
+  .tech-item:first-child{ padding-left:0; }
+  .tech-item:last-child{ padding-right:0; border-right:none; }
+}
+.tech-item .eyebrow{ margin:0 0 var(--sp-24); }
+.tech-item .treatment-accordion-q{ margin:0 0 var(--sp-24); }
+.tech-trust-bar{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:var(--sp-16) var(--sp-40);
+  margin-top:var(--sp-64);
+  padding-top:var(--sp-40);
+  border-top:1px solid var(--a-taupe);
+}
+.tech-trust-bar span{
+  font-family:"Inter",sans-serif;
+  font-weight:600;
+  font-size:12px;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  color:var(--a-gray);
+  white-space:nowrap;
+}
+
 /* FAQ section (#faq): reuses .treatment-intro-grid (same measured 1fr/2fr ratio and
    40px/64px gaps as archon.au's own #faq ._2-column-grid — confirmed identical via
    getComputedStyle, not a new component) but on a dark .section--olive background
@@ -1945,6 +1993,35 @@ h1,h2,h3{
   font-size:16px;
   color:var(--a-ink-warm);
 }
+/* rust "promocja" flag for the consultation price-tier — same rust pill treatment
+   as .price-package-badge (bg var(--a-rust), cream uppercase text) but inline in
+   normal flow instead of absolutely positioned, so it can sit next to the price
+   badge in the collapsed summary AND next to a specific row once expanded. */
+.promo-badge{
+  display:inline-block;
+  white-space:nowrap;
+  font-family:"Inter",sans-serif;
+  font-weight:700;
+  font-size:11px;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  color:var(--a-cream);
+  background:var(--a-rust);
+  padding:4px 10px;
+  border-radius:2px;
+  margin:0 0 0 10px;
+  vertical-align:middle;
+}
+/* struck-through regular price next to the current, promotional one in a
+   .price-row's price column — reuses the same de-emphasized gray/14px
+   treatment already used for the row LABEL's own duration/description
+   span (.price-row p:first-child span), just applied to the price side. */
+.price-row .price-old{
+  text-decoration:line-through;
+  color:var(--a-gray);
+  font-size:14px;
+  margin-right:6px;
+}
 /* archon.au's real #faq accordion divider is a LEADING element (border-top before
    every item incl. the first, none after the last) — on request, the price-tier
    accordion now matches that same mechanism instead of the base .treatment-accordion
@@ -1991,6 +2068,10 @@ h1,h2,h3{
 }
 .price-row p:first-child span{ color:var(--a-gray); font-size:14px; }
 .price-row p:last-child{ flex:0 0 auto; }
+/* current, bookable price next to a struck-through .price-old regular price —
+   rust ties it back visually to the "Promocja" badge on the Konsultacje
+   accordion header itself, without repeating the badge on every row. */
+.price-row .price-promo{ color:var(--a-rust); }
 
 /* PAKIETY sub-section: real data from instytutem.pl/pakiety, not archon.au (archon
    has no package-pricing equivalent — its whole pitch is "one price for all"). Reuses
