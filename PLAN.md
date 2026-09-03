@@ -38,7 +38,7 @@ Kolumna „Uwagi” to **skrót stanu bieżącego, jedno-dwa zdania, nie histori
 
 Pełny status per zabieg (24 pozycji, plik/AI/CDN archon.au/placeholder) → **wyłącznie** [Lista zabiegów, DOKUMENTACJA.md](DOKUMENTACJA.md#lista-zabiegów-oferta-—-źródło-prawdy). Podsumowanie na dziś:
 
-- **23 z 24** kart ma zdjęcie — jedyna bez to **Mezoterapia mikroigłowa** (od Rundy 119 w kategorii Zabiegi Iniekcyjne, nie Manualne — potwierdzone przez użytkownika, że to nie duplikat SkinPen), czeka na wygenerowane zdjęcie z gotowego promptu w DOKUMENTACJA.md.
+- **Wszystkie 24 karty mają teraz zdjęcie** (od Rundy 120 — ostatnia, Mezoterapia mikroigłowa, w kategorii Zabiegi Iniekcyjne od Rundy 119, potwierdzona jako nie-duplikat SkinPen).
 - **Wszystkie 11 oryginalnych zdjęć CDN archon.au podmienione na AI** — galeria `#treatments` jest teraz wolna od treści z Australii.
 - Poza galerią: hero, banner rezerwacji — patrz „Otwarte TODO” (Rekomendacje sezonowe zamknięte Runda 114).
 
