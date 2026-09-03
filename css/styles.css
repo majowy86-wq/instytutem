@@ -2006,8 +2006,14 @@ h1,h2,h3{
    directly on its own h3, live): Inter 15px/700/21px — distinct from FAQ's own
    .faq-title (500/16/24, Round 43), which .treatment-accordion-q was tuned for.
    Skips the real text-transform:capitalize for the same reason as the row text
-   above (would mangle our correctly-cased Polish tier names). */
-#cennik .treatment-accordion-q{
+   above (would mangle our correctly-cased Polish tier names). Scoped to
+   .price-tier-label (the actual semantic wrapper this value belongs to) rather
+   than the treatment page's own #cennik id, so cennik/index.html's identical
+   .price-tier-label markup (Round 131 — reusing this exact accordion pattern
+   1:1, on request, instead of the earlier custom .price-tier--row hack) gets it
+   too, without also reaching unrelated .treatment-accordion-q uses (FAQ, the
+   Round 104 tech section) that were never meant to have it. */
+.price-tier-label .treatment-accordion-q{
   font-family:"Inter",sans-serif;
   font-weight:700;
   font-size:15px;
@@ -2054,24 +2060,67 @@ h1,h2,h3{
   font-size:14px;
   margin-right:6px;
 }
-/* archon.au's real #faq accordion divider is a LEADING element (border-top before
-   every item incl. the first, none after the last) — on request, the price-tier
-   accordion now matches that same mechanism instead of the base .treatment-accordion
-   rule's trailing border-bottom. Taupe matches the already-established cream-section
-   divider convention (.section--cream .treatment-card-divider, .section--cream
-   .treatment-accordion details). */
-#cennik .treatment-accordion details{ border-bottom:none; border-top:1px solid var(--a-taupe); }
+/* .price-tier--row existed briefly (Rounds 128-129) as a workaround so a
+   details/summary accordion could sit among plain .price-row siblings on
+   cennik/index.html, styled by reusing .price-row on <summary> — it needed 3
+   rounds of increasingly narrow fixes (double borders, uneven row heights,
+   margin lost to a :first-child collision, spacing wrong only in the [open]
+   state) because it was fighting the existing .treatment-accordion/.price-tier
+   system instead of using it. Round 131 (user: "zastosuj taki sam styl jak
+   tutaj", pointing at the treatment page's own #cennik accordion) replaced it:
+   cennik/index.html's rows now use the EXACT SAME markup as the treatment page
+   (<summary><span class="price-tier-label"><h3 class="treatment-accordion-q">
+   + .price-tier-badge, no .price-row class on summary at all) — so all of the
+   above bugs stop applying by construction, not by patching, and this whole
+   modifier class and its fixes are removed as dead code. See
+   .price-tier-label .treatment-accordion-q above for the one rule that moved
+   (was #cennik-scoped, now .price-tier-label-scoped) so the reused markup gets
+   the same typography without depending on the treatment page's own id. This
+   DID surface one new, genuine mismatch (user, Round 132, screenshot): the
+   treatment page's own #cennik accordion is ALL .price-tier — every boundary is
+   tier-to-tier, so its default trailing border-bottom (base rule above) reads
+   as exactly one line regardless of which side "owns" it. cennik/index.html
+   mixes .price-tier with plain .price-row (which draws a LEADING border-top on
+   itself instead) in the same flat list — at a .price-row→.price-tier boundary
+   NEITHER contributes a line (the row has no border-bottom, the tier has no
+   border-top: gap with nothing), and at a .price-tier→.price-row boundary BOTH
+   do (the tier's own trailing border-bottom, immediately followed by the row's
+   own leading border-top: two hairlines close together). Fix: give
+   .price-list's own .price-tier the SAME leading-border convention as its
+   plain .price-row siblings — scoped to .price-list (not the treatment page's
+   #cennik id, and not a bare ".price-list .treatment-accordion details" like
+   the invalid Round 128 attempt — .treatment-accordion is combined on the same
+   element as .price-list, not a separate ancestor, so that space-separated
+   form never matches; this one skips it and targets .price-tier directly). */
+.price-list details.price-tier{ border-bottom:none; border-top:1px solid var(--a-taupe); }
+/* Fixing the border alone still left uneven row RHYTHM on cennik/index.html: a
+   plain top-level .price-row is 44px tall (border 1 + padding-top 16 + a
+   27.2px content line) with a real 16px margin-top stacked on top of that; an
+   accordion .price-tier's <summary> is ~68px tall (border 1 + padding 20/20,
+   .treatment-accordion summary's own real measured value — unmodified here,
+   since Round 131 reuses the treatment page's summary verbatim) with NO margin
+   at all (nothing on <summary> or bare <details> sets one). Mixed in one list
+   that gave visibly different gaps depending on which two row types happened
+   to be adjacent (45px / 60px / 68px / 83px, all in the same short list).
+   Rather than shrink the accordion summary to match the plain row (that's the
+   .price-tier--row road already tried and reverted above), give a top-level
+   plain .price-row the accordion summary's own real padding/margin instead —
+   scoped to being a DIRECT child of .price-list, so nested variant rows inside
+   .price-tier-rows (which must keep their own compact 16px rhythm, matching
+   the treatment page's real variant rows exactly) are untouched. */
+.price-list > .price-row{ padding:20px 0; margin-top:0; }
 /* main.js wraps EVERY .treatment-accordion-body's children in its own freshly
    created .treatment-accordion-body-inner div (for the height-animation system —
    see main.js, "document.querySelectorAll('.treatment-accordion-body').forEach"),
    regardless of section. That wrapper's own max-width:720px (sized for FAQ's prose
    answers) was still capping the price rows even after giving .price-tier-rows
    itself max-width:none, because the JS-made wrapper is a SEPARATE, outer element —
-   not the one carrying that class in this file. #cennik-scoped override (specificity
-   beats the plain .treatment-accordion-body-inner rule via the ID) removes the cap
-   only where it doesn't belong, so the price rows span the full .container width
-   like every other full-width element on the page, not a narrow reading column. */
-#cennik .treatment-accordion-body-inner{ max-width:none; }
+   not the one carrying that class in this file. .price-list-scoped override (same
+   reasoning as the border-fix above — moved off the treatment page's #cennik id so
+   it also reaches cennik/index.html's 8 sections, Round 128) removes the cap only
+   where it doesn't belong, so the price rows span the full .container width like
+   every other full-width element on the page, not a narrow reading column. */
+.price-list .treatment-accordion-body-inner{ max-width:none; }
 .price-tier-rows{ display:flex; flex-direction:column; }
 .price-row{
   display:flex;
@@ -2111,6 +2160,25 @@ h1,h2,h3{
    span rule, above) outranks a plain two-class selector and was winning. Same
    specificity pitfall as the original badge-inside-.price-row bug this session. */
 .price-row p:first-child .price-promo{ color:var(--a-rust); font-size:16px; }
+/* Round 133 (user: "ten rdzawy badge niech ma styl jak w pakietach depilacji
+   laserowej taki sam kolor i rozmiar"): cennik/index.html's .promo-badge sits
+   inside the SAME p:first-child as the row's gray/14px duration span (the
+   generator puts name + duration + badge in one <p>, since .price-row only
+   supports exactly 2 flex children — name and price), so the row above
+   silently overrode it to gray/14px, exactly the same specificity pitfall
+   already hit twice before by .price-promo and the original 0 zł bug — the
+   base .promo-badge rule (own file, single class, specificity 0,1,0) never
+   had a chance against .price-row p:first-child span (0,2,2). Restored here
+   at higher specificity, matching .price-package-badge's real values (rust
+   bg, cream text, 11px/700/uppercase) exactly, per the request. */
+.price-row p:first-child .promo-badge{ color:var(--a-cream); font-size:11px; }
+
+/* cennik/index.html: a treatment with several real Fresha positions (e.g. Epilacja
+   laserowa LightSheer®'s S/M/L body areas, or any other multi-variant service in the
+   full Fresha catalog aggregated here — Round 127) expands ONCE (single .price-tier
+   details/summary, reusing the exact same mechanism/JS animation as the treatment
+   page's own #cennik accordion) to reveal every real position at once — no nested
+   per-tier accordions. Single-price items reuse the plain .price-row directly. */
 
 /* Per-row booking button: reuses .treatment-card-cta verbatim (same "Kup pakiet"
    link style as the package cards) — wrapped with its price in .price-row-buy so
