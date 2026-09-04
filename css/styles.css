@@ -2009,22 +2009,56 @@ h1,h2,h3{
    .treatment-benefits, measured 64px from archon.au's #concerns) — the previous
    24px reused .treatment-cards' own gap, a different, unrelated component. */
 .price-list{ margin-top:64px; }
+/* Round 146 (user: cennik's top-level division must match the header nav's
+   own main-category + level-1 structure 1:1) — the header's "Zabiegi" mega-
+   menu has ONE main entry with 3 level-1 sub-groups (Hi-Tech/Iniekcyjne/
+   Manualne), and "Konsultacje" has 2 (Dla Twarzy/Dla Ciała); cennik had
+   these as 4 separate flat top-level SECTIONS instead. Merged into 2
+   sections (one per real header main-category) with a plain, un-styled-
+   as-a-component label marking each level-1 sub-group inside — reuses
+   .eyebrow's own type scale (12px/600/uppercase/gray) rather than a new
+   size, so it reads as "a label", consistent with every other small caps
+   label already on the page, not a new visual language. A divider line
+   above each one but the first in its list (that one already gets its
+   separation from .price-list's own 64px margin-top above the whole
+   list) marks where one sub-group's rows end and the next begins — the
+   same divider color/weight .price-tier and .price-row already use for
+   their own row-to-row lines, just spaced further apart (40px) since this
+   is a bigger structural break than a plain row boundary. */
+/* Round 148 (user: "nad eyebrow niech nie będzie separatora"): dropped the
+   border-top + its padding-top — the label itself, plus the margin-top gap
+   above it, is enough to read as a new sub-group without a literal line on
+   top of it (a line already exists below every row it follows anyway, so a
+   second one right above the label doubled up). */
+.price-list-subheading{
+  font-family:"Inter",sans-serif;
+  font-weight:600;
+  font-size:.75rem;
+  letter-spacing:0.5px;
+  text-transform:uppercase;
+  color:var(--a-gray);
+  margin:var(--sp-40) 0 var(--sp-16);
+}
+.price-list-subheading--first{ margin-top:0; padding-top:0; border-top:none; }
 /* cennik/index.html only (Round 139, user: "zmniejsz o 50% odstęp między
-   najwyższymi kategoriami"): the 4 top-level category sections
-   (Konsultacje/Hi-Tech/Iniekcyjne/Manualne) are plain .section-pad, whose
-   sitewide padding-top+padding-bottom (80/80, halved to 64/64 ≤640px — used
-   on every other page too, so not touched there) stacks between two adjacent
-   sections into a 160px (or 128px) gap. ID selectors here so they win over
-   the shared .section-pad class without needing !important, scoped to just
-   these 4 ids so no other page's section spacing changes. Halving each
-   section's own padding halves the STACKED gap between any two of them by
-   the same 50%, front and back alike. */
-#konsultacje-i-diagnostyka, #zabiegi-hi-tech, #zabiegi-iniekcyjne, #zabiegi-manualne{
+   najwyższymi kategoriami") — the top-level category sections are plain
+   .section-pad, whose sitewide padding-top+padding-bottom (80/80, halved to
+   64/64 ≤640px — used on every other page too, so not touched there) stacks
+   between two adjacent sections into a 160px (or 128px) gap. ID selectors
+   here so they win over the shared .section-pad class without needing
+   !important, scoped to just these ids so no other page's section spacing
+   changes. Halving each section's own padding halves the STACKED gap
+   between any two of them by the same 50%, front and back alike.
+   Round 146 merged what was 4 sections (Konsultacje/Hi-Tech/Iniekcyjne/
+   Manualne) into 2 (#konsultacje-i-diagnostyka, #zabiegi) — updated the
+   selector list to match the current ids, not the 3 removed ones (which
+   would just silently stop matching anything and quietly undo this fix). */
+#konsultacje-i-diagnostyka, #zabiegi{
   padding-top:var(--sp-40);
   padding-bottom:var(--sp-40);
 }
 @media (max-width:640px){
-  #konsultacje-i-diagnostyka, #zabiegi-hi-tech, #zabiegi-iniekcyjne, #zabiegi-manualne{
+  #konsultacje-i-diagnostyka, #zabiegi{
     padding-top:32px;
     padding-bottom:32px;
   }
@@ -2191,18 +2225,50 @@ h1,h2,h3{
 .accordion-info-link{
   display:inline-flex;
   align-items:center;
-  justify-content:center;
-  width:18px;
   height:18px;
+  max-width:18px;
+  overflow:hidden;
   margin-left:6px;
   vertical-align:-3px;
   flex:none;
   color:var(--a-gray);
-  transition:color .2s ease;
+  border-radius:999px;
+  white-space:nowrap;
+  transition:max-width .25s ease;
 }
-.accordion-info-link:hover,
-.accordion-info-link:focus-visible{ color:var(--a-olive); }
-.accordion-info-link svg{ width:100%; height:100%; display:block; }
+.accordion-info-link svg{ width:18px; height:18px; flex:none; display:block; }
+/* Round 149 (user: "na desktopie po najechaniu na ikonę 'i' niech wyjeżdża z
+   niej też klikalny napis 'INFORMACJE O ZABIEGU'"): the label sits inside the
+   SAME <a>, right after the svg, always in the DOM — .accordion-info-link's
+   own max-width (18px, exactly the icon's width) clips it out of view by
+   default via overflow:hidden, so nothing needs to be hidden/shown with
+   display or visibility. On hover/focus, max-width eases open to fit both
+   icon and label, sliding the text out from behind the circle rather than
+   popping it in.
+   Round 153: two follow-ups. (1) Dropped the hover/focus color:var(--a-olive)
+   swap — user wants icon + label to read as the SAME gray as a row's own
+   duration text (--a-gray, .price-row p:first-child span's real color) at
+   all times, not shift to the site's link-hover accent once expanded; color
+   is no longer part of the transition either since it no longer changes.
+   (2) (hover:hover) and (pointer:fine) alone still let the expand trigger at
+   any width on a real desktop browser — e.g. a narrow, resized window still
+   has a mouse — so added min-width:1025px, the site's own real desktop
+   breakpoint (.nav-links's own switch point, see the comment above its
+   @media (max-width:1024px) rule) rather than a made-up number, so "desktop"
+   means the same thing here as it does for the nav itself. */
+.accordion-info-link-label{
+  font-family:"Inter",sans-serif;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  color:var(--a-gray);
+  padding:0 10px 0 6px;
+}
+@media (hover:hover) and (pointer:fine) and (min-width:1025px){
+  .accordion-info-link:hover,
+  .accordion-info-link:focus-visible{ max-width:220px; }
+}
 /* cennik/index.html (Round 135): a "group" accordion (e.g. "Epilacja laserowa
    LightSheer®") nests further .price-tier accordions inside its own
    .price-tier-rows (the S/M/L/Pakiety sub-items) instead of plain .price-row
@@ -2222,9 +2288,52 @@ h1,h2,h3{
    .price-tier (its Pakiety) as siblings inside the same container, so indenting
    the container shifts both of them in together and keeps them aligned with
    each other; indenting only .price-tier would have pushed the accordion in
-   while leaving the plain row's price line flush with the group title above it. */
-.price-tier-rows--nested{ padding-left:var(--sp-24); }
-.price-tier-rows--nested > .price-tier > summary{ padding:16px 0; }
+   while leaving the plain row's price line flush with the group title above it.
+   Round 147 (user: "szerokość wiersza w drugim poziomie niech będzie taka jak
+   w pierwszym i trzecim"): padding-left on the CONTAINER shrinks every CHILD's
+   own box from the left (their own right edge stays put, so their own width —
+   and the border-top line drawn on that same box — shrinks by the full 24px),
+   so a level-2 row's divider visibly stopped 24px short of where a level-1 or
+   level-3 divider on either side of it reached. Moved the padding onto each
+   child's own box instead (below) — padding sits INSIDE an element's own
+   border, so it shifts that element's TEXT content right without moving the
+   element's own edges at all: every row's box/divider now spans the exact
+   same width regardless of level, only the text inside indents. */
+.price-tier-rows--nested > .price-tier > summary{ padding-left:var(--sp-24); }
+.price-tier-rows--nested > .price-row{ padding-left:var(--sp-24); }
+/* Round 147 only indented level 2's OWN row — its content (e.g. "(L) duża
+   partia ciała"'s own variant rows "Całe nogi"/"Całe ręce", or "Pakiety
+   Elastyczne"'s package rows) lives inside THAT accordion's own
+   .price-tier-rows, a plain one levels deeper again, so it never picked up
+   any indent at all and rendered flush with level 1 — undoing the "wcięcie"
+   from Round 137 for exactly the rows it was meant to cover, caught in a
+   screenshot right after (user: "zobacz jakie tu kwiaty wyszły"). Same fix,
+   one level deeper: padding-left on level 3's own row box, not a shared
+   ancestor, so its own border/width still matches level 1 and 2 too. */
+.price-tier-rows--nested > .price-tier .price-row{ padding-left:var(--sp-24); }
+/* Round 145 (user: "tu się nie zgadzają odległości od separatorów" — a plain
+   .price-row directly followed by a nested .price-tier, e.g. Karboksyterapia
+   bezigłowa CO2's own line then its "Pakiety łączone"): .price-row's real,
+   sitewide box model is padding-TOP only (16px) — the gap below its own text
+   comes entirely from the NEXT sibling's border-top + padding-top, so its own
+   text sits flush against its row's bottom edge. This nested summary instead
+   had symmetric padding:16px 0 (top AND bottom), so its own text floated with
+   air on both sides — right under a row whose text had none below it, the two
+   adjacent lines read at visibly different distances from the divider between
+   them even though the divider itself sits in the same place either way.
+   Round 151 (user: "wysokość wierszy drugiego poziomu... mają być jak 1
+   poziom"): matched level 2's own row height to level 1's real, symmetric
+   padding:20px 0 (.treatment-accordion summary) instead of keeping it
+   compact — level 1 and level 2 never sit as direct siblings (level 2 always
+   lives inside level 1's own body), so there's no boundary between THEM to
+   keep flush; the boundary Round 145 actually needed flush is level 2's own
+   plain-row sibling within the same --nested container (e.g. Karboksyterapia
+   bezigłowa CO2's line next to its own "Pakiety łączone") — matched together
+   below, both now symmetric like level 1 instead of both top-only, so that
+   pairing still reads consistently, just at the taller rhythm. Depth still
+   reads from typography (14px/600, --a-gray badge) alone, not height. */
+.price-tier-rows--nested > .price-tier > summary{ padding-top:20px; padding-bottom:20px; }
+.price-tier-rows--nested > .price-row{ padding-top:20px; padding-bottom:20px; }
 .price-tier-rows--nested > .price-tier .price-tier-label .treatment-accordion-q{
   font-size:14px;
   font-weight:600;
@@ -2232,8 +2341,17 @@ h1,h2,h3{
 /* Round 142 (user: "w drugim poziomie może też nie pokazujmy cen"): a level-2
    sub-accordion's own "od X zł" badge was redundant/noisy right above its own
    variant rows, each already showing its own real price — hidden rather than
-   just de-emphasized. */
-.price-tier-rows--nested > .price-tier > summary .price-tier-badge{ display:none; }
+   just de-emphasized.
+   Round 151: visibility:hidden, not display:none — the badge's own real,
+   archon.au-measured line-height (16px/400/27.2px) is TALLER than the level-2
+   title's (14px/600/21px), so on a level-1 row (badge still shown) the whole
+   flex row's height is driven by the badge, not the title; once level-2's
+   badge stopped rendering at all, its row shrank to just the shorter title's
+   height, landing 6px shorter than level 1 even after matching their padding
+   in the rule above this one. Keeping the badge in layout (space reserved,
+   pixels invisible) restores the same height without putting the price back
+   on screen. */
+.price-tier-rows--nested > .price-tier > summary .price-tier-badge{ visibility:hidden; }
 /* Round 138 (user: level 1 > level 2 in font size, but then level 3 came out
    BIGGER than both — confusing): a group's own price line — either the plain
    .price-row sitting directly in .price-tier-rows--nested (e.g. Karboksyterapia
@@ -2312,6 +2430,20 @@ h1,h2,h3{
    span rule, above) outranks a plain two-class selector and was winning. Same
    specificity pitfall as the original badge-inside-.price-row bug this session. */
 .price-row p:first-child .price-promo{ color:var(--a-rust); font-size:16px; }
+/* Round 157 (user: "dostosuj wielkość ceny w przypadku konsultacji dot.
+   depilacji laserowej tak jak jest wszędzie w trzecim poziomie"): the rule
+   above sets 16px sitewide, matching the treatment page's own #cennik
+   accordion (its native, measured size) — but this promo price now also
+   lives inside cennik/index.html's own nested .price-tier-rows (Round 156's
+   Konsultacje→accordion conversion), where every other row's price is 13px
+   (.cennik-page .price-tier-rows .price-row p, Round 141). Scoped override
+   wins by extra specificity (adds .cennik-page + .price-tier-rows), not
+   source order, so it stays correct regardless of future edits above.
+   .price-old brought down to 11px in the same scope to keep the original
+   16px/14px "promo price bigger than the struck-through old price"
+   proportion at the smaller size, instead of ending up backwards. */
+.cennik-page .price-tier-rows .price-row p:first-child .price-promo{ font-size:13px; }
+.cennik-page .price-tier-rows .price-row .price-old{ font-size:11px; }
 /* Round 133 (user: "ten rdzawy badge niech ma styl jak w pakietach depilacji
    laserowej taki sam kolor i rozmiar"): cennik/index.html's .promo-badge sits
    inside the SAME p:first-child as the row's gray/14px duration span (the
@@ -2330,6 +2462,15 @@ h1,h2,h3{
    in place (harmless — it simply can't match anything now) rather than
    deleted, since the reasoning above is still useful history; the base
    .promo-badge rule's own color/size now apply untouched, uncontested. */
+/* Round 152 (user: "jeśli jakaś pozycja ma rdzawy badge to cena tej pozycji
+   też niech będzie rdzawa"): :has() so this applies to every current AND
+   future promo-badge row automatically instead of hand-tagging each price
+   with .price-promo one at a time — two selectors for the row's two real
+   shapes (see the Round 140 comment above .price-row-buy): with a booking
+   button, the price is .price-row-buy's own <p>; without one (the 2 combo
+   deals with no serviceId), it's the row's bare 2nd <p> sibling. */
+.price-row:has(.promo-badge) .price-row-buy > p,
+.price-row:has(.promo-badge) > p:nth-of-type(2){ color:var(--a-rust); }
 
 /* cennik/index.html: a treatment with several real Fresha positions (e.g. Epilacja
    laserowa LightSheer®'s S/M/L body areas, or any other multi-variant service in the
