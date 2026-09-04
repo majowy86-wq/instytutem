@@ -49,6 +49,7 @@ Paleta jest wąska i zdyscyplinowana. Kremowe tło i niemal czarna oliwkowa ziel
 - Rust (`#C7642D`) — stan `:hover` na klikalnych linkach tekstowych (jak dotąd) **oraz** domyślny akcent (patrz wyżej) — nigdy jako domyślny kolor DUŻEJ powierzchni tekstu ani jako tło. Nie dotyczy przycisków (`.abtn`) ani ikon (social media, strzałki karuzeli) — te mają własny, osobny język interakcji (podniesienie + cień / zmiana koloru ikony).
 - Sekcje strony naprzemiennie przełączają tło między `cream` i `black-olive` — to jedyny mechanizm rytmu wizualnego strony (patrz sekcja 7).
 - Tekst na `cream` = `--a-ink-warm` lub `--a-olive-black`. Tekst na `black-olive` = `--a-cream` lub `--a-white`. Nigdy ciemny tekst na ciemnym tle ani jasny na jasnym.
+- **Jeden czarny w całej witrynie, ustalone 2026-09-04: `--a-ink-warm` (`#3F3D3B`), nigdy czysty `#000`/`#000000`/`black`.** Dotyczy widocznych, pełnokryjących zastosowań (tekst, wypełnienia, obwódki) — np. pasek postępu przewijania (`.progress-fill`) używał czystego `#000`, poprawione na `var(--a-ink-warm)`. **Nie dotyczy** cieni (`box-shadow`) ani nakładek na zdjęciach — te konwencjonalnie bazują na czerni z przezroczystością niezależnie od koloru tekstu strony, a tam, gdzie konkretna wartość (np. nakładka na `.treatment-hero-bg::before`, `rgba(0,0,0,.5)`) jest bezpośrednio zmierzona z archon.au, zostaje bez zmian — zmiana zerwałaby zgodność z realnie zmierzonym źródłem.
 
 ---
 

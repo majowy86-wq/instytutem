@@ -878,6 +878,7 @@
     var body = details.querySelector(":scope > .treatment-accordion-body");
     if (!summary || !body) return;
     summary.addEventListener("click", function (e) {
+      if (e.target.closest("a")) return;
       e.preventDefault();
       if (reduceMotion) {
         details.open = !details.open;

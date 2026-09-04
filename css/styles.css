@@ -852,7 +852,7 @@ h1,h2,h3{
   overflow:hidden;
 }
 .progress-fill{
-  background:#000;
+  background:var(--a-ink-warm);
   width:0%;
   height:100%;
   position:relative;
@@ -1790,7 +1790,16 @@ h1,h2,h3{
      ix2 store): 300ms, not the previously-unmeasured 200ms this had before */
   transition:transform .3s;
 }
-.treatment-accordion details[open] summary .caret{ transform:rotate(180deg); }
+/* Must be details[open] > summary > .caret (direct-child, not descendant)
+   everywhere. cennik/index.html nests a .price-tier inside a "group" .price-tier's
+   own .price-tier-rows (Round 135) — with a bare descendant selector, ANY caret
+   inside an open details anywhere below .treatment-accordion matches once the
+   OUTER group is open, because the selector only needs SOME open-details
+   ancestor, not the caret's own immediate details — so a closed inner accordion's
+   caret rotated as soon as its outer group opened, and toggling the inner one
+   itself did nothing more (already "wrongly" rotated). Direct-child combinators
+   pin the match to the caret's own details specifically. */
+.treatment-accordion details[open] > summary > .caret{ transform:rotate(180deg); }
 .treatment-accordion-body{
   /* the reference site's real .accordion-content-wrapper (measured via ix2 store):
      height 0↔auto and opacity 0↔1, both 300ms outQuad — driven here by JS
@@ -2000,8 +2009,34 @@ h1,h2,h3{
    .treatment-benefits, measured 64px from archon.au's #concerns) — the previous
    24px reused .treatment-cards' own gap, a different, unrelated component. */
 .price-list{ margin-top:64px; }
+/* cennik/index.html only (Round 139, user: "zmniejsz o 50% odstęp między
+   najwyższymi kategoriami"): the 4 top-level category sections
+   (Konsultacje/Hi-Tech/Iniekcyjne/Manualne) are plain .section-pad, whose
+   sitewide padding-top+padding-bottom (80/80, halved to 64/64 ≤640px — used
+   on every other page too, so not touched there) stacks between two adjacent
+   sections into a 160px (or 128px) gap. ID selectors here so they win over
+   the shared .section-pad class without needing !important, scoped to just
+   these 4 ids so no other page's section spacing changes. Halving each
+   section's own padding halves the STACKED gap between any two of them by
+   the same 50%, front and back alike. */
+#konsultacje-i-diagnostyka, #zabiegi-hi-tech, #zabiegi-iniekcyjne, #zabiegi-manualne{
+  padding-top:var(--sp-40);
+  padding-bottom:var(--sp-40);
+}
+@media (max-width:640px){
+  #konsultacje-i-diagnostyka, #zabiegi-hi-tech, #zabiegi-iniekcyjne, #zabiegi-manualne{
+    padding-top:32px;
+    padding-bottom:32px;
+  }
+}
 .price-tier summary{ gap:var(--sp-16); }
-.price-tier-label{ display:flex; align-items:center; gap:var(--sp-16); }
+/* flex-grow:1 (default is 0, i.e. hug-content) so this always fills the row up
+   to the caret even when the title is short — otherwise its own box only ever
+   grew as wide as the title needed, and a SHORT title left the icon+"od X zł"
+   cluster stranded right after the text instead of pinned to the row's real
+   right edge (see .price-tier-label .treatment-accordion-q below, which
+   handles the matching case of a LONG title). */
+.price-tier-label{ display:flex; align-items:center; gap:var(--sp-16); flex-grow:1; }
 /* archon.au's real #cost accordion group title (e.g. "Treatment Blocks", measured
    directly on its own h3, live): Inter 15px/700/21px — distinct from FAQ's own
    .faq-title (500/16/24, Round 43), which .treatment-accordion-q was tuned for.
@@ -2018,6 +2053,21 @@ h1,h2,h3{
   font-weight:700;
   font-size:15px;
   line-height:21px;
+  /* .price-tier-label is a nowrap flex row of [title, info-icon, price badge]
+     sharing one line — with the title on default flex-basis:auto (sized by its
+     own content, then shrunk if needed), how much room a long title got to
+     shrink into (and where that left the icon+badge on wide-title rows) varied
+     row to row, so on mobile the icon+"od X zł" cluster didn't land at a
+     consistent x-position — it trailed wherever THIS row's particular title
+     text happened to end, not lined up with the caret above/below it. Giving
+     the title flex-basis:0 + flex-grow:1 (with min-width:0 so it can still
+     shrink/wrap past its own min-content) makes it the one item that absorbs
+     all the leftover space instead of just shrinking proportionally to its own
+     size — so the icon+badge (both already flex-shrink:0, their own natural
+     width) always end up flush against the row's real right edge, i.e.
+     directly against the caret, on every row regardless of title length. */
+  flex:1 1 0%;
+  min-width:0;
 }
 /* archon.au's real #cost .price-table price value (measured directly, live:
    getComputedStyle on the 2nd <p> of a .price-table): Inter 16px/400/27.2px, NOT
@@ -2030,6 +2080,15 @@ h1,h2,h3{
   font-weight:400;
   font-size:16px;
   color:var(--a-ink-warm);
+  /* on narrow viewports a long accordion title (e.g. "LUMIVEX® - laser tulowy
+     (erbowo-szklany)") wraps to 2 lines inside .price-tier-label's flex row —
+     expected/fine. Without this, the price badge (a plain flex item with the
+     browser's default flex-shrink:1) got squeezed along with it, narrow enough
+     that its own "od 299 zł" text wrapped mid-price onto a second line. The
+     title should be the one that flexes/wraps; the price reads as a single
+     unbreakable value. */
+  flex-shrink:0;
+  white-space:nowrap;
 }
 /* rust "promocja" flag for the consultation price-tier — same rust pill treatment
    as .price-package-badge (bg var(--a-rust), cream uppercase text) but inline in
@@ -2109,6 +2168,99 @@ h1,h2,h3{
    .price-tier-rows (which must keep their own compact 16px rhythm, matching
    the treatment page's real variant rows exactly) are untouched. */
 .price-list > .price-row{ padding:20px 0; margin-top:0; }
+/* cennik/index.html: small "i in a circle" link next to an accordion's own
+   title, shown only when that price group has a real matching subpage under
+   /zabiegi (or a standalone treatment URL) — subtle by default (--a-gray,
+   the same muted tone as a row's duration text), darkens to --a-olive on
+   hover/focus so it reads as interactive without competing with the price
+   badge next to it. main.js's accordion click handler skips its own
+   preventDefault()/toggle when the click target is inside an <a> (see the
+   .treatment-accordion details click listener), so this link — and the
+   pre-existing whole-title links this replaced on the 3 LightSheer®
+   body-area accordions — actually navigates instead of just toggling the
+   accordion open/closed.
+   Round 138 (user: "przyklej ikonę do nazwy, nie do ceny"): moved from being
+   a third flex child of .price-tier-label (sharing space with the price
+   badge, so .treatment-accordion-q's own flex-grow:1 — added to fix the
+   badge's right-edge alignment — pushed the icon along with the badge over
+   to the row's right edge, away from the title it's meant to annotate) to
+   living INSIDE the <h3> itself, right after the title text. inline-flex so
+   it flows as part of the text (wraps with a long title, sits immediately
+   after wherever the title's own text ends) instead of being a separate
+   flex item positioned by the row's own layout. */
+.accordion-info-link{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:18px;
+  height:18px;
+  margin-left:6px;
+  vertical-align:-3px;
+  flex:none;
+  color:var(--a-gray);
+  transition:color .2s ease;
+}
+.accordion-info-link:hover,
+.accordion-info-link:focus-visible{ color:var(--a-olive); }
+.accordion-info-link svg{ width:100%; height:100%; display:block; }
+/* cennik/index.html (Round 135): a "group" accordion (e.g. "Epilacja laserowa
+   LightSheer®") nests further .price-tier accordions inside its own
+   .price-tier-rows (the S/M/L/Pakiety sub-items) instead of plain .price-row
+   lines — reusing .price-tier-label/.price-tier-badge verbatim made this
+   second level visually IDENTICAL to the outer one (same 15px/700 title, same
+   20px summary padding, same ink-warm price), so there was no way to tell at a
+   glance which accordion you'd already opened. Scaled down one notch instead
+   of restyling from scratch: smaller/lighter title weight (14px/600, still
+   Inter) and the price badge de-emphasized to --a-gray (the same muted tone
+   already used for a row's own duration text). Compact 16px summary padding to
+   match the surrounding .price-row rhythm one level deeper, rather than the
+   roomier top-level 20px.
+   Round 137 (user: "dodaj wcięcie od drugiego poziomu"): indentation added on
+   the CONTAINER (.price-tier-rows--nested itself), not on the individual
+   .price-tier children — a mixed group like Karboksyterapia bezigłowa CO2
+   nests both a plain .price-row (its own single price line) AND a nested
+   .price-tier (its Pakiety) as siblings inside the same container, so indenting
+   the container shifts both of them in together and keeps them aligned with
+   each other; indenting only .price-tier would have pushed the accordion in
+   while leaving the plain row's price line flush with the group title above it. */
+.price-tier-rows--nested{ padding-left:var(--sp-24); }
+.price-tier-rows--nested > .price-tier > summary{ padding:16px 0; }
+.price-tier-rows--nested > .price-tier .price-tier-label .treatment-accordion-q{
+  font-size:14px;
+  font-weight:600;
+}
+/* Round 142 (user: "w drugim poziomie może też nie pokazujmy cen"): a level-2
+   sub-accordion's own "od X zł" badge was redundant/noisy right above its own
+   variant rows, each already showing its own real price — hidden rather than
+   just de-emphasized. */
+.price-tier-rows--nested > .price-tier > summary .price-tier-badge{ display:none; }
+/* Round 138 (user: level 1 > level 2 in font size, but then level 3 came out
+   BIGGER than both — confusing): a group's own price line — either the plain
+   .price-row sitting directly in .price-tier-rows--nested (e.g. Karboksyterapia
+   bezigłowa CO2's own line, a sibling of its nested Pakiety) or a variant row
+   one level deeper inside that nested accordion's own .price-tier-rows (e.g.
+   Epilacja laserowa's "Szpara międzypośladkowa" inside its "(S)" sub-accordion)
+   — was still using the sitewide base .price-row p size (16px, archon.au's
+   real measured #cost row value, left alone everywhere else on the site).
+   Inside a group specifically, that made actual bookable price lines render
+   LARGER than both the 15px group title above them and the 14px sub-accordion
+   title directly above THEM, breaking the size ladder a reader would expect
+   (bigger title → smaller sub-title → smaller still row text).
+   Round 141 (user: an accordion with no group/level-2 at all — e.g. "Radio-
+   frekwencja mikroigłowa RF", header straight to its own variant rows —
+   still used the sitewide 16px, LARGER than a level-3 row one of the 5
+   grouped accordions gets right next to it in the same list, even though
+   both are exactly the same kind of content: the deepest, most granular
+   bookable line under a top-level category). Widened from
+   .price-tier-rows--nested specifically to .cennik-page's every
+   .price-tier-rows, so any variant row nested inside ANY accordion on this
+   page — grouped or not — reads at the same 13px, matching level 3 whether
+   or not a level 2 happens to sit between it and the top. Scoped to
+   .cennik-page (a class added only on cennik/index.html's <main>) rather than
+   widened sitewide — the treatment page's own #cennik accordion rows keep
+   their real, archon.au-measured 16px untouched; this is cennik's own,
+   locally-introduced 3-tier hierarchy problem, not a sitewide one. */
+.cennik-page .price-tier-rows .price-row p{ font-size:13px; }
 /* main.js wraps EVERY .treatment-accordion-body's children in its own freshly
    created .treatment-accordion-body-inner div (for the height-animation system —
    see main.js, "document.querySelectorAll('.treatment-accordion-body').forEach"),
@@ -2172,6 +2324,12 @@ h1,h2,h3{
    at higher specificity, matching .price-package-badge's real values (rust
    bg, cream text, 11px/700/uppercase) exactly, per the request. */
 .price-row p:first-child .promo-badge{ color:var(--a-cream); font-size:11px; }
+/* Round 140: .promo-badge moved OUT of the row's <p> (see below) — no longer a
+   descendant of p:first-child at all, so the specificity fight this rule
+   existed to win never happens anymore and the rule above is dead code. Left
+   in place (harmless — it simply can't match anything now) rather than
+   deleted, since the reasoning above is still useful history; the base
+   .promo-badge rule's own color/size now apply untouched, uncontested. */
 
 /* cennik/index.html: a treatment with several real Fresha positions (e.g. Epilacja
    laserowa LightSheer®'s S/M/L body areas, or any other multi-variant service in the
@@ -2186,6 +2344,43 @@ h1,h2,h3{
    :last-child rules above still apply unchanged. */
 .price-row-buy{ display:flex; align-items:center; gap:var(--sp-24); }
 .price-row .treatment-card-cta{ margin-top:0; align-self:center; }
+/* Round 140 (user: Round 139's "give the badge its own line" fix (below,
+   narrowed to ≤767px) still looked broken between ~767–991px — wide enough
+   that .price-row-buy stays inline instead of dropping to its own full-width
+   line, so the row tried to fit name+duration+badge+price+button on one row,
+   and only the badge (least essential, needing ~140px it couldn't get) spilled
+   alone onto a 2nd line, vertically centered by align-items:center against the
+   WHOLE row's height — reading as an accidentally stray, un-anchored chip
+   rather than a positioned element. Root cause: the badge lived INSIDE the
+   row's <p> as inline content (see gen_cennik_v2.py's `name + duration +
+   badge` note above), so its position could only ever be wherever THAT
+   specific text happened to wrap, never something CSS could pin. Moved out of
+   <p> to be its own flex sibling (now the row's first DOM child, before <p>)
+   so it can be positioned independent of the name text's own line breaks:
+   ordered back to sit after the name on desktop (order:2, matching where it
+   visually sat before) via :has() so ONLY badge-bearing rows get this
+   restructuring — plain rows keep the original 2-child space-between exactly
+   as before — and ordered FIRST (order:-1, row user asked for: "na górze
+   wiersza a nie na dole czy po środku") below desktop's 991px breakpoint,
+   where the row also stacks to one column per line: badge, then name, then
+   price+button, always in that predictable order regardless of text length. */
+.price-row:has(.promo-badge){ justify-content:flex-start; }
+.price-row:has(.promo-badge) > :last-child{ margin-left:auto; }
+.price-row .promo-badge{ order:2; margin-left:0; }
+/* two shapes of row share this markup: [badge, name-<p>, .price-row-buy] when
+   there's a booking button, or [badge, name-<p>, price-<p>] for the 2 combo
+   deals that have none (see the generator note above .price-row-buy) — :nth-
+   of-type(2) only ever matches a SECOND <p>, so it's a no-op in the first
+   shape (there's only one <p>) and correctly targets the price line in the
+   second, without two separate rules needing to know which shape they're in. */
+.price-row:has(.promo-badge) > p:first-of-type{ order:1; }
+.price-row:has(.promo-badge) > p:nth-of-type(2){ order:3; }
+.price-row:has(.promo-badge) > .price-row-buy{ order:3; }
+@media (max-width:991px){
+  .price-row:has(.promo-badge){ flex-direction:column; align-items:flex-start; row-gap:var(--sp-8); }
+  .price-row:has(.promo-badge) > :last-child{ margin-left:0; }
+  .price-row .promo-badge{ order:-1; }
+}
 @media (max-width:767px){
   .price-row{ flex-wrap:wrap; row-gap:var(--sp-8); }
   .price-row-buy{ width:100%; justify-content:space-between; }
