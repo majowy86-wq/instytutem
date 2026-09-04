@@ -2419,6 +2419,32 @@ h1,h2,h3{
 }
 .price-row p:first-child span{ color:var(--a-gray); font-size:14px; }
 .price-row > :last-child{ flex:0 0 auto; }
+/* Round 159 (user: DERMOkonsultacja's real Fresha service description — "149 zł
+   zaliczane na poczet zabiegu w ciągu 14 dni") — a short explanatory note tied
+   to one specific price-row, on its own line below it (prose, not a name/price
+   pair, so it doesn't fit .price-row's own flex layout). Italic + muted gray so
+   it reads as commentary, distinct from the row itself; pulled up close to that
+   row (negative margin-top) so it visually belongs to it, not to whatever comes
+   next. Small gift-box icon reuses the site's own minimal stroke-icon language
+   (16px viewBox, ~1.2px stroke, currentColor — same idiom as .accordion-info-link's
+   circle-and-dot "i") instead of a system emoji, on request ("użyj ikony, która
+   pasuje do stylu strony"). First attempt used a negative margin-top to pull it
+   close to the row above, but that overlapped the row's own text/price/button
+   (measured: -10px margin gave a -10px actual gap, i.e. real overlap, not just a
+   tight visual pairing) — a small positive margin reads as "attached" without
+   colliding. */
+.price-row-note{
+  display:flex;
+  align-items:flex-start;
+  gap:6px;
+  margin:14px 0 var(--sp-16);
+  font-family:"Inter",sans-serif;
+  font-style:italic;
+  font-size:13px;
+  line-height:1.5;
+  color:var(--a-gray);
+}
+.price-row-note svg{ flex:none; width:15px; height:15px; margin-top:1px; }
 /* current, bookable price next to a struck-through .price-old regular price —
    rust ties it back visually to the "Promocja" badge on the Konsultacje
    accordion header itself, without repeating the badge on every row. Full size
