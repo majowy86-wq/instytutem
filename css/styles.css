@@ -2189,7 +2189,7 @@ div[data-partial]{ display:contents; }
    every existing badge too (text-only ones are unaffected: a single child
    in an inline-flex box renders identically to inline-block). currentColor
    picks up the badge's own cream text color automatically. */
-.promo-badge svg{ width:11px; height:11px; flex:none; }
+.promo-badge svg{ width:15px; height:15px; flex:none; }
 /* two badges on the same row (Runda 177: "Pakiet Powitalny" + "Promocja")
    need their own tight gap between them, distinct from .price-row's own
    larger gap to the row's label/price — wrapped in one flex item so the
@@ -2197,7 +2197,7 @@ div[data-partial]{ display:contents; }
    justify-content:space-between (which only expects 3 children: badges,
    label, price). The individual .promo-badge's own margin-left:10px would
    double up with this wrapper's gap, so it's reset to 0 here. */
-.price-row-badges{ display:inline-flex; align-items:center; gap:8px; }
+.price-row-badges{ display:inline-flex; align-items:center; gap:8px; margin-left:10px; }
 .price-row-badges .promo-badge{ margin-left:0; }
 /* struck-through regular price next to the current, promotional one in a
    .price-row's price column — reuses the same de-emphasized gray/14px
