@@ -2992,10 +2992,16 @@ h1,h2,h3{
   margin:0 0 10px;
 }
 /* #promo (Pakiet Powitalny) needs more breathing room than the archon.au-measured
-   10px now that its paragraph also carries the promo code — scoped to this
-   section only, .treatment-split--price keeps the original 10px. */
+   10px — scoped to this section only, .treatment-split--price keeps the original
+   10px. Since Runda 161 this also does double duty as the visible gap the user
+   asked for between the two <p> the copy is now split into ("Zarezerwuj termin
+   we Fresha..." on its own paragraph) — no extra CSS needed, this rule already
+   applies its margin-bottom to every <p> in the section, including that one. */
 #promo .treatment-split-footer p{ margin-bottom:var(--sp-24); }
-#promo .promo-code{ color:var(--a-rust); }
+/* Runda 161 (użytkownik: "wyróżnij coś ważnego na rdzawy nasz kolor") — zastępuje
+   dawny .promo-code (kod rabatowy usunięty z treści #promo w Rundzie 160, ta sama
+   idea rdzawego wyróżnienia zastosowana teraz do konkretnych kwot). */
+#promo .promo-highlight{ color:var(--a-rust); font-weight:600; }
 .treatment-split-image-wrapper{
   position:relative;
   overflow:hidden;

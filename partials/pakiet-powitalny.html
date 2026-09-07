@@ -1,0 +1,33 @@
+<!-- Sekcja "Pakiet Powitalny" (#promo) — jedyne, wspólne źródło tej treści dla WSZYSTKICH
+     podstron zabiegów, które ją używają (dziś: depilacja laserowa, laser tulowy; docelowo
+     każda kolejna podstrona zabiegu). Wstrzykiwana w js/main.js przez [data-partial] —
+     edycja W TYM pliku aktualizuje treść wszędzie naraz, nie edytować sekcji #promo
+     bezpośrednio w żadnym index.html. Token __ROOT__ w atrybutach src/href zastępowany
+     w main.js wartością atrybutu data-partial-root danej strony (np. "../" albo "../../"),
+     bo ten sam plik jest wstrzykiwany na strony leżące na różnej głębokości w drzewie
+     katalogów — nie da się w nim zaszyć jednej, stałej względnej ścieżki. -->
+<div class="treatment-split">
+  <div class="treatment-split-content" data-reveal="slide">
+    <div class="treatment-split-top">
+      <div class="treatment-split-title-line">
+        <p class="eyebrow">Pakiet Powitalny</p>
+        <div class="treatment-split-divider"></div>
+      </div>
+      <h2 class="treatment-split-heading">Poznajmy się. Odbierz bezpłatną konsultację i 150 zł na zabiegi!</h2>
+    </div>
+    <div class="treatment-split-footer">
+      <p>Pakiet Powitalny to kompletny zestaw korzyści dla osób, które odwiedzają nas po raz pierwszy. Obejmuje <span class="promo-highlight">bezpłatną dermokonsultację</span> lub konsultację do epilacji laserowej, kartę podarunkową o wartości <span class="promo-highlight">150 zł</span> na realizację Twojego indywidualnego planu zabiegowego oraz <span class="promo-highlight">3 karty podarunkowe po 50 zł</span> dla Twoich bliskich.</p>
+      <p>Zarezerwuj termin we Fresha i rozpocznij swoją metamorfozę.</p>
+      <a class="treatment-card-cta" href="__ROOT__pakiet-powitalny-dla-nowych-klientow">
+        <span class="treatment-card-cta-title-wrap">
+          <span>Zarezerwuj pierwszą wizytę</span>
+          <span class="treatment-card-cta-arrow"><svg viewBox="0 0 16 12" aria-hidden="true"><path d="M15,6H1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,11l5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,1l5,5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </span>
+        <span class="treatment-card-cta-underline"></span>
+      </a>
+    </div>
+  </div>
+  <div class="treatment-split-image-wrapper">
+    <img class="treatment-split-image" src="__ROOT__assets/images/treatments/pakiet-powitalny-promo.jpg?v=2" alt="Pakiet Powitalny — promocja dla nowych klientów">
+  </div>
+</div>

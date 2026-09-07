@@ -1,0 +1,270 @@
+<!-- Nagłówek strony (skip-link + nav desktop + mega-panele + drawer mobilny) — jedyne,
+     wspólne źródło tej treści dla WSZYSTKICH stron (Runda 164). Wstrzykiwany w js/main.js
+     przez [data-partial], tak samo jak partials/pakiet-powitalny.html (Runda 161) i
+     partials/footer.html — edycja W TYM pliku aktualizuje menu wszędzie naraz, nie
+     edytować nawigacji bezpośrednio w żadnym index.html. Token __ROOT__ w atrybutach
+     src/href zastępowany w main.js wartością data-partial-root danej strony (np. "" dla
+     index.html, "../" dla stron 1 poziom głębiej, "../../" dla zabiegi/<slug>/).
+     Świadomie BEZ aria-current="page" na żadnym linku — main.js oznacza aktualną stronę
+     dynamicznie po wstrzyknięciu (porównanie znormalizowanej ścieżki), więc nie trzeba
+     tego ręcznie utrzymywać per strona (przed Rundą 164 miał to tylko /cennik, ręcznie
+     wpisane w 2 miejscach — pozostałe strony nie miały tego wcale).
+     Świadomie BEZ .progress-bar — to jedyny fragment "nagłówka" strony, który NIE jest
+     wspólny: ustalona reguła (Runda 124, patrz DOKUMENTACJA.md) mówi, że pasek postępu
+     przewijania ma być na KAŻDEJ stronie OPRÓCZ index.html — więc zostaje jako osobna,
+     literalna linia w każdym pliku, tuż przed placeholderem [data-partial] tego
+     nagłówka, zamiast wymuszać wyjątek wewnątrz współdzielonej treści. -->
+<a class="skip-link" href="#main">Przejdź do treści</a>
+
+<header class="site-nav" id="siteNav">
+  <div class="container nav-row">
+    <a class="logo" href="__ROOT__index.html"><img class="logo-mark" src="__ROOT__assets/images/instytutem-logo.svg" alt="INSTYTUTem.™"></a>
+
+    <div class="nav-right">
+    <nav aria-label="Główna">
+      <ul class="nav-links">
+        <li>
+          <button class="nav-link" id="konsultacjeMenuBtn" aria-expanded="false" aria-controls="konsultacjeMegaPanel">
+            <span class="nav-type">Konsultacje</span><svg class="caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="mega-panel" id="konsultacjeMegaPanel" hidden>
+            <div class="mega-group">
+              <div class="cat">Dla Twarzy</div>
+              <ul>
+                <li><a href="__ROOT__konsultacje/dermokonsultacja-twarz">Dermokonsultacja (twarz)</a></li>
+                <li><a href="__ROOT__konsultacje/konsultacja-zabiegowa-twarz">Konsultacja zabiegowa</a></li>
+                <li><a href="__ROOT__konsultacje/wizyta-kontrolna-twarz">Wizyta kontrolna</a></li>
+                <li><a href="__ROOT__konsultacje/konsultacja-trychologiczna">Konsultacja trychologiczna</a></li>
+              </ul>
+            </div>
+            <div class="mega-group">
+              <div class="cat">Dla Ciała</div>
+              <ul>
+                <li><a href="__ROOT__konsultacje/dermokonsultacja-cialo">Dermokonsultacja (ciało)</a></li>
+                <li><a href="__ROOT__konsultacje/konsultacja-zabiegowa-cialo">Konsultacja zabiegowa</a></li>
+                <li><a href="__ROOT__konsultacje/wizyta-kontrolna-cialo">Wizyta kontrolna</a></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li>
+          <button class="nav-link" id="problemMenuBtn" aria-expanded="false" aria-controls="problemMegaPanel">
+            <span class="nav-type">Problem</span><svg class="caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="mega-panel" id="problemMegaPanel" hidden>
+            <div class="mega-group">
+              <div class="cat">Na Twarzy</div>
+              <ul>
+                <li><a href="__ROOT__problem/zmarszczki-i-utrata-jedrnosci">Zmarszczki i utrata jędrności</a></li>
+                <li><a href="__ROOT__problem/utrata-blasku-i-ziemista-cera">Utrata blasku i ziemista cera</a></li>
+                <li><a href="__ROOT__problem/przebarwienia">Przebarwienia</a></li>
+                <li><a href="__ROOT__problem/tradzik-i-niedoskonalosci">Trądzik i niedoskonałości</a></li>
+                <li><a href="__ROOT__problem/skora-wrazliwa-i-naczyniowa">Skóra wrażliwa i naczyniowa</a></li>
+                <li><a href="__ROOT__problem/suchosc-i-odwodnienie">Suchość i odwodnienie</a></li>
+                <li><a href="__ROOT__problem/skora-dojrzala">Skóra dojrzała</a></li>
+                <li><a href="__ROOT__problem/opadajacy-owal-twarzy">Opadający owal twarzy</a></li>
+              </ul>
+            </div>
+            <div class="mega-group">
+              <div class="cat">Na Ciele</div>
+              <ul>
+                <li><a href="__ROOT__problem/cellulit">Cellulit</a></li>
+                <li><a href="__ROOT__problem/wiotka-skora">Wiotka skóra</a></li>
+                <li><a href="__ROOT__problem/nadmiar-tkanki-tluszczowej">Nadmiar tkanki tłuszczowej</a></li>
+                <li><a href="__ROOT__problem/rozstepy">Rozstępy</a></li>
+                <li><a href="__ROOT__problem/nadmierne-owlosienie">Nadmierne owłosienie</a></li>
+                <li><a href="__ROOT__problem/retencja-wody-i-obrzeki">Retencja wody i obrzęki</a></li>
+                <li><a href="__ROOT__problem/blizny">Blizny</a></li>
+                <li><a href="__ROOT__problem/utrata-jedrnosci-biustu">Utrata jędrności biustu</a></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li>
+          <button class="nav-link" id="zabiegiMenuBtn" aria-expanded="false" aria-controls="zabiegiMegaPanel">
+            <span class="nav-type">Zabiegi</span><svg class="caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="mega-panel" id="zabiegiMegaPanel" hidden>
+            <div class="mega-group">
+              <div class="cat">Zabiegi Hi-Tech</div>
+              <ul>
+                <li><a href="__ROOT__zabiegi/depilacja-laserowa-plock-lightsheer">Epilacja laserowa LightSheer®</a></li>
+                <li><a href="__ROOT__laser-tulowy-plock">Laser Tulowy Erbowo-Szklany</a></li>
+                <li><a href="__ROOT__zabiegi/endermologia-plock-lpg-alliance">Endermologia LPG® Alliance</a></li>
+                <li><a href="__ROOT__zabiegi/lpg-ergolift">LPG® Ergolift</a></li>
+                <li><a href="__ROOT__zabiegi/kriolipoliza-plock-cooltech">Kriolipoliza cooltech®</a></li>
+                <li><a href="__ROOT__zabiegi/bloomea">Bloomea®</a></li>
+                <li><a href="__ROOT__zabiegi/oczyszczanie-wodorowe-plock">Oczyszczanie wodorowe</a></li>
+                <li><a href="__ROOT__fototerapia-dermalux-plock">Fototerapia LED Dermalux®</a></li>
+                <li><a href="__ROOT__zabiegi/plasma">Plasma™</a></li>
+                <li><a href="__ROOT__radiofrekwencja-mikroiglowa-plock">Radiofrekwencja mikroigłowa RF</a></li>
+                <li><a href="__ROOT__zabiegi/dermapen-plock-mikronakluwanie">Mikronakłuwanie SkinPen®</a></li>
+              </ul>
+            </div>
+            <div class="mega-group">
+              <div class="cat">Zabiegi Iniekcyjne</div>
+              <ul>
+                <li><a href="__ROOT__zabiegi/autologiczne-wypelniacze-atr">Autologiczne wypełniacze ATR</a></li>
+                <li><a href="__ROOT__zabiegi/kwas-polimlekowy-plla">Kwas polimlekowy PLLA</a></li>
+                <li><a href="__ROOT__zabiegi/mezoterapia-iglowa-plock">Mezoterapia igłowa</a></li>
+                <li><a href="__ROOT__zabiegi/wypelnianie-kwasem-hialuronowym-plock">Kwas hialuronowy</a></li>
+                <li><a href="__ROOT__zabiegi/nici-liftinguj%C4%85ce-pdo">Nici liftingujące PDO/PLLA</a></li>
+                <li><a href="__ROOT__fibryna-i-osocze-bogatoplytkowe">Fibryna i osocze bogatopłytkowe</a></li>
+                <li><a href="__ROOT__zabiegi/stymulatory-tkankowe">Stymulatory tkankowe</a></li>
+                <li><a href="__ROOT__zabiegi/lipoliza-iniekcyjna-plock">Lipoliza Iniekcyjna</a></li>
+                <li><a href="__ROOT__zabiegi/karboksyterapia-plock">Karboksyterapia</a></li>
+              </ul>
+            </div>
+            <div class="mega-group">
+              <div class="cat">Zabiegi Manualne</div>
+              <ul>
+                <li><a href="__ROOT__zabiegi/mezoterapia-mikroiglowa">Mezoterapia mikroigłowa</a></li>
+                <li><a href="__ROOT__zabiegi/mezoterapia-bezig%C5%82owa">Mezoterapia bezigłowa</a></li>
+                <li><a href="__ROOT__zabiegi/mikrodermabrazja">Mikrodermabrazja</a></li>
+                <li><a href="__ROOT__zabiegi/peelingi-medyczne">Peelingi Medyczne</a></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li><a class="nav-link" href="__ROOT__cennik"><span class="nav-type">Cennik</span></a></li>
+        <li>
+          <button class="nav-link" id="onasMenuBtn" aria-expanded="false" aria-controls="onasMegaPanel">
+            <span class="nav-type">O nas</span><svg class="caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="mega-panel" id="onasMegaPanel" hidden>
+            <div class="mega-group">
+              <div class="cat">Dla Klientów</div>
+              <ul>
+                <li><a href="__ROOT__promocje">Aktualne promocje</a></li>
+                <li><a href="__ROOT__program-lojalnosciowy">Program lojalnościowy</a></li>
+                <li><a href="https://www.fresha.com/book-now/testem-xh2mr620/gift-cards?share=true&amp;pId=602910" target="_blank" rel="noopener">Karty podarunkowe</a></li>
+                <li><a href="__ROOT__pakiet-powitalny-dla-nowych-klientow">Pakiet Powitalny</a></li>
+              </ul>
+            </div>
+            <div class="mega-group">
+              <div class="cat">O INSTYTUTem.™</div>
+              <ul>
+                <li><a href="__ROOT__o-nas">O nas</a></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li><a class="nav-link" href="__ROOT__kontakt"><span class="nav-type">Kontakt</span></a></li>
+      </ul>
+    </nav>
+
+    <div class="nav-ctas">
+      <a class="abtn primary-olive" href="https://www.fresha.com/book-now/testem-xh2mr620/all-offer?share=true&amp;pId=602910" target="_blank" rel="noopener">Rezerwuj online</a>
+      <a class="abtn outline-dark" href="https://www.fresha.com/book-now/testem-xh2mr620/gift-cards?share=true&amp;pId=602910" target="_blank" rel="noopener">Kup Kartę Podarunkową</a>
+    </div>
+    </div>
+
+    <button class="hamburger" id="hamburgerBtn" aria-expanded="false" aria-controls="mobileDrawer" aria-label="Otwórz menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+
+<div class="mobile-drawer" id="mobileDrawer" hidden>
+  <nav aria-label="Mobilna">
+    <ul>
+      <li>
+        <details>
+          <summary class="nav-link"><span class="nav-type">Konsultacje</span><svg class="caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <ul>
+            <li class="cat-label">Dla Twarzy</li>
+            <li><a href="__ROOT__konsultacje/dermokonsultacja-twarz">Dermokonsultacja (twarz)</a></li>
+            <li><a href="__ROOT__konsultacje/konsultacja-zabiegowa-twarz">Konsultacja zabiegowa</a></li>
+            <li><a href="__ROOT__konsultacje/wizyta-kontrolna-twarz">Wizyta kontrolna</a></li>
+            <li><a href="__ROOT__konsultacje/konsultacja-trychologiczna">Konsultacja trychologiczna</a></li>
+            <li class="cat-label">Dla Ciała</li>
+            <li><a href="__ROOT__konsultacje/dermokonsultacja-cialo">Dermokonsultacja (ciało)</a></li>
+            <li><a href="__ROOT__konsultacje/konsultacja-zabiegowa-cialo">Konsultacja zabiegowa</a></li>
+            <li><a href="__ROOT__konsultacje/wizyta-kontrolna-cialo">Wizyta kontrolna</a></li>
+          </ul>
+        </details>
+      </li>
+      <li>
+        <details>
+          <summary class="nav-link"><span class="nav-type">Problem</span><svg class="caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <ul>
+            <li class="cat-label">Na Twarzy</li>
+            <li><a href="__ROOT__problem/zmarszczki-i-utrata-jedrnosci">Zmarszczki i utrata jędrności</a></li>
+            <li><a href="__ROOT__problem/utrata-blasku-i-ziemista-cera">Utrata blasku i ziemista cera</a></li>
+            <li><a href="__ROOT__problem/przebarwienia">Przebarwienia</a></li>
+            <li><a href="__ROOT__problem/tradzik-i-niedoskonalosci">Trądzik i niedoskonałości</a></li>
+            <li><a href="__ROOT__problem/skora-wrazliwa-i-naczyniowa">Skóra wrażliwa i naczyniowa</a></li>
+            <li><a href="__ROOT__problem/suchosc-i-odwodnienie">Suchość i odwodnienie</a></li>
+            <li><a href="__ROOT__problem/skora-dojrzala">Skóra dojrzała</a></li>
+            <li><a href="__ROOT__problem/opadajacy-owal-twarzy">Opadający owal twarzy</a></li>
+            <li class="cat-label">Na Ciele</li>
+            <li><a href="__ROOT__problem/cellulit">Cellulit</a></li>
+            <li><a href="__ROOT__problem/wiotka-skora">Wiotka skóra</a></li>
+            <li><a href="__ROOT__problem/nadmiar-tkanki-tluszczowej">Nadmiar tkanki tłuszczowej</a></li>
+            <li><a href="__ROOT__problem/rozstepy">Rozstępy</a></li>
+            <li><a href="__ROOT__problem/nadmierne-owlosienie">Nadmierne owłosienie</a></li>
+            <li><a href="__ROOT__problem/retencja-wody-i-obrzeki">Retencja wody i obrzęki</a></li>
+            <li><a href="__ROOT__problem/blizny">Blizny</a></li>
+            <li><a href="__ROOT__problem/utrata-jedrnosci-biustu">Utrata jędrności biustu</a></li>
+          </ul>
+        </details>
+      </li>
+      <li>
+        <details>
+          <summary class="nav-link"><span class="nav-type">Zabiegi</span><svg class="caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <ul>
+            <li class="cat-label">Zabiegi Hi-Tech</li>
+            <li><a href="__ROOT__zabiegi/depilacja-laserowa-plock-lightsheer">Epilacja laserowa LightSheer®</a></li>
+            <li><a href="__ROOT__laser-tulowy-plock">Laser Tulowy Erbowo-Szklany</a></li>
+            <li><a href="__ROOT__zabiegi/endermologia-plock-lpg-alliance">Endermologia LPG® Alliance</a></li>
+            <li><a href="__ROOT__zabiegi/lpg-ergolift">LPG® Ergolift</a></li>
+            <li><a href="__ROOT__zabiegi/kriolipoliza-plock-cooltech">Kriolipoliza cooltech®</a></li>
+            <li><a href="__ROOT__zabiegi/bloomea">Bloomea®</a></li>
+            <li><a href="__ROOT__zabiegi/oczyszczanie-wodorowe-plock">Oczyszczanie wodorowe</a></li>
+            <li><a href="__ROOT__fototerapia-dermalux-plock">Fototerapia LED Dermalux®</a></li>
+            <li><a href="__ROOT__zabiegi/plasma">Plasma™</a></li>
+            <li><a href="__ROOT__radiofrekwencja-mikroiglowa-plock">Radiofrekwencja mikroigłowa RF</a></li>
+            <li><a href="__ROOT__zabiegi/dermapen-plock-mikronakluwanie">Mikronakłuwanie SkinPen®</a></li>
+            <li class="cat-label">Zabiegi Iniekcyjne</li>
+            <li><a href="__ROOT__zabiegi/autologiczne-wypelniacze-atr">Autologiczne wypełniacze ATR</a></li>
+            <li><a href="__ROOT__zabiegi/kwas-polimlekowy-plla">Kwas polimlekowy PLLA</a></li>
+            <li><a href="__ROOT__zabiegi/mezoterapia-iglowa-plock">Mezoterapia igłowa</a></li>
+            <li><a href="__ROOT__zabiegi/wypelnianie-kwasem-hialuronowym-plock">Kwas hialuronowy</a></li>
+            <li><a href="__ROOT__zabiegi/nici-liftinguj%C4%85ce-pdo">Nici liftingujące PDO/PLLA</a></li>
+            <li><a href="__ROOT__fibryna-i-osocze-bogatoplytkowe">Fibryna i osocze bogatopłytkowe</a></li>
+            <li><a href="__ROOT__zabiegi/stymulatory-tkankowe">Stymulatory tkankowe</a></li>
+            <li><a href="__ROOT__zabiegi/lipoliza-iniekcyjna-plock">Lipoliza Iniekcyjna</a></li>
+            <li><a href="__ROOT__zabiegi/karboksyterapia-plock">Karboksyterapia</a></li>
+            <li class="cat-label">Zabiegi Manualne</li>
+            <li><a href="__ROOT__zabiegi/mezoterapia-mikroiglowa">Mezoterapia mikroigłowa</a></li>
+            <li><a href="__ROOT__zabiegi/mezoterapia-bezig%C5%82owa">Mezoterapia bezigłowa</a></li>
+            <li><a href="__ROOT__zabiegi/mikrodermabrazja">Mikrodermabrazja</a></li>
+            <li><a href="__ROOT__zabiegi/peelingi-medyczne">Peelingi Medyczne</a></li>
+          </ul>
+        </details>
+      </li>
+      <li><a class="nav-link" href="__ROOT__cennik"><span class="nav-type">Cennik</span></a></li>
+      <li>
+        <details>
+          <summary class="nav-link"><span class="nav-type">O nas</span><svg class="caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <ul>
+            <li class="cat-label">Dla Klientów</li>
+            <li><a href="__ROOT__promocje">Aktualne promocje</a></li>
+            <li><a href="__ROOT__program-lojalnosciowy">Program lojalnościowy</a></li>
+            <li><a href="https://www.fresha.com/book-now/testem-xh2mr620/gift-cards?share=true&amp;pId=602910" target="_blank" rel="noopener">Karty podarunkowe</a></li>
+            <li><a href="__ROOT__pakiet-powitalny-dla-nowych-klientow">Pakiet Powitalny</a></li>
+            <li class="cat-label">O INSTYTUTem.™</li>
+            <li><a href="__ROOT__o-nas">O nas</a></li>
+          </ul>
+        </details>
+      </li>
+      <li><a class="nav-link" href="__ROOT__kontakt"><span class="nav-type">Kontakt</span></a></li>
+    </ul>
+  </nav>
+  <div class="drawer-ctas">
+    <a class="abtn outline-gray" href="tel:+48737836092">Zadzwoń</a>
+    <a class="abtn primary-olive" href="https://www.fresha.com/book-now/testem-xh2mr620/all-offer?share=true&amp;pId=602910" target="_blank" rel="noopener">Rezerwuj online</a>
+    <a class="abtn outline-dark" href="https://www.fresha.com/book-now/testem-xh2mr620/gift-cards?share=true&amp;pId=602910" target="_blank" rel="noopener">Kup Kartę Podarunkową</a>
+  </div>
+</div>

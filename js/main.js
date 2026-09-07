@@ -1,6 +1,65 @@
 (function () {
   "use strict";
 
+  /* ---------- shared content partials (e.g. #promo "Pakiet Powitalny") ----------
+     Static site, no build step — this is the vanilla equivalent of a server-side
+     include: edit the content once in partials/*.html, every page that references
+     it via [data-partial] picks it up automatically instead of hand-copying the
+     same markup into every treatment page. Synchronous XHR is deliberate, not an
+     oversight — this has to fully finish BEFORE the [data-reveal] querySelectorAll
+     further down in this same script runs, or the injected content's own
+     data-reveal elements would never be found (that scan only runs once, here,
+     not on every DOM mutation). Files are same-origin, local, and a few KB, so the
+     blocking cost is negligible — the same trade-off classic SSI includes made.
+     __ROOT__ in the partial's own src/href attributes gets replaced with the
+     value of the placeholder's own data-partial-root (e.g. "../" vs "../../") —
+     one shared partial file has no single correct relative path prefix, since the
+     pages that include it live at different folder depths. */
+  document.querySelectorAll("[data-partial]").forEach(function (el) {
+    var src = el.getAttribute("data-partial");
+    var root = el.getAttribute("data-partial-root") || "";
+    try {
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", src, false);
+      xhr.send(null);
+      if (xhr.status === 200 || xhr.status === 0) {
+        el.innerHTML = xhr.responseText.split("__ROOT__").join(root);
+      }
+    } catch (e) {
+      console.error("Nie udało się wczytać partiala:", src, e);
+    }
+  });
+
+  /* ---------- current-page marker on nav links (header + drawer + footer) ----------
+     Runda 164: header.html/footer.html became shared partials, so a hand-written
+     aria-current="page" baked into one page's own copy of the markup (the old
+     approach — only /cennik had this, added by hand in Rundy 131+, everywhere else
+     had none at all) would now incorrectly mark EVERY page's nav as "on /cennik".
+     Computed dynamically instead, once, right after the partials above are in the
+     DOM — compares each link's own resolved pathname against the current page's,
+     so it's automatically correct on every page (including ones that don't exist
+     yet) without any per-page bookkeeping. Normalizes away directory-index quirks
+     (trailing slash, explicit index.html) since the site's own canonical links
+     never carry either — without this, "/cennik/" (how the browser reports a
+     folder URL) would never equal the link's own "/cennik". */
+  (function () {
+    function normalizeNavPath(path) {
+      path = path.replace(/index\.html$/, "");
+      if (path === "") path = "/";
+      if (path.length > 1 && path.charAt(path.length - 1) === "/") {
+        path = path.slice(0, -1);
+      }
+      return path;
+    }
+    var herePath = normalizeNavPath(location.pathname);
+    document.querySelectorAll("header a[href], .mobile-drawer a[href], footer a[href]").forEach(function (a) {
+      if (a.hostname !== location.hostname) return;
+      if (normalizeNavPath(a.pathname) === herePath) {
+        a.setAttribute("aria-current", "page");
+      }
+    });
+  })();
+
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ---------- page scroll-progress bar (above the header, every page) ----------
