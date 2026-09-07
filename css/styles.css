@@ -2573,6 +2573,18 @@ p .price-row-badges{ margin-left:10px; }
    .price-row keeps exactly two flex children and its existing space-between/
    :last-child rules above still apply unchanged. */
 .price-row-buy{ display:flex; align-items:center; gap:var(--sp-24); }
+/* Runda 181: a row with no CTA (just a bare price <p> as the row's own
+   :last-child, e.g. "Wizyta kontrolna" · 0 zł, "+50 zł" add-ons) sits flush
+   against the row's own right edge — but every OTHER row's price text sits
+   ~119px further left, making room for its own .treatment-card-cta button
+   (measured live: button ~95px + the row's own 24px gap). Down a list that
+   mixes both row shapes, the no-button price visibly "jumps" right instead
+   of reading as part of the same price column — reserve that same ~119px on
+   the right of a bare price so it lines up with where prices sit elsewhere,
+   instead of guessing at a single fixed price-column width for every row
+   (button widths do vary a little by their own text, but they're all
+   "Zarezerwuj" in every list this currently applies to). */
+.price-row > p:last-child{ margin-right:119px; }
 .price-row .treatment-card-cta{ margin-top:0; align-self:center; }
 /* Round 140 (user: Round 139's "give the badge its own line" fix (below,
    narrowed to ≤767px) still looked broken between ~767–991px — wide enough
