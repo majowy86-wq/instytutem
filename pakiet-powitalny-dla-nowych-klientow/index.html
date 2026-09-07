@@ -24,15 +24,20 @@
        bez paska cena+raty pod spodem (nie dotyczy tej strony — to nie jest pojedynczy
        zabieg z jedną ceną) — .treatment-hero ma flex:1 1 auto, więc bez sąsiada sam
        wypełnia całą wysokość wrapa (100vh - 80px nawigacji), nie trzeba nic dodatkowo
-       zmieniać w CSS. Zdjęcie: to samo, co już używane w sekcji #promo na stronach
-       zabiegów (assets/images/treatments/pakiet-powitalny-promo.jpg) — ta strona JEST
-       tym miejscem docelowym tamtego zdjęcia, nie nowy, osobny kontekst wymagający
-       nowego zdjęcia. Treść: mechanika ustalona w Rundach 165–166 w partials/pakiet-powitalny.html
+       zmieniać w CSS. Zdjęcie: dedykowany plik (assets/images/treatments/pakiet-powitalny-hero.jpg,
+       AI, Runda 171) — świadome odejście od zwykłej konwencji "seamless studio backdrop"
+       z DESIGN-SYSTEM.md §9 (ta jedna strona pokazuje realne wnętrze salonu, na wyraźną
+       prośbę użytkownika), bo treść to gest powitania (kosmetolożka w uniformie wita
+       klientkę), nie zbliżenie na skórę/zabieg jak reszta zdjęć AI na stronie — wcześniej
+       ta sekcja tymczasowo pożyczała zdjęcie z bannera #promo (pakiet-powitalny-promo.jpg),
+       teraz ma własny, dedykowany plik (ten sam wniosek co przy laser-tulowy-twarz.jpg:
+       współdzielenie jednego zdjęcia między wizualnie różnymi miejscami nie jest właściwym
+       domyślnym rozwiązaniem). Treść: mechanika ustalona w Rundach 165–166 w partials/pakiet-powitalny.html
        (150 zł + 3×50 zł, warunek: pierwsza dermokonsultacja) — ta strona ją tylko
        rozwija w pełny opis zasad, nie wprowadza nowej mechaniki. -->
   <div class="treatment-hero-wrap">
   <section class="treatment-hero">
-    <div class="treatment-hero-bg" style="background-image:url('../assets/images/treatments/pakiet-powitalny-promo.jpg?v=2')" role="img" aria-label="Pakiet Powitalny dla nowych Klientów INSTYTUTem.™"></div>
+    <div class="treatment-hero-bg" style="background-image:url('../assets/images/treatments/pakiet-powitalny-hero.jpg')" role="img" aria-label="Kosmetolożka wita nową Klientkę w salonie INSTYTUTem.™"></div>
     <div class="container">
       <div class="treatment-hero-inner" data-reveal="slide">
       <div class="eyebrow">Dla Nowych Klientów</div>
