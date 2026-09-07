@@ -2167,7 +2167,9 @@ div[data-partial]{ display:contents; }
    normal flow instead of absolutely positioned, so it can sit next to the price
    badge in the collapsed summary AND next to a specific row once expanded. */
 .promo-badge{
-  display:inline-block;
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
   white-space:nowrap;
   font-family:"Inter",sans-serif;
   font-weight:700;
@@ -2181,6 +2183,22 @@ div[data-partial]{ display:contents; }
   margin:0 0 0 10px;
   vertical-align:middle;
 }
+/* optional leading icon (Runda 177: gift-box icon on a "Promocja" badge,
+   ties it visually to the matching .price-row-note below, which uses the
+   same icon) — inline-flex above already lays out icon+text on one line for
+   every existing badge too (text-only ones are unaffected: a single child
+   in an inline-flex box renders identically to inline-block). currentColor
+   picks up the badge's own cream text color automatically. */
+.promo-badge svg{ width:11px; height:11px; flex:none; }
+/* two badges on the same row (Runda 177: "Pakiet Powitalny" + "Promocja")
+   need their own tight gap between them, distinct from .price-row's own
+   larger gap to the row's label/price — wrapped in one flex item so the
+   pair reads as a group instead of being spread apart by .price-row's own
+   justify-content:space-between (which only expects 3 children: badges,
+   label, price). The individual .promo-badge's own margin-left:10px would
+   double up with this wrapper's gap, so it's reset to 0 here. */
+.price-row-badges{ display:inline-flex; align-items:center; gap:8px; }
+.price-row-badges .promo-badge{ margin-left:0; }
 /* struck-through regular price next to the current, promotional one in a
    .price-row's price column — reuses the same de-emphasized gray/14px
    treatment already used for the row LABEL's own duration/description
