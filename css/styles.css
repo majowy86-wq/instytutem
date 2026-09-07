@@ -1386,6 +1386,13 @@ div[data-partial]{ display:contents; }
   height:calc(100vh - 80px);
   display:flex;
   flex-direction:column;
+  /* the reference site's real 20px gap to the sticky tabs bar (.section-links),
+     measured identically at both mobile and desktop — lives on the WRAP itself
+     (not on .treatment-price-strip, its last child) so pages without a price
+     strip (e.g. a promo/explainer page whose hero is the wrap's only child)
+     still get the same gap before .treatment-tabs, instead of the tabs sitting
+     flush against the hero (Runda 172, reported by user as "za mało powietrza") */
+  margin-bottom:20px;
 }
 @media (max-width:991px){ .treatment-hero-wrap{ height:auto; } }
 .treatment-hero{
@@ -1593,14 +1600,12 @@ div[data-partial]{ display:contents; }
    used everywhere else), "Treatments from: $80 / 15 Minutes" + Afterpay logo
    (image wrapper with filter:invert(1) to read white on the dark strip,
    measured 1:1) + note. Adapted for a price RANGE ("od X zł", not a fixed $
-   figure) and MediRaty instead of Afterpay. Margin-bottom below: the
-   reference site's real 20px gap to the sticky tabs bar (.section-links),
-   measured identically at both mobile and desktop. */
+   figure) and MediRaty instead of Afterpay. The 20px gap to the sticky tabs
+   bar below lives on .treatment-hero-wrap itself now (Runda 172), not here. */
 .treatment-price-strip{
   background:var(--a-olive-black);
   color:var(--a-cream);
   flex:0 0 auto;
-  margin-bottom:20px;
 }
 .treatment-price-strip-inner{
   display:flex;
@@ -1857,6 +1862,14 @@ div[data-partial]{ display:contents; }
   color:var(--a-ink-warm);
   margin-bottom:20px;
 }
+/* this title-line+divider combo was only ever used on .section--cream (Opis
+   zabiegu, Cennik) until Runda 172 put it on a .section--olive section
+   ("Zasady promocji") for the first time — the hardcoded dark ink-warm/near-black
+   colors above are invisible on that dark background, so a light-on-dark pair
+   is needed too, same pattern as every other cream/olive component override
+   on this page. */
+.section--olive .treatment-intro-title-line .eyebrow{ color:var(--a-cream); }
+.section--olive .treatment-intro-divider{ background:var(--a-taupe); }
 .treatment-intro-divider{
   height:1px;
   background:#1E1D1D;
@@ -1973,6 +1986,13 @@ div[data-partial]{ display:contents; }
    exactly: a divider before every details, nothing after the final one. */
 #faq .treatment-accordion details{ border-bottom:none; border-top:1px solid var(--a-gray); }
 #faq .treatment-accordion-body-inner .lede{ color:var(--a-taupe); }
+/* the taupe answer color above assumed #faq is always .section--olive (true on
+   every page until Runda 172's promo/explainer page put FAQ on .section--cream
+   instead) — taupe reads as a deliberate light-on-dark muted tone there, but
+   washes out to near-invisible on a light cream background, so it needs the
+   dark ink-warm counterpart in that context, same as every other cream/olive
+   pair on this page. */
+#faq.section--cream .treatment-accordion-body-inner .lede{ color:var(--a-ink-warm); }
 #faq .treatment-accordion summary{ opacity:.8; transition:opacity .2s; }
 #faq .treatment-accordion summary:hover{ opacity:1; }
 
