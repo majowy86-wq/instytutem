@@ -335,6 +335,24 @@ h1,h2,h3{
 /* ============================================================
    Nav
    ============================================================ */
+/* Runda 165: header.html (Runda 164) is injected into a plain wrapper
+   <div data-partial="...">, since <header> and .mobile-drawer are two sibling
+   top-level elements that need one shared injection point — but that wrapper
+   quietly broke .site-nav's position:sticky below. Root cause: sticky needs
+   its CONTAINING BLOCK (nearest ancestor box) to be taller than itself for
+   there to be any scroll distance to "stick" through — before Runda 164,
+   that containing block was <body> (thousands of px tall); after wrapping,
+   it became this wrapper div, whose own height collapses to fit its content
+   (~80px, same as .site-nav itself, since .mobile-drawer contributes 0px
+   while [hidden]) — zero room to stick, so it never visibly did. display:contents
+   removes the wrapper's own box from rendering entirely, so .site-nav and
+   .mobile-drawer behave exactly as if they were direct children of <body>
+   again (their real, original DOM position) — scoped to div[data-partial]
+   specifically (a plain <div>) so it does NOT reach #promo (<section>) or
+   the footer (<footer>), which also carry data-partial but must stay real,
+   styled boxes. */
+div[data-partial]{ display:contents; }
+
 .site-nav{
   position:sticky;
   top:0;
