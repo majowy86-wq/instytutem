@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow"><!-- wersja robocza (GitHub Pages) — usunąć dopiero przy właściwym wdrożeniu na instytutem.pl, patrz CLAUDE.md -->
+<title>Pakiet Powitalny dla Nowych Klientów | INSTYTUTem.™</title>
+<meta name="description" content="Pakiet Powitalny dla nowych Klientów INSTYTUTem.™ w Płocku — bezpłatna dermokonsultacja, karta podarunkowa 150 zł na zabiegi oraz 3 karty po 50 zł dla bliskich. Sprawdź zasady i zarezerwuj termin.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/styles.css?v=170">
+<!-- TODO: favicon / logo mark asset not yet available -->
+</head>
+<body>
+
+<div class="progress-bar" aria-hidden="true"></div>
+
+<div data-partial="../partials/header.html?v=1" data-partial-root="../"></div>
+
+<main id="main" class="treatment-page">
+
+  <!-- HERO — ten sam komponent co strony zabiegów (.treatment-hero-wrap/.treatment-hero),
+       bez paska cena+raty pod spodem (nie dotyczy tej strony — to nie jest pojedynczy
+       zabieg z jedną ceną) — .treatment-hero ma flex:1 1 auto, więc bez sąsiada sam
+       wypełnia całą wysokość wrapa (100vh - 80px nawigacji), nie trzeba nic dodatkowo
+       zmieniać w CSS. Zdjęcie: to samo, co już używane w sekcji #promo na stronach
+       zabiegów (assets/images/treatments/pakiet-powitalny-promo.jpg) — ta strona JEST
+       tym miejscem docelowym tamtego zdjęcia, nie nowy, osobny kontekst wymagający
+       nowego zdjęcia. Treść: mechanika ustalona w Rundach 165–166 w partials/pakiet-powitalny.html
+       (150 zł + 3×50 zł, warunek: pierwsza dermokonsultacja) — ta strona ją tylko
+       rozwija w pełny opis zasad, nie wprowadza nowej mechaniki. -->
+  <div class="treatment-hero-wrap">
+  <section class="treatment-hero">
+    <div class="treatment-hero-bg" style="background-image:url('../assets/images/treatments/pakiet-powitalny-promo.jpg?v=2')" role="img" aria-label="Pakiet Powitalny dla nowych Klientów INSTYTUTem.™"></div>
+    <div class="container">
+      <div class="treatment-hero-inner" data-reveal="slide">
+      <div class="eyebrow">Dla Nowych Klientów</div>
+      <h1>Pakiet Powitalny dla Nowych Klientów</h1>
+      <p class="lede">Pierwszy raz w INSTYTUTem.™? Zarezerwuj bezpłatną dermokonsultację, a po jej zrealizowaniu otrzymasz od nas kartę podarunkową o wartości 150 zł na zabiegi oraz 3 karty podarunkowe po 50 zł, które możesz przekazać bliskim osobom.</p>
+
+      <div class="treatment-hero-ctas">
+        <a class="abtn primary-black" href="https://www.fresha.com/pl/a/instytutem-tm-plock-1-maja-6-jrr27hgf/booking?offerItemId=s%3A24458471" target="_blank" rel="noopener">Zarezerwuj dermokonsultację</a>
+        <a class="abtn primary-black has-arrow" href="#zasady">Poznaj zasady<span class="down-arrow-wrap"><svg class="down-arrow" viewBox="0 0 15.5 11.5" aria-hidden="true"><path fill="currentColor" d="M15.44,5.46a.75.75,0,0,0-.16-.24l-5-5A.75.75,0,1,0,9.22,1.28L12.94,5H.75a.75.75,0,0,0,0,1.5H12.94L9.22,10.22a.75.75,0,1,0,1.06,1.06l5-5a.75.75,0,0,0,.16-.82Z"/></svg></span></a>
+      </div>
+      </div>
+    </div>
+  </section>
+  </div>
+
+  <!-- STICKY QUICK-NAV — ten sam komponent co strony zabiegów, kategorie dopasowane
+       do sekcji tej strony (nie ma tu cennika ani postępowania zabiegowego, więc
+       inny zestaw zakładek niż na podstronach zabiegów). -->
+  <div class="treatment-tabs">
+    <div class="container treatment-tabs-inner">
+      <a class="treatment-tab" href="#jak-to-dziala">Jak to działa</a>
+      <a class="treatment-tab" href="#zasady">Zasady</a>
+      <a class="treatment-tab" href="#faq">FAQ</a>
+    </div>
+  </div>
+
+  <!-- JAK TO DZIAŁA — reużycie komponentu .treatment-benefits (numerowane karty 01/02/03),
+       pierwotnie zaprojektowanego pod "Wskazania do zabiegu" na stronach zabiegów — pasuje
+       tu równie dobrze jako lista kolejnych kroków, sama numeracja i układ nie są
+       specyficzne dla wskazań medycznych. Treść: dokładnie mechanika z partials/pakiet-powitalny.html,
+       rozpisana na 3 kroki zamiast jednego akapitu. -->
+  <section class="section--olive section-pad" id="jak-to-dziala">
+    <div class="container" data-reveal="slide">
+      <p class="eyebrow">Jak to działa</p>
+      <h2 class="h-section">Trzy proste kroki do Pakietu Powitalnego</h2>
+      <div class="treatment-benefits">
+        <div class="treatment-benefit"><span class="treatment-benefit-num">01</span><p class="lede">Zarezerwuj i zrealizuj pierwszą dermokonsultację w INSTYTUTem.™ — szczegółową analizę skóry zakończoną indywidualnymi rekomendacjami zabiegowymi.</p></div>
+        <div class="treatment-benefit"><span class="treatment-benefit-num">02</span><p class="lede">Odbierz od nas kartę podarunkową o wartości 150 zł na realizację ułożonego podczas dermokonsultacji planu zabiegowego.</p></div>
+        <div class="treatment-benefit"><span class="treatment-benefit-num">03</span><p class="lede">Przekaż 3 karty podarunkowe po 50 zł bliskim osobom — każda z nich może wykorzystać swoją kartę na pierwszy zabieg w INSTYTUTem.™</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS — ten sam komponent i te same realne opinie co na pozostałych stronach zabiegów -->
+  <section class="section--cream section-pad testimonial-section" aria-label="Opinie klientów">
+    <div class="container" data-reveal="slide">
+      <h2 class="h-section">Opinie naszych Klientów</h2>
+
+      <div class="t-shell">
+        <button class="t-arrow t-arrow--prev" id="tPrev" type="button" aria-label="Poprzednia opinia">
+          <svg class="t-arrow-icon" viewBox="0 0 22 16" aria-hidden="true"><path d="M8 1 1 8l7 7M1 8h20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <div class="t-mask" id="tMask">
+          <div class="t-track" id="testimonialTrack">
+            <div class="t-slide" role="group" aria-roledescription="slajd" aria-label="1 z 2">
+              <blockquote>"Szeroki wybór zabiegów, zabiegi dostosowane do potrzeb klientek, fachowa pomoc i porada ze strony pracowników, ceny adekwatne do jakości wykonywanych zabiegów, pełen profesjonalizm i przemiła obsługa, polecam w 100%!"</blockquote>
+              <div class="testimonial-name">Magdalena Górska</div>
+              <div class="t-stars" aria-hidden="true"></div>
+            </div>
+            <div class="t-slide" role="group" aria-roledescription="slajd" aria-label="2 z 2">
+              <blockquote>"Super obsługa, miła, dbająca o komfort klienta podczas zabiegu. Dodatkowo ogromna wiedza pracowników, która pozwala na udzielenie odpowiedzi na każde zadane pytanie. Polecam!"</blockquote>
+              <div class="testimonial-name">Karolina Piotrowska</div>
+              <div class="t-stars" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+
+        <button class="t-arrow t-arrow--next" id="tNext" type="button" aria-label="Następna opinia">
+          <svg class="t-arrow-icon" viewBox="0 0 22 16" aria-hidden="true"><path d="M14 1l7 7-7 7M21 8H1" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <div class="t-dots" id="tDots" role="tablist" aria-label="Wybierz opinię"></div>
+
+      <div class="t-cta">
+        <a class="abtn outline-dark" href="https://www.google.com/search?q=instytutem&oq=instytutem+&aqs=chrome.0.69i59l2j69i60l6.3854j0j1&sourceid=chrome&ie=UTF-8#lrd=0x471c709c13cb9da7:0x14c59205a379dc9a,1,,," target="_blank" rel="noopener">Więcej Opinii</a>
+        <a class="abtn primary-olive" href="https://g.page/r/CZrceaMFksUUEB0/review" target="_blank" rel="noopener">Zostaw Opinię</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ZASADY PROMOCJI — ten sam układ 2-kolumnowy (.treatment-intro-grid) co "Opis zabiegu"
+       na stronach zabiegów, lista reużywa .care-panel (zwykły <ul> z markerem disc,
+       pierwotnie stylowany pod #postepowanie, ale bez zależności od zakładek — działa
+       samodzielnie). Treść: okresy ważności kart (30/90 dni) i ogólne zasady prawne
+       (brak wymiany na gotówkę, brak łączenia z innymi promocjami, tylko nowi Klienci)
+       przeniesione 1:1 z żywego regulaminu na instytutem.pl/pakiet-powitalny-dla-nowych-klientow
+       — struktura tych zasad nie zależy od tego, czy nagroda to % rabatu czy kwota,
+       więc mimo że nasza mechanika (150 zł + 3×50 zł) różni się od tej na żywej stronie
+       (rabat do 50% + vouchery), same reguły prawne pozostają aktualne. Potwierdzone
+       z użytkownikiem przed dodaniem (AskUserQuestion), zamiast zgadywać. -->
+  <section class="section--cream section-pad" id="zasady">
+    <div class="container" data-reveal="slide">
+      <div class="treatment-intro-title-line">
+        <p class="eyebrow">Zasady promocji</p>
+        <div class="treatment-intro-divider"></div>
+      </div>
+      <div class="treatment-intro-grid">
+        <h2>Warunki Pakietu Powitalnego</h2>
+        <ul class="care-panel">
+          <li>Promocja dostępna wyłącznie dla nowych Klientów INSTYTUTem.™, którzy nie korzystali wcześniej z żadnego zabiegu w naszym salonie.</li>
+          <li>Bezpłatna dermokonsultacja obejmuje szczegółową analizę skóry z użyciem nowoczesnych narzędzi diagnostycznych oraz indywidualne rekomendacje zabiegowe (wartość regularna: 149 zł).</li>
+          <li>Karta podarunkowa o wartości 150 zł ważna jest 30 dni od dnia zrealizowania dermokonsultacji i dotyczy zabiegu w cenie regularnej.</li>
+          <li>3 karty podarunkowe po 50 zł dla znajomych ważne są 90 dni od daty Twojej pierwszej wizyty w salonie.</li>
+          <li>Pakiet Powitalny nie wymienia się na gotówkę, nie podlega zwrotowi oraz nie łączy się z innymi promocjami.</li>
+          <li>Promocja dotyczy tylko pojedynczego zabiegu w cenie regularnej.</li>
+          <li>Jeśli jesteś już Klientką lub Klientem INSTYTUTem.™, zgłoszenie może zostać zignorowane — pakiet jest przeznaczony wyłącznie dla nowych osób.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ — ten sam komponent .treatment-accordion co strony zabiegów, treść odpowiada
+       na pytania wynikające wprost z sekcji "Jak to działa" i "Zasady promocji" wyżej. -->
+  <section class="section--olive section-pad" id="faq">
+    <div class="container" data-reveal="slide">
+      <p class="eyebrow">FAQ</p>
+      <div class="treatment-intro-grid">
+        <h2>Najczęściej zadawane pytania</h2>
+        <div class="treatment-accordion">
+          <details>
+            <summary>
+              <h3 class="treatment-accordion-q">Kto może skorzystać z Pakietu Powitalnego?</h3>
+              <svg class="caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <div class="treatment-accordion-body">
+              <p class="lede">Promocja jest dostępna wyłącznie dla nowych Klientów INSTYTUTem.™, którzy nie korzystali wcześniej z żadnego zabiegu w naszym salonie.</p>
+            </div>
+          </details>
+          <details>
+            <summary>
+              <h3 class="treatment-accordion-q">Jak odebrać Pakiet Powitalny?</h3>
+              <svg class="caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <div class="treatment-accordion-body">
+              <p class="lede">Zarezerwuj termin bezpłatnej dermokonsultacji w INSTYTUTem.™. Po jej zrealizowaniu otrzymasz od nas kartę podarunkową o wartości 150 zł oraz 3 karty po 50 zł dla bliskich osób.</p>
+            </div>
+          </details>
+          <details>
+            <summary>
+              <h3 class="treatment-accordion-q">Na co mogę wykorzystać kartę 150 zł?</h3>
+              <svg class="caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <div class="treatment-accordion-body">
+              <p class="lede">Na realizację planu zabiegowego ułożonego podczas Twojej dermokonsultacji, w cenie regularnej zabiegu. Karta jest ważna 30 dni od dnia dermokonsultacji.</p>
+            </div>
+          </details>
+          <details>
+            <summary>
+              <h3 class="treatment-accordion-q">Jak działają karty dla znajomych?</h3>
+              <svg class="caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <div class="treatment-accordion-body">
+              <p class="lede">Każda z 3 kart o wartości 50 zł uprawnia osobę obdarowaną do zniżki na jej pierwszy zabieg w INSTYTUTem.™, ważnej przez 90 dni od Twojej pierwszej wizyty w salonie.</p>
+            </div>
+          </details>
+          <details>
+            <summary>
+              <h3 class="treatment-accordion-q">Czy Pakiet Powitalny można wymienić na gotówkę lub łączyć z innymi promocjami?</h3>
+              <svg class="caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <div class="treatment-accordion-body">
+              <p class="lede">Nie. Pakiet Powitalny nie wymienia się na gotówkę, nie podlega zwrotowi i nie łączy się z innymi promocjami — dotyczy tylko pojedynczego zabiegu w cenie regularnej.</p>
+            </div>
+          </details>
+          <details>
+            <summary>
+              <h3 class="treatment-accordion-q">Jestem już Klientką/Klientem INSTYTUTem.™ — czy mogę skorzystać?</h3>
+              <svg class="caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <div class="treatment-accordion-body">
+              <p class="lede">Pakiet Powitalny jest przeznaczony wyłącznie dla nowych Klientów — zgłoszenia obecnych Klientek i Klientów mogą zostać zignorowane.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA banner — ten sam komponent .cta-banner (parallax) i to samo zdjęcie, co na
+       stronach zabiegów, link prowadzi do tej samej realnej rezerwacji DERMOkonsultacji. -->
+  <section class="cta-banner">
+    <img class="cta-banner-image" src="../assets/images/treatments/postepowanie-cta-banner.jpg?v=2" alt="">
+    <div class="cta-banner-content" data-reveal="slide">
+      <h3 class="cta-banner-heading">Gotowa na pierwszy krok? Zarezerwuj bezpłatną dermokonsultację.</h3>
+      <a class="abtn outline-light magnetic-btn" href="https://www.fresha.com/pl/a/instytutem-tm-plock-1-maja-6-jrr27hgf/booking?offerItemId=s%3A24458471" target="_blank" rel="noopener">Umów konsultację</a>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="section--olive">
+    <div class="newsletter-box" data-reveal="slide">
+      <div class="newsletter-title">
+        <div class="eyebrow">Newsletter</div>
+        <p class="newsletter-heading">Bądź na bieżąco z nowościami i promocjami INSTYTUTem.™</p>
+      </div>
+
+      <form class="newsletter-form" id="newsletterForm" novalidate>
+        <label class="visually-hidden" for="newsletterEmail">Adres e-mail</label>
+        <input type="email" id="newsletterEmail" name="email" placeholder="Twój adres e-mail" required>
+        <button class="abtn primary-olive" type="submit">Zapisz się</button>
+      </form>
+      <p class="form-status" id="newsletterStatus" hidden></p>
+      <p class="form-note">Zapisz się, aby otrzymywać nowości, promocje i informacje o ofertach specjalnych INSTYTUTem.™<br>Zapisując się, akceptujesz naszą <a href="../polityka-prywatności">Politykę Prywatności</a>. Więcej o programie lojalnościowym przeczytasz <a href="../program-lojalnosciowy">tutaj</a>.</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER — te same pozycje i linki co menu w nagłówku, dane kontaktowe realne z instytutem.pl -->
+<footer class="site-footer section--cream" data-partial="../partials/footer.html?v=1" data-partial-root="../"></footer>
+
+<script src="../js/main.js?v=46"></script>
+</body>
+</html>
