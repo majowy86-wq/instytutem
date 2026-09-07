@@ -2197,8 +2197,15 @@ div[data-partial]{ display:contents; }
    justify-content:space-between (which only expects 3 children: badges,
    label, price). The individual .promo-badge's own margin-left:10px would
    double up with this wrapper's gap, so it's reset to 0 here. */
-.price-row-badges{ display:inline-flex; align-items:center; gap:8px; margin-left:10px; }
+.price-row-badges{ display:inline-flex; align-items:center; gap:8px; }
 .price-row-badges .promo-badge{ margin-left:0; }
+/* Runda 178: only the inline-in-<p> usage (laser-tulowy-plock's flat .price-row,
+   no automatic gap mechanism in text flow) needs its own left margin to clear
+   the preceding text. Inside .price-tier-label (Runda 179's use on the
+   depilacja-laserowa summary line) the parent is already display:flex with its
+   own gap — an extra margin here would double up with that gap (measured:
+   26px before the badges vs. 16px after, instead of an even 16px/16px). */
+p .price-row-badges{ margin-left:10px; }
 /* struck-through regular price next to the current, promotional one in a
    .price-row's price column — reuses the same de-emphasized gray/14px
    treatment already used for the row LABEL's own duration/description
