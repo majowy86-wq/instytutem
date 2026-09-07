@@ -17,7 +17,7 @@
   "@type": "Service",
   "name": "Laser tulowy LUMIVEX® (erbowo-szklany)",
   "serviceType": "Laser frakcyjny — regeneracja skóry",
-  "description": "Laser tulowy (erbowo-szklany) LUMIVEX® w Płocku – zaawansowana technologia laserowa klasy medycznej, o długości fali 1927 nm, pobudzająca skórę do regeneracji i produkcji kolagenu.",
+  "description": "Laser tulowy (erbowo-szklany) LUMIVEX® w Płocku – zaawansowana technologia laserowa klasy medycznej, o długości fali 1927 nm i 1550 nm, pobudzająca skórę do regeneracji i produkcji kolagenu.",
   "url": "https://www.instytutem.pl/laser-tulowy-plock",
   "provider": {
     "@type": "BeautySalon",
@@ -146,7 +146,7 @@
       <div class="treatment-intro-grid">
         <h2>Laser tulowy w Płocku – co to jest i na czym polega zabieg?</h2>
         <div>
-          <p class="lede">Laser tulowy (erbowo-szklany) to zaawansowana technologia laserowa klasy medycznej, działająca w warstwie naskórka i skóry właściwej bez uszkadzania jej powierzchni. Emitowane impulsy światła o długości fali 1927 nm tworzą mikroskopijne kanały, które aktywują procesy regeneracji i produkcję kolagenu. Efekt? Skóra staje się gładsza, bardziej napięta i rozświetlona już po pierwszym zabiegu.</p>
+          <p class="lede">Laser tulowy (erbowo-szklany) to zaawansowana technologia laserowa klasy medycznej, działająca w warstwie naskórka i skóry właściwej bez uszkadzania jej powierzchni. Emitowane impulsy światła o długości fali 1927 nm i 1550 nm tworzą mikroskopijne kanały, które aktywują procesy regeneracji i produkcję kolagenu. Efekt? Skóra staje się gładsza, bardziej napięta i rozświetlona już po pierwszym zabiegu.</p>
           <p class="lede" style="margin-top:1rem">Zabieg rozpoczyna się od dokładnego oczyszczenia i przygotowania skóry. Następnie, przy użyciu precyzyjnej głowicy lasera, energia światła przenika w głąb skóry, tworząc mikroskopijne kanały termiczne. W rezultacie dochodzi do intensywnej przebudowy kolagenu i elastyny, co prowadzi do poprawy napięcia i gęstości skóry oraz redukcji zmarszczek, blizn i przebarwień. Zabieg jest dobrze tolerowany i zwykle nie wymaga długiej rekonwalescencji.</p>
           <p class="lede" style="margin-top:1rem">Najlepsze rezultaty uzyskuje się po serii 3–4 zabiegów wykonywanych w odstępach 4–6 tygodni. Każda terapia poprzedzona jest dermokonsultacją w celu indywidualnego dobrania parametrów i obszaru zabiegowego.</p>
         </div>
@@ -235,7 +235,7 @@
               <svg class="caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </summary>
             <div class="treatment-accordion-body">
-              <p class="lede">Laser tulowy (erbowo-szklany) emituje impulsy światła o długości fali 1927 nm, które tworzą w skórze mikroskopijne kanały termiczne. Aktywują one naturalne procesy regeneracji i produkcję kolagenu, dzięki czemu skóra staje się gładsza, bardziej napięta i rozświetlona już po pierwszym zabiegu.</p>
+              <p class="lede">Laser tulowy (erbowo-szklany) emituje impulsy światła o długości fali 1927 nm i 1550 nm, które tworzą w skórze mikroskopijne kanały termiczne. Aktywują one naturalne procesy regeneracji i produkcję kolagenu, dzięki czemu skóra staje się gładsza, bardziej napięta i rozświetlona już po pierwszym zabiegu.</p>
             </div>
           </details>
           <details>
@@ -279,14 +279,64 @@
     </div>
   </section>
 
-  <!-- TECHNOLOGIA — sekcja OPCJONALNA (patrz proces w DOKUMENTACJA.md), świadomie pominięta
-       na tej stronie. Szablon (depilacja laserowa) miał tu treść o LightSheer® DUET™ podaną
-       wprost przez właściciela salonu (certyfikacja FDA/CE, liczba klientów, lata doświadczenia
-       zespołu — konkretne fakty). Dla lasera tulowego LUMIVEX® nie mamy takich samych,
-       zweryfikowanych faktów (tylko ogólny opis mechanizmu działania z żywej strony
-       instytutem.pl/laser-tulowy-plock, już wykorzystany w sekcji "Opis zabiegu" wyżej) —
-       zgodnie z zasadą "nie wymyślaj sztucznego odpowiednika" ta sekcja została pominięta
-       całkowicie, zamiast zapełniona niepotwierdzonymi liczbami/certyfikatami. -->
+  <!-- TECHNOLOGIA — sekcja dodana w Rundzie 183, wcześniej świadomie pominięta (patrz stary
+       komentarz w historii Gita/DOKUMENTACJA.md — brakowało zweryfikowanego źródła faktów o
+       LUMIVEX®, w przeciwieństwie do LightSheer® DUET™, który miał dane wprost od właściciela
+       salonu). Użytkownik wskazał realne źródło: oficjalna strona producenta/dystrybutora
+       urządzenia (attre.eu/produkt/lumivex/, WebFetch) — treść niżej to fakty stamtąd, nie
+       zmyślone liczby/certyfikaty. Struktura 1:1 reużywa komponent z Rundy 104 na stronie
+       depilacji laserowej (ten sam .tech-grid/.tech-item/.tech-trust-bar), bo to jedyny
+       istniejący wzorzec tego typu treści na stronie — zero nowych klas. Świadomie pominięte:
+       żadnej wzmianki o certyfikacji medycznej FDA/CE (źródło producenta jej dla LUMIVEX® nie
+       wymienia, w przeciwieństwie do LightSheer®) ani o liczbie klientów/lat doświadczenia
+       (to fakty specyficzne dla salonu, nie dla urządzenia — nie ma ich na stronie producenta).
+       Odkryta i naprawiona przy okazji niedokładność: reszta strony (opis zabiegu, FAQ, JSON-LD)
+       wspominała tylko "długość fali 1927 nm" — LUMIVEX® to w rzeczywistości laser DWÓCH
+       długości fali naraz (1927 nm Thulium + 1550 nm Er:Glass), co zresztą sama nazwa zabiegu
+       już sugerowała ("erbowo-szklany" = Er:Glass = 1550 nm, "tulowy" = Thulium = 1927 nm) —
+       3 miejsca zaktualizowane do "1927 nm i 1550 nm", żeby nie sprzeczały się z tą sekcją. -->
+  <section class="section--cream section-pad" id="technologia">
+    <div class="container" data-reveal="slide">
+      <div class="treatment-intro-title-line">
+        <p class="eyebrow">Technologia LUMIVEX®</p>
+        <div class="treatment-intro-divider"></div>
+      </div>
+      <div class="treatment-intro-grid">
+        <h2>LUMIVEX®. Dwie długości fali w jednym zabiegu.</h2>
+        <div>
+          <p class="lede">Laser tulowy w INSTYTUTem.™ wykonujemy na urządzeniu LUMIVEX® — nowoczesnym laserze frakcyjnym łączącym dwie sprawdzone technologie: 1927 nm (Thulium) i 1550 nm (Er:Glass). Synergia obu długości fali pozwala oddziaływać jednocześnie na powierzchnię skóry i jej głębsze warstwy, zapewniając wszechstronne efekty odmładzania, regeneracji i rewitalizacji.</p>
+        </div>
+      </div>
+      <div class="tech-grid">
+        <div class="tech-item">
+          <p class="eyebrow">Dualna długość fali</p>
+          <p class="treatment-accordion-q">1927 nm (Thulium) + 1550 nm (Er:Glass)</p>
+          <p class="lede">Dwie sprawdzone technologie połączone w jednym urządzeniu — jedna długość fali działa na powierzchni skóry, druga sięga jej głębszych warstw. Dzięki tej synergii zabieg jest skuteczny zarówno przy przebarwieniach i teksturze skóry, jak i przy głębszej przebudowie kolagenu.</p>
+        </div>
+        <div class="tech-item">
+          <p class="eyebrow">Dopasowana intensywność</p>
+          <p class="treatment-accordion-q">Trzy tryby pracy lasera</p>
+          <p class="lede">Tryb nieablacyjny działa termicznie w skórze właściwej, bez okresu rekonwalescencji — idealny do delikatnego odmładzania. Tryb subablacyjny obejmuje warstwę rogową naskórka i sprawdza się przy przebarwieniach. Tryb ablacyjny sięga najgłębiej, oferując najintensywniejszą przebudowę skóry przy bliznach i rozstępach.</p>
+        </div>
+        <div class="tech-item">
+          <p class="eyebrow">Precyzja zabiegu</p>
+          <p class="treatment-accordion-q">Inteligentne dozowanie energii</p>
+          <p class="lede">Urządzenie pozwala precyzyjnie kontrolować rozmiar plamki lasera oraz intensywność terapii, dobierając parametry indywidualnie do potrzeb Twojej skóry — od delikatnych zabiegów rewitalizacyjnych po intensywniejsze procedury regeneracyjne.</p>
+        </div>
+        <div class="tech-item">
+          <p class="eyebrow">Wszechstronność zabiegowa</p>
+          <p class="treatment-accordion-q">Głowica statyczna i roller</p>
+          <p class="lede">Głowica statyczna umożliwia precyzyjną pracę na twarzy i ciele — od delikatnej okolicy oczu po większe partie skóry. Dodatkowa głowica roller wspiera terapię wpływającą na kondycję skóry głowy.</p>
+        </div>
+      </div>
+      <div class="tech-trust-bar">
+        <span>Moc lasera: 15 W</span>
+        <span>Ośrodek czynny: Thulium (TUL)</span>
+        <span>Rozmiar plamki: 0–200 mikrometrów</span>
+        <span>Efekty widoczne już po pierwszej sesji</span>
+      </div>
+    </div>
+  </section>
 
   <!-- CENNIK (banner) — styl 1:1 z archon.au .split-1 ("ONE PRICE FOR ALL"), lustrzane
        odbicie sekcji promo powyżej (zdjęcie po lewej, tekst po prawej; siatka 2fr/1fr
