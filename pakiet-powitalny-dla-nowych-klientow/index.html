@@ -179,13 +179,19 @@
     </div>
   </section>
 
-  <!-- CTA banner — ten sam komponent .cta-banner (parallax) i to samo zdjęcie, co na
-       stronach zabiegów, link prowadzi do tej samej realnej rezerwacji DERMOkonsultacji. -->
+  <!-- CTA banner — ten sam komponent .cta-banner (parallax), ale dedykowane zdjęcie
+       (assets/images/treatments/pakiet-powitalny-cta.jpg, AI, Runda 173) zamiast
+       generycznego, współdzielonego postepowanie-cta-banner.jpg ze stron zabiegów —
+       kontynuuje narrację z hero (powitanie → sama dermokonsultacja), ten sam duet
+       kosmetolożka+klientka. .cta-banner-image celowo NIE ma ciemnego overlayu
+       (patrz CSS) — zdjęcie musi być samo w sobie wystarczająco ciemne/nastrojowe,
+       stąd prompt wprost wymuszał dużo cienia bez jasnych prześwietleń. Link
+       prowadzi do tej samej realnej rezerwacji DERMOkonsultacji. -->
   <section class="cta-banner">
-    <img class="cta-banner-image" src="../assets/images/treatments/postepowanie-cta-banner.jpg?v=2" alt="">
+    <img class="cta-banner-image" src="../assets/images/treatments/pakiet-powitalny-cta.jpg" alt="">
     <div class="cta-banner-content" data-reveal="slide">
-      <h3 class="cta-banner-heading">Gotowa na pierwszy krok? Zarezerwuj bezpłatną dermokonsultację.</h3>
-      <a class="abtn outline-light magnetic-btn" href="https://www.fresha.com/pl/a/instytutem-tm-plock-1-maja-6-jrr27hgf/booking?offerItemId=s%3A24458471" target="_blank" rel="noopener">Umów konsultację</a>
+      <h3 class="cta-banner-heading">Gotowa na pierwszy krok? Zarezerwuj swoją dermokonsultację.</h3>
+      <a class="abtn outline-light magnetic-btn" href="https://www.fresha.com/pl/a/instytutem-tm-plock-1-maja-6-jrr27hgf/booking?offerItemId=s%3A24458471" target="_blank" rel="noopener">Zarezerwuj termin</a>
     </div>
   </section>
 
