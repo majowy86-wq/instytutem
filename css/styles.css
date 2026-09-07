@@ -2594,8 +2594,18 @@ p .price-row-badges{ margin-left:10px; }
    wiersza a nie na dole czy po środku") below desktop's 991px breakpoint,
    where the row also stacks to one column per line: badge, then name, then
    price+button, always in that predictable order regardless of text length. */
-.price-row:has(.promo-badge){ justify-content:flex-start; }
-.price-row:has(.promo-badge) > :last-child{ margin-left:auto; }
+/* Runda 180: all the reordering rules below use :has(> .promo-badge) — DIRECT
+   child only — not the bare :has(.promo-badge) descendant match used by the
+   .price-old/.price-promo/rust-price rules above. Runda 177/178 introduced a
+   SECOND badge shape (.price-row-badges wrapper nested INSIDE the row's <p>,
+   after the name/duration text, on laser-tulowy-plock) that :has(.promo-badge)
+   would also match — but that shape already sits correctly via the row's
+   plain 2-child space-between layout (name-<p>, .price-row-buy), the same as
+   any badge-less row, so re-running this old shape's column-stacking at
+   ≤991px (built only for the OLD direct-child shape below) broke it: price
+   fully justified. */
+.price-row:has(> .promo-badge){ justify-content:flex-start; }
+.price-row:has(> .promo-badge) > :last-child{ margin-left:auto; }
 .price-row .promo-badge{ order:2; margin-left:0; }
 /* two shapes of row share this markup: [badge, name-<p>, .price-row-buy] when
    there's a booking button, or [badge, name-<p>, price-<p>] for the 2 combo
@@ -2603,12 +2613,12 @@ p .price-row-badges{ margin-left:10px; }
    of-type(2) only ever matches a SECOND <p>, so it's a no-op in the first
    shape (there's only one <p>) and correctly targets the price line in the
    second, without two separate rules needing to know which shape they're in. */
-.price-row:has(.promo-badge) > p:first-of-type{ order:1; }
-.price-row:has(.promo-badge) > p:nth-of-type(2){ order:3; }
-.price-row:has(.promo-badge) > .price-row-buy{ order:3; }
+.price-row:has(> .promo-badge) > p:first-of-type{ order:1; }
+.price-row:has(> .promo-badge) > p:nth-of-type(2){ order:3; }
+.price-row:has(> .promo-badge) > .price-row-buy{ order:3; }
 @media (max-width:991px){
-  .price-row:has(.promo-badge){ flex-direction:column; align-items:flex-start; row-gap:var(--sp-8); }
-  .price-row:has(.promo-badge) > :last-child{ margin-left:0; }
+  .price-row:has(> .promo-badge){ flex-direction:column; align-items:flex-start; row-gap:var(--sp-8); }
+  .price-row:has(> .promo-badge) > :last-child{ margin-left:0; }
   .price-row .promo-badge{ order:-1; }
 }
 @media (max-width:767px){
