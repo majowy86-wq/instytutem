@@ -2491,7 +2491,15 @@ p .price-row-badges{ margin-left:10px; }
   line-height:27.2px;
   color:var(--a-ink-warm);
 }
-.price-row p:first-child span{ color:var(--a-gray); font-size:14px; }
+/* :first-of-type (not :first-child) — a leading .promo-badge sibling (Round 140+
+   package rows, e.g. "Pakiet 10x Endermologia") pushes the label <p> to be the
+   row's 2nd child, so :first-child silently missed it (label text rendered full
+   ink-warm/16px instead of gray/14px, unnoticed until Round 193 flagged it on a
+   newly-built page — turned out to already be broken sitewide on every existing
+   promo-badge package row too). :first-of-type still correctly targets ONLY the
+   first <p> (the label) among .price-row's children regardless of what non-<p>
+   siblings precede it. */
+.price-row p:first-of-type span{ color:var(--a-gray); font-size:14px; }
 .price-row > :last-child{ flex:0 0 auto; }
 /* Round 159 (user: DERMOkonsultacja's real Fresha service description — "149 zł
    zaliczane na poczet zabiegu w ciągu 14 dni") — a short explanatory note tied
