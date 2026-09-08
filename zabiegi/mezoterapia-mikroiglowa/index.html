@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow"><!-- wersja robocza (GitHub Pages) — usunąć dopiero przy właściwym wdrożeniu na instytutem.pl, patrz CLAUDE.md -->
+<title>Mezoterapia Mikroigłowa Płock – Frakcyjne Mikronakłuwanie</title>
+<meta name="description" content="Mezoterapia mikroigłowa w Płocku – kontrolowane frakcyjne mikronakłuwanie z koktajlem witaminowym lub peptydami relaksującymi. Wygładzenie i ujędrnienie skóry twarzy. Cena od 599 zł.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/styles.css?v=178">
+<!-- TODO: favicon / logo mark asset not yet available -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Mezoterapia mikroigłowa",
+  "serviceType": "Mezoterapia mikroigłowa / frakcyjne mikronakłuwanie skóry",
+  "description": "Mezoterapia mikroigłowa w Płocku – kontrolowana metoda frakcyjnego mikronakłuwania naskórka, wtłaczająca zaawansowane koktajle substancji aktywnych w głąb tkanki.",
+  "url": "https://www.instytutem.pl/zabiegi/mezoterapia-mikroiglowa",
+  "provider": {
+    "@type": "BeautySalon",
+    "@id": "https://www.instytutem.pl/#business",
+    "name": "INSTYTUTem.™",
+    "image": "https://www.instytutem.pl/assets/images/instytutem-logo.svg",
+    "telephone": "+48737836092",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "ul. 1 Maja 6",
+      "postalCode": "09-402",
+      "addressLocality": "Płock",
+      "addressCountry": "PL"
+    }
+  },
+  "areaServed": {
+    "@type": "City",
+    "name": "Płock"
+  },
+  "offers": [
+    { "@type": "Offer", "name": "DERMOkonsultacja (twarz)", "price": "149", "priceCurrency": "PLN" },
+    { "@type": "Offer", "name": "Wizyta kontrolna", "price": "0", "priceCurrency": "PLN" },
+    { "@type": "Offer", "name": "Twarz", "price": "599", "priceCurrency": "PLN" },
+    { "@type": "Offer", "name": "BTSES Mimetic (redukcja zmarszczek mimicznych)", "price": "599", "priceCurrency": "PLN" }
+  ],
+  "review": [
+    {
+      "@type": "Review",
+      "author": { "@type": "Person", "name": "Magdalena Górska" },
+      "reviewRating": { "@type": "Rating", "ratingValue": "5" },
+      "reviewBody": "Szeroki wybór zabiegów, zabiegi dostosowane do potrzeb klientek, fachowa pomoc i porada ze strony pracowników, ceny adekwatne do jakości wykonywanych zabiegów, pełen profesjonalizm i przemiła obsługa, polecam w 100%!"
+    },
+    {
+      "@type": "Review",
+      "author": { "@type": "Person", "name": "Karolina Piotrowska" },
+      "reviewRating": { "@type": "Rating", "ratingValue": "5" },
+      "reviewBody": "Super obsługa, miła, dbająca o komfort klienta podczas zabiegu. Dodatkowo ogromna wiedza pracowników, która pozwala na udzielenie odpowiedzi na każde zadane pytanie. Polecam!"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<div class="progress-bar" aria-hidden="true"></div>
+
+<div data-partial="../../partials/header.html?v=2" data-partial-root="../../"></div>
+
+<main id="main" class="treatment-page">
+
+  <!-- HERO ZABIEGU — 1:1 komponent z szablonu. Pierwsza strona z kategorii „Zabiegi Manualne"
+       (nie „Zabiegi Iniekcyjne" — błędnie założone we wcześniejszym śledzeniu postępu, poprawione
+       tą rundą po sprawdzeniu realnej struktury `partials/header.html`: kategoria „Zabiegi
+       Iniekcyjne" ma dokładnie 9 pozycji i jest już KOMPLETNA, „Zabiegi Manualne" ma 4, nie 3).
+       `/zabiegi/mezoterapia-mikroiglowa` zwraca 404 na żywej instytutem.pl, zero linku w
+       nawigacji żywej strony (sprawdzone programowo na stronach `/zabiegi` i samego 404),
+       `WebSearch` nie znalazł dedykowanej podstrony — ten sam, rutynowy typ sytuacji URL co
+       ATR/PLLA/Nici PDO/Stymulatory tkankowe: zabieg nigdy nie dostał własnej podstrony, URL
+       zostaje nasz, bo nie ma do czego go poprawić. Realność potwierdzona w Fresha
+       (`s:24480642`, zakładka „Suchość, naczynka i głęboka regeneracja (dla twarzy)" w katalogu
+       `booking?allOffer=true`) — bogaty, autorski opis + 2 realne, nazwane warianty
+       (Twarz/BTSES Mimetic), oba 599 zł, jeden wspólny `offerItemId` (potwierdzony przechwyceniem
+       body mutacji `BookingFlow_ActionButtonPressed_Mutation` przy otwarciu modala usługi —
+       `catalogId` nie pojawia się w żadnym linku/URL na tej stronie Fresha, trzeba było go
+       wyciągnąć z network requestu). **Marka preparatu „BTSES Mimetic" zachowana** — ten sam
+       typ preparatu wybieranego przez klientkę co Lenisna®/Nucleofill/Cytocare (Runda 216/224),
+       nie nazwa sprzętu salonu. Treść Postępowania/Przeciwwskazań z niezależnych źródeł
+       (`WebSearch` — skyclinic.pl, mkestetic.pl i inne), ten sam wzorzec co ATR/PLLA. Zdjęcie:
+       reużyty istniejący plik karty galerii #treatments (mezoterapia-mikroiglowa.jpg) —
+       dedykowane zdjęcie AI do wygenerowania później (użytkownik zajmie się zdjęciami osobno). -->
+  <div class="treatment-hero-wrap">
+  <section class="treatment-hero">
+    <div class="treatment-hero-bg" style="background-image:url('../../assets/images/treatments/mezoterapia-mikroiglowa.jpg')" role="img" aria-label="Zabieg mezoterapii mikroigłowej — zbliżenie na czoło z widocznymi drobnymi zmarszczkami mimicznymi"></div>
+    <div class="container">
+      <div class="treatment-hero-inner" data-reveal="slide">
+      <div class="eyebrow">Mezoterapia Mikroigłowa</div>
+      <h1>Mezoterapia mikroigłowa w Płocku – frakcyjne mikronakłuwanie skóry</h1>
+      <p class="lede">Wyjątkowo skuteczna, kontrolowana metoda frakcyjnego mikronakłuwania naskórka, stymulująca naturalne mechanizmy obronne i naprawcze skóry. Poprzez powstałe mikrokanaliki w głąb tkanki wtłaczane są zaawansowane koktajle substancji aktywnych o natychmiastowym działaniu komórkowym — na sterylnych, jednorazowych kartridżach.</p>
+
+      <div class="treatment-hero-ctas">
+        <a class="abtn primary-black has-arrow" href="#cennik">Zobacz cennik<span class="down-arrow-wrap"><svg class="down-arrow" viewBox="0 0 15.5 11.5" aria-hidden="true"><path fill="currentColor" d="M15.44,5.46a.75.75,0,0,0-.16-.24l-5-5A.75.75,0,1,0,9.22,1.28L12.94,5H.75a.75.75,0,0,0,0,1.5H12.94L9.22,10.22a.75.75,0,1,0,1.06,1.06l5-5a.75.75,0,0,0,.16-.82Z"/></svg></span></a>
+        <a class="abtn primary-black" href="https://www.fresha.com/book-now/testem-xh2mr620/all-offer?share=true&amp;pId=602910" target="_blank" rel="noopener">Rezerwuj online</a>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="treatment-price-strip">
+    <div class="container treatment-price-strip-inner">
+      <div class="treatment-price-strip-row">
+        <p class="treatment-price-label">Cena już od:</p>
+        <div class="treatment-price-wrap">
+          <p class="treatment-price-giant">599</p>
+          <p class="treatment-price-suffix">zł</p>
+        </div>
+      </div>
+      <div class="treatment-financing-wrap">
+        <div class="treatment-financing-logo"><img src="../../assets/images/mediraty-logo.svg" alt=""></div>
+        <p class="treatment-financing">Dostępne dla tego zabiegu na recepcji w salonie</p>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="treatment-tabs">
+    <div class="container treatment-tabs-inner">
+      <a class="treatment-tab" href="#faq">FAQ</a>
+      <a class="treatment-tab" href="#wskazania">Wskazania</a>
+      <a class="treatment-tab" href="#cennik">Cennik</a>
+      <a class="treatment-tab" href="#postepowanie">Postępowanie</a>
+    </div>
+  </div>
+
+  <!-- OPIS ZABIEGU — treść real z opisu usługi w Fresha. Karty S/M/L z szablonu CELOWO
+       pominięte — cena zależy od NAZWANYCH WARIANTÓW (rodzaj koktajlu), nie od rozmiaru strefy —
+       ten sam wzorzec co ATR/PLLA/Stymulatory tkankowe. -->
+  <section class="section--cream section-pad">
+    <div class="container">
+      <div data-reveal="slide">
+      <div class="treatment-intro-title-line">
+        <p class="eyebrow">Zabiegi Manualne</p>
+        <div class="treatment-intro-divider"></div>
+      </div>
+      <div class="treatment-intro-grid">
+        <h2>Mezoterapia mikroigłowa w Płocku – jak działa i dla kogo jest ten zabieg?</h2>
+        <div>
+          <p class="lede">Mezoterapia mikroigłowa to wyjątkowo skuteczna, kontrolowana metoda frakcyjnego mikronakłuwania naskórka. Zabieg stymuluje naturalne mechanizmy obronne i naprawcze skóry, wyzwalając potężną produkcję nowego kolagenu i elastyny. Jednocześnie, poprzez powstałe mikrokanaliki, w głąb tkanki zostają wtłoczone zaawansowane koktajle substancji aktywnych o natychmiastowym działaniu komórkowym.</p>
+          <p class="lede" style="margin-top:1rem">W INSTYTUTem.™ pracujemy wyłącznie na sterylnych, jednorazowych kartridżach, dbając o najwyższe bezpieczeństwo. Do wyboru masz dwa warianty koktajlu — intensywną terapię frakcyjną całej twarzy ze spersonalizowanym koktajlem witaminowym, lub zabieg z koktajlem peptydów relaksujących, który działa jak bezinwazyjny botoks.</p>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROMOCJA — prawdziwy, jeden współdzielony partial (Runda 161), bez zmian per-zabieg. -->
+  <section class="section--olive" id="promo" data-partial="../../partials/pakiet-powitalny.html?v=5" data-partial-root="../../"></section>
+
+  <!-- TESTIMONIALS — ten sam komponent i te same realne opinie co na pozostałych stronach zabiegów. -->
+  <section class="section--cream section-pad testimonial-section" aria-label="Opinie klientów">
+    <div class="container" data-reveal="slide">
+      <h2 class="h-section">Opinie naszych Klientów</h2>
+
+      <div class="t-shell">
+        <button class="t-arrow t-arrow--prev" id="tPrev" type="button" aria-label="Poprzednia opinia">
+          <svg class="t-arrow-icon" viewBox="0 0 22 16" aria-hidden="true"><path d="M8 1 1 8l7 7M1 8h20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <div class="t-mask" id="tMask">
+          <div class="t-track" id="testimonialTrack">
+            <div class="t-slide" role="group" aria-roledescription="slajd" aria-label="1 z 2">
+              <blockquote>"Szeroki wybór zabiegów, zabiegi dostosowane do potrzeb klientek, fachowa pomoc i porada ze strony pracowników, ceny adekwatne do jakości wykonywanych zabiegów, pełen profesjonalizm i przemiła obsługa, polecam w 100%!"</blockquote>
+              <div class="testimonial-name">Magdalena Górska</div>
+              <div class="t-stars" aria-hidden="true"></div>
+            </div>
+            <div class="t-slide" role="group" aria-roledescription="slajd" aria-label="2 z 2">
+              <blockquote>"Super obsługa, miła, dbająca o komfort klienta podczas zabiegu. Dodatkowo ogromna wiedza pracowników, która pozwala na udzielenie odpowiedzi na każde zadane pytanie. Polecam!"</blockquote>
+              <div class="testimonial-name">Karolina Piotrowska</div>
+              <div class="t-stars" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+
+        <button class="t-arrow t-arrow--next" id="tNext" type="button" aria-label="Następna opinia">
+          <svg class="t-arrow-icon" viewBox="0 0 22 16" aria-hidden="true"><path d="M14 1l7 7-7 7M21 8H1" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <div class="t-dots" id="tDots" role="tablist" aria-label="Wybierz opinię"></div>
+
+      <div class="t-cta">
+        <a class="abtn outline-dark" href="https://www.google.com/search?q=instytutem&oq=instytutem+&aqs=chrome.0.69i59l2j69i60l6.3854j0j1&sourceid=chrome&ie=UTF-8#lrd=0x471c709c13cb9da7:0x14c59205a379dc9a,1,,," target="_blank" rel="noopener">Więcej Opinii</a>
+        <a class="abtn primary-olive" href="https://g.page/r/CZrceaMFksUUEB0/review" target="_blank" rel="noopener">Zostaw Opinię</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ — pytania zbudowane z realnych faktów z opisu usługi w Fresha + niezależnych źródeł
+       branżowych (WebSearch) o mezoterapii mikroigłowej/mikronakłuwaniu ogólnie — nie wymyślone. -->
+  <section class="section--olive section-pad" id="faq">
+    <div class="container" data-reveal="slide">
+      <p class="eyebrow">FAQ</p>
+      <div class="treatment-intro-grid">
+        <h2>Najczęściej zadawane pytania</h2>
+        <div class="treatment-accordion">
+          <details>
+            <summary>
+              <h3 class="treatment-accordion-q">Czym różnią się dwa dostępne warianty zabiegu?</h3>
+              <svg class="caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <div class="treatment-accordion-body">
+              <p class="lede">Wariant „Twarz" to intensywna terapia frakcyjna całej twarzy ze spersonalizowanym koktajlem witaminowym — głęboko ujędrnia, zagęszcza strukturę naskórka i przywraca zdrowy blask. Wariant „BTSES Mimetic" wykorzystuje koktajl z peptydami relaksującymi, który działa jak bezinwazyjny botoks — precyzyjnie rozluźnia napięcie mięśniowe i spłyca zmarszczki mimiczne wokół oczu i ust.</p>
+            </div>
+          </details>
+          <details>
+            <summary>
+              <h3 class="treatment-accordion-q">Jak przygotować się do zabiegu?</h3>
+              <svg class="caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <div class="treatment-accordion-body">
+              <p class="lede">Na 14 dni przed zabiegiem odstaw retinoidy i kwasy, a na 48 godzin przed zabiegiem zrezygnuj z alkoholu, żeby zminimalizować ryzyko siniaków. Zalecane jest też unikanie leków rozrzedzających krew przed zabiegiem.</p>
+            </div>
+          </details>
+          <details>
+            <summary>
+              <h3 class="treatment-accordion-q">Jak wygląda przebieg zabiegu?</h3>
+              <svg class="caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <div class="treatment-accordion-body">
+              <p class="lede">Zabieg zaczynamy od szczegółowej konsultacji, na której wykluczamy przeciwwskazania i oceniamy stan skóry. Specjalne urządzenie ze sterylnym, jednorazowym kartridżem nakłuwa skórę na głębokość dobraną indywidualnie do celu zabiegu, a przez powstałe mikrokanaliki wtłaczany jest wybrany koktajl aktywnych substancji. Na cały zabieg warto przeznaczyć około godziny.</p>
+            </div>
+          </details>
+          <details>
+            <summary>
+              <h3 class="treatment-accordion-q">Jak wygląda skóra bezpośrednio po zabiegu?</h3>
+              <svg class="caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <div class="treatment-accordion-body">
+              <p class="lede">Zaraz po zabiegu skóra jest zaczerwieniona, podobnie jak po długim dniu na słońcu, a u niektórych osób pojawia się niewielki obrzęk, zwłaszcza w okolicach policzków czy pod oczami. To normalny etap procesu naprawczego — rumień i obrzęk zwykle ustępują w ciągu 24–48 godzin.</p>
+            </div>
+          </details>
+          <details>
+            <summary>
+              <h3 class="treatment-accordion-q">Jak pielęgnować skórę po zabiegu?</h3>
+              <svg class="caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <div class="treatment-accordion-body">
+              <p class="lede">Przez pierwsze 24–48 godzin unikaj dotykania twarzy, makijażu i intensywnego wysiłku fizycznego. Stosuj łagodne oczyszczanie oraz kremy z ceramidami i SPF 50 — nawet w pochmurne dni. Przez co najmniej 2 tygodnie po zabiegu unikaj silnie działających składników aktywnych, takich jak retinoidy czy kwasy AHA/BHA.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECHNOLOGIA — treść real z opisu usługi w Fresha (frakcyjne mikronakłuwanie, sterylne
+       kartridże) + niezależnych źródeł branżowych o głębokości nakłuwania. 4 pozycje jako
+       komponent .tech-grid, ten sam wzorzec co Mezoterapia igłowa/Oczyszczanie Wodorowe. -->
+  <section class="section--cream section-pad" id="technologia">
+    <div class="container" data-reveal="slide">
+      <div class="treatment-intro-title-line">
+        <p class="eyebrow">Technologia</p>
+        <div class="treatment-intro-divider"></div>
+      </div>
+      <div class="treatment-intro-grid">
+        <h2>Kontrolowane, frakcyjne mikronakłuwanie.</h2>
+        <div>
+          <p class="lede">Specjalne urządzenie z jednorazowym, sterylnym kartridżem nakłuwa naskórek na precyzyjnie dobraną głębokość, tworząc mikrokanaliki, przez które w głąb tkanki wtłaczany jest wybrany koktajl aktywnych substancji.</p>
+        </div>
+      </div>
+      <div class="tech-grid">
+        <div class="tech-item">
+          <p class="eyebrow">Precyzja aplikacji</p>
+          <p class="treatment-accordion-q">Głębokość nakłuwania 0,2–2,5 mm</p>
+          <p class="lede">Kosmetolog dobiera głębokość nakłuwania indywidualnie, w zależności od celu zabiegu i obszaru zabiegowego.</p>
+        </div>
+        <div class="tech-item">
+          <p class="eyebrow">Bezpieczeństwo</p>
+          <p class="treatment-accordion-q">Sterylne, jednorazowe kartridże</p>
+          <p class="lede">Każdy zabieg wykonujemy na nowym, sterylnym kartridżu, gwarantując najwyższe bezpieczeństwo i higienę.</p>
+        </div>
+        <div class="tech-item">
+          <p class="eyebrow">Koktajl witaminowy</p>
+          <p class="treatment-accordion-q">Wariant „Twarz"</p>
+          <p class="lede">Spersonalizowany koktajl witaminowy głęboko ujędrnia, zagęszcza strukturę naskórka i przywraca cerze zdrowy blask.</p>
+        </div>
+        <div class="tech-item">
+          <p class="eyebrow">Peptydy relaksujące</p>
+          <p class="treatment-accordion-q">Wariant „BTSES Mimetic"</p>
+          <p class="lede">Koktajl z peptydami relaksującymi działa jak bezinwazyjny botoks — precyzyjnie rozluźnia napięcie mięśniowe i spłyca zmarszczki mimiczne.</p>
+        </div>
+      </div>
+      <div class="tech-trust-bar">
+        <span>Sterylne, jednorazowe kartridże</span>
+        <span>Zabieg trwa ok. godziny</span>
+        <span>2 warianty koktajlu do wyboru</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CENNIK (banner) — lustrzane odbicie sekcji promo. Zdjęcie TYMCZASOWO reużyte z hero tej
+       strony (ten sam wzorzec co inne strony przed dedykowanym zdjęciem AI, patrz PLAN.md) —
+       do podmiany na dedykowane. -->
+  <section class="section--cream">
+    <div class="treatment-split treatment-split--price">
+      <div class="treatment-split-image-wrapper">
+        <img class="treatment-split-image" src="../../assets/images/treatments/mezoterapia-mikroiglowa.jpg" alt="Zabieg mezoterapii mikroigłowej — zbliżenie na czoło z widocznymi drobnymi zmarszczkami mimicznymi">
+      </div>
+      <div class="treatment-split-content" data-reveal="slide">
+        <div class="treatment-split-top">
+          <div class="treatment-split-title-line">
+            <p class="eyebrow">Przejrzysty cennik</p>
+          </div>
+          <h2 class="treatment-split-heading">Jedna cena, dwa warianty koktajlu.</h2>
+          <p>Oba warianty zabiegu — Twarz i BTSES Mimetic — kosztują tyle samo, więc wybierasz wyłącznie na podstawie efektu, na którym Ci zależy, bez ukrytych kosztów i niespodzianek podczas płatności.</p>
+        </div>
+        <div class="treatment-split-footer">
+          <a class="treatment-card-cta" href="#cennik">
+            <span class="treatment-card-cta-title-wrap">
+              <span>Zobacz cennik</span>
+              <span class="treatment-card-cta-arrow"><svg viewBox="0 0 16 12" aria-hidden="true"><path d="M15,6H1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,11l5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,1l5,5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </span>
+            <span class="treatment-card-cta-underline"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WSKAZANIA — treść real z „Kluczowe efekty" opisu usługi w Fresha. -->
+  <section class="section--olive section-pad" id="wskazania">
+    <div class="container" data-reveal="slide">
+      <p class="eyebrow">Efekty zabiegu</p>
+      <h2 class="h-section">Ten zabieg pomoże, jeśli zależy Ci na:</h2>
+      <div class="treatment-benefits">
+        <div class="treatment-benefit"><span class="treatment-benefit-num">01</span><p class="lede">Wyraźnym wygładzeniu struktury skóry i redukcji drobnych zmarszczek</p></div>
+        <div class="treatment-benefit"><span class="treatment-benefit-num">02</span><p class="lede">Silnym zagęszczeniu, ujędrnieniu i poprawie elastyczności cery</p></div>
+        <div class="treatment-benefit"><span class="treatment-benefit-num">03</span><p class="lede">Głębokim odżywieniu, nawilżeniu i rozświetleniu skóry</p></div>
+        <div class="treatment-benefit"><span class="treatment-benefit-num">04</span><p class="lede">Rozluźnieniu napięcia mięśniowego i spłyceniu zmarszczek mimicznych (wariant BTSES Mimetic)</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CENNIK — ceny i czasy zweryfikowane bezpośrednio na żywym Fresha (usługa „Mezoterapia
+       mikroigłowa", `s:24480642`, przechwycone z body mutacji `BookingFlow_ActionButtonPressed_
+       Mutation` przy otwarciu modala usługi — Fresha nie ujawnia offerItemId w żadnym linku dla
+       tej usługi, inaczej niż przy większości pozostałych stron). Oba warianty (Twarz/BTSES
+       Mimetic) dzielą JEDEN wspólny offerItemId i mają identyczną cenę (599 zł). Konsultacje:
+       DERMOkonsultacja TWARZ — zabieg wyłącznie na twarz, offerItemId s:24458471. -->
+  <section class="section--cream section-pad" id="cennik">
+    <div class="container" data-reveal="slide">
+      <div class="treatment-intro-title-line">
+        <p class="eyebrow">Cennik</p>
+        <div class="treatment-intro-divider"></div>
+      </div>
+      <div class="treatment-intro-grid">
+        <h2>Ile kosztuje mezoterapia mikroigłowa w Płocku?</h2>
+        <div>
+          <p class="lede">Oba warianty koktajlu kosztują tyle samo. Poniżej sprawdzisz dokładny cennik.</p>
+        </div>
+      </div>
+
+      <div class="price-list treatment-accordion">
+        <details class="price-tier">
+          <summary>
+            <span class="price-tier-label">
+              <h3 class="treatment-accordion-q">Konsultacje</h3>
+              <span class="price-row-badges"><a class="promo-badge" href="../../pakiet-powitalny-dla-nowych-klientow">Pakiet Powitalny</a><span class="promo-badge">Promocja</span></span>
+              <span class="price-tier-badge">149 zł</span>
+            </span>
+            <svg class="caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </summary>
+          <div class="treatment-accordion-body">
+            <div class="price-tier-rows">
+              <div class="price-row"><p>DERMOkonsultacja (twarz) <span>· 35 min</span></p><span class="price-row-buy"><p><span class="price-promo">149 zł</span></p><a class="treatment-card-cta" href="https://www.fresha.com/pl/a/instytutem-tm-plock-1-maja-6-jrr27hgf/booking?offerItemId=s%3A24458471" target="_blank" rel="noopener"><span class="treatment-card-cta-title-wrap"><span>Zarezerwuj</span><span class="treatment-card-cta-arrow"><svg viewBox="0 0 16 12" aria-hidden="true"><path d="M15,6H1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,11l5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,1l5,5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span><span class="treatment-card-cta-underline"></span></a></span></div>
+              <p class="price-row-note"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2.3" y="6.8" width="11.4" height="6.7" rx="0.5" fill="none" stroke="currentColor" stroke-width="1.2"/><line x1="1.9" y1="6.8" x2="14.1" y2="6.8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><line x1="8" y1="6.8" x2="8" y2="13.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M8 6.8c-.3-2.1-1.6-3.4-2.7-3.1-1 .3-1.1 1.4-.2 2 .7.5 1.7.9 2.9 1.1Z" fill="none" stroke="currentColor" stroke-width="1"/><path d="M8 6.8c.3-2.1 1.6-3.4 2.7-3.1 1 .3 1.1 1.4.2 2-.7.5-1.7.9-2.9 1.1Z" fill="none" stroke="currentColor" stroke-width="1"/></svg>Prezent na start: jeśli po konsultacji zdecydujesz się na rekomendowany zabieg (w tym samym dniu lub w ciągu 14 dni), cała kwota 149 zł zostanie odliczona od jego ceny. Ekspercki plan opieki otrzymujesz w prezencie!</p>
+              <div class="price-row"><p>Wizyta kontrolna <span>· 15 min</span></p><p>0 zł</p></div>
+            </div>
+          </div>
+        </details>
+        <details class="price-tier">
+          <summary>
+            <span class="price-tier-label">
+              <h3 class="treatment-accordion-q">Zabieg</h3>
+              <span class="price-tier-badge">599 zł</span>
+            </span>
+            <svg class="caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </summary>
+          <div class="treatment-accordion-body">
+            <div class="price-tier-rows">
+              <div class="price-row"><p>Twarz <span>· 1 godz. i 5 min</span></p><span class="price-row-buy"><p>599 zł</p><a class="treatment-card-cta" href="https://www.fresha.com/pl/a/instytutem-tm-plock-1-maja-6-jrr27hgf/booking?offerItemId=s%3A24480642" target="_blank" rel="noopener"><span class="treatment-card-cta-title-wrap"><span>Zarezerwuj</span><span class="treatment-card-cta-arrow"><svg viewBox="0 0 16 12" aria-hidden="true"><path d="M15,6H1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,11l5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,1l5,5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span><span class="treatment-card-cta-underline"></span></a></span></div>
+              <div class="price-row"><p>BTSES Mimetic (redukcja zmarszczek mimicznych) <span>· 1 godz. i 5 min</span></p><span class="price-row-buy"><p>599 zł</p><a class="treatment-card-cta" href="https://www.fresha.com/pl/a/instytutem-tm-plock-1-maja-6-jrr27hgf/booking?offerItemId=s%3A24480642" target="_blank" rel="noopener"><span class="treatment-card-cta-title-wrap"><span>Zarezerwuj</span><span class="treatment-card-cta-arrow"><svg viewBox="0 0 16 12" aria-hidden="true"><path d="M15,6H1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,11l5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,1l5,5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span><span class="treatment-card-cta-underline"></span></a></span></div>
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- POSTĘPOWANIE ZABIEGOWE — brak treści źródłowej na żywej stronie (URL nigdy nie
+       istniał), fakty zebrane z niezależnych źródeł branżowych o mezoterapii mikroigłowej/
+       mikronakłuwaniu (WebSearch — skyclinic.pl, mkestetic.pl, cetaphil.pl i inne), ten sam
+       wzorzec co ATR/PLLA. -->
+  <section class="section--olive section-pad" id="postepowanie">
+    <div class="container" data-reveal="slide">
+      <p class="eyebrow">Zalecenia zabiegowe i przeciwwskazania</p>
+      <h2 class="h-section">Postępowanie przed i po zabiegu</h2>
+      <div class="care-tabs" role="tablist">
+        <button class="care-tab is-active" type="button" aria-controls="care-contra">Przeciwwskazania</button>
+        <button class="care-tab" type="button" aria-controls="care-prep">Przygotowanie do zabiegu</button>
+        <button class="care-tab" type="button" aria-controls="care-after">Postępowanie po zabiegu</button>
+      </div>
+      <ul class="care-panel" id="care-contra">
+        <li>Ciąża i okres karmienia piersią</li>
+        <li>Niektóre choroby autoimmunologiczne (np. bielactwo, stwardnienie rozsiane)</li>
+        <li>Choroba nowotworowa</li>
+        <li>Infekcje skórne (bakteryjne, wirusowe, grzybicze)</li>
+        <li>Aktywny trądzik</li>
+        <li>Tendencja do powstawania bliznowców</li>
+        <li>Małopłytkowość i inne zaburzenia krzepnięcia</li>
+        <li>Aktywna opryszczka</li>
+        <li>Problemy z kontrolą naczyń krwionośnych</li>
+      </ul>
+      <ul class="care-panel" id="care-prep" hidden>
+        <li>Na 14 dni przed zabiegiem odstaw retinoidy i kwasy.</li>
+        <li>Na 48 godzin przed zabiegiem zrezygnuj z alkoholu, żeby zminimalizować ryzyko siniaków.</li>
+        <li>Zalecane jest unikanie leków rozrzedzających krew przed zabiegiem.</li>
+      </ul>
+      <ul class="care-panel" id="care-after" hidden>
+        <li>Zaczerwienienie i niewielki obrzęk po zabiegu to normalny etap procesu naprawczego — zwykle ustępują w ciągu 24–48 godzin.</li>
+        <li>Przez pierwsze 24–48 godzin unikaj dotykania twarzy, makijażu i intensywnego wysiłku fizycznego.</li>
+        <li>Stosuj łagodne oczyszczanie oraz kremy z ceramidami i SPF 50 — nawet w pochmurne dni.</li>
+        <li>Przez co najmniej 2 tygodnie po zabiegu unikaj retinoidów i kwasów AHA/BHA.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CTA — heading NIE obiecuje „bezpłatnej" konsultacji (DERMOkonsultacja to 149 zł,
+       odliczane w ciągu 14 dni, nie darmowe od razu — ten sam wzorzec co na pozostałych
+       stronach zabiegów). Link do realnej rezerwacji DERMOkonsultacji (twarz). -->
+  <section class="cta-banner">
+    <img class="cta-banner-image" src="../../assets/images/treatments/postepowanie-cta-banner.jpg?v=2" alt="">
+    <div class="cta-banner-content" data-reveal="slide">
+      <h3 class="cta-banner-heading">Nie miałaś jeszcze mezoterapii mikroigłowej? Umów się na dermokonsultację.</h3>
+      <a class="abtn outline-light magnetic-btn" href="https://www.fresha.com/pl/a/instytutem-tm-plock-1-maja-6-jrr27hgf/booking?offerItemId=s%3A24458471" target="_blank" rel="noopener">Umów konsultację</a>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="section--olive">
+    <div class="newsletter-box" data-reveal="slide">
+      <div class="newsletter-title">
+        <div class="eyebrow">Newsletter</div>
+        <p class="newsletter-heading">Bądź na bieżąco z nowościami i promocjami INSTYTUTem.™</p>
+      </div>
+
+      <form class="newsletter-form" id="newsletterForm" novalidate>
+        <label class="visually-hidden" for="newsletterEmail">Adres e-mail</label>
+        <input type="email" id="newsletterEmail" name="email" placeholder="Twój adres e-mail" required>
+        <button class="abtn primary-olive" type="submit">Zapisz się</button>
+      </form>
+      <p class="form-status" id="newsletterStatus" hidden></p>
+      <p class="form-note">Zapisz się, aby otrzymywać nowości, promocje i informacje o ofertach specjalnych INSTYTUTem.™<br>Zapisując się, akceptujesz naszą <a href="../../polityka-prywatności">Politykę Prywatności</a>. Więcej o programie lojalnościowym przeczytasz <a href="../../program-lojalnosciowy">tutaj</a>.</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER — te same pozycje i linki co menu w nagłówku, dane kontaktowe realne z instytutem.pl -->
+<footer class="site-footer section--cream" data-partial="../../partials/footer.html?v=2" data-partial-root="../../"></footer>
+
+<script src="../../js/main.js?v=46"></script>
+</body>
+</html>
