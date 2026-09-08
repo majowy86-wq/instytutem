@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow"><!-- wersja robocza (GitHub Pages) — usunąć dopiero przy właściwym wdrożeniu na instytutem.pl, patrz CLAUDE.md -->
+<title>Lipoliza Iniekcyjna Płock – Redukcja Tkanki Tłuszczowej</title>
+<meta name="description" content="Lipoliza iniekcyjna w Płocku – nieinwazyjna redukcja miejscowych złogów tłuszczu i modelowanie sylwetki. Brzuch, uda, podbródek, ramiona. Cena od 399 zł.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/styles.css?v=178">
+<!-- TODO: favicon / logo mark asset not yet available -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Lipoliza iniekcyjna",
+  "serviceType": "Lipoliza iniekcyjna / redukcja miejscowej tkanki tłuszczowej",
+  "description": "Lipoliza iniekcyjna w Płocku – małoinwazyjny zabieg modelowania sylwetki polegający na precyzyjnym podaniu preparatu lipolitycznego bezpośrednio do tkanki tłuszczowej.",
+  "url": "https://www.instytutem.pl/zabiegi/lipoliza-iniekcyjna-plock",
+  "provider": {
+    "@type": "BeautySalon",
+    "@id": "https://www.instytutem.pl/#business",
+    "name": "INSTYTUTem.™",
+    "image": "https://www.instytutem.pl/assets/images/instytutem-logo.svg",
+    "telephone": "+48737836092",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "ul. 1 Maja 6",
+      "postalCode": "09-402",
+      "addressLocality": "Płock",
+      "addressCountry": "PL"
+    }
+  },
+  "areaServed": {
+    "@type": "City",
+    "name": "Płock"
+  },
+  "offers": [
+    { "@type": "Offer", "name": "DERMOkonsultacja (ciało)", "price": "149", "priceCurrency": "PLN" },
+    { "@type": "Offer", "name": "Wizyta kontrolna", "price": "0", "priceCurrency": "PLN" },
+    { "@type": "Offer", "name": "Inne części ciała (boczki / kolana)", "price": "399", "priceCurrency": "PLN" },
+    { "@type": "Offer", "name": "Podbródek", "price": "399", "priceCurrency": "PLN" },
+    { "@type": "Offer", "name": "Ramiona", "price": "699", "priceCurrency": "PLN" },
+    { "@type": "Offer", "name": "Brzuch", "price": "719", "priceCurrency": "PLN" },
+    { "@type": "Offer", "name": "Bryczesy", "price": "699", "priceCurrency": "PLN" },
+    { "@type": "Offer", "name": "Wewnętrzna część ud", "price": "699", "priceCurrency": "PLN" },
+    { "@type": "Offer", "name": "Wewnętrzna część ud + bryczesy", "price": "1099", "priceCurrency": "PLN" }
+  ],
+  "review": [
+    {
+      "@type": "Review",
+      "author": { "@type": "Person", "name": "Magdalena Górska" },
+      "reviewRating": { "@type": "Rating", "ratingValue": "5" },
+      "reviewBody": "Szeroki wybór zabiegów, zabiegi dostosowane do potrzeb klientek, fachowa pomoc i porada ze strony pracowników, ceny adekwatne do jakości wykonywanych zabiegów, pełen profesjonalizm i przemiła obsługa, polecam w 100%!"
+    },
+    {
+      "@type": "Review",
+      "author": { "@type": "Person", "name": "Karolina Piotrowska" },
+      "reviewRating": { "@type": "Rating", "ratingValue": "5" },
+      "reviewBody": "Super obsługa, miła, dbająca o komfort klienta podczas zabiegu. Dodatkowo ogromna wiedza pracowników, która pozwala na udzielenie odpowiedzi na każde zadane pytanie. Polecam!"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<div class="progress-bar" aria-hidden="true"></div>
+
+<div data-partial="../../partials/header.html?v=2" data-partial-root="../../"></div>
+
+<main id="main" class="treatment-page">
+
+  <!-- HERO ZABIEGU — 1:1 komponent z szablonu. `/zabiegi/lipoliza-iniekcyjna-plock` to REALNY
+       URL na żywej instytutem.pl (200, "Lipoliza iniekcyjna twarzy, brzucha, boczków Płock").
+       Treść zdobyta klikając 4 z 5 przycisków "POKAŻ" (Efekty/Technologia/Postępowanie/
+       Przeciwwskazania — Ceny pominięte celowo, ceny zawsze z Fresha), przez
+       chrome-devtools-mcp (`click` po realnym `uid` z `take_snapshot`) — plain JS `.click()`
+       na przyciskach nie triggerował frameworkowego handlera (ten sam problem co przy Kwasie
+       Hialuronowym, Runda 220). Sekcje "Efekty" I "Technologia" na żywej stronie okazały się
+       OBIE puste po rozwinięciu (ten sam błąd źródła co Kwas Hialuronowy) — ale tym razem oba
+       braki dało się uzupełnić realnymi faktami z opisu usługi w Fresha (zakładka "Nadmiar
+       tkanki tłuszczowej i modelowanie sylwetki", katalog booking?allOffer=true), która ma
+       swój własny, długi opis techniczny — inny przypadek niż Kwas Hialuronowy, gdzie Fresha
+       nie miała żadnego pasującego produktu w ogóle. REALNY KONFLIKT CEN: żywa strona podaje
+       "od 400 zł", Fresha realnie "od 399 zł" (`s:24470528`) — rozstrzygnięty na korzyść
+       Fresha, ten sam typ konfliktu co SkinPen®/Mezoterapia Igłowa. Wszystkie 7 nazwanych
+       wariantów (obszar ciała) dzieli JEDEN wspólny offerItemId. Zdjęcie: reużyty istniejący
+       plik karty galerii #treatments (lipoliza-iniekcyjna.jpg) — dedykowane zdjęcie AI do
+       wygenerowania później (użytkownik zajmie się zdjęciami osobno). -->
+  <div class="treatment-hero-wrap">
+  <section class="treatment-hero">
+    <div class="treatment-hero-bg" style="background-image:url('../../assets/images/treatments/lipoliza-iniekcyjna.jpg')" role="img" aria-label="Zabieg lipolizy iniekcyjnej — biodro i boczek"></div>
+    <div class="container">
+      <div class="treatment-hero-inner" data-reveal="slide">
+      <div class="eyebrow">Lipoliza Iniekcyjna</div>
+      <h1>Lipoliza iniekcyjna w Płocku – redukcja tkanki tłuszczowej</h1>
+      <p class="lede">Nieinwazyjny i bezpieczny sposób na pozbycie się miejscowych złogów tłuszczu opornych na dietę i ćwiczenia. Zabieg pozwala zmniejszyć obwód nawet o 4–6 centymetrów, redukując tkankę tłuszczową z brzucha, ud, ramion, kolan, pośladków, karku czy podbródka.</p>
+
+      <div class="treatment-hero-ctas">
+        <a class="abtn primary-black has-arrow" href="#cennik">Zobacz cennik<span class="down-arrow-wrap"><svg class="down-arrow" viewBox="0 0 15.5 11.5" aria-hidden="true"><path fill="currentColor" d="M15.44,5.46a.75.75,0,0,0-.16-.24l-5-5A.75.75,0,1,0,9.22,1.28L12.94,5H.75a.75.75,0,0,0,0,1.5H12.94L9.22,10.22a.75.75,0,1,0,1.06,1.06l5-5a.75.75,0,0,0,.16-.82Z"/></svg></span></a>
+        <a class="abtn primary-black" href="https://www.fresha.com/book-now/testem-xh2mr620/all-offer?share=true&amp;pId=602910" target="_blank" rel="noopener">Rezerwuj online</a>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="treatment-price-strip">
+    <div class="container treatment-price-strip-inner">
+      <div class="treatment-price-strip-row">
+        <p class="treatment-price-label">Cena już od:</p>
+        <div class="treatment-price-wrap">
+          <p class="treatment-price-giant">399</p>
+          <p class="treatment-price-suffix">zł</p>
+        </div>
+      </div>
+      <div class="treatment-financing-wrap">
+        <div class="treatment-financing-logo"><img src="../../assets/images/mediraty-logo.svg" alt=""></div>
+        <p class="treatment-financing">Dostępne dla tego zabiegu na recepcji w salonie</p>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="treatment-tabs">
+    <div class="container treatment-tabs-inner">
+      <a class="treatment-tab" href="#faq">FAQ</a>
+      <a class="treatment-tab" href="#wskazania">Wskazania</a>
+      <a class="treatment-tab" href="#cennik">Cennik</a>
+      <a class="treatment-tab" href="#postepowanie">Postępowanie</a>
+    </div>
+  </div>
+
+  <!-- OPIS ZABIEGU — treść real z instytutem.pl (akapit wstępny strony) + opisu usługi w
+       Fresha. Karty S/M/L z szablonu CELOWO pominięte — cena zależy od NAZWANYCH WARIANTÓW
+       (obszar zabiegowy), nie od rozmiaru strefy — ten sam wzorzec co ATR/PLLA/Mezoterapia. -->
+  <section class="section--cream section-pad">
+    <div class="container">
+      <div data-reveal="slide">
+      <div class="treatment-intro-title-line">
+        <p class="eyebrow">Zabiegi Iniekcyjne</p>
+        <div class="treatment-intro-divider"></div>
+      </div>
+      <div class="treatment-intro-grid">
+        <h2>Lipoliza iniekcyjna w Płocku – jak działa i dla kogo jest ten zabieg?</h2>
+        <div>
+          <p class="lede">Lipoliza iniekcyjna to małoinwazyjny zabieg modelowania sylwetki, polegający na precyzyjnym podaniu preparatu lipolitycznego bezpośrednio do tkanki tłuszczowej. To idealne rozwiązanie na miejscowe otłuszczenia, oporne na dietę i ćwiczenia — aktywne substancje rozpuszczają błony komórek tłuszczowych, zamieniając nagromadzony tłuszcz w emulsję, która jest naturalnie i bezpowrotnie usuwana z organizmu w procesach metabolicznych.</p>
+          <p class="lede" style="margin-top:1rem">Zabieg można wykonać nie tylko na brzuchu, ale i na podbródku, udach, ramionach, kolanach, pośladkach czy karku. Trwa zaledwie 20 minut i nie wymaga szczególnych przygotowań — pamiętaj jedynie, by przed zabiegiem nie pić kawy. Przed pierwszą wizytą zapraszamy na indywidualną konsultację, podczas której wspólnie ustalimy plan zabiegowy.</p>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROMOCJA — prawdziwy, jeden współdzielony partial (Runda 161), bez zmian per-zabieg. -->
+  <section class="section--olive" id="promo" data-partial="../../partials/pakiet-powitalny.html?v=5" data-partial-root="../../"></section>
+
+  <!-- TESTIMONIALS — ten sam komponent i te same realne opinie co na pozostałych stronach zabiegów. -->
+  <section class="section--cream section-pad testimonial-section" aria-label="Opinie klientów">
+    <div class="container" data-reveal="slide">
+      <h2 class="h-section">Opinie naszych Klientów</h2>
+
+      <div class="t-shell">
+        <button class="t-arrow t-arrow--prev" id="tPrev" type="button" aria-label="Poprzednia opinia">
+          <svg class="t-arrow-icon" viewBox="0 0 22 16" aria-hidden="true"><path d="M8 1 1 8l7 7M1 8h20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <div class="t-mask" id="tMask">
+          <div class="t-track" id="testimonialTrack">
+            <div class="t-slide" role="group" aria-roledescription="slajd" aria-label="1 z 2">
+              <blockquote>"Szeroki wybór zabiegów, zabiegi dostosowane do potrzeb klientek, fachowa pomoc i porada ze strony pracowników, ceny adekwatne do jakości wykonywanych zabiegów, pełen profesjonalizm i przemiła obsługa, polecam w 100%!"</blockquote>
+              <div class="testimonial-name">Magdalena Górska</div>
+              <div class="t-stars" aria-hidden="true"></div>
+            </div>
+            <div class="t-slide" role="group" aria-roledescription="slajd" aria-label="2 z 2">
+              <blockquote>"Super obsługa, miła, dbająca o komfort klienta podczas zabiegu. Dodatkowo ogromna wiedza pracowników, która pozwala na udzielenie odpowiedzi na każde zadane pytanie. Polecam!"</blockquote>
+              <div class="testimonial-name">Karolina Piotrowska</div>
+              <div class="t-stars" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+
+        <button class="t-arrow t-arrow--next" id="tNext" type="button" aria-label="Następna opinia">
+          <svg class="t-arrow-icon" viewBox="0 0 22 16" aria-hidden="true"><path d="M14 1l7 7-7 7M21 8H1" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <div class="t-dots" id="tDots" role="tablist" aria-label="Wybierz opinię"></div>
+
+      <div class="t-cta">
+        <a class="abtn outline-dark" href="https://www.google.com/search?q=instytutem&oq=instytutem+&aqs=chrome.0.69i59l2j69i60l6.3854j0j1&sourceid=chrome&ie=UTF-8#lrd=0x471c709c13cb9da7:0x14c59205a379dc9a,1,,," target="_blank" rel="noopener">Więcej Opinii</a>
+        <a class="abtn primary-olive" href="https://g.page/r/CZrceaMFksUUEB0/review" target="_blank" rel="noopener">Zostaw Opinię</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ — pytania zbudowane wyłącznie z realnych faktów pobranych z żywej strony
+       instytutem.pl (Postępowanie/Przeciwwskazania po "POKAŻ") oraz opisu usługi w Fresha —
+       nie wymyślone. -->
+  <section class="section--olive section-pad" id="faq">
+    <div class="container" data-reveal="slide">
+      <p class="eyebrow">FAQ</p>
+      <div class="treatment-intro-grid">
+        <h2>Najczęściej zadawane pytania</h2>
+        <div class="treatment-accordion">
+          <details>
+            <summary>
+              <h3 class="treatment-accordion-q">Jak przygotować się do zabiegu?</h3>
+              <svg class="caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <div class="treatment-accordion-body">
+              <p class="lede">Lipoliza iniekcyjna nie wymaga szczególnych przygotowań. Pamiętaj jedynie, by przed zabiegiem nie pić kawy. Przed pierwszym zabiegiem zapraszamy na indywidualną konsultację, podczas której ustalimy plan zabiegowy i porozmawiamy o spodziewanych efektach.</p>
+            </div>
+          </details>
+          <details>
+            <summary>
+              <h3 class="treatment-accordion-q">Jak wygląda przebieg zabiegu?</h3>
+              <svg class="caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <div class="treatment-accordion-body">
+              <p class="lede">Zabieg jest bardzo prosty, nieinwazyjny i bezpieczny — trwa zaledwie 20 minut. Kosmetolog dokładnie ogląda miejsce zabiegowe, a następnie wstrzykuje w komórki tłuszczowe preparat lipolityczny, który rozpuszcza błony komórek tłuszczowych i zamienia nagromadzony tłuszcz w emulsję, naturalnie usuwaną z organizmu.</p>
+            </div>
+          </details>
+          <details>
+            <summary>
+              <h3 class="treatment-accordion-q">Czy zabieg jest bezpieczny?</h3>
+              <svg class="caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <div class="treatment-accordion-body">
+              <p class="lede">Tak, to całkowicie bezpieczne. W miejscu zabiegowym powstaje celowo wywołany, kontrolowany stan zapalny, który pomaga wydalić z organizmu nadmiar tkanki tłuszczowej. Pracujemy wyłącznie na certyfikowanych preparatach najwyższej klasy.</p>
+            </div>
+          </details>
+          <details>
+            <summary>
+              <h3 class="treatment-accordion-q">Jakich efektów ubocznych można się spodziewać?</h3>
+              <svg class="caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <div class="treatment-accordion-body">
+              <p class="lede">Lipoliza iniekcyjna może wywołać lekkie zaczerwienienie, obrzęk oraz wrażliwość na dotyk w miejscu zabiegowym — to całkowicie normalne i nie ma powodów do niepokoju. Przez kilka dni możesz też odczuwać lekkie swędzenie i mrowienie, które ustępuje samoistnie.</p>
+            </div>
+          </details>
+          <details>
+            <summary>
+              <h3 class="treatment-accordion-q">Z czym warto łączyć lipolizę iniekcyjną?</h3>
+              <svg class="caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <div class="treatment-accordion-body">
+              <p class="lede">Najlepsze efekty daje w połączeniu z karboksyterapią oraz endermologią LPG® Alliance, która przyspiesza usuwanie uwolnionych metabolitów z organizmu.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECHNOLOGIA — sekcja "Technologia" na żywej stronie instytutem.pl okazała się PUSTA po
+       rozwinięciu (ten sam błąd źródła co Kwas Hialuronowy, Efekty, Runda 218/220) — ale w tym
+       przypadku Fresha ma swój własny, długi opis usługi (zakładka "Nadmiar tkanki tłuszczowej
+       i modelowanie sylwetki" w katalogu booking?allOffer=true), z którego pochodzą wszystkie
+       4 pozycje poniżej — realne fakty, nie wymyślone. Brak marki/nazwy konkretnego preparatu —
+       ani żywa strona, ani Fresha jej nie podają, więc nic tu nie jest ukrywane ani zgadywane. -->
+  <section class="section--cream section-pad" id="technologia">
+    <div class="container" data-reveal="slide">
+      <div class="treatment-intro-title-line">
+        <p class="eyebrow">Technologia</p>
+        <div class="treatment-intro-divider"></div>
+      </div>
+      <div class="treatment-intro-grid">
+        <h2>Preparat lipolityczny najwyższej klasy.</h2>
+        <div>
+          <p class="lede">Pracujemy wyłącznie na certyfikowanych preparatach lipolitycznych, precyzyjnie wstrzykiwanych bezpośrednio do tkanki tłuszczowej — dokładnie tam, gdzie są najbardziej potrzebne.</p>
+        </div>
+      </div>
+      <div class="tech-grid">
+        <div class="tech-item">
+          <p class="eyebrow">Precyzja aplikacji</p>
+          <p class="treatment-accordion-q">Iniekcja bezpośrednio do tkanki tłuszczowej</p>
+          <p class="lede">Preparat lipolityczny podawany jest precyzyjnie w miejsce zabiegowe, celując dokładnie w nagromadzone komórki tłuszczowe.</p>
+        </div>
+        <div class="tech-item">
+          <p class="eyebrow">Mechanizm działania</p>
+          <p class="treatment-accordion-q">Rozpuszczanie błon komórek tłuszczowych</p>
+          <p class="lede">Aktywne substancje rozpuszczają błony komórek tłuszczowych, zamieniając nagromadzony tłuszcz w emulsję, naturalnie i bezpowrotnie usuwaną z organizmu w procesach metabolicznych.</p>
+        </div>
+        <div class="tech-item">
+          <p class="eyebrow">Bezpieczeństwo</p>
+          <p class="treatment-accordion-q">Certyfikowane preparaty najwyższej klasy</p>
+          <p class="lede">W INSTYTUTem.™ pracujemy wyłącznie na certyfikowanych preparatach, gwarantując pełne bezpieczeństwo zabiegu.</p>
+        </div>
+        <div class="tech-item">
+          <p class="eyebrow">Terapia łączona</p>
+          <p class="treatment-accordion-q">Endermologia LPG® i karboksyterapia</p>
+          <p class="lede">Zabieg doskonale komponuje się w terapiach łączonych z endermologią LPG® Alliance, która przyspiesza usuwanie metabolitów, oraz z karboksyterapią.</p>
+        </div>
+      </div>
+      <div class="tech-trust-bar">
+        <span>Preparat podawany precyzyjnie</span>
+        <span>Zabieg trwa 20 minut</span>
+        <span>Efekt: redukcja obwodu nawet o 4–6 cm</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CENNIK (banner) — lustrzane odbicie sekcji promo. Zdjęcie TYMCZASOWO reużyte z hero tej
+       strony (ten sam wzorzec co inne strony przed dedykowanym zdjęciem AI, patrz PLAN.md) —
+       do podmiany na dedykowane. -->
+  <section class="section--cream">
+    <div class="treatment-split treatment-split--price">
+      <div class="treatment-split-image-wrapper">
+        <img class="treatment-split-image" src="../../assets/images/treatments/lipoliza-iniekcyjna.jpg" alt="Zabieg lipolizy iniekcyjnej — biodro i boczek">
+      </div>
+      <div class="treatment-split-content" data-reveal="slide">
+        <div class="treatment-split-top">
+          <div class="treatment-split-title-line">
+            <p class="eyebrow">Przejrzysty cennik</p>
+          </div>
+          <h2 class="treatment-split-heading">Proste ceny dopasowane do obszaru zabiegowego.</h2>
+          <p>Cennik dzieli się na obszar zabiegowy — podbródek, ramiona, brzuch, bryczesy, uda czy inne partie ciała — a cena i czas trwania są znane od razu, bez ukrytych kosztów i niespodzianek podczas płatności.</p>
+        </div>
+        <div class="treatment-split-footer">
+          <a class="treatment-card-cta" href="#cennik">
+            <span class="treatment-card-cta-title-wrap">
+              <span>Zobacz cennik</span>
+              <span class="treatment-card-cta-arrow"><svg viewBox="0 0 16 12" aria-hidden="true"><path d="M15,6H1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,11l5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,1l5,5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </span>
+            <span class="treatment-card-cta-underline"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WSKAZANIA — treść wyprowadzona z akapitu wstępnego żywej strony instytutem.pl oraz opisu
+       usługi w Fresha (sekcja "Efekty" na żywej stronie po rozwinięciu okazała się pusta, błąd
+       źródła, patrz komentarz przy hero). -->
+  <section class="section--olive section-pad" id="wskazania">
+    <div class="container" data-reveal="slide">
+      <p class="eyebrow">Efekty zabiegu</p>
+      <h2 class="h-section">Ten zabieg pomoże, jeśli zależy Ci na:</h2>
+      <div class="treatment-benefits">
+        <div class="treatment-benefit"><span class="treatment-benefit-num">01</span><p class="lede">Bezpowrotnej redukcji lokalnie nagromadzonych komórek tłuszczowych</p></div>
+        <div class="treatment-benefit"><span class="treatment-benefit-num">02</span><p class="lede">Wyraźnym zmniejszeniu obwodów nawet o 4–6 centymetrów</p></div>
+        <div class="treatment-benefit"><span class="treatment-benefit-num">03</span><p class="lede">Wymodelowaniu konturów twarzy (podbródek) oraz rzeźby sylwetki</p></div>
+        <div class="treatment-benefit"><span class="treatment-benefit-num">04</span><p class="lede">Redukcji tłuszczu z brzucha, ud, ramion, kolan, pośladków czy karku</p></div>
+        <div class="treatment-benefit"><span class="treatment-benefit-num">05</span><p class="lede">Wyszczupleniu partii ciała opornych na dietę i ćwiczenia</p></div>
+        <div class="treatment-benefit"><span class="treatment-benefit-num">06</span><p class="lede">Krótkim, 20-minutowym zabiegu bez długiej rekonwalescencji</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CENNIK — ceny i czasy zweryfikowane bezpośrednio na żywym Fresha (window.__NEXT_DATA__ +
+       zakładka katalogu, usługa "Lipoliza iniekcyjna", s:24470528) — REALNY KONFLIKT z żywą
+       stroną instytutem.pl (tam "od 400 zł", w Fresha realnie "od 399 zł") — rozstrzygnięty na
+       korzyść Fresha zgodnie z ustaloną zasadą źródła cen (ten sam typ konfliktu co SkinPen®/
+       Mezoterapia Igłowa). Wszystkie 7 wariantów dzieli JEDEN wspólny offerItemId. Konsultacja:
+       DERMOkonsultacja (CIAŁO) — to zabieg na ciało, nie twarz, ten sam wzorzec co Kriolipoliza/
+       Endermologia ciała, offerItemId s:24458504. -->
+  <section class="section--cream section-pad" id="cennik">
+    <div class="container" data-reveal="slide">
+      <div class="treatment-intro-title-line">
+        <p class="eyebrow">Cennik</p>
+        <div class="treatment-intro-divider"></div>
+      </div>
+      <div class="treatment-intro-grid">
+        <h2>Ile kosztuje lipoliza iniekcyjna w Płocku?</h2>
+        <div>
+          <p class="lede">Cena zależy od zabiegowej partii ciała. Poniżej sprawdzisz dokładny cennik.</p>
+        </div>
+      </div>
+
+      <div class="price-list treatment-accordion">
+        <details class="price-tier">
+          <summary>
+            <span class="price-tier-label">
+              <h3 class="treatment-accordion-q">Konsultacje</h3>
+              <span class="price-row-badges"><a class="promo-badge" href="../../pakiet-powitalny-dla-nowych-klientow">Pakiet Powitalny</a><span class="promo-badge">Promocja</span></span>
+              <span class="price-tier-badge">149 zł</span>
+            </span>
+            <svg class="caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </summary>
+          <div class="treatment-accordion-body">
+            <div class="price-tier-rows">
+              <div class="price-row"><p>DERMOkonsultacja (ciało) <span>· 35 min</span></p><span class="price-row-buy"><p><span class="price-promo">149 zł</span></p><a class="treatment-card-cta" href="https://www.fresha.com/pl/a/instytutem-tm-plock-1-maja-6-jrr27hgf/booking?offerItemId=s%3A24458504" target="_blank" rel="noopener"><span class="treatment-card-cta-title-wrap"><span>Zarezerwuj</span><span class="treatment-card-cta-arrow"><svg viewBox="0 0 16 12" aria-hidden="true"><path d="M15,6H1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,11l5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,1l5,5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span><span class="treatment-card-cta-underline"></span></a></span></div>
+              <p class="price-row-note"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2.3" y="6.8" width="11.4" height="6.7" rx="0.5" fill="none" stroke="currentColor" stroke-width="1.2"/><line x1="1.9" y1="6.8" x2="14.1" y2="6.8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><line x1="8" y1="6.8" x2="8" y2="13.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M8 6.8c-.3-2.1-1.6-3.4-2.7-3.1-1 .3-1.1 1.4-.2 2 .7.5 1.7.9 2.9 1.1Z" fill="none" stroke="currentColor" stroke-width="1"/><path d="M8 6.8c.3-2.1 1.6-3.4 2.7-3.1 1 .3 1.1 1.4.2 2-.7.5-1.7.9-2.9 1.1Z" fill="none" stroke="currentColor" stroke-width="1"/></svg>Prezent na start: jeśli po konsultacji zdecydujesz się na rekomendowany zabieg (w tym samym dniu lub w ciągu 14 dni), cała kwota 149 zł zostanie odliczona od jego ceny. Ekspercki plan opieki otrzymujesz w prezencie!</p>
+              <div class="price-row"><p>Wizyta kontrolna <span>· 15 min</span></p><p>0 zł</p></div>
+            </div>
+          </div>
+        </details>
+        <details class="price-tier">
+          <summary>
+            <span class="price-tier-label">
+              <h3 class="treatment-accordion-q">Zabieg</h3>
+              <span class="price-tier-badge">od 399 zł</span>
+            </span>
+            <svg class="caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </summary>
+          <div class="treatment-accordion-body">
+            <div class="price-tier-rows">
+              <div class="price-row"><p>Inne części ciała (boczki / kolana) <span>· 35 min</span></p><span class="price-row-buy"><p>od 399 zł</p><a class="treatment-card-cta" href="https://www.fresha.com/pl/a/instytutem-tm-plock-1-maja-6-jrr27hgf/booking?offerItemId=s%3A24470528" target="_blank" rel="noopener"><span class="treatment-card-cta-title-wrap"><span>Zarezerwuj</span><span class="treatment-card-cta-arrow"><svg viewBox="0 0 16 12" aria-hidden="true"><path d="M15,6H1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,11l5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,1l5,5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span><span class="treatment-card-cta-underline"></span></a></span></div>
+              <div class="price-row"><p>Podbródek <span>· 30 min</span></p><span class="price-row-buy"><p>399 zł</p><a class="treatment-card-cta" href="https://www.fresha.com/pl/a/instytutem-tm-plock-1-maja-6-jrr27hgf/booking?offerItemId=s%3A24470528" target="_blank" rel="noopener"><span class="treatment-card-cta-title-wrap"><span>Zarezerwuj</span><span class="treatment-card-cta-arrow"><svg viewBox="0 0 16 12" aria-hidden="true"><path d="M15,6H1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,11l5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,1l5,5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span><span class="treatment-card-cta-underline"></span></a></span></div>
+              <div class="price-row"><p>Ramiona <span>· 35 min</span></p><span class="price-row-buy"><p>699 zł</p><a class="treatment-card-cta" href="https://www.fresha.com/pl/a/instytutem-tm-plock-1-maja-6-jrr27hgf/booking?offerItemId=s%3A24470528" target="_blank" rel="noopener"><span class="treatment-card-cta-title-wrap"><span>Zarezerwuj</span><span class="treatment-card-cta-arrow"><svg viewBox="0 0 16 12" aria-hidden="true"><path d="M15,6H1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,11l5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,1l5,5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span><span class="treatment-card-cta-underline"></span></a></span></div>
+              <div class="price-row"><p>Brzuch <span>· 35 min</span></p><span class="price-row-buy"><p>719 zł</p><a class="treatment-card-cta" href="https://www.fresha.com/pl/a/instytutem-tm-plock-1-maja-6-jrr27hgf/booking?offerItemId=s%3A24470528" target="_blank" rel="noopener"><span class="treatment-card-cta-title-wrap"><span>Zarezerwuj</span><span class="treatment-card-cta-arrow"><svg viewBox="0 0 16 12" aria-hidden="true"><path d="M15,6H1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,11l5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,1l5,5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span><span class="treatment-card-cta-underline"></span></a></span></div>
+              <div class="price-row"><p>Bryczesy <span>· 35 min</span></p><span class="price-row-buy"><p>699 zł</p><a class="treatment-card-cta" href="https://www.fresha.com/pl/a/instytutem-tm-plock-1-maja-6-jrr27hgf/booking?offerItemId=s%3A24470528" target="_blank" rel="noopener"><span class="treatment-card-cta-title-wrap"><span>Zarezerwuj</span><span class="treatment-card-cta-arrow"><svg viewBox="0 0 16 12" aria-hidden="true"><path d="M15,6H1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,11l5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,1l5,5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span><span class="treatment-card-cta-underline"></span></a></span></div>
+              <div class="price-row"><p>Wewnętrzna część ud <span>· 35 min</span></p><span class="price-row-buy"><p>699 zł</p><a class="treatment-card-cta" href="https://www.fresha.com/pl/a/instytutem-tm-plock-1-maja-6-jrr27hgf/booking?offerItemId=s%3A24470528" target="_blank" rel="noopener"><span class="treatment-card-cta-title-wrap"><span>Zarezerwuj</span><span class="treatment-card-cta-arrow"><svg viewBox="0 0 16 12" aria-hidden="true"><path d="M15,6H1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,11l5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,1l5,5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span><span class="treatment-card-cta-underline"></span></a></span></div>
+              <div class="price-row"><p>Wewnętrzna część ud + bryczesy <span>· 50 min</span></p><span class="price-row-buy"><p>1099 zł</p><a class="treatment-card-cta" href="https://www.fresha.com/pl/a/instytutem-tm-plock-1-maja-6-jrr27hgf/booking?offerItemId=s%3A24470528" target="_blank" rel="noopener"><span class="treatment-card-cta-title-wrap"><span>Zarezerwuj</span><span class="treatment-card-cta-arrow"><svg viewBox="0 0 16 12" aria-hidden="true"><path d="M15,6H1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,11l5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,1l5,5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span><span class="treatment-card-cta-underline"></span></a></span></div>
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- POSTĘPOWANIE ZABIEGOWE — treść real z żywej strony instytutem.pl (sekcje
+       "Przeciwwskazania" i "Postępowanie zabiegowe" po kliknięciu "POKAŻ"). -->
+  <section class="section--olive section-pad" id="postepowanie">
+    <div class="container" data-reveal="slide">
+      <p class="eyebrow">Zalecenia zabiegowe i przeciwwskazania</p>
+      <h2 class="h-section">Postępowanie przed i po zabiegu</h2>
+      <div class="care-tabs" role="tablist">
+        <button class="care-tab is-active" type="button" aria-controls="care-contra">Przeciwwskazania</button>
+        <button class="care-tab" type="button" aria-controls="care-prep">Przygotowanie do zabiegu</button>
+        <button class="care-tab" type="button" aria-controls="care-after">Postępowanie po zabiegu</button>
+      </div>
+      <ul class="care-panel" id="care-contra">
+        <li>Aktywna alergia skórna przejawiająca się stanem zapalnym skóry</li>
+        <li>Stany zapalne organizmu, np. grypa</li>
+        <li>Infekcje skórne (bakteryjne, wirusowe, grzybicze)</li>
+        <li>Tatuaż w miejscu, które ma być poddane zabiegowi</li>
+        <li>Nadmierne spożywanie alkoholu</li>
+        <li>Nowotwory</li>
+        <li>Padaczka</li>
+        <li>Łuszczyca, liszaj, bielactwo</li>
+        <li>Choroba Raynauda (napadowy skurcz tętnic w obrębie kończyn)</li>
+        <li>Krioglobulinemia</li>
+        <li>Hemofilia</li>
+        <li>Cukrzyca</li>
+        <li>Zaburzenia krzepnięcia krwi</li>
+        <li>Choroby nerek i wątroby</li>
+        <li>Zaburzenia hormonalne</li>
+        <li>Choroby serca, wszczepiony rozrusznik serca</li>
+        <li>Nadczynność i niedoczynność tarczycy</li>
+        <li>Miesiączka (w przypadku wykonywania zabiegu na brzuch)</li>
+        <li>Ciąża, karmienie piersią</li>
+      </ul>
+      <ul class="care-panel" id="care-prep" hidden>
+        <li>Lipoliza iniekcyjna nie wymaga szczególnych przygotowań.</li>
+        <li>Przed zabiegiem nie pij kawy.</li>
+        <li>Przed pierwszym zabiegiem odbywa się indywidualna konsultacja, podczas której ustalamy plan zabiegowy i rozmawiamy o spodziewanych efektach.</li>
+      </ul>
+      <ul class="care-panel" id="care-after" hidden>
+        <li>Lekkie zaczerwienienie, obrzęk i wrażliwość na dotyk w miejscu zabiegowym to normalne objawy.</li>
+        <li>Przez kilka dni po zabiegu możesz odczuwać lekkie swędzenie i mrowienie — to tymczasowe i powinno ustąpić samoistnie.</li>
+        <li>Jeśli zauważysz niepokojące objawy, skontaktuj się z nami — jesteśmy po to, żeby pomóc.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CTA — heading NIE obiecuje "bezpłatnej" konsultacji (DERMOkonsultacja to 149 zł,
+       odliczane w ciągu 14 dni, nie darmowe od razu — ten sam wzorzec co na pozostałych
+       stronach zabiegów). Link do realnej rezerwacji DERMOkonsultacji (ciało). -->
+  <section class="cta-banner">
+    <img class="cta-banner-image" src="../../assets/images/treatments/postepowanie-cta-banner.jpg?v=2" alt="">
+    <div class="cta-banner-content" data-reveal="slide">
+      <h3 class="cta-banner-heading">Nie miałaś jeszcze lipolizy iniekcyjnej? Umów się na dermokonsultację.</h3>
+      <a class="abtn outline-light magnetic-btn" href="https://www.fresha.com/pl/a/instytutem-tm-plock-1-maja-6-jrr27hgf/booking?offerItemId=s%3A24458504" target="_blank" rel="noopener">Umów konsultację</a>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="section--olive">
+    <div class="newsletter-box" data-reveal="slide">
+      <div class="newsletter-title">
+        <div class="eyebrow">Newsletter</div>
+        <p class="newsletter-heading">Bądź na bieżąco z nowościami i promocjami INSTYTUTem.™</p>
+      </div>
+
+      <form class="newsletter-form" id="newsletterForm" novalidate>
+        <label class="visually-hidden" for="newsletterEmail">Adres e-mail</label>
+        <input type="email" id="newsletterEmail" name="email" placeholder="Twój adres e-mail" required>
+        <button class="abtn primary-olive" type="submit">Zapisz się</button>
+      </form>
+      <p class="form-status" id="newsletterStatus" hidden></p>
+      <p class="form-note">Zapisz się, aby otrzymywać nowości, promocje i informacje o ofertach specjalnych INSTYTUTem.™<br>Zapisując się, akceptujesz naszą <a href="../../polityka-prywatności">Politykę Prywatności</a>. Więcej o programie lojalnościowym przeczytasz <a href="../../program-lojalnosciowy">tutaj</a>.</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER — te same pozycje i linki co menu w nagłówku, dane kontaktowe realne z instytutem.pl -->
+<footer class="site-footer section--cream" data-partial="../../partials/footer.html?v=2" data-partial-root="../../"></footer>
+
+<script src="../../js/main.js?v=46"></script>
+</body>
+</html>
