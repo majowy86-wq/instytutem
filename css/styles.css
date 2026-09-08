@@ -2199,6 +2199,17 @@ div[data-partial]{ display:contents; }
    double up with this wrapper's gap, so it's reset to 0 here. */
 .price-row-badges{ display:inline-flex; align-items:center; gap:8px; }
 .price-row-badges .promo-badge{ margin-left:0; }
+/* Runda 184 (user: "te plakietki zrób w widoku mobilnym nad nazwą kategorii") —
+   on .price-tier-label (the "Konsultacje" summary row), badges + h3 + price
+   all fighting for one nowrap-ish row got cramped on narrow phones. flex-wrap
+   + order:-1 + flex-basis:100% forces .price-row-badges onto its own full-width
+   line FIRST; the title (already flex-grow:1) and price badge then continue
+   together on the next line, keeping their usual name-left/price-right layout
+   — same breakpoint as the rest of the page's other mobile reflows (767px). */
+@media (max-width:767px){
+  .price-tier-label{ flex-wrap:wrap; row-gap:8px; }
+  .price-tier-label > .price-row-badges{ order:-1; flex-basis:100%; }
+}
 /* Runda 178: only the inline-in-<p> usage (laser-tulowy-plock's flat .price-row,
    no automatic gap mechanism in text flow) needs its own left margin to clear
    the preceding text. Inside .price-tier-label (Runda 179's use on the
