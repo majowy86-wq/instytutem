@@ -83,8 +83,13 @@
        publicznego katalogu Fresha (przeszukano programowo WSZYSTKIE 37 pozycji __NEXT_DATA__
        — zero dopasowania) — realna nazwa, opis i ceny podane BEZPOŚREDNIO przez użytkownika
        (właściciela salonu) ze zrzutu ekranu panelu administracyjnego Fresha (widok edycji
-       usługi, jeszcze przed publikacją/rezerwacją online — stąd brak linku rezerwacji w
-       cenniku niżej, żaden nie wymyślony). Realna nazwa to "Lumiderm® PLASMA™" (marka
+       usługi, w momencie zbierania treści jeszcze przed publikacją/rezerwacją online).
+       AKTUALIZACJA (Runda 208): usługa została opublikowana w publicznym katalogu Fresha —
+       realny, wspólny `offerItemId=s:24470227` dla wszystkich 5 wariantów znaleziony
+       bezpośrednio w GraphQL odpowiedzi widżetu rezerwacji (przechwycone przez monkey-patch
+       `window.fetch` w konsoli, bo dane nie trafiają do `window.__NEXT_DATA__` na stronie
+       profilu — inny mechanizm ładowania danych niż reszta katalogu). Wszystkie 5 wierszy
+       cennika ma teraz przycisk "Zarezerwuj". Realna nazwa to "Lumiderm® PLASMA™" (marka
        urządzenia + rodzaj zabiegu), szersza niż nasza dotychczasowa etykieta menu "Plasma™"
        (celowo NIE zmieniona w menu — krótka, rozpoznawalna, wystarczająca jako nazwa
        kategorii). Zdjęcie: reużyty istniejący plik karty galerii #treatments (plasma.jpg,
@@ -357,11 +362,12 @@
   </section>
 
   <!-- CENNIK — realne dane wprost z panelu administracyjnego Fresha (dostarczone przez
-       użytkownika, patrz komentarz przy hero) — usługa jeszcze nie opublikowana w publicznym
-       katalogu Fresha (przeszukano programowo wszystkie 37 pozycji __NEXT_DATA__ — zero
-       dopasowania), więc ŻADEN wiersz nie ma przycisku "Zarezerwuj" — nie wymyślono żadnego
-       linku rezerwacji, ten sam uczciwy wzorzec co przy innych pozycjach bez realnego CTA.
-       Odnotowane w PLAN.md jako TODO dla właściciela salonu (dodać publiczną rezerwację). -->
+       użytkownika, patrz komentarz przy hero). Usługa opublikowana w publicznym katalogu
+       Fresha po zbudowaniu strony (Runda 208) — wszystkie 5 wierszy dzieli JEDEN wspólny
+       `offerItemId=s:24470227` (ten sam catalogId dla wszystkich wariantów, ten sam wzorzec
+       co np. S/M/L depilacji laserowej), przechwycony bezpośrednio z GraphQL widżetu
+       rezerwacji (nie z `__NEXT_DATA__` strony profilu, gdzie dane tej usługi się nie
+       pojawiają — inny, opóźniony mechanizm cache/ładowania). -->
   <section class="section--cream section-pad" id="cennik">
     <div class="container" data-reveal="slide">
       <div class="treatment-intro-title-line">
@@ -403,11 +409,11 @@
           </summary>
           <div class="treatment-accordion-body">
             <div class="price-tier-rows">
-              <div class="price-row"><p>Usuwanie zmian skórnych (włókniaki / brodawki) <span>· 35 min</span></p><p>od 249 zł</p></div>
-              <div class="price-row"><p>Kurze łapki <span>· 50 min</span></p><p>799 zł</p></div>
-              <div class="price-row"><p>Powieki górne <span>· 50 min</span></p><p>799 zł</p></div>
-              <div class="price-row"><p>Powieki dolne <span>· 50 min</span></p><p>799 zł</p></div>
-              <div class="price-row"><p>Cała okolica oczu (Total Eye Lift) <span>· 1 godz. i 5 min</span></p><p>1499 zł</p></div>
+              <div class="price-row"><p>Usuwanie zmian skórnych (włókniaki / brodawki) <span>· 35 min</span></p><span class="price-row-buy"><p>od 249 zł</p><a class="treatment-card-cta" href="https://www.fresha.com/pl/a/instytutem-tm-plock-1-maja-6-jrr27hgf/booking?offerItemId=s%3A24470227" target="_blank" rel="noopener"><span class="treatment-card-cta-title-wrap"><span>Zarezerwuj</span><span class="treatment-card-cta-arrow"><svg viewBox="0 0 16 12" aria-hidden="true"><path d="M15,6H1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,11l5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,1l5,5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span><span class="treatment-card-cta-underline"></span></a></span></div>
+              <div class="price-row"><p>Kurze łapki <span>· 50 min</span></p><span class="price-row-buy"><p>799 zł</p><a class="treatment-card-cta" href="https://www.fresha.com/pl/a/instytutem-tm-plock-1-maja-6-jrr27hgf/booking?offerItemId=s%3A24470227" target="_blank" rel="noopener"><span class="treatment-card-cta-title-wrap"><span>Zarezerwuj</span><span class="treatment-card-cta-arrow"><svg viewBox="0 0 16 12" aria-hidden="true"><path d="M15,6H1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,11l5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,1l5,5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span><span class="treatment-card-cta-underline"></span></a></span></div>
+              <div class="price-row"><p>Powieki górne <span>· 50 min</span></p><span class="price-row-buy"><p>799 zł</p><a class="treatment-card-cta" href="https://www.fresha.com/pl/a/instytutem-tm-plock-1-maja-6-jrr27hgf/booking?offerItemId=s%3A24470227" target="_blank" rel="noopener"><span class="treatment-card-cta-title-wrap"><span>Zarezerwuj</span><span class="treatment-card-cta-arrow"><svg viewBox="0 0 16 12" aria-hidden="true"><path d="M15,6H1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,11l5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,1l5,5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span><span class="treatment-card-cta-underline"></span></a></span></div>
+              <div class="price-row"><p>Powieki dolne <span>· 50 min</span></p><span class="price-row-buy"><p>799 zł</p><a class="treatment-card-cta" href="https://www.fresha.com/pl/a/instytutem-tm-plock-1-maja-6-jrr27hgf/booking?offerItemId=s%3A24470227" target="_blank" rel="noopener"><span class="treatment-card-cta-title-wrap"><span>Zarezerwuj</span><span class="treatment-card-cta-arrow"><svg viewBox="0 0 16 12" aria-hidden="true"><path d="M15,6H1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,11l5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,1l5,5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span><span class="treatment-card-cta-underline"></span></a></span></div>
+              <div class="price-row"><p>Cała okolica oczu (Total Eye Lift) <span>· 1 godz. i 5 min</span></p><span class="price-row-buy"><p>1499 zł</p><a class="treatment-card-cta" href="https://www.fresha.com/pl/a/instytutem-tm-plock-1-maja-6-jrr27hgf/booking?offerItemId=s%3A24470227" target="_blank" rel="noopener"><span class="treatment-card-cta-title-wrap"><span>Zarezerwuj</span><span class="treatment-card-cta-arrow"><svg viewBox="0 0 16 12" aria-hidden="true"><path d="M15,6H1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,11l5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,1l5,5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span><span class="treatment-card-cta-underline"></span></a></span></div>
             </div>
           </div>
         </details>
