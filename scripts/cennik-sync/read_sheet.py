@@ -16,12 +16,35 @@ SHEET_ID = "1XNXfThupDPVX6UVDJ6JCsfsSa9_JTEHa2OkhSEuhNzo"
 TAB_NAME = "Cennik — wszystkie zabiegi"
 
 
-def get_worksheet():
+STATUS_TAB_NAME = "Status"
+
+
+def _get_spreadsheet():
     scopes = ["https://www.googleapis.com/auth/spreadsheets"]
     creds = Credentials.from_service_account_file(str(CREDS_PATH), scopes=scopes)
     gc = gspread.authorize(creds)
-    sh = gc.open_by_key(SHEET_ID)
-    return sh.worksheet(TAB_NAME)
+    return gc.open_by_key(SHEET_ID)
+
+
+def get_worksheet():
+    return _get_spreadsheet().worksheet(TAB_NAME)
+
+
+def write_status(result_line: str, detail_lines: list):
+    """Zapisuje krótkie podsumowanie ostatniego przebiegu synchronizacji do zakładki
+    Status w arkuszu (widoczne od razu po kliknięciu przycisku, bez zaglądania w logi)."""
+    import datetime
+
+    sh = _get_spreadsheet()
+    try:
+        ws = sh.worksheet(STATUS_TAB_NAME)
+    except gspread.WorksheetNotFound:
+        ws = sh.add_worksheet(title=STATUS_TAB_NAME, rows=20, cols=2)
+
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    rows = [[f"Ostatnia synchronizacja: {timestamp}"], [result_line], [""]] + [[line] for line in detail_lines]
+    ws.clear()
+    ws.update("A1", rows, value_input_option="RAW")
 
 
 def read_all_rows():

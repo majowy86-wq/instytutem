@@ -147,8 +147,18 @@ def check_deletions(sheet_rows, exclude_zabiegi=frozenset()):
     return sorted(last_state - current_state)
 
 
-def save_synced_state(sheet_rows):
-    snapshot = sorted({(r["zabieg"], r["podgrupa"], r["wariant"]) for r in sheet_rows})
+def save_synced_state(sheet_rows, skip_zabiegi=frozenset()):
+    """Zapisuje bieżący stan arkusza jako 'ostatnio zsynchronizowany' — ale dla zabiegów
+    pominiętych w tym przebiegu (skip_zabiegi: czekają na --confirm-*) zachowuje ich STARY
+    zapisany stan, żeby przy kolejnym uruchomieniu nadal były wykrywane jako wymagające
+    potwierdzenia, a nie wyglądały na już zsynchronizowane."""
+    old_state = []
+    if skip_zabiegi and STATE_PATH.exists():
+        old_state = [tuple(x) for x in json.loads(STATE_PATH.read_text(encoding="utf-8"))
+                     if x[0] in skip_zabiegi]
+    current = [(r["zabieg"], r["podgrupa"], r["wariant"]) for r in sheet_rows
+               if r["zabieg"] not in skip_zabiegi]
+    snapshot = sorted(set(current) | set(old_state))
     STATE_PATH.write_text(json.dumps(snapshot, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
@@ -250,42 +260,53 @@ def main():
     parser.add_argument("--confirm-flatten", action="store_true",
                          help="potwierdź spłaszczenie zabiegu(-ów) do jednego poziomu (wykryte "
                               "po wyczyszczeniu kolumny Podgrupa)")
+    parser.add_argument("--report-to-sheet", action="store_true",
+                         help="zapisz krótkie podsumowanie przebiegu do zakładki Status w arkuszu "
+                              "(używane przez przycisk/automatyzację, nie potrzebne z terminala)")
     args = parser.parse_args()
 
     sheet_rows = read_all_rows()
+    status_lines = []
+
+    # rozjazdy cena-na-stronie vs Fresha są TYLKO informacyjne — widać je jako ⚠️ w kolumnie
+    # Zgodność w samym arkuszu, więc nie blokują zapisu; cena na stronie to zawsze to, co jest
+    # wpisane w kolumnie "Cena na stronie", niezależnie od tego, co pokazuje Fresha
+    mismatches = [r for r in sheet_rows if r["zgodnosc"].startswith("⚠️")]
+    if mismatches:
+        print("ℹ️  Rozjazdy cena-na-stronie vs Fresha (informacyjnie, nie blokują zapisu):")
+        for r in mismatches:
+            print(f"   {r['zabieg']} | {r['wariant']} | strona={r['cena']!r} vs Fresha={r['cena_fresha']!r}")
+        status_lines.append(f"ℹ️ {len(mismatches)} rozjazd(ów) cena-Fresha — patrz kolumna Zgodność")
 
     # wykrywanie PRZED normalizacją Podgrupa — potrzebne surowe (puste) wartości
     flatten_candidates = find_flatten_candidates(sheet_rows)
     flatten_zabiegi = {z for z, _ in flatten_candidates}
-
-    if flatten_candidates and not args.confirm_flatten:
-        print("⚠️  WYKRYTO SPŁASZCZENIE PODGRUP (kolumna Podgrupa wyczyszczona) — zatrzymuję się:")
+    flatten_pending = set() if args.confirm_flatten else flatten_zabiegi
+    if flatten_pending:
+        print("⚠️  WYKRYTO SPŁASZCZENIE PODGRUP (kolumna Podgrupa wyczyszczona) — pomijam te zabiegi:")
         for zabieg, old_podgrupy in flatten_candidates:
             print(f"   {zabieg}: {', '.join(old_podgrupy)} → jeden poziom ('Zabieg')")
-        print("\nJeśli to zamierzone, uruchom ponownie z flagą --confirm-flatten (razem z --write, jeśli chcesz też zapisać).")
-        return
+        print("Uruchom z flagą --confirm-flatten (razem z --write), żeby to zastosować.")
+        status_lines.append(f"⚠️ Do potwierdzenia (spłaszczenie): {', '.join(sorted(flatten_pending))}")
 
     normalize_blank_podgrupa(sheet_rows)
 
-    # walidacja PRZED czymkolwiek: rozjazdy cena-na-stronie vs Fresha
-    mismatches = [r for r in sheet_rows if r["zgodnosc"].startswith("⚠️")]
-    if mismatches:
-        print("⚠️  WYKRYTO ROZJAZDY CEN — zatrzymuję się przed zapisem:")
-        for r in mismatches:
-            print(f"   {r['zabieg']} | {r['wariant']} | strona={r['cena']!r} vs Fresha={r['cena_fresha']!r}")
-        print("\nPopraw w arkuszu (cenę na stronie albo cenę w Fresha), zanim uruchomisz ponownie.")
-        return
-
     deletions = check_deletions(sheet_rows, exclude_zabiegi=flatten_zabiegi)
-    if deletions and not args.confirm_deletions:
-        print("⚠️  WYKRYTO USUNIĘTE WIERSZE (były w arkuszu, teraz ich nie ma) — zatrzymuję się:")
+    deletion_zabiegi = {z for z, _p, _w in deletions}
+    deletions_pending = set() if args.confirm_deletions else deletion_zabiegi
+    if deletions_pending:
+        print("⚠️  WYKRYTO USUNIĘTE WIERSZE (były w arkuszu, teraz ich nie ma) — pomijam te zabiegi:")
         for zabieg, podgrupa, wariant in deletions:
             print(f"   {zabieg} | {podgrupa} | {wariant}")
-        print("\nJeśli to zamierzone, uruchom ponownie z flagą --confirm-deletions (razem z --write, jeśli chcesz też zapisać).")
-        return
+        print("Uruchom z flagą --confirm-deletions (razem z --write), żeby to zastosować.")
+        status_lines.append(f"⚠️ Do potwierdzenia (usunięcia): {', '.join(sorted(deletions_pending))}")
+
+    skip_zabiegi = flatten_pending | deletions_pending
 
     by_zabieg = defaultdict(list)
     for r in sheet_rows:
+        if r["zabieg"] in skip_zabiegi:
+            continue
         by_zabieg[r["zabieg"]].append(r)
 
     any_changes = False
@@ -296,6 +317,8 @@ def main():
     subpage_cache = {}
 
     for zabieg, old_podgrupy in flatten_candidates:
+        if zabieg in skip_zabiegi:
+            continue
         rows = by_zabieg[zabieg]
         group_rows = [to_row_dict(r, zabieg) for r in rows]
         cennik_html = flatten_cennik_group(cennik_html, zabieg, group_rows)
@@ -358,9 +381,18 @@ def main():
                 (ROOT / rel / "index.html").write_text(html, encoding="utf-8")
 
     if args.write:
-        save_synced_state(sheet_rows)
+        save_synced_state(sheet_rows, skip_zabiegi=skip_zabiegi)
 
-    print(f"\n\n{'WYNIK: zapisano zmiany.' if (any_changes and args.write) else ('WYNIK: znaleziono zmiany (tryb podglądu).' if any_changes else 'WYNIK: brak zmian, wszystko już zgodne.')}")
+    result_line = ('WYNIK: zapisano zmiany.' if (any_changes and args.write)
+                    else ('WYNIK: znaleziono zmiany (tryb podglądu).' if any_changes
+                          else 'WYNIK: brak zmian, wszystko już zgodne.'))
+    print(f"\n\n{result_line}")
+
+    if args.report_to_sheet:
+        from read_sheet import write_status
+        if not status_lines:
+            status_lines.append("✅ Wszystko zsynchronizowane, bez zastrzeżeń.")
+        write_status(result_line, status_lines)
 
 
 if __name__ == "__main__":
