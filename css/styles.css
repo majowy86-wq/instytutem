@@ -3380,9 +3380,14 @@ p .price-row-badges{ margin-left:10px; }
 .blog-byline-row{ display:grid; grid-template-columns:1fr 2fr; column-gap:40px; }
 .blog-byline{
   font-family:"Inter",sans-serif; font-size:12px; font-weight:600; letter-spacing:0.5px;
-  text-transform:uppercase; color:var(--a-ink-warm); margin:0 0 20px;
+  text-transform:uppercase; color:var(--a-ink-warm); margin:0;
 }
-.blog-byline-divider{ height:1px; background:var(--a-gray); margin:0 0 25px; }
+/* Linia pod datą/autorem jest SIOSTRĄ gridu .blog-byline-row (pełna szerokość kontenera),
+   NIE elementem wewnątrz jego wąskiej kolumny — zweryfikowane wprost w DOM archon.au
+   (.divider-line jest bezpośrednim dzieckiem pełnoszerokiego .section-title-line.home,
+   nie zagnieżdżone w jego wewnętrznym _2-column-grid) i potwierdzone przez użytkownika
+   po zrzucie ekranu z pierwszej (błędnej) wersji, 2026-09-09. */
+.blog-byline-divider{ height:1px; width:100%; background:var(--a-gray); margin:20px 0 25px; }
 
 .blog-content-row{ display:grid; grid-template-columns:1fr 2fr; column-gap:40px; }
 .blog-content-row .blog-spacer{ display:block; }
