@@ -18,28 +18,43 @@ def offer_item_id_to_url_param(offer_item_id: str) -> str:
     return offer_item_id.replace(":", "%3A")
 
 
-def generate_price_row(zabieg: str, wariant: str, czas: str, cena: str, offer_item_id: str) -> str:
-    """Buduje jeden <div class="price-row">...</div>."""
+PACKAGES_BASE_URL = "https://www.fresha.com/book-now/testem-xh2mr620/packages"
+
+
+def generate_price_row(zabieg: str, wariant: str, czas: str, cena: str, offer_item_id: str,
+                        package_id: str = "", promo: str = "") -> str:
+    """Buduje jeden <div class="price-row">...</div>. Obsługuje 3 warianty przycisku:
+    offerItemId -> "Zarezerwuj" (booking), packageId -> "Kup pakiet" (packages), brak obu -> płaska cena."""
     name_html = wariant
     duration_html = f' <span>· {czas}</span>' if czas else ''
     label = f'<p>{name_html}{duration_html}</p>'
+    promo_html = f'<span class="promo-badge">{promo}</span>' if promo else ''
 
     if offer_item_id:
         href = (
             "https://www.fresha.com/pl/a/instytutem-tm-plock-1-maja-6-jrr27hgf/booking"
             f"?offerItemId={offer_item_id_to_url_param(offer_item_id)}"
         )
+        cta_label = "Zarezerwuj"
+    elif package_id:
+        href = f"{PACKAGES_BASE_URL}?id={package_id}&share=true&pId=602910"
+        cta_label = "Kup pakiet"
+    else:
+        href = None
+        cta_label = None
+
+    if href:
         buy = (
             f'<span class="price-row-buy"><p>{cena}</p>'
             f'<a class="treatment-card-cta" href="{href}" target="_blank" rel="noopener">'
-            f'<span class="treatment-card-cta-title-wrap"><span>Zarezerwuj</span>'
+            f'<span class="treatment-card-cta-title-wrap"><span>{cta_label}</span>'
             f'<span class="treatment-card-cta-arrow">{CTA_ARROW_SVG}</span></span>'
             f'<span class="treatment-card-cta-underline"></span></a></span>'
         )
     else:
         buy = f'<p>{cena}</p>'
 
-    return f'<div class="price-row">{label}{buy}</div>'
+    return f'<div class="price-row">{promo_html}{label}{buy}</div>'
 
 
 def generate_rows_block(rows: list[dict], row_indent: int, closing_indent: int) -> str:
@@ -48,7 +63,13 @@ def generate_rows_block(rows: list[dict], row_indent: int, closing_indent: int) 
     z takim samym wcięciem jak reszta pliku. W /cennik: row_indent=16, closing_indent=16.
     Na podstronach: row_indent=14, closing_indent=12 (zweryfikowane bezpośrednio w plikach)."""
     pad = " " * row_indent
-    parts = [pad + generate_price_row(r["zabieg"], r["wariant"], r["czas"], r["cena"], r["offerItemId"]) for r in rows]
+    parts = [
+        pad + generate_price_row(
+            r["zabieg"], r["wariant"], r["czas"], r["cena"], r["offerItemId"],
+            r.get("packageId", ""), r.get("promo", ""),
+        )
+        for r in rows
+    ]
     return "\n" + "\n".join(parts) + "\n" + (" " * closing_indent)
 
 

@@ -1,0 +1,1394 @@
+{
+  "Epilacja laserowa LightSheer®": {
+    "subpageRel": "zabiegi/depilacja-laserowa-plock-lightsheer",
+    "subpage_groups": [
+      {
+        "name": "Konsultacje",
+        "badge": "0 zł",
+        "rows": [
+          {
+            "name": "Konsultacja kwalifikująca do zabiegu",
+            "duration": "25 min",
+            "price": "49 zł0 zł",
+            "offerItemId": "",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Wizyta kontrolna",
+            "duration": "",
+            "price": "0 zł",
+            "offerItemId": "",
+            "packageId": "",
+            "ctaLabel": "",
+            "promo": ""
+          }
+        ]
+      },
+      {
+        "name": "(S) Mała partia ciała",
+        "badge": "179 zł",
+        "rows": [
+          {
+            "name": "Szpara międzypośladkowa",
+            "duration": "15 min",
+            "price": "179 zł",
+            "offerItemId": "s:9410150",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Kolana",
+            "duration": "20 min",
+            "price": "179 zł",
+            "offerItemId": "s:9410150",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Baki",
+            "duration": "20 min",
+            "price": "179 zł",
+            "offerItemId": "s:9410150",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Stopy",
+            "duration": "20 min",
+            "price": "179 zł",
+            "offerItemId": "s:9410150",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Kark",
+            "duration": "20 min",
+            "price": "179 zł",
+            "offerItemId": "s:9410150",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Sutki",
+            "duration": "20 min",
+            "price": "179 zł",
+            "offerItemId": "s:9410150",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Dłonie",
+            "duration": "20 min",
+            "price": "179 zł",
+            "offerItemId": "s:9410150",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Policzki",
+            "duration": "20 min",
+            "price": "179 zł",
+            "offerItemId": "s:9410150",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Broda",
+            "duration": "20 min",
+            "price": "179 zł",
+            "offerItemId": "s:9410150",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Wąsik",
+            "duration": "20 min",
+            "price": "179 zł",
+            "offerItemId": "s:9410150",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Linia brzucha",
+            "duration": "20 min",
+            "price": "179 zł",
+            "offerItemId": "s:9410150",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          }
+        ]
+      },
+      {
+        "name": "(M) Standardowa partia ciała",
+        "badge": "349 zł",
+        "rows": [
+          {
+            "name": "Cała twarz",
+            "duration": "25 min · Wąsik, broda, policzki, baki.",
+            "price": "349 zł",
+            "offerItemId": "s:9410878",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Ramiona",
+            "duration": "25 min",
+            "price": "349 zł",
+            "offerItemId": "s:9410878",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Pośladki",
+            "duration": "25 min",
+            "price": "349 zł",
+            "offerItemId": "s:9410878",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Bikini pełne",
+            "duration": "25 min · Pełne lub niepełne — ta sama cena.",
+            "price": "349 zł",
+            "offerItemId": "s:9410878",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Brzuch",
+            "duration": "25 min · Brzuch i linia brzucha.",
+            "price": "349 zł",
+            "offerItemId": "s:9410878",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Pachy",
+            "duration": "25 min",
+            "price": "349 zł",
+            "offerItemId": "s:9410878",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Przedramiona",
+            "duration": "20 min",
+            "price": "349 zł",
+            "offerItemId": "s:9410878",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Szyja",
+            "duration": "20 min",
+            "price": "349 zł",
+            "offerItemId": "s:9410878",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Uda",
+            "duration": "20 min",
+            "price": "349 zł",
+            "offerItemId": "s:9410878",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Klatka piersiowa",
+            "duration": "30 min",
+            "price": "349 zł",
+            "offerItemId": "s:9410878",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Łydki",
+            "duration": "30 min",
+            "price": "349 zł",
+            "offerItemId": "s:9410878",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Plecy",
+            "duration": "35 min",
+            "price": "349 zł",
+            "offerItemId": "s:9410878",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          }
+        ]
+      },
+      {
+        "name": "(L) Duża partia ciała",
+        "badge": "698 zł",
+        "rows": [
+          {
+            "name": "Całe nogi",
+            "duration": "1 godz. i 5 min · Stopy, łydki, kolana, uda.",
+            "price": "698 zł",
+            "offerItemId": "s:24457937",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Całe ręce",
+            "duration": "1 godz. i 5 min · Dłonie, przedramiona, ramiona.",
+            "price": "698 zł",
+            "offerItemId": "s:24457937",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          }
+        ]
+      },
+      {
+        "name": "Przygotowanie do zabiegu",
+        "badge": "+50 zł",
+        "rows": [
+          {
+            "name": "Ogolenie strefy zabiegowej przez kosmetologa",
+            "duration": "Pamiętaj, żeby ogolić strefę zabiegową maszynką najpóźniej 24 godziny przed wizytą — jeśli zapomnisz, chętnie zrobimy to za Ciebie na miejscu.",
+            "price": "+50 zł",
+            "offerItemId": "",
+            "packageId": "",
+            "ctaLabel": "",
+            "promo": ""
+          }
+        ]
+      }
+    ],
+    "cennik_subgroups": [
+      {
+        "name": "Konsultacje",
+        "badge": "0 zł",
+        "rows": [
+          {
+            "name": "Konsultacja kwalifikująca do zabiegu",
+            "duration": "25 min · Obejmuje próbę laserową.",
+            "price": "49 zł0 zł",
+            "offerItemId": "",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": "Promocja"
+          },
+          {
+            "name": "Wizyta kontrolna",
+            "duration": "Dla osób w trakcie serii zabiegowej lub po próbie laserowej.",
+            "price": "0 zł",
+            "offerItemId": "",
+            "packageId": "",
+            "ctaLabel": "",
+            "promo": ""
+          }
+        ]
+      },
+      {
+        "name": "(S) mała partia ciała",
+        "badge": "179 zł",
+        "rows": [
+          {
+            "name": "Szpara międzypośladkowa",
+            "duration": "15 min",
+            "price": "179 zł",
+            "offerItemId": "s:9410150",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Kolana",
+            "duration": "20 min",
+            "price": "179 zł",
+            "offerItemId": "s:9410150",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Baki",
+            "duration": "20 min",
+            "price": "179 zł",
+            "offerItemId": "s:9410150",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Stopy",
+            "duration": "20 min",
+            "price": "179 zł",
+            "offerItemId": "s:9410150",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Kark",
+            "duration": "20 min",
+            "price": "179 zł",
+            "offerItemId": "s:9410150",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Sutki",
+            "duration": "20 min",
+            "price": "179 zł",
+            "offerItemId": "s:9410150",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Dłonie",
+            "duration": "20 min",
+            "price": "179 zł",
+            "offerItemId": "s:9410150",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Policzki",
+            "duration": "20 min",
+            "price": "179 zł",
+            "offerItemId": "s:9410150",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Broda",
+            "duration": "20 min",
+            "price": "179 zł",
+            "offerItemId": "s:9410150",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Wąsik",
+            "duration": "20 min",
+            "price": "179 zł",
+            "offerItemId": "s:9410150",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Linia brzucha",
+            "duration": "20 min",
+            "price": "179 zł",
+            "offerItemId": "s:9410150",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          }
+        ]
+      },
+      {
+        "name": "(M) standardowa partia ciała",
+        "badge": "349 zł",
+        "rows": [
+          {
+            "name": "Cała twarz",
+            "duration": "25 min",
+            "price": "349 zł",
+            "offerItemId": "s:9410878",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Ramiona",
+            "duration": "25 min",
+            "price": "349 zł",
+            "offerItemId": "s:9410878",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Pośladki",
+            "duration": "25 min",
+            "price": "349 zł",
+            "offerItemId": "s:9410878",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Bikini pełne",
+            "duration": "25 min",
+            "price": "349 zł",
+            "offerItemId": "s:9410878",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Brzuch",
+            "duration": "25 min",
+            "price": "349 zł",
+            "offerItemId": "s:9410878",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Pachy",
+            "duration": "25 min",
+            "price": "349 zł",
+            "offerItemId": "s:9410878",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Przedramiona",
+            "duration": "20 min",
+            "price": "349 zł",
+            "offerItemId": "s:9410878",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Szyja",
+            "duration": "20 min",
+            "price": "349 zł",
+            "offerItemId": "s:9410878",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Uda",
+            "duration": "20 min",
+            "price": "349 zł",
+            "offerItemId": "s:9410878",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Klatka piersiowa",
+            "duration": "30 min",
+            "price": "349 zł",
+            "offerItemId": "s:9410878",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Łydki",
+            "duration": "30 min",
+            "price": "349 zł",
+            "offerItemId": "s:9410878",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Plecy",
+            "duration": "35 min",
+            "price": "349 zł",
+            "offerItemId": "s:9410878",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          }
+        ]
+      },
+      {
+        "name": "(L) duża partia ciała",
+        "badge": "698 zł",
+        "rows": [
+          {
+            "name": "Całe nogi",
+            "duration": "1 godz. i 5 min",
+            "price": "698 zł",
+            "offerItemId": "s:24457937",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Całe ręce",
+            "duration": "1 godz. i 5 min",
+            "price": "698 zł",
+            "offerItemId": "s:24457937",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          }
+        ]
+      },
+      {
+        "name": "Pakiety Elastyczne",
+        "badge": "od 1890 zł",
+        "rows": [
+          {
+            "name": "Pakiet MINI 6 – Epilacja laserowa (M)",
+            "duration": "6 zabiegów · ważny 12 mies.",
+            "price": "1890 zł",
+            "offerItemId": "",
+            "packageId": "23e836dd-ad04-5a88-9afb-f8d5b3df86cb",
+            "ctaLabel": "Kup pakiet",
+            "promo": "Zaoszczędź 10%"
+          },
+          {
+            "name": "Pakiet COMFORT 10 – Epilacja laserowa (M)",
+            "duration": "10 zabiegów · ważny 12 mies.",
+            "price": "2890 zł",
+            "offerItemId": "",
+            "packageId": "0e9f9b1b-15e6-559d-a6b3-cdd683884324",
+            "ctaLabel": "Kup pakiet",
+            "promo": "Zaoszczędź 17%"
+          },
+          {
+            "name": "Pakiet PREMIUM 20 – Epilacja laserowa (M)",
+            "duration": "20 zabiegów · ważny 18 mies.",
+            "price": "4790 zł",
+            "offerItemId": "",
+            "packageId": "0f0f807b-b1fa-5b81-8756-8dc92a0ec9af",
+            "ctaLabel": "Kup pakiet",
+            "promo": "Zaoszczędź 31%"
+          }
+        ]
+      },
+      {
+        "name": "Przygotowanie do zabiegu",
+        "badge": "+50 zł",
+        "rows": [
+          {
+            "name": "Ogolenie strefy zabiegowej przez kosmetologa",
+            "duration": "Pamiętaj, żeby ogolić strefę zabiegową maszynką najpóźniej 24 godziny przed wizytą — jeśli zapomnisz, chętnie zrobimy to za Ciebie na miejscu.",
+            "price": "+50 zł",
+            "offerItemId": "",
+            "packageId": "",
+            "ctaLabel": "",
+            "promo": ""
+          }
+        ]
+      }
+    ]
+  },
+  "Endermologia LPG® Alliance": {
+    "subpageRel": "zabiegi/endermologia-plock-lpg-alliance",
+    "subpage_groups": [
+      {
+        "name": "Konsultacje",
+        "badge": "149 zł",
+        "rows": [
+          {
+            "name": "DERMOkonsultacja (ciało)",
+            "duration": "35 min",
+            "price": "149 zł",
+            "offerItemId": "s:24458504",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Wizyta kontrolna",
+            "duration": "15 min",
+            "price": "0 zł",
+            "offerItemId": "",
+            "packageId": "",
+            "ctaLabel": "",
+            "promo": ""
+          }
+        ]
+      },
+      {
+        "name": "Sesje zabiegowe",
+        "badge": "od 179 zł",
+        "rows": [
+          {
+            "name": "Sesja 20 minutowa",
+            "duration": "25 min",
+            "price": "179 zł",
+            "offerItemId": "s:24458930",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Sesja 40 minutowa",
+            "duration": "45 min",
+            "price": "299 zł",
+            "offerItemId": "s:24458930",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Sesja 60 minutowa",
+            "duration": "1 godz. i 5 min",
+            "price": "349 zł",
+            "offerItemId": "s:24458930",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          }
+        ]
+      },
+      {
+        "name": "Strój zabiegowy",
+        "badge": "100 zł",
+        "rows": [
+          {
+            "name": "Endermowear™",
+            "duration": "Wielorazowego użytku — kupujesz raz, korzystasz przy każdej kolejnej wizycie.",
+            "price": "100 zł",
+            "offerItemId": "",
+            "packageId": "",
+            "ctaLabel": "",
+            "promo": ""
+          }
+        ]
+      },
+      {
+        "name": "Pakiety",
+        "badge": "od 1390 zł",
+        "rows": [
+          {
+            "name": "Pakiet 10x Endermologia (20 min) ★ Fokus",
+            "duration": "10 zabiegów",
+            "price": "1390 zł",
+            "offerItemId": "",
+            "packageId": "d71f45c4-d19c-5e51-9bc0-c4fa3069e262",
+            "ctaLabel": "Kup pakiet",
+            "promo": "Zaoszczędź 22%"
+          },
+          {
+            "name": "Pakiet 15x Endermologia (20 min) ★ Fokus",
+            "duration": "15 zabiegów",
+            "price": "1890 zł",
+            "offerItemId": "",
+            "packageId": "587ecee7-3916-5f14-8f34-54813ddccbf6",
+            "ctaLabel": "Kup pakiet",
+            "promo": "Zaoszczędź 30%"
+          },
+          {
+            "name": "Pakiet 10x Endermologia (40 min) ★ Classic",
+            "duration": "10 zabiegów",
+            "price": "1990 zł",
+            "offerItemId": "",
+            "packageId": "63ddd293-8da2-5c62-948e-9400046bc225",
+            "ctaLabel": "Kup pakiet",
+            "promo": "Zaoszczędź 33%"
+          },
+          {
+            "name": "Pakiet 15x Endermologia (40 min) ★ Classic",
+            "duration": "15 zabiegów",
+            "price": "2690 zł",
+            "offerItemId": "",
+            "packageId": "455897b3-b25a-5de9-b285-4a8d33c651df",
+            "ctaLabel": "Kup pakiet",
+            "promo": "Zaoszczędź 40%"
+          },
+          {
+            "name": "Pakiet 10x Endermologia (60 min) ★ Total",
+            "duration": "10 zabiegów",
+            "price": "2790 zł",
+            "offerItemId": "",
+            "packageId": "afff7568-1d3c-55e1-b892-72d30d2f9e32",
+            "ctaLabel": "Kup pakiet",
+            "promo": "Zaoszczędź 20%"
+          },
+          {
+            "name": "Pakiet 15x Endermologia (60 min) ★ Total",
+            "duration": "15 zabiegów",
+            "price": "3690 zł",
+            "offerItemId": "",
+            "packageId": "36b8e6bb-54a2-5dbd-8f66-a458969a9174",
+            "ctaLabel": "Kup pakiet",
+            "promo": "Zaoszczędź 30%"
+          }
+        ]
+      }
+    ],
+    "cennik_subgroups": [
+      {
+        "name": "Endermologia LPG® Alliance",
+        "badge": "od 179 zł",
+        "rows": [
+          {
+            "name": "Sesja 20 minutowa",
+            "duration": "25 min",
+            "price": "179 zł",
+            "offerItemId": "s:24458930",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Sesja 40 minutowa",
+            "duration": "45 min",
+            "price": "299 zł",
+            "offerItemId": "s:24458930",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Sesja 60 minutowa",
+            "duration": "1 godz. i 5 min",
+            "price": "349 zł",
+            "offerItemId": "s:24458930",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          }
+        ]
+      },
+      {
+        "name": "Pakiety",
+        "badge": "od 1390 zł",
+        "rows": [
+          {
+            "name": "Pakiet 10x Endermologia (20 min) ★ Fokus",
+            "duration": "10 zabiegów",
+            "price": "1390 zł",
+            "offerItemId": "",
+            "packageId": "d71f45c4-d19c-5e51-9bc0-c4fa3069e262",
+            "ctaLabel": "Kup pakiet",
+            "promo": "Zaoszczędź 22%"
+          },
+          {
+            "name": "Pakiet 15x Endermologia (20 min) ★ Fokus",
+            "duration": "15 zabiegów",
+            "price": "1890 zł",
+            "offerItemId": "",
+            "packageId": "587ecee7-3916-5f14-8f34-54813ddccbf6",
+            "ctaLabel": "Kup pakiet",
+            "promo": "Zaoszczędź 30%"
+          },
+          {
+            "name": "Pakiet 10x Endermologia (40 min) ★ Classic",
+            "duration": "10 zabiegów",
+            "price": "1990 zł",
+            "offerItemId": "",
+            "packageId": "63ddd293-8da2-5c62-948e-9400046bc225",
+            "ctaLabel": "Kup pakiet",
+            "promo": "Zaoszczędź 33%"
+          },
+          {
+            "name": "Pakiet 15x Endermologia (40 min) ★ Classic",
+            "duration": "15 zabiegów",
+            "price": "2690 zł",
+            "offerItemId": "",
+            "packageId": "455897b3-b25a-5de9-b285-4a8d33c651df",
+            "ctaLabel": "Kup pakiet",
+            "promo": "Zaoszczędź 40%"
+          },
+          {
+            "name": "Pakiet 10x Endermologia (60 min) ★ Total",
+            "duration": "10 zabiegów",
+            "price": "2790 zł",
+            "offerItemId": "",
+            "packageId": "afff7568-1d3c-55e1-b892-72d30d2f9e32",
+            "ctaLabel": "Kup pakiet",
+            "promo": "Zaoszczędź 20%"
+          },
+          {
+            "name": "Pakiet 15x Endermologia (60 min) ★ Total",
+            "duration": "15 zabiegów",
+            "price": "3690 zł",
+            "offerItemId": "",
+            "packageId": "36b8e6bb-54a2-5dbd-8f66-a458969a9174",
+            "ctaLabel": "Kup pakiet",
+            "promo": "Zaoszczędź 30%"
+          }
+        ]
+      }
+    ]
+  },
+  "Endermologia Twarzy LPG® Endermolift™": {
+    "subpageRel": "zabiegi/endermologia-twarzy-plock-lpg-endermolift",
+    "subpage_groups": [
+      {
+        "name": "Konsultacje",
+        "badge": "149 zł",
+        "rows": [
+          {
+            "name": "DERMOkonsultacja (twarz)",
+            "duration": "35 min",
+            "price": "149 zł",
+            "offerItemId": "s:24458471",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Wizyta kontrolna",
+            "duration": "15 min",
+            "price": "0 zł",
+            "offerItemId": "",
+            "packageId": "",
+            "ctaLabel": "",
+            "promo": ""
+          }
+        ]
+      },
+      {
+        "name": "Zabieg",
+        "badge": "180 zł",
+        "rows": [
+          {
+            "name": "Endermolift™ (twarz, szyja, dekolt)",
+            "duration": "45 min",
+            "price": "180 zł",
+            "offerItemId": "",
+            "packageId": "",
+            "ctaLabel": "",
+            "promo": ""
+          }
+        ]
+      },
+      {
+        "name": "Pakiety",
+        "badge": "1260 zł",
+        "rows": [
+          {
+            "name": "Pakiet 10 zabiegów Endermolift™ (40 min)",
+            "duration": "10 zabiegów",
+            "price": "1260 zł",
+            "offerItemId": "",
+            "packageId": "",
+            "ctaLabel": "",
+            "promo": ""
+          }
+        ]
+      },
+      {
+        "name": "Pakiety łączone",
+        "badge": "449 zł",
+        "rows": [
+          {
+            "name": "Karboksyterapia + Lifting LPG® Ergolift",
+            "duration": "1 godz. i 20 min · 2 usługi",
+            "price": "449 zł",
+            "offerItemId": "",
+            "packageId": "",
+            "ctaLabel": "",
+            "promo": "Zaoszczędź 10%"
+          }
+        ]
+      }
+    ],
+    "cennik_subgroups": [
+      {
+        "name": "Zabieg",
+        "badge": "180 zł",
+        "rows": [
+          {
+            "name": "Endermolift™ (twarz, szyja, dekolt)",
+            "duration": "45 min",
+            "price": "180 zł",
+            "offerItemId": "",
+            "packageId": "",
+            "ctaLabel": "",
+            "promo": ""
+          }
+        ]
+      },
+      {
+        "name": "Pakiety",
+        "badge": "1260 zł",
+        "rows": [
+          {
+            "name": "Pakiet 10 zabiegów Endermolift™ (40 min)",
+            "duration": "10 zabiegów",
+            "price": "1260 zł",
+            "offerItemId": "",
+            "packageId": "",
+            "ctaLabel": "",
+            "promo": ""
+          }
+        ]
+      },
+      {
+        "name": "Pakiety łączone",
+        "badge": "449 zł",
+        "rows": [
+          {
+            "name": "Karboksyterapia + Lifting LPG® Ergolift",
+            "duration": "1 godz. i 20 min · 2 usługi",
+            "price": "449 zł",
+            "offerItemId": "",
+            "packageId": "",
+            "ctaLabel": "",
+            "promo": "Zaoszczędź 10%"
+          }
+        ]
+      }
+    ]
+  },
+  "Kriolipoliza cooltech®": {
+    "subpageRel": "zabiegi/kriolipoliza-plock-cooltech",
+    "subpage_groups": [
+      {
+        "name": "Konsultacje",
+        "badge": "149 zł",
+        "rows": [
+          {
+            "name": "DERMOkonsultacja (ciało)",
+            "duration": "35 min",
+            "price": "149 zł",
+            "offerItemId": "s:24458504",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Wizyta kontrolna",
+            "duration": "15 min",
+            "price": "0 zł",
+            "offerItemId": "",
+            "packageId": "",
+            "ctaLabel": "",
+            "promo": ""
+          }
+        ]
+      },
+      {
+        "name": "Zabieg",
+        "badge": "od 790 zł",
+        "rows": [
+          {
+            "name": "Przyłożenie 1 głowicy",
+            "duration": "1 godz. i 30 min",
+            "price": "790 zł",
+            "offerItemId": "s:24462591",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Przyłożenie 2 głowic (na raz)",
+            "duration": "1 godz. i 30 min",
+            "price": "1290 zł",
+            "offerItemId": "s:24462591",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          }
+        ]
+      },
+      {
+        "name": "Pakiety",
+        "badge": "1990 zł",
+        "rows": [
+          {
+            "name": "Pakiet Kriolipoliza Cooltech 2x2",
+            "duration": "2 wizyty · 4 przyłożenia",
+            "price": "1990 zł",
+            "offerItemId": "",
+            "packageId": "2e655996-c378-51f9-8ab2-30bff96b6a71",
+            "ctaLabel": "Kup pakiet",
+            "promo": "Zaoszczędź 37%"
+          }
+        ]
+      }
+    ],
+    "cennik_subgroups": [
+      {
+        "name": "Kriolipoliza cooltech®",
+        "badge": "od 790 zł",
+        "rows": [
+          {
+            "name": "Przyłożenie 1 głowicy",
+            "duration": "1 godz. i 30 min",
+            "price": "790 zł",
+            "offerItemId": "s:24462591",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Przyłożenie 2 głowic (na raz)",
+            "duration": "1 godz. i 30 min",
+            "price": "1290 zł",
+            "offerItemId": "s:24462591",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          }
+        ]
+      },
+      {
+        "name": "Pakiety",
+        "badge": "1990 zł",
+        "rows": [
+          {
+            "name": "Pakiet Kriolipoliza Cooltech 2x2",
+            "duration": "2 wizyty · 4 przyłożenia",
+            "price": "1990 zł",
+            "offerItemId": "",
+            "packageId": "2e655996-c378-51f9-8ab2-30bff96b6a71",
+            "ctaLabel": "Kup pakiet",
+            "promo": "Zaoszczędź 37%"
+          }
+        ]
+      }
+    ]
+  },
+  "Fibryna i osocze bogatopłytkowe": {
+    "subpageRel": "fibryna-i-osocze-bogatoplytkowe",
+    "subpage_groups": [
+      {
+        "name": "Konsultacje",
+        "badge": "149 zł",
+        "rows": [
+          {
+            "name": "DERMOkonsultacja (twarz)",
+            "duration": "35 min",
+            "price": "149 zł",
+            "offerItemId": "s:24458471",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Wizyta kontrolna",
+            "duration": "15 min",
+            "price": "0 zł",
+            "offerItemId": "",
+            "packageId": "",
+            "ctaLabel": "",
+            "promo": ""
+          }
+        ]
+      },
+      {
+        "name": "Osocze bogatopłytkowe PRP",
+        "badge": "od 699 zł",
+        "rows": [
+          {
+            "name": "Okolica oczu",
+            "duration": "1 godz. i 5 min",
+            "price": "699 zł",
+            "offerItemId": "s:24480866",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Skóra głowy",
+            "duration": "1 godz. i 5 min",
+            "price": "899 zł",
+            "offerItemId": "s:24480866",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Cała twarz",
+            "duration": "1 godz. i 5 min",
+            "price": "899 zł",
+            "offerItemId": "s:24480866",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Twarz + szyja",
+            "duration": "1 godz. i 5 min",
+            "price": "1399 zł",
+            "offerItemId": "s:24480866",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Twarz + szyja + dekolt",
+            "duration": "1 godz. i 5 min",
+            "price": "1899 zł",
+            "offerItemId": "s:24480866",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          }
+        ]
+      },
+      {
+        "name": "Fibryna bogatopłytkowa PRF",
+        "badge": "od 899 zł",
+        "rows": [
+          {
+            "name": "Okolica oczu",
+            "duration": "1 godz. i 5 min",
+            "price": "899 zł",
+            "offerItemId": "s:24480925",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Skóra głowy",
+            "duration": "1 godz. i 5 min",
+            "price": "1099 zł",
+            "offerItemId": "s:24480925",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Cała twarz",
+            "duration": "1 godz. i 5 min",
+            "price": "1199 zł",
+            "offerItemId": "s:24480925",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Twarz + szyja",
+            "duration": "1 godz. i 5 min",
+            "price": "1699 zł",
+            "offerItemId": "s:24480925",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Twarz + szyja + dekolt",
+            "duration": "1 godz. i 5 min",
+            "price": "2299 zł",
+            "offerItemId": "s:24480925",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          }
+        ]
+      }
+    ],
+    "cennik_subgroups": [
+      {
+        "name": "Fibryna bogatopłytkowa PRF",
+        "badge": "od 899 zł",
+        "rows": [
+          {
+            "name": "Okolica oczu",
+            "duration": "1 godz. i 5 min",
+            "price": "899 zł",
+            "offerItemId": "s:24480925",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Skóra głowy",
+            "duration": "1 godz. i 5 min",
+            "price": "1099 zł",
+            "offerItemId": "s:24480925",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Cała twarz",
+            "duration": "1 godz. i 5 min",
+            "price": "1199 zł",
+            "offerItemId": "s:24480925",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Twarz + szyja",
+            "duration": "1 godz. i 5 min",
+            "price": "1699 zł",
+            "offerItemId": "s:24480925",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Twarz + szyja + dekolt",
+            "duration": "1 godz. i 5 min",
+            "price": "2299 zł",
+            "offerItemId": "s:24480925",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          }
+        ]
+      },
+      {
+        "name": "Osocze bogatopłytkowe PRP",
+        "badge": "od 699 zł",
+        "rows": [
+          {
+            "name": "Okolica oczu",
+            "duration": "1 godz. i 5 min",
+            "price": "699 zł",
+            "offerItemId": "s:24480866",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Skóra głowy",
+            "duration": "1 godz. i 5 min",
+            "price": "899 zł",
+            "offerItemId": "s:24480866",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Cała twarz",
+            "duration": "1 godz. i 5 min",
+            "price": "899 zł",
+            "offerItemId": "s:24480866",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Twarz + szyja",
+            "duration": "1 godz. i 5 min",
+            "price": "1399 zł",
+            "offerItemId": "s:24480866",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Twarz + szyja + dekolt",
+            "duration": "1 godz. i 5 min",
+            "price": "1899 zł",
+            "offerItemId": "s:24480866",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          }
+        ]
+      }
+    ]
+  },
+  "Mezoterapia bezigłowa": {
+    "subpageRel": "zabiegi/mezoterapia-bezigłowa",
+    "subpage_groups": [
+      {
+        "name": "Konsultacje",
+        "badge": "149 zł",
+        "rows": [
+          {
+            "name": "DERMOkonsultacja (twarz)",
+            "duration": "35 min",
+            "price": "149 zł",
+            "offerItemId": "s:24458471",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          },
+          {
+            "name": "Wizyta kontrolna",
+            "duration": "15 min",
+            "price": "0 zł",
+            "offerItemId": "",
+            "packageId": "",
+            "ctaLabel": "",
+            "promo": ""
+          }
+        ]
+      },
+      {
+        "name": "Zabieg",
+        "badge": "299 zł",
+        "rows": [
+          {
+            "name": "Mezoterapia bezigłowa",
+            "duration": "1 godz. i 5 min",
+            "price": "299 zł",
+            "offerItemId": "s:24480685",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          }
+        ]
+      },
+      {
+        "name": "Pakiety łączone",
+        "badge": "549 zł",
+        "rows": [
+          {
+            "name": "Karboksyterapia + Mezoterapia bezigłowa",
+            "duration": "1 godz. i 40 min · 2 usługi",
+            "price": "549 zł",
+            "offerItemId": "",
+            "packageId": "",
+            "ctaLabel": "",
+            "promo": "Zaoszczędź 8%"
+          }
+        ]
+      }
+    ],
+    "cennik_subgroups": [
+      {
+        "name": "Mezoterapia bezigłowa",
+        "badge": "od 299 zł",
+        "rows": [
+          {
+            "name": "Mezoterapia bezigłowa",
+            "duration": "1 godz. i 5 min",
+            "price": "299 zł",
+            "offerItemId": "s:24480685",
+            "packageId": "",
+            "ctaLabel": "Zarezerwuj",
+            "promo": ""
+          }
+        ]
+      },
+      {
+        "name": "Pakiety łączone",
+        "badge": "549 zł",
+        "rows": [
+          {
+            "name": "Karboksyterapia + Mezoterapia bezigłowa",
+            "duration": "1 godz. i 40 min · 2 usługi",
+            "price": "549 zł",
+            "offerItemId": "",
+            "packageId": "",
+            "ctaLabel": "",
+            "promo": "Zaoszczędź 8%"
+          }
+        ]
+      }
+    ]
+  }
+}
