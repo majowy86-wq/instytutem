@@ -13,12 +13,15 @@ Użycie:
 """
 import argparse
 import difflib
+import json
 import re
 import urllib.parse
 from collections import defaultdict
 from pathlib import Path
 
 from read_sheet import read_all_rows
+
+STATE_PATH = Path(__file__).parent / "last_synced_state.json"
 from html_engine import (
     find_price_tier_rows_block, find_price_tier_badge, replace_span, replace_block,
     find_outer_treatment_block, find_loose_rows_block,
@@ -128,9 +131,26 @@ def show_diff(label, old, new):
     return True
 
 
+def check_deletions(sheet_rows):
+    """Porównuje bieżące (zabieg,podgrupa,wariant) z ostatnim znanym stanem arkusza.
+    Zwraca listę usuniętych kluczy (obecnych wcześniej, nieobecnych teraz)."""
+    if not STATE_PATH.exists():
+        return []
+    last_state = {tuple(x) for x in json.loads(STATE_PATH.read_text(encoding="utf-8"))}
+    current_state = {(r["zabieg"], r["podgrupa"], r["wariant"]) for r in sheet_rows}
+    return sorted(last_state - current_state)
+
+
+def save_synced_state(sheet_rows):
+    snapshot = sorted({(r["zabieg"], r["podgrupa"], r["wariant"]) for r in sheet_rows})
+    STATE_PATH.write_text(json.dumps(snapshot, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--write", action="store_true")
+    parser.add_argument("--confirm-deletions", action="store_true",
+                         help="potwierdź, że wykryte usunięcia wierszy są zamierzone")
     args = parser.parse_args()
 
     sheet_rows = read_all_rows()
@@ -142,6 +162,14 @@ def main():
         for r in mismatches:
             print(f"   {r['zabieg']} | {r['wariant']} | strona={r['cena']!r} vs Fresha={r['cena_fresha']!r}")
         print("\nPopraw w arkuszu (cenę na stronie albo cenę w Fresha), zanim uruchomisz ponownie.")
+        return
+
+    deletions = check_deletions(sheet_rows)
+    if deletions and not args.confirm_deletions:
+        print("⚠️  WYKRYTO USUNIĘTE WIERSZE (były w arkuszu, teraz ich nie ma) — zatrzymuję się:")
+        for zabieg, podgrupa, wariant in deletions:
+            print(f"   {zabieg} | {podgrupa} | {wariant}")
+        print("\nJeśli to zamierzone, uruchom ponownie z flagą --confirm-deletions (razem z --write, jeśli chcesz też zapisać).")
         return
 
     by_zabieg = defaultdict(list)
@@ -202,6 +230,9 @@ def main():
             any_changes = True
             if args.write:
                 (ROOT / rel / "index.html").write_text(html, encoding="utf-8")
+
+    if args.write:
+        save_synced_state(sheet_rows)
 
     print(f"\n\n{'WYNIK: zapisano zmiany.' if (any_changes and args.write) else ('WYNIK: znaleziono zmiany (tryb podglądu).' if any_changes else 'WYNIK: brak zmian, wszystko już zgodne.')}")
 
