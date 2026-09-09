@@ -2,6 +2,7 @@
 """Generuje HTML pojedynczego wiersza cennikowego (price-row) oraz przelicza
 cenę-badge ("od X zł") na podstawie wierszy arkusza — dokładnie w formacie
 używanym we wszystkich podstronach zabiegów tego projektu."""
+import html as html_module
 import re
 
 CTA_ARROW_SVG = (
@@ -24,11 +25,15 @@ PACKAGES_BASE_URL = "https://www.fresha.com/book-now/testem-xh2mr620/packages"
 def generate_price_row(zabieg: str, wariant: str, czas: str, cena: str, offer_item_id: str,
                         package_id: str = "", promo: str = "") -> str:
     """Buduje jeden <div class="price-row">...</div>. Obsługuje 3 warianty przycisku:
-    offerItemId -> "Zarezerwuj" (booking), packageId -> "Kup pakiet" (packages), brak obu -> płaska cena."""
-    name_html = wariant
-    duration_html = f' <span>· {czas}</span>' if czas else ''
+    offerItemId -> "Zarezerwuj" (booking), packageId -> "Kup pakiet" (packages), brak obu -> płaska cena.
+
+    UWAGA: dane z arkusza (przez BeautifulSoup przy ekstrakcji) mają już ZDEKODOWANE
+    encje HTML (np. "GABA & NANA", nie "GABA &amp; NANA") — trzeba je zakodować z
+    powrotem przy generowaniu, inaczej powstaje niepoprawny/niespójny HTML."""
+    name_html = html_module.escape(wariant, quote=False)
+    duration_html = f' <span>· {html_module.escape(czas, quote=False)}</span>' if czas else ''
     label = f'<p>{name_html}{duration_html}</p>'
-    promo_html = f'<span class="promo-badge">{promo}</span>' if promo else ''
+    promo_html = f'<span class="promo-badge">{html_module.escape(promo, quote=False)}</span>' if promo else ''
 
     if offer_item_id:
         href = (

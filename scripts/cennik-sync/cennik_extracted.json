@@ -225,7 +225,7 @@
             "rows": [
               {
                 "name": "Cała twarz",
-                "duration": "25 min",
+                "duration": "25 min · Wąsik, broda, policzki, baki.",
                 "price": "349 zł",
                 "offerItemId": "s:9410878",
                 "promo": ""
@@ -246,14 +246,14 @@
               },
               {
                 "name": "Bikini pełne",
-                "duration": "25 min",
+                "duration": "25 min · Pełne lub niepełne — ta sama cena.",
                 "price": "349 zł",
                 "offerItemId": "s:9410878",
                 "promo": ""
               },
               {
                 "name": "Brzuch",
-                "duration": "25 min",
+                "duration": "25 min · Brzuch i linia brzucha.",
                 "price": "349 zł",
                 "offerItemId": "s:9410878",
                 "promo": ""
@@ -317,14 +317,14 @@
             "rows": [
               {
                 "name": "Całe nogi",
-                "duration": "1 godz. i 5 min",
+                "duration": "1 godz. i 5 min · Stopy, łydki, kolana, uda.",
                 "price": "698 zł",
                 "offerItemId": "s:24457937",
                 "promo": ""
               },
               {
                 "name": "Całe ręce",
-                "duration": "1 godz. i 5 min",
+                "duration": "1 godz. i 5 min · Dłonie, przedramiona, ramiona.",
                 "price": "698 zł",
                 "offerItemId": "s:24457937",
                 "promo": ""
@@ -467,6 +467,21 @@
                 "duration": "1 godz. i 5 min",
                 "price": "349 zł",
                 "offerItemId": "s:24458930",
+                "promo": ""
+              }
+            ],
+            "nestedTiers": []
+          },
+          {
+            "tierName": "Strój zabiegowy",
+            "subpageUrl": "",
+            "badgePrice": "100 zł",
+            "rows": [
+              {
+                "name": "Endermowear™",
+                "duration": "Wielorazowego użytku — kupujesz raz, korzystasz przy każdej kolejnej wizycie.",
+                "price": "100 zł",
+                "offerItemId": "",
                 "promo": ""
               }
             ],
@@ -633,7 +648,7 @@
           {
             "name": "Ciało (redukcja rozstępów i blizn)",
             "duration": "1 godz. i 5 min",
-            "price": "od 399 zł",
+            "price": "399 zł",
             "offerItemId": "s:24469375",
             "promo": ""
           },
@@ -712,8 +727,8 @@
             "promo": ""
           },
           {
-            "name": "Booster LED (Dodatek do wybranego zabiegu)",
-            "duration": "50 min",
+            "name": "Booster LED",
+            "duration": "dodatek do wybranego zabiegu · 50 min",
             "price": "99 zł",
             "offerItemId": "s:24470013",
             "promo": ""
@@ -724,14 +739,42 @@
       },
       {
         "tierName": "Plasma™",
-        "subpageUrl": "",
-        "badgePrice": "---",
+        "subpageUrl": "../zabiegi/plasma",
+        "badgePrice": "od 249 zł",
         "rows": [
           {
-            "name": "Plasma™",
-            "duration": "",
-            "price": "---",
-            "offerItemId": "",
+            "name": "Usuwanie zmian skórnych (włókniaki / brodawki)",
+            "duration": "35 min",
+            "price": "od 249 zł",
+            "offerItemId": "s:24470227",
+            "promo": ""
+          },
+          {
+            "name": "Kurze łapki",
+            "duration": "50 min",
+            "price": "799 zł",
+            "offerItemId": "s:24470227",
+            "promo": ""
+          },
+          {
+            "name": "Powieki górne",
+            "duration": "50 min",
+            "price": "799 zł",
+            "offerItemId": "s:24470227",
+            "promo": ""
+          },
+          {
+            "name": "Powieki dolne",
+            "duration": "50 min",
+            "price": "799 zł",
+            "offerItemId": "s:24470227",
+            "promo": ""
+          },
+          {
+            "name": "Cała okolica oczu (Total Eye Lift)",
+            "duration": "1 godz. i 5 min",
+            "price": "1499 zł",
+            "offerItemId": "s:24470227",
             "promo": ""
           }
         ],
@@ -766,21 +809,21 @@
           },
           {
             "name": "Terapia rozszerzona - twarz",
-            "duration": "1 godz. i 5 min",
+            "duration": "1 godz. i 5 min · Z maską lub mezoterapią ampułką na zakończenie.",
             "price": "1150 zł",
             "offerItemId": "s:24468071",
             "promo": ""
           },
           {
             "name": "Terapia rozszerzona - twarz + szyja",
-            "duration": "1 godz. i 10 min",
+            "duration": "1 godz. i 10 min · Z maską lub mezoterapią ampułką na zakończenie.",
             "price": "1450 zł",
             "offerItemId": "s:24468071",
             "promo": ""
           },
           {
             "name": "Terapia rozszerzona - twarz + szyja + dekolt",
-            "duration": "1 godz. i 20 min",
+            "duration": "1 godz. i 20 min · Z maską lub mezoterapią ampułką na zakończenie.",
             "price": "1750 zł",
             "offerItemId": "s:24468071",
             "promo": ""
@@ -802,7 +845,7 @@
             "promo": ""
           },
           {
-            "name": "Ciało (rozstępy i blizny)",
+            "name": "Ciało — rozstępy i blizny",
             "duration": "45 min",
             "price": "od 799 zł",
             "offerItemId": "s:24469738",
@@ -817,7 +860,7 @@
           },
           {
             "name": "Twarz + szyja + dekolt (+Pixel Peel)",
-            "duration": "1 godz. i 5 min",
+            "duration": "1 godz. i 5 min · Połączenie z zaawansowanym peelingiem medycznym.",
             "price": "1499 zł",
             "offerItemId": "s:24469738",
             "promo": ""
@@ -846,7 +889,7 @@
             "promo": ""
           },
           {
-            "name": "Usta (kontur i rewitalizacja czerwieni wargowej)",
+            "name": "Usta — kontur i rewitalizacja czerwieni wargowej",
             "duration": "1 godz. i 5 min",
             "price": "849 zł",
             "offerItemId": "s:24479368",
@@ -860,7 +903,7 @@
             "promo": ""
           },
           {
-            "name": "Full Face (pełna wolumetria twarzy)",
+            "name": "Full Face — pełna wolumetria twarzy",
             "duration": "1 godz. i 15 min",
             "price": "1999 zł",
             "offerItemId": "s:24479368",
@@ -883,7 +926,7 @@
         "badgePrice": "od 949 zł",
         "rows": [
           {
-            "name": "Full Face",
+            "name": "Full Face — globalne odmłodzenie całej twarzy",
             "duration": "1 godz. i 5 min",
             "price": "1799 zł",
             "offerItemId": "s:24479437",
@@ -904,14 +947,14 @@
             "promo": ""
           },
           {
-            "name": "Okolice ciała (kolana, ramiona lub brzuch)",
+            "name": "Okolice ciała — kolana, ramiona lub brzuch",
             "duration": "1 godz. i 5 min",
             "price": "od 949 zł",
             "offerItemId": "s:24479437",
             "promo": ""
           },
           {
-            "name": "Terapia łączona (uzupełnienie procedury)",
+            "name": "Terapia łączona — uzupełnienie procedury",
             "duration": "1 godz. i 5 min",
             "price": "od 949 zł",
             "offerItemId": "s:24479437",
@@ -988,7 +1031,7 @@
           },
           {
             "name": "Nici wypełniające Cavern Fill (1 szt.)",
-            "duration": "35 min",
+            "duration": "35 min · Nić o strukturze sprężyny, dedykowana głębokim ubytkom.",
             "price": "od 299 zł",
             "offerItemId": "s:24481289",
             "promo": ""

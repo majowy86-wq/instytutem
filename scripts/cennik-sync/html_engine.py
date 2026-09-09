@@ -35,12 +35,15 @@ def find_matching_close_div(html: str, open_tag_end: int) -> int:
 
 def find_outer_treatment_block(html: str, treatment_name: str, search_from: int = 0):
     """Znajduje OUTER <details class="price-tier price-tier--group">...</details> zabiegu
-    w /cennik (identyfikowany po h3 z accordion-info-link, bo nested-podgrupy powtarzają
-    tę samą nazwę bez linku). Zwraca (start, end) — end TUŻ PO zamykającym </details>."""
-    marker = f'<h3 class="treatment-accordion-q">{treatment_name}<a class="accordion-info-link"'
+    w /cennik. Zabiegi Z podstroną mają na tym h3 link accordion-info-link, zabiegi BEZ
+    podstrony (np. Karboksyterapia bezigłowa CO2) — nie. Identyfikacja przez PIERWSZE
+    wystąpienie h3 z tą nazwą działa dla obu, bo zagnieżdżone podgrupy o tej samej nazwie
+    (jeśli występują) zawsze idą PO własnym, zewnętrznym nagłówku, nigdy przed nim.
+    Zwraca (start, end) — end TUŻ PO zamykającym </details>."""
+    marker = f'<h3 class="treatment-accordion-q">{treatment_name}'
     h3_pos = html.find(marker, search_from)
     if h3_pos == -1:
-        raise ValueError(f"Nie znaleziono nagłówka zabiegu (z linkiem): {treatment_name!r}")
+        raise ValueError(f"Nie znaleziono nagłówka zabiegu: {treatment_name!r}")
 
     # cofnij się do otwierającego <details ...> poprzedzającego ten h3
     details_start = html.rfind("<details", 0, h3_pos)
