@@ -3322,7 +3322,7 @@ p .price-row-badges{ margin-left:10px; }
 .blog-grid{
   display:grid;
   grid-template-columns:repeat(2, 1fr);
-  gap:var(--sp-40);
+  gap:var(--sp-64);
 }
 @media (max-width:767px){
   .blog-grid{ grid-template-columns:1fr; }
@@ -3349,7 +3349,7 @@ p .price-row-badges{ margin-left:10px; }
   font-family:"Inter",sans-serif; font-size:24px; font-weight:500; line-height:31.2px;
   letter-spacing:-0.48px; color:var(--a-ink-warm); margin:0 0 10px;
 }
-.blog-card-line{ height:1px; background:#D2D2D7; margin:24px 0 8px; }
+.blog-card-line{ display:block; width:100%; height:1px; background:#D2D2D7; margin:24px 0 8px; }
 
 /* Pojedynczy wpis — struktura DOKŁADNIE odtworzona z żywego archon.au (2026-09-09, druga
    runda pomiarów po uwadze użytkownika "1:1, żebym nie mógł się do niczego przyczepić").
