@@ -3412,6 +3412,7 @@ p .price-row-badges{ margin-left:10px; }
   font-family:"Inter",sans-serif; font-size:16px; font-weight:400; line-height:27.2px;
   color:var(--a-ink-warm); margin-bottom:6px;
 }
+.blog-article-body .blog-cta{ margin-top:32px; }
 @media (max-width:767px){
   .blog-post-header, .blog-byline-row, .blog-content-row{ grid-template-columns:1fr; column-gap:0; }
   .blog-content-row .blog-spacer{ display:none; }
