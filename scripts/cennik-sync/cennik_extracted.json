@@ -1,0 +1,1545 @@
+[
+  {
+    "sectionTitle": "Konsultacje i diagnostyka",
+    "sectionId": "konsultacje-i-diagnostyka",
+    "groups": [
+      {
+        "tierName": "Konsultacja kwalifikująca do zabiegu depilacji laserowej",
+        "subpageUrl": "",
+        "badgePrice": "0 zł",
+        "rows": [
+          {
+            "name": "Konsultacja kwalifikująca do zabiegu depilacji laserowej",
+            "duration": "25 min",
+            "price": "49 zł0 zł",
+            "offerItemId": "s:25016625",
+            "promo": "Promocja"
+          }
+        ],
+        "nestedTiers": [],
+        "subheading": ""
+      },
+      {
+        "tierName": "DERMOkonsultacja (twarz)",
+        "subpageUrl": "",
+        "badgePrice": "149 zł",
+        "rows": [
+          {
+            "name": "DERMOkonsultacja (twarz)",
+            "duration": "35 min",
+            "price": "149 zł",
+            "offerItemId": "s:24458471",
+            "promo": ""
+          }
+        ],
+        "nestedTiers": [],
+        "subheading": "Dla Twarzy"
+      },
+      {
+        "tierName": "Konsultacja trychologiczna",
+        "subpageUrl": "",
+        "badgePrice": "299 zł",
+        "rows": [
+          {
+            "name": "Konsultacja trychologiczna",
+            "duration": "35 min",
+            "price": "299 zł",
+            "offerItemId": "",
+            "promo": ""
+          }
+        ],
+        "nestedTiers": [],
+        "subheading": "Dla Twarzy"
+      },
+      {
+        "tierName": "Wizyta kontrolna",
+        "subpageUrl": "",
+        "badgePrice": "0 zł",
+        "rows": [
+          {
+            "name": "Wizyta kontrolna",
+            "duration": "15 min",
+            "price": "0 zł",
+            "offerItemId": "",
+            "promo": ""
+          }
+        ],
+        "nestedTiers": [],
+        "subheading": "Dla Twarzy"
+      },
+      {
+        "tierName": "DERMOkonsultacja (ciało)",
+        "subpageUrl": "",
+        "badgePrice": "149 zł",
+        "rows": [
+          {
+            "name": "DERMOkonsultacja (ciało)",
+            "duration": "35 min",
+            "price": "149 zł",
+            "offerItemId": "s:24458504",
+            "promo": ""
+          }
+        ],
+        "nestedTiers": [],
+        "subheading": "Dla Ciała"
+      },
+      {
+        "tierName": "Wizyta kontrolna",
+        "subpageUrl": "",
+        "badgePrice": "0 zł",
+        "rows": [
+          {
+            "name": "Wizyta kontrolna",
+            "duration": "15 min",
+            "price": "0 zł",
+            "offerItemId": "",
+            "promo": ""
+          }
+        ],
+        "nestedTiers": [],
+        "subheading": "Dla Ciała"
+      }
+    ]
+  },
+  {
+    "sectionTitle": "Zabiegi",
+    "sectionId": "zabiegi",
+    "groups": [
+      {
+        "tierName": "Epilacja laserowa LightSheer®",
+        "subpageUrl": "../zabiegi/depilacja-laserowa-plock-lightsheer",
+        "badgePrice": "od 179 zł",
+        "rows": [],
+        "nestedTiers": [
+          {
+            "tierName": "Konsultacje",
+            "subpageUrl": "",
+            "badgePrice": "0 zł",
+            "rows": [
+              {
+                "name": "Konsultacja kwalifikująca do zabiegu",
+                "duration": "25 min · Obejmuje próbę laserową.",
+                "price": "49 zł0 zł",
+                "offerItemId": "",
+                "promo": "Promocja"
+              },
+              {
+                "name": "Wizyta kontrolna",
+                "duration": "Dla osób w trakcie serii zabiegowej lub po próbie laserowej.",
+                "price": "0 zł",
+                "offerItemId": "",
+                "promo": ""
+              }
+            ],
+            "nestedTiers": []
+          },
+          {
+            "tierName": "(S) mała partia ciała",
+            "subpageUrl": "",
+            "badgePrice": "179 zł",
+            "rows": [
+              {
+                "name": "Szpara międzypośladkowa",
+                "duration": "15 min",
+                "price": "179 zł",
+                "offerItemId": "s:9410150",
+                "promo": ""
+              },
+              {
+                "name": "Kolana",
+                "duration": "20 min",
+                "price": "179 zł",
+                "offerItemId": "s:9410150",
+                "promo": ""
+              },
+              {
+                "name": "Baki",
+                "duration": "20 min",
+                "price": "179 zł",
+                "offerItemId": "s:9410150",
+                "promo": ""
+              },
+              {
+                "name": "Stopy",
+                "duration": "20 min",
+                "price": "179 zł",
+                "offerItemId": "s:9410150",
+                "promo": ""
+              },
+              {
+                "name": "Kark",
+                "duration": "20 min",
+                "price": "179 zł",
+                "offerItemId": "s:9410150",
+                "promo": ""
+              },
+              {
+                "name": "Sutki",
+                "duration": "20 min",
+                "price": "179 zł",
+                "offerItemId": "s:9410150",
+                "promo": ""
+              },
+              {
+                "name": "Dłonie",
+                "duration": "20 min",
+                "price": "179 zł",
+                "offerItemId": "s:9410150",
+                "promo": ""
+              },
+              {
+                "name": "Policzki",
+                "duration": "20 min",
+                "price": "179 zł",
+                "offerItemId": "s:9410150",
+                "promo": ""
+              },
+              {
+                "name": "Broda",
+                "duration": "20 min",
+                "price": "179 zł",
+                "offerItemId": "s:9410150",
+                "promo": ""
+              },
+              {
+                "name": "Wąsik",
+                "duration": "20 min",
+                "price": "179 zł",
+                "offerItemId": "s:9410150",
+                "promo": ""
+              },
+              {
+                "name": "Linia brzucha",
+                "duration": "20 min",
+                "price": "179 zł",
+                "offerItemId": "s:9410150",
+                "promo": ""
+              }
+            ],
+            "nestedTiers": []
+          },
+          {
+            "tierName": "(M) standardowa partia ciała",
+            "subpageUrl": "",
+            "badgePrice": "349 zł",
+            "rows": [
+              {
+                "name": "Cała twarz",
+                "duration": "25 min",
+                "price": "349 zł",
+                "offerItemId": "s:9410878",
+                "promo": ""
+              },
+              {
+                "name": "Ramiona",
+                "duration": "25 min",
+                "price": "349 zł",
+                "offerItemId": "s:9410878",
+                "promo": ""
+              },
+              {
+                "name": "Pośladki",
+                "duration": "25 min",
+                "price": "349 zł",
+                "offerItemId": "s:9410878",
+                "promo": ""
+              },
+              {
+                "name": "Bikini pełne",
+                "duration": "25 min",
+                "price": "349 zł",
+                "offerItemId": "s:9410878",
+                "promo": ""
+              },
+              {
+                "name": "Brzuch",
+                "duration": "25 min",
+                "price": "349 zł",
+                "offerItemId": "s:9410878",
+                "promo": ""
+              },
+              {
+                "name": "Pachy",
+                "duration": "25 min",
+                "price": "349 zł",
+                "offerItemId": "s:9410878",
+                "promo": ""
+              },
+              {
+                "name": "Przedramiona",
+                "duration": "20 min",
+                "price": "349 zł",
+                "offerItemId": "s:9410878",
+                "promo": ""
+              },
+              {
+                "name": "Szyja",
+                "duration": "20 min",
+                "price": "349 zł",
+                "offerItemId": "s:9410878",
+                "promo": ""
+              },
+              {
+                "name": "Uda",
+                "duration": "20 min",
+                "price": "349 zł",
+                "offerItemId": "s:9410878",
+                "promo": ""
+              },
+              {
+                "name": "Klatka piersiowa",
+                "duration": "30 min",
+                "price": "349 zł",
+                "offerItemId": "s:9410878",
+                "promo": ""
+              },
+              {
+                "name": "Łydki",
+                "duration": "30 min",
+                "price": "349 zł",
+                "offerItemId": "s:9410878",
+                "promo": ""
+              },
+              {
+                "name": "Plecy",
+                "duration": "35 min",
+                "price": "349 zł",
+                "offerItemId": "s:9410878",
+                "promo": ""
+              }
+            ],
+            "nestedTiers": []
+          },
+          {
+            "tierName": "(L) duża partia ciała",
+            "subpageUrl": "",
+            "badgePrice": "698 zł",
+            "rows": [
+              {
+                "name": "Całe nogi",
+                "duration": "1 godz. i 5 min",
+                "price": "698 zł",
+                "offerItemId": "s:24457937",
+                "promo": ""
+              },
+              {
+                "name": "Całe ręce",
+                "duration": "1 godz. i 5 min",
+                "price": "698 zł",
+                "offerItemId": "s:24457937",
+                "promo": ""
+              }
+            ],
+            "nestedTiers": []
+          },
+          {
+            "tierName": "Pakiety Elastyczne",
+            "subpageUrl": "",
+            "badgePrice": "od 1890 zł",
+            "rows": [
+              {
+                "name": "Pakiet MINI 6 – Epilacja laserowa (M)",
+                "duration": "6 zabiegów · ważny 12 mies.",
+                "price": "1890 zł",
+                "offerItemId": "",
+                "promo": "Zaoszczędź 10%"
+              },
+              {
+                "name": "Pakiet COMFORT 10 – Epilacja laserowa (M)",
+                "duration": "10 zabiegów · ważny 12 mies.",
+                "price": "2890 zł",
+                "offerItemId": "",
+                "promo": "Zaoszczędź 17%"
+              },
+              {
+                "name": "Pakiet PREMIUM 20 – Epilacja laserowa (M)",
+                "duration": "20 zabiegów · ważny 18 mies.",
+                "price": "4790 zł",
+                "offerItemId": "",
+                "promo": "Zaoszczędź 31%"
+              }
+            ],
+            "nestedTiers": []
+          },
+          {
+            "tierName": "Przygotowanie do zabiegu",
+            "subpageUrl": "",
+            "badgePrice": "+50 zł",
+            "rows": [
+              {
+                "name": "Ogolenie strefy zabiegowej przez kosmetologa",
+                "duration": "Pamiętaj, żeby ogolić strefę zabiegową maszynką najpóźniej 24 godziny przed wizytą — jeśli zapomnisz, chętnie zrobimy to za Ciebie na miejscu.",
+                "price": "+50 zł",
+                "offerItemId": "",
+                "promo": ""
+              }
+            ],
+            "nestedTiers": []
+          }
+        ],
+        "subheading": "Zabiegi Hi-Tech"
+      },
+      {
+        "tierName": "LUMIVEX® - laser tulowy (erbowo-szklany)",
+        "subpageUrl": "../laser-tulowy-plock",
+        "badgePrice": "od 299 zł",
+        "rows": [
+          {
+            "name": "Zabieg punktowy",
+            "duration": "20 min",
+            "price": "od 299 zł",
+            "offerItemId": "s:24468530",
+            "promo": ""
+          },
+          {
+            "name": "Dłonie",
+            "duration": "45 min",
+            "price": "599 zł",
+            "offerItemId": "s:24468530",
+            "promo": ""
+          },
+          {
+            "name": "Okolica oczu",
+            "duration": "45 min",
+            "price": "799 zł",
+            "offerItemId": "s:24468530",
+            "promo": ""
+          },
+          {
+            "name": "Szyja lub dekolt",
+            "duration": "45 min",
+            "price": "899 zł",
+            "offerItemId": "s:24468530",
+            "promo": ""
+          },
+          {
+            "name": "Twarz",
+            "duration": "1 godz. i 5 min",
+            "price": "1199 zł",
+            "offerItemId": "s:24468530",
+            "promo": ""
+          },
+          {
+            "name": "Twarz + szyja",
+            "duration": "1 godz. i 20 min",
+            "price": "1499 zł",
+            "offerItemId": "s:24468530",
+            "promo": ""
+          },
+          {
+            "name": "Twarz + szyja + dekolt",
+            "duration": "1 godz. i 35 min",
+            "price": "1799 zł",
+            "offerItemId": "s:24468530",
+            "promo": ""
+          }
+        ],
+        "nestedTiers": [],
+        "subheading": "Zabiegi Hi-Tech"
+      },
+      {
+        "tierName": "Endermologia LPG® Alliance",
+        "subpageUrl": "../zabiegi/endermologia-plock-lpg-alliance",
+        "badgePrice": "od 179 zł",
+        "rows": [],
+        "nestedTiers": [
+          {
+            "tierName": "Endermologia LPG® Alliance",
+            "subpageUrl": "",
+            "badgePrice": "od 179 zł",
+            "rows": [
+              {
+                "name": "Sesja 20 minutowa",
+                "duration": "25 min",
+                "price": "179 zł",
+                "offerItemId": "s:24458930",
+                "promo": ""
+              },
+              {
+                "name": "Sesja 40 minutowa",
+                "duration": "45 min",
+                "price": "299 zł",
+                "offerItemId": "s:24458930",
+                "promo": ""
+              },
+              {
+                "name": "Sesja 60 minutowa",
+                "duration": "1 godz. i 5 min",
+                "price": "349 zł",
+                "offerItemId": "s:24458930",
+                "promo": ""
+              }
+            ],
+            "nestedTiers": []
+          },
+          {
+            "tierName": "Pakiety",
+            "subpageUrl": "",
+            "badgePrice": "od 1390 zł",
+            "rows": [
+              {
+                "name": "Pakiet 10x Endermologia (20 min) ★ Fokus",
+                "duration": "10 zabiegów",
+                "price": "1390 zł",
+                "offerItemId": "",
+                "promo": "Zaoszczędź 22%"
+              },
+              {
+                "name": "Pakiet 15x Endermologia (20 min) ★ Fokus",
+                "duration": "15 zabiegów",
+                "price": "1890 zł",
+                "offerItemId": "",
+                "promo": "Zaoszczędź 30%"
+              },
+              {
+                "name": "Pakiet 10x Endermologia (40 min) ★ Classic",
+                "duration": "10 zabiegów",
+                "price": "1990 zł",
+                "offerItemId": "",
+                "promo": "Zaoszczędź 33%"
+              },
+              {
+                "name": "Pakiet 15x Endermologia (40 min) ★ Classic",
+                "duration": "15 zabiegów",
+                "price": "2690 zł",
+                "offerItemId": "",
+                "promo": "Zaoszczędź 40%"
+              },
+              {
+                "name": "Pakiet 10x Endermologia (60 min) ★ Total",
+                "duration": "10 zabiegów",
+                "price": "2790 zł",
+                "offerItemId": "",
+                "promo": "Zaoszczędź 20%"
+              },
+              {
+                "name": "Pakiet 15x Endermologia (60 min) ★ Total",
+                "duration": "15 zabiegów",
+                "price": "3690 zł",
+                "offerItemId": "",
+                "promo": "Zaoszczędź 30%"
+              }
+            ],
+            "nestedTiers": []
+          }
+        ],
+        "subheading": "Zabiegi Hi-Tech"
+      },
+      {
+        "tierName": "Endermologia Twarzy LPG® Endermolift™",
+        "subpageUrl": "../zabiegi/endermologia-twarzy-plock-lpg-endermolift",
+        "badgePrice": "180 zł",
+        "rows": [],
+        "nestedTiers": [
+          {
+            "tierName": "Zabieg",
+            "subpageUrl": "",
+            "badgePrice": "180 zł",
+            "rows": [
+              {
+                "name": "Endermolift™ (twarz, szyja, dekolt)",
+                "duration": "45 min",
+                "price": "180 zł",
+                "offerItemId": "",
+                "promo": ""
+              }
+            ],
+            "nestedTiers": []
+          },
+          {
+            "tierName": "Pakiety",
+            "subpageUrl": "",
+            "badgePrice": "1260 zł",
+            "rows": [
+              {
+                "name": "Pakiet 10 zabiegów Endermolift™ (40 min)",
+                "duration": "10 zabiegów",
+                "price": "1260 zł",
+                "offerItemId": "",
+                "promo": ""
+              }
+            ],
+            "nestedTiers": []
+          },
+          {
+            "tierName": "Pakiety łączone",
+            "subpageUrl": "",
+            "badgePrice": "449 zł",
+            "rows": [
+              {
+                "name": "Karboksyterapia + Lifting LPG® Ergolift",
+                "duration": "1 godz. i 20 min · 2 usługi",
+                "price": "449 zł",
+                "offerItemId": "",
+                "promo": "Zaoszczędź 10%"
+              }
+            ],
+            "nestedTiers": []
+          }
+        ],
+        "subheading": "Zabiegi Hi-Tech"
+      },
+      {
+        "tierName": "Kriolipoliza cooltech®",
+        "subpageUrl": "../zabiegi/kriolipoliza-plock-cooltech",
+        "badgePrice": "od 790 zł",
+        "rows": [],
+        "nestedTiers": [
+          {
+            "tierName": "Kriolipoliza cooltech®",
+            "subpageUrl": "",
+            "badgePrice": "od 790 zł",
+            "rows": [
+              {
+                "name": "Przyłożenie 1 głowicy",
+                "duration": "1 godz. i 30 min",
+                "price": "790 zł",
+                "offerItemId": "s:24462591",
+                "promo": ""
+              },
+              {
+                "name": "Przyłożenie 2 głowic (na raz)",
+                "duration": "1 godz. i 30 min",
+                "price": "1290 zł",
+                "offerItemId": "s:24462591",
+                "promo": ""
+              }
+            ],
+            "nestedTiers": []
+          },
+          {
+            "tierName": "Pakiety",
+            "subpageUrl": "",
+            "badgePrice": "1990 zł",
+            "rows": [
+              {
+                "name": "Pakiet Kriolipoliza Cooltech 2x2",
+                "duration": "2 wizyty · 4 przyłożenia",
+                "price": "1990 zł",
+                "offerItemId": "",
+                "promo": "Zaoszczędź 37%"
+              }
+            ],
+            "nestedTiers": []
+          }
+        ],
+        "subheading": "Zabiegi Hi-Tech"
+      },
+      {
+        "tierName": "Bloomea® – Makroeksfoliacja i resurfacing skóry",
+        "subpageUrl": "../zabiegi/modeling-skory-bloomea",
+        "badgePrice": "od 399 zł",
+        "rows": [
+          {
+            "name": "Ciało (redukcja rozstępów i blizn)",
+            "duration": "1 godz. i 5 min",
+            "price": "od 399 zł",
+            "offerItemId": "s:24469375",
+            "promo": ""
+          },
+          {
+            "name": "Twarz + szyja + dekolt",
+            "duration": "1 godz. i 5 min",
+            "price": "549 zł",
+            "offerItemId": "s:24469375",
+            "promo": ""
+          },
+          {
+            "name": "Twarz + szyja + dekolt (z peelingiem chemicznym)",
+            "duration": "1 godz. i 5 min",
+            "price": "599 zł",
+            "offerItemId": "s:24469375",
+            "promo": ""
+          }
+        ],
+        "nestedTiers": [],
+        "subheading": "Zabiegi Hi-Tech"
+      },
+      {
+        "tierName": "Oczyszczanie wodorowe",
+        "subpageUrl": "../zabiegi/oczyszczanie-wodorowe-plock",
+        "badgePrice": "od 299 zł",
+        "rows": [
+          {
+            "name": "Podstawowe - twarz",
+            "duration": "45 min",
+            "price": "299 zł",
+            "offerItemId": "s:24480407",
+            "promo": ""
+          },
+          {
+            "name": "Podstawowe - plecy",
+            "duration": "45 min",
+            "price": "349 zł",
+            "offerItemId": "s:24480407",
+            "promo": ""
+          },
+          {
+            "name": "Podstawowe - twarz + szyja + dekolt",
+            "duration": "1 godz. i 25 min",
+            "price": "399 zł",
+            "offerItemId": "s:24480407",
+            "promo": ""
+          },
+          {
+            "name": "Premium - twarz",
+            "duration": "1 godz. i 15 min",
+            "price": "399 zł",
+            "offerItemId": "s:24480407",
+            "promo": ""
+          },
+          {
+            "name": "Premium - twarz + szyja + dekolt",
+            "duration": "1 godz. i 25 min",
+            "price": "499 zł",
+            "offerItemId": "s:24480407",
+            "promo": ""
+          }
+        ],
+        "nestedTiers": [],
+        "subheading": "Zabiegi Hi-Tech"
+      },
+      {
+        "tierName": "Dermalux® Flex MD – Fototerapia LED",
+        "subpageUrl": "../fototerapia-dermalux-plock",
+        "badgePrice": "od 99 zł",
+        "rows": [
+          {
+            "name": "Samodzielny zabieg terapeutyczny",
+            "duration": "50 min",
+            "price": "199 zł",
+            "offerItemId": "s:24470013",
+            "promo": ""
+          },
+          {
+            "name": "Booster LED (Dodatek do wybranego zabiegu)",
+            "duration": "50 min",
+            "price": "99 zł",
+            "offerItemId": "s:24470013",
+            "promo": ""
+          }
+        ],
+        "nestedTiers": [],
+        "subheading": "Zabiegi Hi-Tech"
+      },
+      {
+        "tierName": "Plasma™",
+        "subpageUrl": "",
+        "badgePrice": "---",
+        "rows": [
+          {
+            "name": "Plasma™",
+            "duration": "",
+            "price": "---",
+            "offerItemId": "",
+            "promo": ""
+          }
+        ],
+        "nestedTiers": [],
+        "subheading": "Zabiegi Hi-Tech"
+      },
+      {
+        "tierName": "Radiofrekwencja mikroigłowa RF",
+        "subpageUrl": "../radiofrekwencja-mikroiglowa-plock",
+        "badgePrice": "od 950 zł",
+        "rows": [
+          {
+            "name": "Terapia podstawowa - twarz",
+            "duration": "1 godz. i 5 min",
+            "price": "950 zł",
+            "offerItemId": "s:24468071",
+            "promo": ""
+          },
+          {
+            "name": "Terapia podstawowa - twarz + szyja",
+            "duration": "1 godz. i 10 min",
+            "price": "1250 zł",
+            "offerItemId": "s:24468071",
+            "promo": ""
+          },
+          {
+            "name": "Terapia podstawowa - twarz + szyja + dekolt",
+            "duration": "1 godz. i 20 min",
+            "price": "1550 zł",
+            "offerItemId": "s:24468071",
+            "promo": ""
+          },
+          {
+            "name": "Terapia rozszerzona - twarz",
+            "duration": "1 godz. i 5 min",
+            "price": "1150 zł",
+            "offerItemId": "s:24468071",
+            "promo": ""
+          },
+          {
+            "name": "Terapia rozszerzona - twarz + szyja",
+            "duration": "1 godz. i 10 min",
+            "price": "1450 zł",
+            "offerItemId": "s:24468071",
+            "promo": ""
+          },
+          {
+            "name": "Terapia rozszerzona - twarz + szyja + dekolt",
+            "duration": "1 godz. i 20 min",
+            "price": "1750 zł",
+            "offerItemId": "s:24468071",
+            "promo": ""
+          }
+        ],
+        "nestedTiers": [],
+        "subheading": "Zabiegi Hi-Tech"
+      },
+      {
+        "tierName": "SkinPen® – Mikronakłuwanie skóry",
+        "subpageUrl": "../zabiegi/skinpen-plock-mikronakluwanie",
+        "badgePrice": "od 699 zł",
+        "rows": [
+          {
+            "name": "Blizny potrądzikowe (twarz)",
+            "duration": "45 min",
+            "price": "od 699 zł",
+            "offerItemId": "s:24469738",
+            "promo": ""
+          },
+          {
+            "name": "Ciało (rozstępy i blizny)",
+            "duration": "45 min",
+            "price": "od 799 zł",
+            "offerItemId": "s:24469738",
+            "promo": ""
+          },
+          {
+            "name": "Twarz + szyja + dekolt (standard)",
+            "duration": "55 min",
+            "price": "1049 zł",
+            "offerItemId": "s:24469738",
+            "promo": ""
+          },
+          {
+            "name": "Twarz + szyja + dekolt (+Pixel Peel)",
+            "duration": "1 godz. i 5 min",
+            "price": "1499 zł",
+            "offerItemId": "s:24469738",
+            "promo": ""
+          }
+        ],
+        "nestedTiers": [],
+        "subheading": "Zabiegi Hi-Tech"
+      },
+      {
+        "tierName": "Autologiczne wypełniacze ATR",
+        "subpageUrl": "../zabiegi/autologiczne-wypelniacze-atr",
+        "badgePrice": "od 849 zł",
+        "rows": [
+          {
+            "name": "Bruzdy nosowo-wargowe i linie marionetki",
+            "duration": "1 godz. i 5 min",
+            "price": "849 zł",
+            "offerItemId": "s:24479368",
+            "promo": ""
+          },
+          {
+            "name": "Dolina łez",
+            "duration": "1 godz. i 5 min",
+            "price": "849 zł",
+            "offerItemId": "s:24479368",
+            "promo": ""
+          },
+          {
+            "name": "Usta (kontur i rewitalizacja czerwieni wargowej)",
+            "duration": "1 godz. i 5 min",
+            "price": "849 zł",
+            "offerItemId": "s:24479368",
+            "promo": ""
+          },
+          {
+            "name": "Blizny potrądzikowe i zanikowe",
+            "duration": "1 godz. i 15 min",
+            "price": "od 849 zł",
+            "offerItemId": "s:24479368",
+            "promo": ""
+          },
+          {
+            "name": "Full Face (pełna wolumetria twarzy)",
+            "duration": "1 godz. i 15 min",
+            "price": "1999 zł",
+            "offerItemId": "s:24479368",
+            "promo": ""
+          },
+          {
+            "name": "Szyja i dekolt",
+            "duration": "1 godz. i 15 min",
+            "price": "1999 zł",
+            "offerItemId": "s:24479368",
+            "promo": ""
+          }
+        ],
+        "nestedTiers": [],
+        "subheading": "Zabiegi Iniekcyjne"
+      },
+      {
+        "tierName": "Lenisna® – Kwas polimlekowy PLLA",
+        "subpageUrl": "../zabiegi/kwas-polimlekowy-plla",
+        "badgePrice": "od 949 zł",
+        "rows": [
+          {
+            "name": "Full Face",
+            "duration": "1 godz. i 5 min",
+            "price": "1799 zł",
+            "offerItemId": "s:24479437",
+            "promo": ""
+          },
+          {
+            "name": "Szyja i dekolt",
+            "duration": "1 godz. i 5 min",
+            "price": "1799 zł",
+            "offerItemId": "s:24479437",
+            "promo": ""
+          },
+          {
+            "name": "Dłonie",
+            "duration": "1 godz. i 5 min",
+            "price": "1499 zł",
+            "offerItemId": "s:24479437",
+            "promo": ""
+          },
+          {
+            "name": "Okolice ciała (kolana, ramiona lub brzuch)",
+            "duration": "1 godz. i 5 min",
+            "price": "od 949 zł",
+            "offerItemId": "s:24479437",
+            "promo": ""
+          },
+          {
+            "name": "Terapia łączona (uzupełnienie procedury)",
+            "duration": "1 godz. i 5 min",
+            "price": "od 949 zł",
+            "offerItemId": "s:24479437",
+            "promo": ""
+          }
+        ],
+        "nestedTiers": [],
+        "subheading": "Zabiegi Iniekcyjne"
+      },
+      {
+        "tierName": "Mezoterapia igłowa",
+        "subpageUrl": "../zabiegi/mezoterapia-iglowa-plock",
+        "badgePrice": "od 399 zł",
+        "rows": [
+          {
+            "name": "Twarz",
+            "duration": "50 min",
+            "price": "599 zł",
+            "offerItemId": "s:24481005",
+            "promo": ""
+          },
+          {
+            "name": "Twarz + szyja",
+            "duration": "50 min",
+            "price": "od 899 zł",
+            "offerItemId": "s:24481005",
+            "promo": ""
+          },
+          {
+            "name": "Twarz + szyja + dekolt",
+            "duration": "50 min",
+            "price": "1599 zł",
+            "offerItemId": "s:24481005",
+            "promo": ""
+          },
+          {
+            "name": "Light Eyes™ Ultra – Mezoterapia okolicy oczu",
+            "duration": "35 min",
+            "price": "399 zł",
+            "offerItemId": "s:24481081",
+            "promo": ""
+          }
+        ],
+        "nestedTiers": [],
+        "subheading": "Zabiegi Iniekcyjne"
+      },
+      {
+        "tierName": "Kwas hialuronowy",
+        "subpageUrl": "../zabiegi/wypelnianie-kwasem-hialuronowym-plock",
+        "badgePrice": "od 800 zł",
+        "rows": [
+          {
+            "name": "Wypełnianie kwasem hialuronowym",
+            "duration": "40–90 min · Cena zależy od miejsca zabiegowego i ilości preparatu.",
+            "price": "od 800 zł",
+            "offerItemId": "",
+            "promo": ""
+          }
+        ],
+        "nestedTiers": [],
+        "subheading": "Zabiegi Iniekcyjne"
+      },
+      {
+        "tierName": "Nici PDO i PLLA",
+        "subpageUrl": "../zabiegi/nici-liftinguj%C4%85ce-pdo",
+        "badgePrice": "od 99 zł",
+        "rows": [
+          {
+            "name": "Rewitalizacja nićmi Mono (1 szt.)",
+            "duration": "50 min",
+            "price": "od 99 zł",
+            "offerItemId": "s:24481289",
+            "promo": ""
+          },
+          {
+            "name": "Nici wypełniające Cavern Fill (1 szt.)",
+            "duration": "35 min",
+            "price": "od 299 zł",
+            "offerItemId": "s:24481289",
+            "promo": ""
+          },
+          {
+            "name": "Lifting nićmi haczykowymi COG",
+            "duration": "50 min",
+            "price": "od 999 zł",
+            "offerItemId": "s:24481289",
+            "promo": ""
+          }
+        ],
+        "nestedTiers": [],
+        "subheading": "Zabiegi Iniekcyjne"
+      },
+      {
+        "tierName": "Fibryna i osocze bogatopłytkowe",
+        "subpageUrl": "../fibryna-i-osocze-bogatoplytkowe",
+        "badgePrice": "od 699 zł",
+        "rows": [],
+        "nestedTiers": [
+          {
+            "tierName": "Fibryna bogatopłytkowa PRF",
+            "subpageUrl": "",
+            "badgePrice": "od 899 zł",
+            "rows": [
+              {
+                "name": "Okolica oczu",
+                "duration": "1 godz. i 5 min",
+                "price": "899 zł",
+                "offerItemId": "s:24480925",
+                "promo": ""
+              },
+              {
+                "name": "Skóra głowy",
+                "duration": "1 godz. i 5 min",
+                "price": "1099 zł",
+                "offerItemId": "s:24480925",
+                "promo": ""
+              },
+              {
+                "name": "Cała twarz",
+                "duration": "1 godz. i 5 min",
+                "price": "1199 zł",
+                "offerItemId": "s:24480925",
+                "promo": ""
+              },
+              {
+                "name": "Twarz + szyja",
+                "duration": "1 godz. i 5 min",
+                "price": "1699 zł",
+                "offerItemId": "s:24480925",
+                "promo": ""
+              },
+              {
+                "name": "Twarz + szyja + dekolt",
+                "duration": "1 godz. i 5 min",
+                "price": "2299 zł",
+                "offerItemId": "s:24480925",
+                "promo": ""
+              }
+            ],
+            "nestedTiers": []
+          },
+          {
+            "tierName": "Osocze bogatopłytkowe PRP",
+            "subpageUrl": "",
+            "badgePrice": "od 699 zł",
+            "rows": [
+              {
+                "name": "Okolica oczu",
+                "duration": "1 godz. i 5 min",
+                "price": "699 zł",
+                "offerItemId": "s:24480866",
+                "promo": ""
+              },
+              {
+                "name": "Skóra głowy",
+                "duration": "1 godz. i 5 min",
+                "price": "899 zł",
+                "offerItemId": "s:24480866",
+                "promo": ""
+              },
+              {
+                "name": "Cała twarz",
+                "duration": "1 godz. i 5 min",
+                "price": "899 zł",
+                "offerItemId": "s:24480866",
+                "promo": ""
+              },
+              {
+                "name": "Twarz + szyja",
+                "duration": "1 godz. i 5 min",
+                "price": "1399 zł",
+                "offerItemId": "s:24480866",
+                "promo": ""
+              },
+              {
+                "name": "Twarz + szyja + dekolt",
+                "duration": "1 godz. i 5 min",
+                "price": "1899 zł",
+                "offerItemId": "s:24480866",
+                "promo": ""
+              }
+            ],
+            "nestedTiers": []
+          }
+        ],
+        "subheading": "Zabiegi Iniekcyjne"
+      },
+      {
+        "tierName": "Stymulatory tkankowe",
+        "subpageUrl": "../zabiegi/stymulatory-tkankowe",
+        "badgePrice": "od 649 zł",
+        "rows": [
+          {
+            "name": "Hydro-Lifting (Ejal/Neauvia/Electri/Vitaran)",
+            "duration": "50 min",
+            "price": "649 zł",
+            "offerItemId": "s:24481259",
+            "promo": ""
+          },
+          {
+            "name": "Biorewitalizacja (Nucleofill/Cytocare/Restylane)",
+            "duration": "50 min",
+            "price": "849 zł",
+            "offerItemId": "s:24481259",
+            "promo": ""
+          },
+          {
+            "name": "Redermalizacja (Xela Rederm 2 ml)",
+            "duration": "45 min",
+            "price": "999 zł",
+            "offerItemId": "s:24481259",
+            "promo": ""
+          },
+          {
+            "name": "Atelokolagen i Lifting (Karisma)",
+            "duration": "45 min",
+            "price": "1199 zł",
+            "offerItemId": "s:24481259",
+            "promo": ""
+          },
+          {
+            "name": "DR CYJ® Hair Filler – Peptydowa terapia skóry głowy",
+            "duration": "50 min",
+            "price": "649 zł",
+            "offerItemId": "s:24481196",
+            "promo": ""
+          },
+          {
+            "name": "Koktail Monaco – Królewski lifting i totalny glow",
+            "duration": "45 min",
+            "price": "649 zł",
+            "offerItemId": "s:24481176",
+            "promo": ""
+          },
+          {
+            "name": "PROFHILO® – Molekularny lifting i bioremodeling",
+            "duration": "50 min",
+            "price": "1199 zł",
+            "offerItemId": "s:24481136",
+            "promo": ""
+          },
+          {
+            "name": "PLASMOO™ – Kompleksowa terapia PRP + PRF",
+            "duration": "1 godz. i 5 min",
+            "price": "1099 zł",
+            "offerItemId": "s:24480945",
+            "promo": ""
+          }
+        ],
+        "nestedTiers": [],
+        "subheading": "Zabiegi Iniekcyjne"
+      },
+      {
+        "tierName": "Lipoliza iniekcyjna",
+        "subpageUrl": "../zabiegi/lipoliza-iniekcyjna-plock",
+        "badgePrice": "od 399 zł",
+        "rows": [
+          {
+            "name": "Inne części ciała (boczki / kolana)",
+            "duration": "35 min",
+            "price": "od 399 zł",
+            "offerItemId": "s:24470528",
+            "promo": ""
+          },
+          {
+            "name": "Podbródek",
+            "duration": "30 min",
+            "price": "399 zł",
+            "offerItemId": "s:24470528",
+            "promo": ""
+          },
+          {
+            "name": "Ramiona",
+            "duration": "35 min",
+            "price": "699 zł",
+            "offerItemId": "s:24470528",
+            "promo": ""
+          },
+          {
+            "name": "Brzuch",
+            "duration": "35 min",
+            "price": "719 zł",
+            "offerItemId": "s:24470528",
+            "promo": ""
+          },
+          {
+            "name": "Bryczesy",
+            "duration": "35 min",
+            "price": "699 zł",
+            "offerItemId": "s:24470528",
+            "promo": ""
+          },
+          {
+            "name": "Wewnętrzna część ud",
+            "duration": "35 min",
+            "price": "699 zł",
+            "offerItemId": "s:24470528",
+            "promo": ""
+          },
+          {
+            "name": "Wewnętrzna część ud + bryczesy",
+            "duration": "50 min",
+            "price": "1099 zł",
+            "offerItemId": "s:24470528",
+            "promo": ""
+          }
+        ],
+        "nestedTiers": [],
+        "subheading": "Zabiegi Iniekcyjne"
+      },
+      {
+        "tierName": "Karboksyterapia medyczna",
+        "subpageUrl": "../zabiegi/karboksyterapia-plock",
+        "badgePrice": "od 269 zł",
+        "rows": [
+          {
+            "name": "Skóra głowy (terapia wypadania włosów)",
+            "duration": "35 min",
+            "price": "299 zł",
+            "offerItemId": "s:24480484",
+            "promo": ""
+          },
+          {
+            "name": "Ciało",
+            "duration": "35 min",
+            "price": "269 zł",
+            "offerItemId": "s:24480484",
+            "promo": ""
+          }
+        ],
+        "nestedTiers": [],
+        "subheading": "Zabiegi Iniekcyjne"
+      },
+      {
+        "tierName": "Egzosomy i PDRN",
+        "subpageUrl": "",
+        "badgePrice": "od 499 zł",
+        "rows": [
+          {
+            "name": "Egzosomy restrukturyzacja (twarz)",
+            "duration": "50 min",
+            "price": "799 zł",
+            "offerItemId": "s:24481618",
+            "promo": ""
+          },
+          {
+            "name": "EXO + TXA Melanin Stop (twarz)",
+            "duration": "1 godz. i 5 min",
+            "price": "899 zł",
+            "offerItemId": "s:24481618",
+            "promo": ""
+          },
+          {
+            "name": "PDRN Mesocit Polinukleotydy (twarz)",
+            "duration": "1 godz. i 5 min",
+            "price": "499 zł",
+            "offerItemId": "s:24481618",
+            "promo": ""
+          },
+          {
+            "name": "PDRN Mesocit (twarz+szyja+dekolt)",
+            "duration": "1 godz. i 5 min",
+            "price": "849 zł",
+            "offerItemId": "s:24481618",
+            "promo": ""
+          }
+        ],
+        "nestedTiers": [],
+        "subheading": "Zabiegi Iniekcyjne"
+      },
+      {
+        "tierName": "Tropokolagen – Atelokolagenowa odbudowa skóry",
+        "subpageUrl": "",
+        "badgePrice": "od 599 zł",
+        "rows": [
+          {
+            "name": "Regeneracja strukturalna (2 ml)",
+            "duration": "50 min",
+            "price": "od 599 zł",
+            "offerItemId": "s:24481052",
+            "promo": ""
+          },
+          {
+            "name": "Intensywna odbudowa (4 ml)",
+            "duration": "1 godz.",
+            "price": "od 899 zł",
+            "offerItemId": "s:24481052",
+            "promo": ""
+          }
+        ],
+        "nestedTiers": [],
+        "subheading": "Zabiegi Iniekcyjne"
+      },
+      {
+        "tierName": "Mezoterapia mikroigłowa",
+        "subpageUrl": "../zabiegi/mezoterapia-mikroiglowa",
+        "badgePrice": "599 zł",
+        "rows": [
+          {
+            "name": "Twarz",
+            "duration": "1 godz. i 5 min",
+            "price": "599 zł",
+            "offerItemId": "s:24480642",
+            "promo": ""
+          },
+          {
+            "name": "BTSES Mimetic (redukcja zmarszczek mimicznych)",
+            "duration": "1 godz. i 5 min",
+            "price": "599 zł",
+            "offerItemId": "s:24480642",
+            "promo": ""
+          }
+        ],
+        "nestedTiers": [],
+        "subheading": "Zabiegi Manualne"
+      },
+      {
+        "tierName": "Mezoterapia bezigłowa",
+        "subpageUrl": "../zabiegi/mezoterapia-bezig%C5%82owa",
+        "badgePrice": "od 299 zł",
+        "rows": [
+          {
+            "name": "Mezoterapia bezigłowa",
+            "duration": "1 godz. i 5 min",
+            "price": "299 zł",
+            "offerItemId": "s:24480685",
+            "promo": ""
+          }
+        ],
+        "nestedTiers": [
+          {
+            "tierName": "Pakiety łączone",
+            "subpageUrl": "",
+            "badgePrice": "549 zł",
+            "rows": [
+              {
+                "name": "Karboksyterapia + Mezoterapia bezigłowa",
+                "duration": "1 godz. i 40 min · 2 usługi",
+                "price": "549 zł",
+                "offerItemId": "",
+                "promo": "Zaoszczędź 8%"
+              }
+            ],
+            "nestedTiers": []
+          }
+        ],
+        "subheading": "Zabiegi Manualne"
+      },
+      {
+        "tierName": "Mikrodermabrazja",
+        "subpageUrl": "",
+        "badgePrice": "---",
+        "rows": [
+          {
+            "name": "Mikrodermabrazja",
+            "duration": "",
+            "price": "---",
+            "offerItemId": "",
+            "promo": ""
+          }
+        ],
+        "nestedTiers": [],
+        "subheading": "Zabiegi Manualne"
+      },
+      {
+        "tierName": "Peelingi medyczne",
+        "subpageUrl": "../zabiegi/peelingi-medyczne",
+        "badgePrice": "od 99 zł",
+        "rows": [
+          {
+            "name": "Skóra dłoni",
+            "duration": "35 min",
+            "price": "99 zł",
+            "offerItemId": "s:24481347",
+            "promo": ""
+          },
+          {
+            "name": "Skóra pleców",
+            "duration": "50 min",
+            "price": "od 199 zł",
+            "offerItemId": "s:24481347",
+            "promo": ""
+          },
+          {
+            "name": "Twarz (trądzik / przebarwienia / glow)",
+            "duration": "50 min",
+            "price": "od 349 zł",
+            "offerItemId": "s:24481347",
+            "promo": ""
+          },
+          {
+            "name": "Twarz + szyja",
+            "duration": "45 min",
+            "price": "od 399 zł",
+            "offerItemId": "s:24481347",
+            "promo": ""
+          },
+          {
+            "name": "Twarz + szyja + dekolt",
+            "duration": "45 min",
+            "price": "od 449 zł",
+            "offerItemId": "s:24481347",
+            "promo": ""
+          },
+          {
+            "name": "BioRePeel / PRX-T33 – Całoroczna biorewitalizacja",
+            "duration": "40 min",
+            "price": "399 zł",
+            "offerItemId": "s:24481434",
+            "promo": ""
+          },
+          {
+            "name": "Retix C® / Yellow Peel – Retinolowa odbudowa skóry",
+            "duration": "40 min",
+            "price": "399 zł",
+            "offerItemId": "s:24481453",
+            "promo": ""
+          },
+          {
+            "name": "Peeling Medyczny – Booster do zabiegu",
+            "duration": "10 min",
+            "price": "99 zł",
+            "offerItemId": "s:24481458",
+            "promo": ""
+          }
+        ],
+        "nestedTiers": [],
+        "subheading": "Zabiegi Manualne"
+      },
+      {
+        "tierName": "Rytuały Neuro-Kosmetyczne",
+        "subpageUrl": "",
+        "badgePrice": "od 249 zł",
+        "rows": [
+          {
+            "name": "Neuro-Lifting GABA & NANA (bankietowy)",
+            "duration": "1 godz. i 5 min",
+            "price": "299 zł",
+            "offerItemId": "s:24481650",
+            "promo": ""
+          },
+          {
+            "name": "Neuro Sensi & CollAGE (skóry wrażliwe)",
+            "duration": "1 godz. i 5 min",
+            "price": "349 zł",
+            "offerItemId": "s:24481650",
+            "promo": ""
+          },
+          {
+            "name": "MesoCit AntiAge & Fitoestrogeny",
+            "duration": "1 godz. i 5 min",
+            "price": "349 zł",
+            "offerItemId": "s:24481650",
+            "promo": ""
+          },
+          {
+            "name": "Rytuał Witamina C & Kurkumina (glow)",
+            "duration": "1 godz. i 5 min",
+            "price": "299 zł",
+            "offerItemId": "s:24481650",
+            "promo": ""
+          },
+          {
+            "name": "Ekspresowy Dotleniająco-Nawilżający",
+            "duration": "1 godz. i 5 min",
+            "price": "249 zł",
+            "offerItemId": "s:24481650",
+            "promo": ""
+          }
+        ],
+        "nestedTiers": [],
+        "subheading": "Zabiegi Manualne"
+      },
+      {
+        "tierName": "Masaż endomodelujący twarzy",
+        "subpageUrl": "",
+        "badgePrice": "199 zł",
+        "rows": [
+          {
+            "name": "Masaż endomodelujący twarzy",
+            "duration": "1 godz. i 5 min",
+            "price": "199 zł",
+            "offerItemId": "s:24481574",
+            "promo": ""
+          }
+        ],
+        "nestedTiers": [],
+        "subheading": "Zabiegi Manualne"
+      },
+      {
+        "tierName": "Karboksyterapia bezigłowa CO2",
+        "subpageUrl": "",
+        "badgePrice": "od 449 zł",
+        "rows": [
+          {
+            "name": "Karboksyterapia bezigłowa CO2",
+            "duration": "50 min",
+            "price": "449 zł",
+            "offerItemId": "s:24481672",
+            "promo": ""
+          }
+        ],
+        "nestedTiers": [
+          {
+            "tierName": "Pakiety łączone",
+            "subpageUrl": "",
+            "badgePrice": "od 449 zł",
+            "rows": [
+              {
+                "name": "Karboksyterapia + Lifting LPG® Ergolift",
+                "duration": "1 godz. i 20 min · 2 usługi",
+                "price": "449 zł",
+                "offerItemId": "",
+                "promo": "Zaoszczędź 10%"
+              },
+              {
+                "name": "Karboksyterapia + Mezoterapia bezigłowa",
+                "duration": "1 godz. i 40 min · 2 usługi",
+                "price": "549 zł",
+                "offerItemId": "",
+                "promo": "Zaoszczędź 8%"
+              }
+            ],
+            "nestedTiers": []
+          }
+        ],
+        "subheading": "Zabiegi Manualne"
+      }
+    ]
+  }
+]
