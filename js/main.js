@@ -1053,6 +1053,39 @@
     update();
   })();
 
+  /* ---------- blog post — hero image parallax (2026-09-09, na prośbę użytkownika) ----------
+     Ten sam wzorzec co CTA banner wyżej (przewymiarowany <img>, translateY na scroll,
+     ratio -0.22, clamp do zapasu) — tu uogólniony na querySelectorAll, bo w przeciwieństwie
+     do jednego banera na stronie, każda z 12 stron wpisów ma swój własny obraz hero. */
+  (function () {
+    var images = document.querySelectorAll(".blog-hero-image img");
+    if (!images.length || reduceMotion) return;
+    var entries = Array.prototype.map.call(images, function (img) {
+      return { img: img, section: img.closest(".blog-hero-image") };
+    });
+    var ticking = false;
+    function update() {
+      entries.forEach(function (entry) {
+        var rect = entry.section.getBoundingClientRect();
+        var maxOffset = (entry.img.offsetHeight - rect.height) / 2;
+        var offset = -0.22 * rect.top;
+        if (offset > maxOffset) offset = maxOffset;
+        if (offset < -maxOffset) offset = -maxOffset;
+        entry.img.style.transform = "translateY(" + offset.toFixed(2) + "px)";
+      });
+      ticking = false;
+    }
+    function onScroll() {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    update();
+  })();
+
   /* ---------- treatment page — scroll-reveal (the reference site's real
      "slideInBottom"/"fadeIn" IX2 presets, see the CSS comment on [data-reveal]) --------- */
   var revealEls = document.querySelectorAll("[data-reveal]");

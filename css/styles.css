@@ -3363,11 +3363,19 @@ p .price-row-badges{ margin-left:10px; }
    przy pomiarze to niewystrzelone jeszcze animacje wejścia (Webflow IX2, ten sam mechanizm co
    nasze [data-reveal]) — nie mają wpływu na finalne, docelowe wartości typografii/koloru/
    marginesów użyte tutaj. */
+/* Pionowa paralaksa (2026-09-09) — ten sam wzorzec co już istniejący .cta-banner-image
+   (przewymiarowany <img> przesuwany transformem na scroll, patrz main.js), zastosowany na
+   zdjęciu hero wpisu blogowego: kontener position:relative/overflow:hidden, obraz o 100px
+   większy niż kontener (50px zapasu na górze i dole) żeby przesunięcie nigdy nie odkryło
+   pustej krawędzi. */
 .blog-hero-image{
-  display:block; width:100%; aspect-ratio:1283/640; border-radius:20px; overflow:hidden;
-  margin-bottom:32px;
+  position:relative; display:block; width:100%; aspect-ratio:1283/640; border-radius:20px;
+  overflow:hidden; margin-bottom:32px;
 }
-.blog-hero-image img{ width:100%; height:100%; object-fit:cover; display:block; }
+.blog-hero-image img{
+  position:absolute; top:-50px; left:0; width:100%; height:calc(100% + 100px);
+  object-fit:cover; display:block; will-change:transform;
+}
 
 .blog-post-header{
   display:grid; grid-template-columns:3fr 2fr; column-gap:72px; margin:0 0 50px;
