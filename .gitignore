@@ -1,5 +1,3 @@
 .DS_Store
 .secrets/
 scripts/cennik-sync/venv/
-# token gita bez scope'u "workflow" — ten plik trzeba wkleić ręcznie przez github.com
-.github/workflows/sync-cennik.yml
