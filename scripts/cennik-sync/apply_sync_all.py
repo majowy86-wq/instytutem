@@ -26,7 +26,7 @@ from html_engine import (
     find_price_tier_rows_block, find_price_tier_badge, replace_span, replace_block,
     find_outer_treatment_block, find_loose_rows_block,
     find_full_outer_block, find_full_subpage_block, find_price_strip_giant,
-    find_nested_container_bounds,
+    find_nested_container_bounds, rename_h3_heading,
 )
 from row_generator import generate_rows_block, compute_badge_price, _extract_number
 from subgroup_generator import (
@@ -59,6 +59,7 @@ def to_row_dict(r, zabieg):
     return {
         "zabieg": zabieg, "wariant": r["wariant"], "czas": r["czas"], "cena": r["cena"],
         "offerItemId": r["offerItemId"], "packageId": r["packageId"], "promo": r["promo"],
+        "opis": r.get("opis", ""), "link_reczny": r.get("link_reczny", ""),
     }
 
 
@@ -137,32 +138,90 @@ def show_diff(label, old, new):
     return True
 
 
-def check_deletions(sheet_rows, exclude_zabiegi=frozenset()):
-    """Porównuje bieżące (zabieg,podgrupa,wariant) z ostatnim znanym stanem arkusza.
-    Zwraca listę usuniętych kluczy (obecnych wcześniej, nieobecnych teraz). Zabiegi
-    z exclude_zabiegi (spłaszczane — patrz find_flatten_candidates) są pomijane: ich stare
-    nazwy podgrup naturalnie znikają przy spłaszczeniu, to nie jest prawdziwe usunięcie."""
+def _load_state() -> dict:
+    """{"<id>": {"zabieg":..., "podgrupa":..., "wariant":...}} — stan ostatniej synchronizacji,
+    kluczowany po stałym ID wiersza (kolumna "ID" w arkuszu, dodana 2026-09-09), NIE po tekście.
+    Dzięki temu zmiana samej nazwy zabiegu/podgrupy/wariantu dla ISTNIEJĄCEGO wiersza to
+    rename (patrz detect_group_renames), nie usunięcie+dodanie — patrz DOKUMENTACJA.md,
+    incydent Endermolift 2026-09-09."""
     if not STATE_PATH.exists():
+        return {}
+    raw = json.loads(STATE_PATH.read_text(encoding="utf-8"))
+    if isinstance(raw, list):
+        return {}  # stary format (lista trójek, bez ID) — brak ID, nie da się zmigrować 1:1
+    return raw
+
+
+def _state_triples(state: dict, exclude_zabiegi=frozenset()):
+    """Lista (nie set!) — zachowuje kolejność wpisów w last_synced_state.json, od której
+    zależy porządek podgrup w find_flatten_candidates/find_new_subgroup_candidates."""
+    return [(v["zabieg"], v["podgrupa"], v["wariant"]) for v in state.values()
+            if v["zabieg"] not in exclude_zabiegi]
+
+
+def check_deletions(sheet_rows, exclude_zabiegi=frozenset()):
+    """ID-based: prawdziwe usunięcie wiersza = jego ID było zapisane w last_synced_state.json,
+    a teraz go nie ma wśród ID w arkuszu. Zmiana samej nazwy (zabieg/podgrupa/wariant) dla
+    ISTNIEJĄCEGO ID to rename (detect_group_renames), NIE usunięcie — to jest różnica względem
+    starej wersji tej funkcji (dopasowanie po tekście), która fałszywie łapała np. zmianę
+    interpunkcji w nazwie wariantu jako "usunięcie" (Endermolift, 2026-09-09). Zabiegi z
+    exclude_zabiegi (spłaszczane) są pomijane — ich stare nazwy podgrup naturalnie znikają
+    przy spłaszczeniu, to nie jest prawdziwe usunięcie."""
+    state = _load_state()
+    if not state:
         return []
-    last_state = {tuple(x) for x in json.loads(STATE_PATH.read_text(encoding="utf-8"))
-                  if x[0] not in exclude_zabiegi}
-    current_state = {(r["zabieg"], r["podgrupa"], r["wariant"]) for r in sheet_rows
-                      if r["zabieg"] not in exclude_zabiegi}
-    return sorted(last_state - current_state)
+    current_ids = {r["id"] for r in sheet_rows if r["id"] and r["zabieg"] not in exclude_zabiegi}
+    deleted = []
+    for id_, info in state.items():
+        if info["zabieg"] in exclude_zabiegi:
+            continue
+        if id_ not in current_ids:
+            deleted.append((info["zabieg"], info["podgrupa"], info["wariant"]))
+    return sorted(deleted)
+
+
+def detect_group_renames(sheet_rows, exclude_zabiegi=frozenset()):
+    """Wykrywa zmianę nazwy zabiegu i/lub podgrupy dla ISTNIEJĄCEGO id (wiersz był w ostatnim
+    stanie I wciąż jest w arkuszu, ale pod inną nazwą zabiegu/podgrupy) — odróżnione od
+    usunięcia właśnie dzięki ID. Zwraca listę unikalnych par
+    (old_zabieg, old_podgrupa, new_zabieg, new_podgrupa), po jednej per faktycznie zmieniona
+    grupa (deduplikowane — wiele wierszy tej samej grupy dają tę samą parę)."""
+    state = _load_state()
+    if not state:
+        return []
+    seen = set()
+    renames = []
+    for r in sheet_rows:
+        id_ = r["id"]
+        if not id_ or r["zabieg"] in exclude_zabiegi:
+            continue
+        old = state.get(id_)
+        if not old:
+            continue  # nowy wiersz (nowe ID) — to nie rename
+        if old["zabieg"] != r["zabieg"] or old["podgrupa"] != r["podgrupa"]:
+            key = (old["zabieg"], old["podgrupa"], r["zabieg"], r["podgrupa"])
+            if key not in seen:
+                seen.add(key)
+                renames.append(key)
+    return renames
 
 
 def save_synced_state(sheet_rows, skip_zabiegi=frozenset()):
-    """Zapisuje bieżący stan arkusza jako 'ostatnio zsynchronizowany' — ale dla zabiegów
-    pominiętych w tym przebiegu (skip_zabiegi: czekają na --confirm-*) zachowuje ich STARY
-    zapisany stan, żeby przy kolejnym uruchomieniu nadal były wykrywane jako wymagające
-    potwierdzenia, a nie wyglądały na już zsynchronizowane."""
-    old_state = []
-    if skip_zabiegi and STATE_PATH.exists():
-        old_state = [tuple(x) for x in json.loads(STATE_PATH.read_text(encoding="utf-8"))
-                     if x[0] in skip_zabiegi]
-    current = [(r["zabieg"], r["podgrupa"], r["wariant"]) for r in sheet_rows
-               if r["zabieg"] not in skip_zabiegi]
-    snapshot = sorted(set(current) | set(old_state))
+    """Zapisuje bieżący stan arkusza (kluczowany po ID) jako 'ostatnio zsynchronizowany' —
+    ale dla zabiegów pominiętych w tym przebiegu (skip_zabiegi: czekają na --confirm-*)
+    zachowuje ich STARY zapisany stan, żeby przy kolejnym uruchomieniu nadal były wykrywane
+    jako wymagające potwierdzenia, a nie wyglądały na już zsynchronizowane."""
+    old_state = _load_state()
+    snapshot = {}
+    if skip_zabiegi:
+        snapshot.update({id_: v for id_, v in old_state.items() if v["zabieg"] in skip_zabiegi})
+    for r in sheet_rows:
+        if not r["id"] or r["zabieg"] in skip_zabiegi:
+            continue
+        snapshot[r["id"]] = {"zabieg": r["zabieg"], "podgrupa": r["podgrupa"], "wariant": r["wariant"]}
+    # UWAGA: bez sort_keys — kolejność wpisów (insertion order słownika Pythona) musi
+    # odpowiadać kolejności wierszy w arkuszu, bo od niej zależy porządek podgrup
+    # w find_flatten_candidates/find_new_subgroup_candidates (patrz _state_triples).
     STATE_PATH.write_text(json.dumps(snapshot, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
@@ -185,9 +244,9 @@ def find_flatten_candidates(sheet_rows):
     puste) dla zabiegu, który wcześniej (wg last_synced_state.json) miał więcej niż jedną
     podgrupę — czyli miał zagnieżdżoną strukturę w /cennik. Zwraca listę
     (zabieg, [stare_nazwy_podgrup_w_kolejności_z_ostatniego_stanu])."""
-    if not STATE_PATH.exists():
+    last_state = _state_triples(_load_state())
+    if not last_state:
         return []
-    last_state = [tuple(x) for x in json.loads(STATE_PATH.read_text(encoding="utf-8"))]
     prev_podgrupy_by_zabieg = defaultdict(list)
     for zabieg, podgrupa, _wariant in last_state:
         if podgrupa not in prev_podgrupy_by_zabieg[zabieg]:
@@ -261,9 +320,9 @@ def find_new_subgroup_candidates(sheet_rows, exclude_zabiegi=frozenset()):
     (nieobecna w last_synced_state.json), podczas gdy sam zabieg już wcześniej istniał —
     wywoływać PO normalize_blank_podgrupa. Zwraca listę
     (zabieg, poprzednie_podgrupy: set, nowe_podgrupy: set)."""
-    if not STATE_PATH.exists():
+    last_state = _state_triples(_load_state())
+    if not last_state:
         return []
-    last_state = [tuple(x) for x in json.loads(STATE_PATH.read_text(encoding="utf-8"))]
     prev_podgrupy_by_zabieg = defaultdict(set)
     for zabieg, podgrupa, _w in last_state:
         prev_podgrupy_by_zabieg[zabieg].add(podgrupa)
@@ -353,6 +412,55 @@ def unflatten_cennik_group(html: str, zabieg: str, rows_by_podgrupa: dict) -> st
     return html[:full_start] + new_block + html[full_end:]
 
 
+def apply_renames(cennik_html, subpage_cache, renames, url_by_zabieg):
+    """Aplikuje zmiany nazwy zabiegu/podgrupy (wykryte przez detect_group_renames) na
+    /cennik i — jeśli zabieg ma podstronę — na niej też, PRZED głównym przebiegiem
+    synchronizacji (który dalej lokalizuje grupy PO NOWEJ nazwie). Bez tego kroku główny
+    przebieg dostałby ValueError "nie znaleziono nagłówka", bo HTML wciąż ma starą nazwę.
+
+    Zasięg zmian jest ograniczony do tego, czym ten skrypt już i tak zarządza (nagłówki
+    <h3 class="treatment-accordion-q"> w cenniku/na podstronie zabiegu) — NIE dotyka
+    <title>, meta description, JSON-LD, H1 czy sekcji opisowych strony zabiegu. Zmiana
+    nazwy zabiegu w arkuszu więc odświeży cennik, ale nie całą resztę strony — to świadome
+    ograniczenie zakresu (2026-09-09), nie przeoczenie."""
+    state = _load_state()
+    prev_podgrupy_by_old_zabieg = defaultdict(set)
+    for v in state.values():
+        prev_podgrupy_by_old_zabieg[v["zabieg"]].add(v["podgrupa"])
+
+    for old_zabieg, old_podgrupa, new_zabieg, new_podgrupa in renames:
+        was_nested = len(prev_podgrupy_by_old_zabieg.get(old_zabieg, set())) > 1
+        zabieg_changed = old_zabieg != new_zabieg
+        podgrupa_changed = old_podgrupa != new_podgrupa
+
+        if zabieg_changed:
+            try:
+                cennik_html = rename_h3_heading(cennik_html, old_zabieg, new_zabieg)
+            except ValueError as e:
+                print(f"UWAGA: zmiana nazwy zabiegu w /cennik — {e} (pomijam tę zmianę nazwy w tym przebiegu)")
+                continue
+
+        if was_nested and podgrupa_changed and (old_zabieg, old_podgrupa) not in LOOSE_CENNIK_SUBGROUPS:
+            old_display = CENNIK_NAME_OVERRIDE.get((old_zabieg, old_podgrupa), old_podgrupa)
+            new_display = CENNIK_NAME_OVERRIDE.get((new_zabieg, new_podgrupa), new_podgrupa)
+            try:
+                scope_start, _scope_end = find_outer_treatment_block(cennik_html, new_zabieg)
+                cennik_html = rename_h3_heading(cennik_html, old_display, new_display, search_from=scope_start)
+            except ValueError as e:
+                print(f"UWAGA: zmiana nazwy podgrupy w /cennik — {e} (pomijam tę zmianę nazwy w tym przebiegu)")
+
+        url = url_by_zabieg.get(new_zabieg) or url_by_zabieg.get(old_zabieg)
+        if url and podgrupa_changed and url in subpage_cache:
+            rel, subpage_html = subpage_cache[url]
+            try:
+                subpage_html = rename_h3_heading(subpage_html, old_podgrupa, new_podgrupa)
+                subpage_cache[url] = (rel, subpage_html)
+            except ValueError as e:
+                print(f"UWAGA: zmiana nazwy podgrupy na podstronie {rel} — {e} (pomijam tę zmianę nazwy w tym przebiegu)")
+
+    return cennik_html
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--write", action="store_true")
@@ -430,6 +538,24 @@ def main():
     original_cennik_html = cennik_html
 
     subpage_cache = {}
+
+    # zmiana nazwy zabiegu/podgrupy dla ISTNIEJĄCEGO id (patrz detect_group_renames) — NIE
+    # wymaga --confirm-*, w przeciwieństwie do flatten/deletions/grow, bo dzięki ID wiemy
+    # na pewno że to nie usunięcie+dodanie, tylko ten sam wiersz pod inną nazwą
+    renames = detect_group_renames(sheet_rows, exclude_zabiegi=flatten_zabiegi | deletion_zabiegi | grow_zabiegi)
+    if renames:
+        print("ℹ️  Wykryto zmianę nazwy zabiegu/podgrupy (stosowane automatycznie, bez potwierdzenia):")
+        for old_z, old_p, new_z, new_p in renames:
+            print(f"   {old_z} | {old_p}  →  {new_z} | {new_p}")
+        status_lines.append(f"ℹ️ {len(renames)} zmiana(y) nazwy zabiegu/podgrupy zastosowana(e) automatycznie")
+
+        url_by_zabieg = {r["zabieg"]: r["url"] for r in sheet_rows if r["url"]}
+        for old_z, _old_p, new_z, _new_p in renames:
+            url = url_by_zabieg.get(new_z) or url_by_zabieg.get(old_z)
+            if url and url not in subpage_cache:
+                rel = urllib.parse.unquote(url.lstrip("/"))
+                subpage_cache[url] = (rel, (ROOT / rel / "index.html").read_text(encoding="utf-8"))
+        cennik_html = apply_renames(cennik_html, subpage_cache, renames, url_by_zabieg)
 
     for zabieg, old_podgrupy in flatten_candidates:
         if zabieg in skip_zabiegi:

@@ -49,12 +49,15 @@ def write_status(result_line: str, detail_lines: list):
 
 def read_all_rows():
     """Zwraca listę dictów: zabieg, podgrupa, wariant, czas, cena, cena_fresha, zgodnosc,
-    offerItemId, packageId, promo, url — dokładnie to, co jest AKTUALNIE w arkuszu."""
+    offerItemId, packageId, promo, url, id, opis, link_reczny — dokładnie to, co jest
+    AKTUALNIE w arkuszu. `id` (kolumna L) jest stałym identyfikatorem wiersza — od Rundy
+    2026-09-09 to on, nie tekst (zabieg,podgrupa,wariant), jest kluczem dopasowania przy
+    synchronizacji, żeby zmiana samej nazwy nie wygladała jak usunięcie+dodanie."""
     ws = get_worksheet()
     values = ws.get_all_values()
     rows = []
     for row in values[1:]:  # pomiń nagłówek
-        row = row + [""] * (11 - len(row))  # dopełnij, gdyby wiersz był krótszy
+        row = row + [""] * (14 - len(row))  # dopełnij, gdyby wiersz był krótszy
         zabieg = row[0].strip()
         if not zabieg:
             continue  # pusty wiersz — pomiń
@@ -70,6 +73,9 @@ def read_all_rows():
             "packageId": row[8].strip(),
             "promo": row[9].strip(),
             "url": row[10].strip(),
+            "id": row[11].strip(),
+            "opis": row[12].strip(),
+            "link_reczny": row[13].strip(),
         })
     return rows
 

@@ -14,6 +14,47 @@
 const GITHUB_OWNER = "majowy86-wq";
 const GITHUB_REPO = "instytutem";
 
+/**
+ * Kolumna L ("ID") to stały identyfikator wiersza (dodany 2026-09-09) — synchronizacja
+ * dopasowuje wiersze po NIM, nie po tekście (Zabieg/Podgrupa/Wariant), więc zmiana samej
+ * nazwy nie wygląda już jak "usunięto stare + dodano nowe". Ten trigger sam wypełnia ID
+ * dla każdego nowego wiersza (ma wypełnioną kolumnę A "Zabieg", ale puste ID) — użytkownik
+ * nie musi o tym pamiętać przy dodawaniu nowej pozycji w arkuszu.
+ */
+const CENNIK_TAB_NAME = "Cennik — wszystkie zabiegi";
+const COL_ZABIEG = 1;  // A
+const COL_ID = 12;     // L
+
+function onEdit(e) {
+  try {
+    const sheet = e.range.getSheet();
+    if (sheet.getName() !== CENNIK_TAB_NAME) return;
+    if (e.range.getRow() === 1) return; // nagłówek
+
+    const startRow = e.range.getRow();
+    const numRows = e.range.getNumRows();
+    for (let r = startRow; r < startRow + numRows; r++) {
+      const zabieg = sheet.getRange(r, COL_ZABIEG).getValue();
+      const idCell = sheet.getRange(r, COL_ID);
+      if (zabieg && !idCell.getValue()) {
+        idCell.setValue(nextCennikId(sheet));
+      }
+    }
+  } catch (err) {
+    console.error(err); // proste triggery nie mogą pokazać ui.alert
+  }
+}
+
+function nextCennikId(sheet) {
+  const lastRow = sheet.getLastRow();
+  if (lastRow < 2) return 1;
+  const ids = sheet.getRange(2, COL_ID, lastRow - 1, 1).getValues().flat()
+    .map(function (v) { return parseInt(v, 10); })
+    .filter(function (n) { return !isNaN(n); });
+  const max = ids.length ? Math.max.apply(null, ids) : 0;
+  return max + 1;
+}
+
 function onOpen() {
   SpreadsheetApp.getUi()
     .createMenu("Cennik")

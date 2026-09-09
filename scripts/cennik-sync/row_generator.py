@@ -23,9 +23,11 @@ PACKAGES_BASE_URL = "https://www.fresha.com/book-now/testem-xh2mr620/packages"
 
 
 def generate_price_row(zabieg: str, wariant: str, czas: str, cena: str, offer_item_id: str,
-                        package_id: str = "", promo: str = "") -> str:
-    """Buduje jeden <div class="price-row">...</div>. Obsługuje 3 warianty przycisku:
-    offerItemId -> "Zarezerwuj" (booking), packageId -> "Kup pakiet" (packages), brak obu -> płaska cena.
+                        package_id: str = "", promo: str = "", link_reczny: str = "") -> str:
+    """Buduje jeden <div class="price-row">...</div>. Obsługuje 4 warianty przycisku:
+    offerItemId -> "Zarezerwuj" (booking), packageId -> "Kup pakiet" (packages),
+    link_reczny -> "Zarezerwuj" (link wklejony ręcznie w arkuszu, dla pozycji bez
+    dopasowania w Fresha), brak żadnego -> płaska cena.
 
     UWAGA: dane z arkusza (przez BeautifulSoup przy ekstrakcji) mają już ZDEKODOWANE
     encje HTML (np. "GABA & NANA", nie "GABA &amp; NANA") — trzeba je zakodować z
@@ -44,6 +46,9 @@ def generate_price_row(zabieg: str, wariant: str, czas: str, cena: str, offer_it
     elif package_id:
         href = f"{PACKAGES_BASE_URL}?id={package_id}&share=true&pId=602910"
         cta_label = "Kup pakiet"
+    elif link_reczny:
+        href = link_reczny
+        cta_label = "Zarezerwuj"
     else:
         href = None
         cta_label = None
@@ -63,18 +68,25 @@ def generate_price_row(zabieg: str, wariant: str, czas: str, cena: str, offer_it
 
 
 def generate_rows_block(rows: list[dict], row_indent: int, closing_indent: int) -> str:
-    """rows: lista dictów z kluczami zabieg/wariant/czas/cena/offerItemId.
+    """rows: lista dictów z kluczami zabieg/wariant/czas/cena/offerItemId/opis/link_reczny.
     Zwraca zawartość <div class="price-tier-rows"> (bez samego wrappera),
     z takim samym wcięciem jak reszta pliku. W /cennik: row_indent=16, closing_indent=16.
-    Na podstronach: row_indent=14, closing_indent=12 (zweryfikowane bezpośrednio w plikach)."""
+    Na podstronach: row_indent=14, closing_indent=12 (zweryfikowane bezpośrednio w plikach).
+    Wiersz z niepustym "opis" dostaje własny <p class="price-row-note"> TUŻ pod sobą (kolumna
+    "Opis" w arkuszu, dodana 2026-09-09) — osobno od _extract_trailing_notes/_splice_notes w
+    apply_sync_all.py, które chronią wcześniej istniejące, "osierocone" dopiski bez odpowiednika
+    w arkuszu (np. na Stroju zabiegowym Endermologii)."""
     pad = " " * row_indent
-    parts = [
-        pad + generate_price_row(
+    parts = []
+    for r in rows:
+        parts.append(pad + generate_price_row(
             r["zabieg"], r["wariant"], r["czas"], r["cena"], r["offerItemId"],
-            r.get("packageId", ""), r.get("promo", ""),
-        )
-        for r in rows
-    ]
+            r.get("packageId", ""), r.get("promo", ""), r.get("link_reczny", ""),
+        ))
+        opis = r.get("opis", "")
+        if opis:
+            opis_html = html_module.escape(opis, quote=False)
+            parts.append(pad + f'<p class="price-row-note">{opis_html}</p>')
     return "\n" + "\n".join(parts) + "\n" + (" " * closing_indent)
 
 

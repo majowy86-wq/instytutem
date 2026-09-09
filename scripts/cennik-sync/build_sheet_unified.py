@@ -23,7 +23,13 @@ HEADERS = [
     "Zabieg", "Podgrupa", "Wariant", "Czas trwania",
     "Cena na stronie", "Cena Fresha", "Zgodność",
     "offerItemId", "packageId", "Promo", "URL podstrony",
+    "ID", "Opis", "Link ręczny",
 ]
+# UWAGA (2026-09-09): ten skrypt to jednorazowy budowniczy arkusza z baseline*.py — nie jest
+# uruchamiany przy normalnej synchronizacji. Kolumny ID/Opis/Link ręczny zostały dodane
+# PÓŹNIEJ, ręcznie (append, nie insert — patrz read_sheet.py), do już istniejącego arkusza.
+# Ten HEADERS jest zsynchronizowany dla dokumentacji/ewentualnego odtworzenia od zera, ale
+# realny arkusz nie był budowany tym skryptem po tej zmianie.
 
 
 def formula_for_row(i):

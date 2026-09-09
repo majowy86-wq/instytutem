@@ -188,6 +188,27 @@ def find_loose_rows_block(html: str):
     return c_pos, details_pos, content_start
 
 
+def rename_h3_heading(html: str, old_text: str, new_text: str, search_from: int = 0) -> str:
+    """Zmienia sam TEKST nagłówka <h3 class="treatment-accordion-q">OLD...</h3> z old_text na
+    new_text, zachowując bez zmian ewentualny zagnieżdżony <a class="accordion-info-link">
+    (ikonkę "Informacje o zabiegu") i wszystko poza samym h3. Używane przy zmianie nazwy
+    zabiegu/podgrupy w arkuszu (kolumna ID pozwala odróżnić to od usunięcia+dodania — patrz
+    apply_sync_all.py detect_group_renames, 2026-09-09).
+
+    Wymaga, że old_text jest CAŁYM tekstem przed kolejnym '<' (koniec h3 albo start linku
+    z ikonką) — jeśli old_text jest tylko prefiksem dłuższego, niezwiązanego tekstu, zgłasza
+    błąd, żeby nie podmienić czegoś przez przypadek po częściowym dopasowaniu."""
+    marker = f'<h3 class="treatment-accordion-q">{old_text}'
+    pos = html.find(marker, search_from)
+    if pos == -1:
+        raise ValueError(f"Nie znaleziono nagłówka do zmiany nazwy: {old_text!r}")
+    text_start = pos + len('<h3 class="treatment-accordion-q">')
+    text_end = text_start + len(old_text)
+    if html[text_end:text_end + 1] != "<":
+        raise ValueError(f"Dopasowanie nagłówka {old_text!r} niejednoznaczne (nie jest całym tekstem h3)")
+    return html[:text_start] + new_text + html[text_end:]
+
+
 def replace_span(html: str, start: int, end: int, new_text: str) -> str:
     return html[:start] + new_text + html[end:]
 
