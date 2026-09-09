@@ -20,6 +20,8 @@ open http://localhost:8090
 
 Adres lokalny ma być **zawsze ten sam**: `http://localhost:8090` — stały port ustawiony w `.claude/launch.json` (`archon-local`). Jeśli lokalny serwer (`python3 -m http.server 8090`) nie działa, uruchom go najpierw w tle.
 
+**Zawsze `git pull` PRZED otwarciem podglądu** (ustalone 2026-09-09) — synchronizacja cennika z arkusza Google (`.github/workflows/sync-cennik.yml`) commituje i pushuje zmiany bezpośrednio na `origin/main` z poziomu GitHub Actions, z pominięciem lokalnego klonu na tym komputerze. Bez `git pull` lokalny podgląd może pokazywać nieaktualne ceny mimo że w arkuszu/na GitHubie są już zsynchronizowane. Świadomie NIE zautomatyzowane trwałym procesem w tle (LaunchAgent) — użytkownik wybrał lżejsze rozwiązanie: `git pull` jako rutynowy krok Claude Code przed każdym `open http://localhost:8090`.
+
 ---
 
 ## 🤝 Zasady współpracy (obowiązują zawsze, priorytet ekstra wysoki)
