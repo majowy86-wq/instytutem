@@ -25,9 +25,9 @@ STATE_PATH = Path(__file__).parent / "last_synced_state.json"
 from html_engine import (
     find_price_tier_rows_block, find_price_tier_badge, replace_span, replace_block,
     find_outer_treatment_block, find_loose_rows_block,
-    find_full_outer_block, find_full_subpage_block,
+    find_full_outer_block, find_full_subpage_block, find_price_strip_giant,
 )
-from row_generator import generate_rows_block, compute_badge_price
+from row_generator import generate_rows_block, compute_badge_price, _extract_number
 from subgroup_generator import generate_subgroup_block, SUBPAGE_INDENTS, CENNIK_FLAT_INDENTS
 
 ROOT = Path(__file__).resolve().parent.parent.parent
@@ -367,6 +367,25 @@ def main():
                         cennik_scope = find_outer_treatment_block(cennik_html, zabieg)
             else:
                 cennik_html, _ = apply_group(cennik_html, cennik_name, group_rows, row_indent=16, closing_indent=16)
+
+    # czarny pasek cenowy na górze podstrony ("Cena już od: X zł") — pokazuje minimum
+    # z PIERWSZEJ grupy w arkuszu dla danego zabiegu (główna usługa), pomijając celowo
+    # akcesoria/pakiety/dodatki dodane w arkuszu po niej
+    for zabieg, rows in by_zabieg.items():
+        url = rows[0]["url"]
+        if not url or url not in subpage_cache:
+            continue
+        first_podgrupa = rows[0]["podgrupa"]
+        first_group_rows = [r for r in rows if r["podgrupa"] == first_podgrupa]
+        min_price = min(_extract_number(r["cena"]) for r in first_group_rows)
+        rel, subpage_html = subpage_cache[url]
+        try:
+            p_start, p_end, current = find_price_strip_giant(subpage_html)
+        except ValueError:
+            continue
+        new_value = str(min_price)
+        if current != new_value:
+            subpage_cache[url] = (rel, replace_span(subpage_html, p_start, p_end, new_value))
 
     if show_diff("cennik/index.html", original_cennik_html, cennik_html):
         any_changes = True

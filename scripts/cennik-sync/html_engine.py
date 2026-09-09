@@ -134,6 +134,19 @@ def find_price_tier_badge(html: str, h3_prefix: str):
     return text_start, text_end, html[text_start:text_end]
 
 
+def find_price_strip_giant(html: str):
+    """Znajduje <p class="treatment-price-giant">TEKST</p> — sam numer w czarnym pasku
+    cenowym na górze podstrony zabiegu (poza sekcją cennika, jeden na stronę).
+    Zwraca (start_tekstu, end_tekstu, obecny_tekst)."""
+    marker = '<p class="treatment-price-giant">'
+    start = html.find(marker)
+    if start == -1:
+        raise ValueError("Nie znaleziono treatment-price-giant")
+    text_start = start + len(marker)
+    text_end = html.index("</p>", text_start)
+    return text_start, text_end, html[text_start:text_end]
+
+
 def find_loose_rows_block(html: str):
     """Dla przypadków typu Mezoterapia bezigłowa w /cennik: podgrupa BEZ własnego
     <details>/badge — luźne <div class="price-row"> leżą wprost w kontenerze
