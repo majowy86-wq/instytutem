@@ -3308,3 +3308,92 @@ p .price-row-badges{ margin-left:10px; }
 @media (prefers-reduced-motion: reduce){
   [data-reveal]{ opacity:1 !important; transform:none !important; width:100% !important; }
 }
+
+/* ============ BLOG (2026-09-09) ============
+   Zmierzone na żywym archon.au: listing "/articles/skincare" (nav "Articles & News")
+   i pojedynczy wpis "/articles/skincare-and-grooming-essentials-guide-for-australian-men"
+   — desktop viewport 1440px (resize_window, nie domyślny wąski panel podglądu, który
+   fałszywie wygląda jak układ 1-kolumnowy mobile). Kolor tekstu ujednolicony na
+   --a-ink-warm (zasada "jedna czerń na całej stronie") — archon w tym jednym komponencie
+   listy miał inny odcień (rgb(30,30,32)), ale na stronie pojedynczego wpisu H1 i akapity
+   już używają dokładnie #3F3D3B, więc to prawdopodobnie niezamierzona niekonsekwencja
+   źródła, nie świadomy wybór do skopiowania. */
+
+.blog-grid{
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:var(--sp-40);
+}
+@media (max-width:767px){
+  .blog-grid{ grid-template-columns:1fr; }
+}
+
+.blog-card{ display:block; color:inherit; text-decoration:none; }
+.blog-card-thumb{
+  display:block;
+  width:100%;
+  aspect-ratio:621/400;
+  border-radius:20px;
+  overflow:hidden;
+  margin-bottom:24px;
+}
+.blog-card-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+.blog-card-meta{
+  display:flex; align-items:center; gap:8px;
+  font-family:"Inter",sans-serif; font-size:12px; font-weight:400; line-height:16px;
+  color:var(--a-ink-warm);
+  margin-bottom:8px;
+}
+.blog-card-meta .dot-small{ width:4px; height:4px; border-radius:100px; background:var(--a-ink-warm); flex:none; }
+.blog-card-title{
+  font-family:"Inter",sans-serif; font-size:24px; font-weight:500; line-height:31.2px;
+  letter-spacing:-0.48px; color:var(--a-ink-warm); margin:0 0 10px;
+}
+.blog-card-line{ height:1px; background:#D2D2D7; margin:24px 0 8px; }
+
+/* Pojedynczy wpis */
+.blog-hero-image{
+  display:block; width:100%; aspect-ratio:1283/640; border-radius:20px; overflow:hidden;
+  margin-bottom:var(--sp-40);
+}
+.blog-hero-image img{ width:100%; height:100%; object-fit:cover; display:block; }
+.blog-article-meta{
+  display:flex; align-items:center; gap:8px;
+  font-family:"Inter",sans-serif; font-size:12px; font-weight:400; line-height:16px;
+  color:var(--a-ink-warm); margin-bottom:16px;
+}
+.blog-article-meta .dot-small{ width:4px; height:4px; border-radius:100px; background:var(--a-ink-warm); flex:none; }
+.blog-article-body{ max-width:828px; margin:0 auto; }
+.blog-article-body h1{
+  font-family:"Inter",sans-serif; font-size:56px; font-weight:400; line-height:61.6px;
+  letter-spacing:-2px; color:var(--a-ink-warm); margin:0 0 32px;
+}
+.blog-article-body .blog-lede{
+  font-family:"Inter",sans-serif; font-size:20.8px; font-weight:500; line-height:35.36px;
+  color:var(--a-ink-warm); margin:0 0 10px;
+}
+.blog-article-body p{
+  font-family:"Inter",sans-serif; font-size:16px; font-weight:400; line-height:27.2px;
+  color:var(--a-ink-warm); margin:0 0 10px;
+}
+.blog-article-body h3{
+  font-family:"Inter",sans-serif; font-size:24px; font-weight:500; line-height:28.8px;
+  letter-spacing:-0.5px; color:var(--a-ink-warm); margin:60px 0 20px;
+}
+.blog-article-body h4{
+  font-family:"Inter",sans-serif; font-size:16px; font-weight:600; line-height:19.2px;
+  color:var(--a-ink-warm); margin:30px 0 10px;
+}
+.blog-article-body ul, .blog-article-body ol{ margin:0 0 20px; padding-left:20px; }
+.blog-article-body li{
+  font-family:"Inter",sans-serif; font-size:16px; font-weight:400; line-height:27.2px;
+  color:var(--a-ink-warm); margin-bottom:6px;
+}
+@media (max-width:767px){
+  .blog-article-body h1{ font-size:36px; line-height:41px; letter-spacing:-1px; }
+}
+.blog-back-link{
+  display:inline-flex; align-items:center; gap:8px;
+  font-family:"Inter",sans-serif; font-size:14px; font-weight:500; color:var(--a-ink-warm);
+  margin-bottom:var(--sp-24); text-decoration:none;
+}
