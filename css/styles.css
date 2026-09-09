@@ -3351,23 +3351,41 @@ p .price-row-badges{ margin-left:10px; }
 }
 .blog-card-line{ height:1px; background:#D2D2D7; margin:24px 0 8px; }
 
-/* Pojedynczy wpis */
+/* Pojedynczy wpis — struktura DOKŁADNIE odtworzona z żywego archon.au (2026-09-09, druga
+   runda pomiarów po uwadze użytkownika "1:1, żebym nie mógł się do niczego przyczepić").
+   Pierwsza runda pomiarów złapała tylko powierzchowne wartości typograficzne i pominęła
+   prawdziwy układ: archon NIE ma linku powrotu przed hero (usunięty), tytuł siedzi w gridzie
+   2-kolumnowym (druga kolumna pusta — prawdopodobnie zarezerwowana pod nagłówek/cytat na
+   innych wpisach), data+autor to OSOBNY wiersz PO tytule (nie przed nim, nie przy zdjęciu),
+   w formacie "DATA / AUTOR" z ukośnikiem (nie kropką) i własnym podkreśleniem (divider-line),
+   a sama treść artykułu siedzi w DRUGIEJ kolumnie 2-kolumnowego gridu — pierwsza kolumna to
+   pusty "spacer" (weryfikowane wprost w DOM, nie domysł). Wartości opacity:0/width:0% złapane
+   przy pomiarze to niewystrzelone jeszcze animacje wejścia (Webflow IX2, ten sam mechanizm co
+   nasze [data-reveal]) — nie mają wpływu na finalne, docelowe wartości typografii/koloru/
+   marginesów użyte tutaj. */
 .blog-hero-image{
   display:block; width:100%; aspect-ratio:1283/640; border-radius:20px; overflow:hidden;
-  margin-bottom:var(--sp-40);
+  margin-bottom:32px;
 }
 .blog-hero-image img{ width:100%; height:100%; object-fit:cover; display:block; }
-.blog-article-meta{
-  display:flex; align-items:center; gap:8px;
-  font-family:"Inter",sans-serif; font-size:12px; font-weight:400; line-height:16px;
-  color:var(--a-ink-warm); margin-bottom:16px;
+
+.blog-post-header{
+  display:grid; grid-template-columns:3fr 2fr; column-gap:72px; margin:0 0 50px;
 }
-.blog-article-meta .dot-small{ width:4px; height:4px; border-radius:100px; background:var(--a-ink-warm); flex:none; }
-.blog-article-body{ max-width:828px; margin:0 auto; }
-.blog-article-body h1{
+.blog-post-header h1{
   font-family:"Inter",sans-serif; font-size:56px; font-weight:400; line-height:61.6px;
-  letter-spacing:-2px; color:var(--a-ink-warm); margin:0 0 32px;
+  letter-spacing:-2px; color:var(--a-ink-warm); margin:0;
 }
+
+.blog-byline-row{ display:grid; grid-template-columns:1fr 2fr; column-gap:40px; }
+.blog-byline{
+  font-family:"Inter",sans-serif; font-size:12px; font-weight:600; letter-spacing:0.5px;
+  text-transform:uppercase; color:var(--a-ink-warm); margin:0 0 20px;
+}
+.blog-byline-divider{ height:1px; background:var(--a-gray); margin:0 0 25px; }
+
+.blog-content-row{ display:grid; grid-template-columns:1fr 2fr; column-gap:40px; }
+.blog-content-row .blog-spacer{ display:block; }
 .blog-article-body .blog-lede{
   font-family:"Inter",sans-serif; font-size:20.8px; font-weight:500; line-height:35.36px;
   color:var(--a-ink-warm); margin:0 0 10px;
@@ -3390,10 +3408,7 @@ p .price-row-badges{ margin-left:10px; }
   color:var(--a-ink-warm); margin-bottom:6px;
 }
 @media (max-width:767px){
-  .blog-article-body h1{ font-size:36px; line-height:41px; letter-spacing:-1px; }
-}
-.blog-back-link{
-  display:inline-flex; align-items:center; gap:8px;
-  font-family:"Inter",sans-serif; font-size:14px; font-weight:500; color:var(--a-ink-warm);
-  margin-bottom:var(--sp-24); text-decoration:none;
+  .blog-post-header, .blog-byline-row, .blog-content-row{ grid-template-columns:1fr; column-gap:0; }
+  .blog-content-row .blog-spacer{ display:none; }
+  .blog-post-header h1{ font-size:36px; line-height:41px; letter-spacing:-1px; }
 }
