@@ -134,6 +134,23 @@ def find_price_tier_badge(html: str, h3_prefix: str):
     return text_start, text_end, html[text_start:text_end]
 
 
+def find_nested_container_bounds(html: str, treatment_name: str):
+    """Dla JUŻ zagnieżdżonego zabiegu w /cennik: zwraca (content_start, content_end)
+    zawartości kontenera price-tier-rows--nested (BEZ jego własnych tagów otwierającego/
+    zamykającego <div>) — do wstawiania nowej podgrupy na końcu listy istniejących."""
+    s, e = find_outer_treatment_block(html, treatment_name)
+    scoped = html[s:e]
+    marker_pos = scoped.find("price-tier-rows--nested")
+    if marker_pos == -1:
+        raise ValueError(f"Zabieg {treatment_name!r} nie ma dziś zagnieżdżonej struktury w /cennik")
+    c_pos = scoped.rfind("<div", 0, marker_pos)
+    open_tag_end = scoped.index(">", c_pos)
+    content_start = open_tag_end + 1
+    close_end = find_matching_close_div(scoped, open_tag_end)
+    content_end = close_end - len("</div>")
+    return s + content_start, s + content_end
+
+
 def find_price_strip_giant(html: str):
     """Znajduje <p class="treatment-price-giant">TEKST</p> — sam numer w czarnym pasku
     cenowym na górze podstrony zabiegu (poza sekcją cennika, jeden na stronę).

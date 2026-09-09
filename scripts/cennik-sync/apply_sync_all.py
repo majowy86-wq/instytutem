@@ -26,9 +26,13 @@ from html_engine import (
     find_price_tier_rows_block, find_price_tier_badge, replace_span, replace_block,
     find_outer_treatment_block, find_loose_rows_block,
     find_full_outer_block, find_full_subpage_block, find_price_strip_giant,
+    find_nested_container_bounds,
 )
 from row_generator import generate_rows_block, compute_badge_price, _extract_number
-from subgroup_generator import generate_subgroup_block, SUBPAGE_INDENTS, CENNIK_FLAT_INDENTS
+from subgroup_generator import (
+    generate_subgroup_block, SUBPAGE_INDENTS, CENNIK_FLAT_INDENTS, CENNIK_NESTED_INDENTS,
+    ACCORDION_INFO_LINK_ICON,
+)
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 
@@ -252,6 +256,103 @@ def flatten_subpage_sections(html: str, old_podgrupa_names: list[str], rows: lis
     return result
 
 
+def find_new_subgroup_candidates(sheet_rows, exclude_zabiegi=frozenset()):
+    """Wykrywa zabiegi, dla których w arkuszu pojawiła się CAŁKIEM NOWA nazwa podgrupy
+    (nieobecna w last_synced_state.json), podczas gdy sam zabieg już wcześniej istniał —
+    wywoływać PO normalize_blank_podgrupa. Zwraca listę
+    (zabieg, poprzednie_podgrupy: set, nowe_podgrupy: set)."""
+    if not STATE_PATH.exists():
+        return []
+    last_state = [tuple(x) for x in json.loads(STATE_PATH.read_text(encoding="utf-8"))]
+    prev_podgrupy_by_zabieg = defaultdict(set)
+    for zabieg, podgrupa, _w in last_state:
+        prev_podgrupy_by_zabieg[zabieg].add(podgrupa)
+
+    current_by_zabieg = defaultdict(set)
+    for r in sheet_rows:
+        current_by_zabieg[r["zabieg"]].add(r["podgrupa"])
+
+    candidates = []
+    for zabieg, current_podgrupy in current_by_zabieg.items():
+        if zabieg in exclude_zabiegi:
+            continue
+        prev_podgrupy = prev_podgrupy_by_zabieg.get(zabieg)
+        if not prev_podgrupy:
+            continue  # zabieg jeszcze nie istniał na stronie — nieobsługiwane tutaj
+        new_names = current_podgrupy - prev_podgrupy
+        if new_names:
+            candidates.append((zabieg, prev_podgrupy, new_names))
+    return candidates
+
+
+def insert_cennik_subgroup(html: str, zabieg: str, name: str, rows: list[dict]) -> str:
+    """Dopisuje nową podgrupę na końcu już istniejącej zagnieżdżonej struktury zabiegu
+    w /cennik (zabieg musi już mieć co najmniej jedną podgrupę we własnym <details>)."""
+    content_start, content_end = find_nested_container_bounds(html, zabieg)
+    content = html[content_start:content_end]
+    last_details_end = content.rfind("</details>")
+    if last_details_end == -1:
+        raise ValueError(f"Brak istniejących podgrup w kontenerze zagnieżdżonym {zabieg!r}")
+    last_details_end += len("</details>")
+    cennik_name = CENNIK_NAME_OVERRIDE.get((zabieg, name), name)
+    new_block = generate_subgroup_block(cennik_name, rows, CENNIK_NESTED_INDENTS)
+    new_content = content[:last_details_end] + "\n" + new_block + content[last_details_end:]
+    return html[:content_start] + new_content + html[content_end:]
+
+
+def insert_subpage_subgroup(html: str, after_h3_name: str, name: str, rows: list[dict]) -> str:
+    """Dopisuje nową podgrupę jako kolejną sekcję na podstronie zabiegu, zaraz po
+    sekcji after_h3_name."""
+    _s, after_end = find_full_subpage_block(html, after_h3_name)
+    new_block = generate_subgroup_block(name, rows, SUBPAGE_INDENTS)
+    return html[:after_end] + "\n" + new_block + html[after_end:]
+
+
+def unflatten_cennik_group(html: str, zabieg: str, rows_by_podgrupa: dict) -> str:
+    """Przekształca dziś PŁASKI blok zabiegu w /cennik w nowo zagnieżdżoną strukturę —
+    odwrotność flatten_cennik_group. rows_by_podgrupa: {podgrupa: [wiersze]} w kolejności
+    z arkusza — pierwsza podgrupa to dotychczasowa zawartość dawnego płaskiego bloku."""
+    full_start, full_end = find_full_outer_block(html, zabieg)
+    info_link = extract_accordion_info_link(html[full_start:full_end])
+
+    first_rows = next(iter(rows_by_podgrupa.values()))
+    outer_badge = compute_badge_price(first_rows)
+
+    inner_blocks = []
+    for podgrupa, rows in rows_by_podgrupa.items():
+        cennik_name = CENNIK_NAME_OVERRIDE.get((zabieg, podgrupa), zabieg if podgrupa == "Zabieg" else podgrupa)
+        inner_blocks.append(generate_subgroup_block(cennik_name, rows, CENNIK_NESTED_INDENTS))
+    inner_html = "\n".join(inner_blocks)
+
+    h3_content = zabieg
+    if info_link:
+        href, aria_label = info_link
+        h3_content += (f'<a class="accordion-info-link" href="{href}" aria-label="{aria_label}">'
+                        f'{ACCORDION_INFO_LINK_ICON}</a>')
+
+    caret_svg = ('<svg class="caret" viewBox="0 0 10 6" fill="none" aria-hidden="true">'
+                 '<path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" '
+                 'stroke-linecap="round" stroke-linejoin="round"/></svg>')
+
+    new_block = "\n".join([
+        " " * 12 + '<details class="price-tier price-tier--group">',
+        " " * 14 + '<summary>',
+        " " * 16 + '<span class="price-tier-label">',
+        " " * 18 + f'<h3 class="treatment-accordion-q">{h3_content}</h3>',
+        " " * 18 + f'<span class="price-tier-badge">{outer_badge}</span>',
+        " " * 16 + '</span>',
+        " " * 16 + caret_svg,
+        " " * 14 + '</summary>',
+        " " * 14 + '<div class="treatment-accordion-body">',
+        " " * 16 + '<div class="price-tier-rows price-tier-rows--nested">',
+        inner_html,
+        " " * 16 + '</div>',
+        " " * 14 + '</div>',
+        " " * 12 + '</details>',
+    ])
+    return html[:full_start] + new_block + html[full_end:]
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--write", action="store_true")
@@ -260,6 +361,9 @@ def main():
     parser.add_argument("--confirm-flatten", action="store_true",
                          help="potwierdź spłaszczenie zabiegu(-ów) do jednego poziomu (wykryte "
                               "po wyczyszczeniu kolumny Podgrupa)")
+    parser.add_argument("--confirm-grow", action="store_true",
+                         help="potwierdź dodanie nowej podgrupy zabiegu (wykrytej jako nowa "
+                              "nazwa w kolumnie Podgrupa dla już istniejącego zabiegu)")
     parser.add_argument("--report-to-sheet", action="store_true",
                          help="zapisz krótkie podsumowanie przebiegu do zakładki Status w arkuszu "
                               "(używane przez przycisk/automatyzację, nie potrzebne z terminala)")
@@ -301,7 +405,18 @@ def main():
         print("Uruchom z flagą --confirm-deletions (razem z --write), żeby to zastosować.")
         status_lines.append(f"⚠️ Do potwierdzenia (usunięcia): {', '.join(sorted(deletions_pending))}")
 
-    skip_zabiegi = flatten_pending | deletions_pending
+    grow_candidates = find_new_subgroup_candidates(sheet_rows, exclude_zabiegi=flatten_zabiegi)
+    grow_zabiegi = {z for z, _prev, _new in grow_candidates}
+    grow_pending = set() if args.confirm_grow else grow_zabiegi
+    if grow_pending:
+        print("⚠️  WYKRYTO NOWĄ PODGRUPĘ ZABIEGU — pomijam te zabiegi:")
+        for zabieg, prev_podgrupy, new_names in grow_candidates:
+            print(f"   {zabieg}: nowa podgrupa {', '.join(sorted(new_names))} "
+                  f"(dotychczas: {', '.join(sorted(prev_podgrupy))})")
+        print("Uruchom z flagą --confirm-grow (razem z --write), żeby dodać nową sekcję na stronie.")
+        status_lines.append(f"⚠️ Do potwierdzenia (nowa podgrupa): {', '.join(sorted(grow_pending))}")
+
+    skip_zabiegi = flatten_pending | deletions_pending | grow_pending
 
     by_zabieg = defaultdict(list)
     for r in sheet_rows:
@@ -331,6 +446,48 @@ def main():
             rel, subpage_html = subpage_cache[url]
             subpage_html = flatten_subpage_sections(subpage_html, old_podgrupy, group_rows)
             subpage_cache[url] = (rel, subpage_html)
+
+    for zabieg, prev_podgrupy, new_names in grow_candidates:
+        if zabieg in skip_zabiegi:
+            continue
+        rows = by_zabieg[zabieg]
+        was_nested = len(prev_podgrupy) > 1
+
+        rows_by_podgrupa = defaultdict(list)
+        for r in rows:
+            rows_by_podgrupa[r["podgrupa"]].append(to_row_dict(r, zabieg))
+
+        url = rows[0]["url"]
+        if url and url not in subpage_cache:
+            rel = urllib.parse.unquote(url.lstrip("/"))
+            subpage_cache[url] = (rel, (ROOT / rel / "index.html").read_text(encoding="utf-8"))
+
+        if was_nested:
+            for name in sorted(new_names):
+                cennik_html = insert_cennik_subgroup(cennik_html, zabieg, name, rows_by_podgrupa[name])
+            if url:
+                rel, subpage_html = subpage_cache[url]
+                sheet_order = list(dict.fromkeys(r["podgrupa"] for r in rows))
+                existing_order = [p for p in sheet_order if p not in new_names]
+                after_name = existing_order[-1] if existing_order else None
+                for name in sorted(new_names):
+                    if after_name:
+                        subpage_html = insert_subpage_subgroup(subpage_html, after_name, name, rows_by_podgrupa[name])
+                    after_name = name
+                subpage_cache[url] = (rel, subpage_html)
+        else:
+            # było płaskie ("Zabieg") -> teraz zagnieżdżone (odwrotność spłaszczania)
+            sheet_order = list(dict.fromkeys(r["podgrupa"] for r in rows))
+            rows_by_podgrupa_ordered = {p: rows_by_podgrupa[p] for p in sheet_order}
+            cennik_html = unflatten_cennik_group(cennik_html, zabieg, rows_by_podgrupa_ordered)
+            if url:
+                rel, subpage_html = subpage_cache[url]
+                after_name = "Zabieg" if "Zabieg" in sheet_order else sheet_order[0]
+                for name in sheet_order:
+                    if name in new_names:
+                        subpage_html = insert_subpage_subgroup(subpage_html, after_name, name, rows_by_podgrupa[name])
+                        after_name = name
+                subpage_cache[url] = (rel, subpage_html)
 
     for zabieg, rows in by_zabieg.items():
         podgrupy = sorted(set(r["podgrupa"] for r in rows))
