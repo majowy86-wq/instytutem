@@ -21,7 +21,7 @@ from bs4 import BeautifulSoup
 
 ROOT = Path("/Users/krzysztofmajchrzak/INSTYTUTem")
 EXTRACTED_PATH = Path(__file__).parent / "cennik_extracted.json"
-EXCLUDED = {"LUMIVEX® - laser tulowy (erbowo-szklany)"}  # stara struktura, poza zakresem Fazy 1
+EXCLUDED = set()  # LUMIVEX® - laser tulowy: struktura naprawiona, dołączony do Fazy 1
 
 
 def _parse_subpage_row(row_div):
