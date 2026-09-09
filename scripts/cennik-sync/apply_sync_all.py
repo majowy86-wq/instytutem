@@ -30,7 +30,7 @@ from html_engine import (
 from row_generator import generate_rows_block, compute_badge_price
 from subgroup_generator import generate_subgroup_block, SUBPAGE_INDENTS, CENNIK_FLAT_INDENTS
 
-ROOT = Path("/Users/krzysztofmajchrzak/INSTYTUTem")
+ROOT = Path(__file__).resolve().parent.parent.parent
 
 # nazwa zabiegu użyta w /cennik, gdy różni się od nazwy podgrupy "Zabieg" na arkuszu
 # (przypadki, gdzie /cennik i podstrona historycznie nazwały główną podgrupę inaczej)
