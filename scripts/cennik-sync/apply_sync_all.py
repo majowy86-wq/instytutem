@@ -354,19 +354,29 @@ def main():
 
             if url:
                 rel, subpage_html = subpage_cache[url]
-                subpage_html, _ = apply_group(subpage_html, podgrupa, group_rows, row_indent=14, closing_indent=12)
-                subpage_cache[url] = (rel, subpage_html)
+                try:
+                    subpage_html, _ = apply_group(subpage_html, podgrupa, group_rows, row_indent=14, closing_indent=12)
+                    subpage_cache[url] = (rel, subpage_html)
+                except ValueError as e:
+                    print(f"UWAGA: podstrona {rel} — {e} (pomijam tę pozycję; to nie jest "
+                          f"nowy wariant istniejącej pozycji, tylko zupełnie nowa nazwa "
+                          f"podgrupy — trzeba najpierw ręcznie dodać dla niej sekcję na stronie)")
 
             cennik_name = CENNIK_NAME_OVERRIDE.get((zabieg, podgrupa), podgrupa if is_nested else zabieg)
             is_loose = (zabieg, podgrupa) in LOOSE_CENNIK_SUBGROUPS
-            if is_nested:
-                indent = 16 if is_loose else 32
-                if cennik_scope:
-                    cennik_html, changed2 = apply_group(cennik_html, cennik_name, group_rows, row_indent=indent, closing_indent=indent, scope=cennik_scope, loose=is_loose)
-                    if changed2:
-                        cennik_scope = find_outer_treatment_block(cennik_html, zabieg)
-            else:
-                cennik_html, _ = apply_group(cennik_html, cennik_name, group_rows, row_indent=16, closing_indent=16)
+            try:
+                if is_nested:
+                    indent = 16 if is_loose else 32
+                    if cennik_scope:
+                        cennik_html, changed2 = apply_group(cennik_html, cennik_name, group_rows, row_indent=indent, closing_indent=indent, scope=cennik_scope, loose=is_loose)
+                        if changed2:
+                            cennik_scope = find_outer_treatment_block(cennik_html, zabieg)
+                else:
+                    cennik_html, _ = apply_group(cennik_html, cennik_name, group_rows, row_indent=16, closing_indent=16)
+            except ValueError as e:
+                print(f"UWAGA: /cennik — {e} (pomijam tę pozycję; to nie jest nowy wariant "
+                      f"istniejącej pozycji, tylko zupełnie nowa nazwa podgrupy — trzeba "
+                      f"najpierw ręcznie dodać dla niej sekcję na stronie)")
 
     # czarny pasek cenowy na górze podstrony ("Cena już od: X zł") — pokazuje minimum
     # z PIERWSZEJ grupy w arkuszu dla danego zabiegu (główna usługa), pomijając celowo
