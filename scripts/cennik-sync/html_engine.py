@@ -59,6 +59,40 @@ def find_outer_treatment_block(html: str, treatment_name: str, search_from: int 
     return own_summary_end, end
 
 
+def find_full_outer_block(html: str, treatment_name: str):
+    """Jak find_outer_treatment_block, ale zwraca CAŁY OUTER <details ...>...</details>
+    (WŁĄCZNIE z własnym <summary>/h3/badge zabiegu) — potrzebne przy spłaszczaniu
+    zagnieżdżonej struktury do jednego poziomu, gdzie cały outer blok jest zastępowany
+    nowym, płaskim <details class="price-tier">. Start = początek linii z <details>."""
+    marker = f'<h3 class="treatment-accordion-q">{treatment_name}'
+    h3_pos = html.find(marker)
+    if h3_pos == -1:
+        raise ValueError(f"Nie znaleziono nagłówka zabiegu: {treatment_name!r}")
+    details_start = html.rfind("<details", 0, h3_pos)
+    if details_start == -1:
+        raise ValueError(f"Nie znaleziono otwierającego <details> dla {treatment_name!r}")
+    line_start = html.rfind("\n", 0, details_start) + 1
+    open_tag_end = html.index(">", details_start)
+    end = find_matching_close_tag(html, open_tag_end, "details")
+    return line_start, end
+
+
+def find_full_subpage_block(html: str, h3_name: str):
+    """Znajduje CAŁY <details class="price-tier">...</details> na podstronie zabiegu,
+    zaczynający się od nagłówka h3_name. Start = początek linii z <details>."""
+    marker = f'<h3 class="treatment-accordion-q">{h3_name}'
+    h3_pos = html.find(marker)
+    if h3_pos == -1:
+        raise ValueError(f"Nie znaleziono nagłówka podstrony: {h3_name!r}")
+    details_start = html.rfind("<details", 0, h3_pos)
+    if details_start == -1:
+        raise ValueError(f"Nie znaleziono otwierającego <details> dla {h3_name!r}")
+    line_start = html.rfind("\n", 0, details_start) + 1
+    open_tag_end = html.index(">", details_start)
+    end = find_matching_close_tag(html, open_tag_end, "details")
+    return line_start, end
+
+
 def find_price_tier_rows_block(html: str, h3_prefix: str):
     """Znajduje blok <div class="price-tier-rows">...</div> należący do grupy
     zaczynającej się od <h3 class="treatment-accordion-q">{h3_prefix}.
