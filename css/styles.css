@@ -3744,3 +3744,52 @@ p .price-row-badges{ margin-left:10px; }
    archon.au — inne strony/instancje tego komponentu mają zmierzone 400px, więc
    nadpisujemy scoped klasą zamiast zmieniać bazową .cta-banner). */
 .o-nas-cta.cta-banner{ height:600px; }
+
+/* Salon (/salon) — nowa strona, brak odpowiednika na archon.au (ten sam przypadek co
+   /zespol — sprawdzone wcześniej, że grupa "About" nie ma osobnej podstrony
+   lokalizacji/wnętrza). Hero-photo reużywa 1:1 .about-hero-photo (ta sama klasa —
+   automatycznie dziedziczy paralaksę z main.js, selektor ".about-hero-photo img").
+   Galeria wnętrza i karty sprzętu pożyczają dokładnie ten sam język wizualny co
+   portrety zespołu na /zespol (.team-portrait): rounded-rect 4:5, border-radius 20px,
+   ten sam filtr grayscale(85%) sepia(8%) co blog/zespół — spójny ton fotografii w
+   całym serwisie. Zdjęcia realne, dostarczone przez użytkownika (sesja "Sesja salon
+   2026"), sprzęt podpisany wyłącznie zweryfikowanymi, już ustalonymi w projekcie
+   nazwami marek (LightSheer®/cooltech®/Dermalux®) — bez zgadywania nienazwanych
+   urządzeń widocznych na innych zdjęciach z sesji. */
+.salon-gallery{
+  display:grid; grid-template-columns:repeat(4,1fr); column-gap:24px; row-gap:24px;
+  margin-top:52px;
+}
+.salon-photo{
+  display:block; aspect-ratio:4/5; border-radius:20px; background:var(--a-taupe); overflow:hidden;
+}
+.salon-photo img{
+  width:100%; height:100%; object-fit:cover; object-position:center top; display:block;
+  filter:grayscale(85%) sepia(8%);
+}
+@media (max-width:1023px){
+  .salon-gallery{ grid-template-columns:repeat(2,1fr); }
+}
+@media (max-width:479px){
+  .salon-gallery{ grid-template-columns:1fr; }
+}
+
+.salon-equipment-grid{
+  display:grid; grid-template-columns:repeat(4,1fr); column-gap:24px; row-gap:40px;
+  margin-top:52px;
+}
+.salon-equipment-card .salon-photo{ margin-bottom:20px; }
+.salon-equipment-card h3{
+  font-family:"Tenor Sans",Georgia,serif; font-weight:500; font-size:20px; line-height:1.2;
+  color:var(--a-ink-warm); margin:0 0 4px;
+}
+.salon-equipment-card p{
+  font-family:"Inter",sans-serif; font-size:14px; font-weight:400; line-height:1.5;
+  color:var(--a-gray); margin:0;
+}
+@media (max-width:1023px){
+  .salon-equipment-grid{ grid-template-columns:repeat(2,1fr); }
+}
+@media (max-width:479px){
+  .salon-equipment-grid{ grid-template-columns:1fr; }
+}
