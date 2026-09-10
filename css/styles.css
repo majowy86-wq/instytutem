@@ -3458,7 +3458,7 @@ p .price-row-badges{ margin-left:10px; }
 .about-hero-intro{ max-width:640px; margin:0 auto; text-align:center; }
 .about-hero-intro .eyebrow{ margin-bottom:20px; }
 .about-hero-heading{
-  font-family:"Inter",sans-serif; font-weight:500; font-size:60px; line-height:60px;
+  font-family:"Tenor Sans",Georgia,serif; font-weight:500; font-size:60px; line-height:60px;
   letter-spacing:-2px; margin:0 0 35px;
 }
 .about-hero-intro .lede{ margin:0 auto; }
@@ -3477,12 +3477,16 @@ p .price-row-badges{ margin-left:10px; }
 .section--olive .treatment-intro-grid h2{ color:var(--a-cream); }
 
 /* Zakładki "Nasza Historia" — REUŻYWA istniejącego mechanizmu .care-tab/.care-panel
-   (main.js, ta sama logika przełączania co na stronach zabiegów) — tylko pionowy
-   układ listy zamiast poziomego rzędu równej szerokości, zmierzony 1:1 z archon.au
-   (border-bottom 1px, aktywna zakładka pogrubiona + cream, dokładnie jak już
-   zmierzone kolory .care-tab na ciemnym tle — bez potrzeby nowych wartości koloru). */
-.about-tabs.care-tabs{ display:flex; flex-direction:column; gap:0; margin:0; }
-.about-tabs .care-tab{ flex:none; text-align:left; }
+   (main.js, ta sama logika przełączania co na stronach zabiegów) — łącznie z jego
+   domyślnym POZIOMYM układem (flex row, 3 równe kolumny), bo to dokładnie ten sam
+   układ co na tej podstronie archon.au: zmierzone przy 1440px (nie w wąskim panelu
+   podglądu, który poniżej 767px pokazuje już mobilny, skolapsowany do kolumny widok
+   — pierwsza wersja tej sekcji pomyłkowo wzięła TEN widok za desktopowy) — 3 zakładki
+   flex:1 1 0% po 256px, odstęp przez padding-right:30px na każdej (nie gap), dokładnie
+   jak już istniejące .care-tabs/.care-tab. Jedyna różnica względem stron zabiegów:
+   brak górnego/dolnego marginesu 104px/50px (tu zakładki siedzą od razu pod H2 "Nasza
+   Historia" w prawej kolumnie .treatment-intro-grid, nie pod osobnym nagłówkiem sekcji). */
+.about-tabs.care-tabs{ margin:0; }
 .about-tab-panel{ margin-top:30px; }
 .about-tab-panel p{
   font-family:"Inter",sans-serif; font-size:16px; font-weight:400; line-height:27.2px;
@@ -3503,6 +3507,10 @@ p .price-row-badges{ margin-left:10px; }
 .value-item:nth-child(2){ grid-column:2; grid-row:1; }
 .value-item:nth-child(3){ grid-column:2; grid-row:2; }
 .value-item:nth-child(4){ grid-column:3; grid-row:2; }
+/* archon.au's real .value-wrapper: 32px padding-bottom + 1px border-bottom pod
+   każdym boksem (zmierzone: border czarny na żywej stronie, ale zgodnie z regułą
+   "jedna czerń na stronie" z CLAUDE.md użyty tu --a-ink-warm zamiast surowego #000). */
+.value-item{ padding-bottom:32px; border-bottom:1px solid var(--a-ink-warm); }
 .value-num{
   font-family:"Inter",sans-serif; font-weight:400; font-size:15px; line-height:1;
   color:var(--a-ink-warm); margin:0 0 20px;
