@@ -1086,6 +1086,40 @@
     update();
   })();
 
+  /* ---------- /o-nas hero — MOCNA pionowa paralaksa (2026-09-10, na wyraźną
+     prośbę użytkownika: "dodaj tam też mocną pionową paralaksę") ----------
+     Ten sam mechanizm co blog-hero-image wyżej, osobny blok (nie ten sam
+     querySelectorAll) bo współczynnik jest świadomie mocniejszy (-0.4 zamiast
+     -0.22) tylko dla tego jednego zdjęcia, nie dla całego bloga. */
+  (function () {
+    var images = document.querySelectorAll(".about-hero-photo img");
+    if (!images.length || reduceMotion) return;
+    var entries = Array.prototype.map.call(images, function (img) {
+      return { img: img, section: img.closest(".about-hero-photo") };
+    });
+    var ticking = false;
+    function update() {
+      entries.forEach(function (entry) {
+        var rect = entry.section.getBoundingClientRect();
+        var maxOffset = (entry.img.offsetHeight - rect.height) / 2;
+        var offset = -0.4 * rect.top;
+        if (offset > maxOffset) offset = maxOffset;
+        if (offset < -maxOffset) offset = -maxOffset;
+        entry.img.style.transform = "translateY(" + offset.toFixed(2) + "px)";
+      });
+      ticking = false;
+    }
+    function onScroll() {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    update();
+  })();
+
   /* ---------- treatment page — scroll-reveal (the reference site's real
      "slideInBottom"/"fadeIn" IX2 presets, see the CSS comment on [data-reveal]) --------- */
   var revealEls = document.querySelectorAll("[data-reveal]");
