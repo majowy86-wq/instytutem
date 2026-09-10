@@ -3526,7 +3526,10 @@ p .price-row-badges{ margin-left:10px; }
    dołem tego gridu a górem siatki wartości: 0px (bezpośrednio przylegają). */
 .value-grid{
   display:grid; grid-template-columns:repeat(4,1fr); column-gap:40px; row-gap:64px;
-  margin-top:0;
+  /* zmierzone na archon.au PO odczekaniu na zakończenie animacji wejścia (pierwszy
+     pomiar, jak przy eyebrow→H2, złapał stan w trakcie [data-reveal]/IX2 i dał
+     fałszywe 0px) — realny odstęp lede→pierwszy rząd boksów to 10px, nie 0. */
+  margin-top:10px;
   /* bez tego grid items domyślnie się rozciągają (align-items:stretch) do wysokości
      najwyższego sąsiada W TYM SAMYM RZĘDZIE — niewidoczne na archon.au, gdzie treść
      każdej karty ma podobną długość, ale u nas (realny, dłuższy polski tekst) ujawniało
