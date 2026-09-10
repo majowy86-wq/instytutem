@@ -3580,6 +3580,165 @@ p .price-row-badges{ margin-left:10px; }
   }
 }
 
+/* Zespół (/zespol) — nowa strona, brak odpowiednika na archon.au (nie ma tam dedykowanej
+   podstrony zespołu, potwierdzone przeglądem pełnej listy linków nawigacji); zaprojektowana
+   od zera z tych samych tokenów co reszta strony (kolory/typografia/spacing z
+   DESIGN-SYSTEM.md). Przebudowana (Runda 2/2026-09-10) z pierwotnej płaskiej siatki
+   5 równych kart na 3-poziomową hierarchię ról, na wyraźną prośbę użytkownika:
+   Poziom 1 Założycielka (split 50/50) → Poziom 2 Praktyka kosmetologiczna (siatka 3
+   kolumn) → Poziom 3 Zarządzanie marką (dyskretny pasek), patrz DOKUMENTACJA.md.
+   Bez zdjęć nigdzie (decyzja użytkownika, potwierdzona ponownie przy przebudowie) —
+   wszędzie okrągły/prostokątny placeholder z inicjałem zamiast <img> — TODO w PLAN.md:
+   podmienić na realne zdjęcia, gdy będą dostępne. */
+
+/* Zespół (/zespol) — 3-poziomowa hierarchia. Przebudowana (Runda 6/2026-09-10) —
+   usunięte obwódki wokół zdjęć i border-radius ujednolicony na 20px, dokładnie tak
+   jak każdy inny zaokrąglony portret/miniatura na stronie (.about-hero-photo,
+   .blog-card-thumb, .blog-hero-image — wszystkie 20px, sprawdzone w CSS przed tą
+   zmianą, nie zgadnięte na nowo). Przyciski "Zarezerwuj termin" reużywają WPROST
+   klasę .abtn.primary-olive — dokładnie tę samą, której używa "Rezerwuj online" w
+   nagłówku (partials/header.html) — więc są 1:1 identyczne (ten sam selektor CSS),
+   nie osobno dostrojone przybliżenie. .team-tags (linia ról/specjalizacji, pisana z
+   małych liter) dostrojona do już istniejącego wzorca małego, wyciszonego tekstu
+   meta na stronie (.blog-card-meta/.form-note/.t-source — wszystkie 12px, sprawdzone
+   przed tą zmianą), nie własny, nowo wymyślony rozmiar. Patrz DOKUMENTACJA.md po
+   pełny log tej i poprzednich rund (okrągłe kadry, kadrowanie Nikoli/Krzysztofa,
+   itd. — historia, nie duplikować tu). */
+
+/* POZIOM 1 — Założycielka: split 50/50, zdjęcie po lewej, treść po prawej. */
+.team-founder-grid{
+  display:grid; grid-template-columns:1fr 1fr; column-gap:64px; align-items:center;
+}
+.team-founder-photo{
+  aspect-ratio:4/5; border-radius:20px; background:var(--a-taupe); overflow:hidden;
+}
+.team-founder-photo img{
+  /* object-position:top: cała głowa musi być widoczna w każdym widoku (ustalone
+     wcześniej, patrz DOKUMENTACJA.md) — cover zawsze skaluje wg szerokości, nadmiar
+     przycina się w pionie, "top" kotwiczy głowę, przycina wyłącznie dół.
+     filter — dokładnie ten sam ton co blog (.blog-card-thumb/.blog-hero-image img),
+     ujednolica kolorystykę wszystkich zdjęć zespołu. */
+  width:100%; height:100%; object-fit:cover; object-position:center top; display:block;
+  filter:grayscale(85%) sepia(8%);
+}
+.team-founder-content .eyebrow{ margin-bottom:20px; }
+.team-founder-content .h-section{ margin-bottom:8px; }
+.team-founder-content .lede{ margin:0 0 20px; }
+.team-founder-content .abtn{ margin-top:4px; }
+@media (max-width:767px){
+  .team-founder-grid{ grid-template-columns:1fr; row-gap:32px; }
+}
+
+/* Tagi ról/specjalizacji — jedna linia tekstu z kropkami "·" jako separatorami wprost
+   w treści (nie lista + pseudo-elementy, prostsze), pisana z małych liter (poza
+   markami własnymi jak LightSheer®). Rozmiar/waga/kolor 1:1 z już istniejącym wzorcem
+   małego, wyciszonego tekstu meta na stronie (.blog-card-meta/.form-note: 12px/400,
+   .a-gray) — bez własnego, nowo wymyślonego letter-spacingu. Reużywana dla linii
+   "rola" (pod imieniem) i linii "specjalizacje" (niżej, przed/po biogramie). */
+.team-tags{
+  font-family:"Inter",sans-serif; font-size:12px; font-weight:400; line-height:16px;
+  color:var(--a-gray); margin:0 0 20px;
+}
+
+/* POZIOM 2 — Praktyka kosmetologiczna: nagłówek własny + siatka 3 kolumn pionowych
+   portretów (editorial rounded-rect 4:5 — NIE kółka, świadoma zmiana kierunku
+   2026-09-10 po wcześniejszej rundzie z okrągłym kadrem, patrz DOKUMENTACJA.md). */
+.team-practitioners-header{ max-width:640px; margin:0 0 52px; }
+.team-practitioners-header .eyebrow{ margin-bottom:20px; }
+.team-practitioners-header .h-section{ margin-bottom:16px; }
+.team-grid{
+  display:grid; grid-template-columns:repeat(3,1fr); column-gap:40px; row-gap:64px;
+  align-items:stretch;
+}
+.team-card{
+  display:flex; flex-direction:column; padding-bottom:32px;
+  border-bottom:1px solid var(--a-ink-warm);
+}
+.team-portrait{
+  aspect-ratio:4/5; border-radius:20px; background:var(--a-taupe); overflow:hidden;
+  margin:0 0 24px;
+}
+.team-portrait img{
+  width:100%; height:100%; object-fit:cover; object-position:center top; display:block;
+  filter:grayscale(85%) sepia(8%);
+}
+.team-card h3{
+  /* Tenor Sans (nie Inter) — ten sam krój co każdy inny nagłówek na stronie (h1/h2/h3
+     mają Tenor Sans w bazowym resecie). font-size 35px = 20px +75%, na wyraźną
+     prośbę użytkownika (2026-09-10, kolejna runda). */
+  font-family:"Tenor Sans",Georgia,serif; font-weight:500; font-size:35px; line-height:1.2;
+  color:var(--a-ink-warm); margin:0 0 8px;
+}
+.team-card .team-tags{ margin:0 0 12px; }
+.team-specialty{
+  font-family:"Inter",sans-serif; font-size:15px; font-weight:400; line-height:1.6;
+  color:var(--a-ink-warm); margin:0;
+  /* min-height:96px = 4 linie × 24px (15px×1.6 line-height) — dokładnie tyle, ile
+     zajmuje najdłuższy opis w tym rzędzie (Nikola, 4 linie), zmierzone bezpośrednio
+     na żywo. Na wyraźną prośbę użytkownika: przyciski wszystkich 3 kart mają być na
+     tym samym poziomie co u Nikoli — skoro jej opis jest najdłuższy, krótsze opisy
+     (Patrycja/Julia, 3 linie/72px) muszą rezerwować tyle samo miejsca, żeby stały
+     margin-top:32px na przycisku (patrz niżej) wylądował w tym samym miejscu u
+     wszystkich. Jeśli treść opisu się zmieni i ktoś przekroczy 4 linie, przelicz tę
+     wartość na nowo (nie zgaduj) i zaktualizuj ten komentarz. */
+  min-height:96px;
+}
+/* CTA — STAŁY odstęp 32px od opisu (margin-top:auto z 2 rund temu cofnięte — dawało
+   0px u Nikoli, bo jej opis jest najdłuższy i nie zostawiał "luzu" w wyciągniętej
+   fleksowo karcie). W POŁĄCZENIU z .team-specialty{min-height:96px} wyżej (rezerwuje
+   tyle miejsca, ile zajmuje NAJDŁUŻSZY opis w rzędzie) ten stały margin-top ląduje
+   teraz w TYM SAMYM miejscu na wszystkich 3 kartach — na wyraźną prośbę użytkownika
+   "wyrównaj przyciski na tym samym poziomie wszystkie co u Nikoli" — zamiast
+   wcześniejszego wyrównania do dolnego separatora (Runda 7, zarzucone), bo tamto
+   dawało różny odstęp od tekstu przy różnej długości opisu. WYŁĄCZNIE margin (nigdy
+   padding) na samym .abtn — patrz błąd "rozjechanych" przycisków z wcześniejszej
+   rundy (padding-top ściskał stałą wysokość 44px). */
+.team-card .abtn{ margin-top:32px; align-self:flex-start; }
+/* Patrycja — przycisk stylowo identyczny z "Kup Kartę Podarunkową" (.abtn.outline-dark)
+   ale wyszarzony i nieaktywny (nie <a>, tylko <span>, bez href) — na wyraźną prośbę
+   użytkownika: komunikuje "obecnie niedostępna" wizualnie, bez ujawniania powodu w
+   tekście (patrz DOKUMENTACJA.md, prywatna sprawa). Nadpisuje tylko kolor/border na
+   --a-gray i wyłącza interakcję — struktura (padding/radius/rozmiar) ta sama co
+   .outline-dark, więc karta ma identyczny rytm co karty z aktywnym CTA. */
+.abtn.outline-dark.is-disabled{
+  color:var(--a-gray); border-color:var(--a-gray); cursor:default; pointer-events:none;
+}
+.abtn.outline-dark.is-disabled:hover{ transform:none; box-shadow:none; }
+@media (max-width:767px){
+  .team-grid{ grid-template-columns:1fr; row-gap:40px; }
+}
+
+/* POZIOM 3 — Zarządzanie marką: stonowany panel (tło --a-taupe) z pionowym portretem
+   4:5 po lewej (NIE okrągły — poprzednia okrągła wersja .team-avatar w tym miejscu
+   zarzucona na rzecz spójnego języka z Poziomem 1/2, 2026-09-10) i treścią po prawej. */
+.team-leadership{ background:var(--a-taupe); }
+.team-leadership-row{
+  display:grid; grid-template-columns:240px 1fr; column-gap:48px; align-items:center;
+}
+.team-leadership-photo{
+  aspect-ratio:4/5; border-radius:20px; overflow:hidden;
+}
+.team-leadership-photo img{
+  width:100%; height:100%; object-fit:cover; object-position:center top; display:block;
+  filter:grayscale(85%) sepia(8%);
+}
+.team-leadership-row h3{
+  /* Tenor Sans, dostrojone do kart praktyczek (.team-card h3). Poprzednia runda
+     świadomie zostawiła 20px (bez +75% jak w kartach) — kolejna, osobna prośba
+     użytkownika teraz jawnie chce +50% tutaj: 20px→30px. */
+  font-family:"Tenor Sans",Georgia,serif; font-weight:500; font-size:30px; line-height:1.2;
+  color:var(--a-ink-warm); margin:0 0 4px;
+}
+.team-leadership-row .team-tags{ margin:0 0 12px; }
+.team-leadership-bio{
+  font-family:"Inter",sans-serif; font-size:15px; font-weight:400; line-height:1.6;
+  color:var(--a-ink-warm); margin:0; max-width:560px;
+}
+@media (max-width:767px){
+  .team-leadership-row{ grid-template-columns:1fr; row-gap:24px; }
+  .team-leadership-photo{ max-width:240px; }
+}
+
 /* Baner CTA "Umów się na bezpłatną konsultację" — ten sam .cta-banner co na stronach
    zabiegów, tylko wyższy (600px, zmierzone bezpośrednio na tej konkretnej sekcji
    archon.au — inne strony/instancje tego komponentu mają zmierzone 400px, więc
