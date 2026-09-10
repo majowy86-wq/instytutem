@@ -118,23 +118,27 @@
         </div>
       </div>
     </div>
-    <!-- RUCHOMY PASEK DODATKOWYCH TECHNOLOGII — reużywa 1:1 mechanizm .marquee/
-         .marquee-track z js/main.js (scroll-linked, nie timed loop — ten sam kod co
-         benefity na stronie głównej i /o-nas). Logotypy dostarczone przez
-         użytkownika, zidentyfikowane i zapisane w assets/images/logos/
-         (2026-09-10). Hebe: brak dostarczonego logotypu na razie — kafel tekstowy
-         zamiast obrazka, do podmiany gdy użytkownik dośle plik. -->
-    <div class="marquee salon-tech-marquee" aria-hidden="true">
-      <div class="marquee-track" id="marqueeTrack">
-        <div class="marquee-logo"><img src="../assets/images/logos/lightsheer.png" alt="LightSheer®"></div><span class="marquee-dot"></span>
-        <div class="marquee-logo"><img src="../assets/images/logos/cooltech.png" alt="cooltech®"></div><span class="marquee-dot"></span>
-        <div class="marquee-logo"><img src="../assets/images/logos/lpg.png" alt="LPG®"></div><span class="marquee-dot"></span>
-        <div class="marquee-logo"><img src="../assets/images/logos/skinpen.webp" alt="SkinPen®"></div><span class="marquee-dot"></span>
-        <div class="marquee-logo"><img src="../assets/images/logos/lumiderm.webp" alt="Lumiderm® PLASMA™"></div><span class="marquee-dot"></span>
-        <div class="marquee-logo"><span class="marquee-logo-text">Hebe</span></div><span class="marquee-dot"></span>
-      </div>
-    </div>
   </section>
+
+  <!-- RUCHOMY PASEK DODATKOWYCH TECHNOLOGII — reużywa 1:1 mechanizm .marquee/
+       .marquee-track z js/main.js (scroll-linked, nie timed loop — ten sam kod co
+       benefity na stronie głównej i /o-nas). Logotypy dostarczone przez
+       użytkownika, zidentyfikowane i zapisane w assets/images/logos/
+       (2026-09-10). Hebe: brak dostarczonego logotypu na razie — kafel tekstowy
+       zamiast obrazka, do podmiany gdy użytkownik dośle plik. Sekcja celowo POZA
+       #sprzet (nie ostatnie dziecko sekcji z .section-pad) — na prośbę użytkownika
+       pasek ma "dotykać" bezpośrednio następnej sekcji CTA, a .section-pad dodaje
+       80px padding-bottom, które by to uniemożliwiło. -->
+  <div class="marquee salon-tech-marquee" aria-hidden="true">
+    <div class="marquee-track" id="marqueeTrack">
+      <div class="marquee-logo"><img src="../assets/images/logos/lightsheer.png" alt="LightSheer®"></div><span class="marquee-dot"></span>
+      <div class="marquee-logo"><img src="../assets/images/logos/cooltech.png?v=2" alt="cooltech®"></div><span class="marquee-dot"></span>
+      <div class="marquee-logo"><img src="../assets/images/logos/lpg.png" alt="LPG®"></div><span class="marquee-dot"></span>
+      <div class="marquee-logo"><img src="../assets/images/logos/skinpen.webp" alt="SkinPen®"></div><span class="marquee-dot"></span>
+      <div class="marquee-logo"><img src="../assets/images/logos/lumiderm.webp?v=2" alt="Lumiderm® PLASMA™"></div><span class="marquee-dot"></span>
+      <div class="marquee-logo"><span class="marquee-logo-text">Hebe</span></div><span class="marquee-dot"></span>
+    </div>
+  </div>
 
   <!-- BANER CTA — istniejący komponent .cta-banner (paralaksa, main.js), ten sam
        reużyty wariant .o-nas-cta (600px) co na /o-nas i /zespol, to samo zdjęcie
