@@ -3793,3 +3793,30 @@ p .price-row-badges{ margin-left:10px; }
 @media (max-width:479px){
   .salon-equipment-grid{ grid-template-columns:1fr; }
 }
+/* Ruchomy pasek dodatkowych technologii pod głównymi 4 kartami — na kolejną
+   prośbę użytkownika (2026-09-10): zamiast samej linii tekstu ("opcja 1"),
+   docelowo realny scroll-linked marquee z logotypami marek, reużywający 1:1
+   mechanizm .marquee/.marquee-track z js/main.js (ten sam kod co pasek
+   korzyści na stronie głównej i /o-nas — JS jest treściowo-agnostyczny,
+   klonuje dowolne dzieci #marqueeTrack, więc kafle z <img> zamiast
+   .marquee-phrase/.marquee-dot działają bez zmian w main.js). Logotypy
+   dostarczone przez użytkownika (zapisane w assets/images/logos/), każdy na
+   białym zaokrąglonym kaflu żeby ujednolicić różne tła źródłowych plików
+   (np. LPG ma wbudowane czarne tło w pliku źródłowym). Hebe nie ma jeszcze
+   dostarczonego logotypu — kafel tekstowy zamiast obrazka, ten sam styl co
+   .marquee-phrase na innych podstronach. */
+.salon-tech-marquee{ margin-top:40px; background:var(--a-cream); }
+.salon-tech-marquee .marquee-logo{
+  display:flex; align-items:center; justify-content:center;
+  height:64px; padding:0 28px;
+  background:#fff; border-radius:12px;
+  flex:0 0 auto;
+}
+.salon-tech-marquee .marquee-logo img{
+  display:block; max-height:26px; width:auto;
+}
+.salon-tech-marquee .marquee-logo-text{
+  font-family:"Inter",sans-serif; font-weight:600; text-transform:uppercase;
+  font-size:13px; letter-spacing:.02em; color:var(--a-ink-warm); white-space:nowrap;
+}
+.salon-tech-marquee .marquee-dot{ margin:0 16px; }
