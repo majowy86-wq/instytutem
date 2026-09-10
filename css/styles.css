@@ -3812,8 +3812,20 @@ p .price-row-badges{ margin-left:10px; }
   flex:0 0 auto;
 }
 .salon-tech-marquee .marquee-logo img{
-  display:block; max-height:32px; width:auto;
+  display:block; width:auto;
 }
+/* Wysokości dobrane per-logo, NIE jedna wspólna max-height — każdy plik ma
+   inny udział właściwego napisu w wysokości całego kadru (np. lightsheer.png
+   ma duży abstrakcyjny znak NAD wordmarkiem, lpg.png duży czarny margines
+   wokół napisu, skinpen.webp dopisek "PRECISION" pod głównym kursywnym
+   wordmarkiem) — zmierzone wprost pasami pikseli (PIL, gęstość alfa/jasność
+   na wiersz), żeby sam widoczny napis wychodził optycznie w tym samym
+   rozmiarze u wszystkich, zamiast całego obrazka. */
+.logo-lightsheer{ height:55px; }
+.logo-cooltech{ height:15px; }
+.logo-lpg{ height:39px; }
+.logo-skinpen{ height:21px; }
+.logo-lumiderm{ height:20px; }
 .salon-tech-marquee .marquee-logo-text{
   font-family:"Inter",sans-serif; font-weight:600; text-transform:uppercase;
   font-size:13px; letter-spacing:.02em; color:var(--a-ink-warm); white-space:nowrap;
