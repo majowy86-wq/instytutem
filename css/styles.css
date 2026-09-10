@@ -3527,6 +3527,13 @@ p .price-row-badges{ margin-left:10px; }
 .value-grid{
   display:grid; grid-template-columns:repeat(4,1fr); column-gap:40px; row-gap:64px;
   margin-top:0;
+  /* bez tego grid items domyślnie się rozciągają (align-items:stretch) do wysokości
+     najwyższego sąsiada W TYM SAMYM RZĘDZIE — niewidoczne na archon.au, gdzie treść
+     każdej karty ma podobną długość, ale u nas (realny, dłuższy polski tekst) ujawniało
+     się jako oderwana od tekstu linia pod krótszymi boksami (np. "Butikowy Komfort i
+     Troska": 60px odstępu zamiast zmierzonych 32px, bo box rozciągał się do wysokości
+     dłuższego sąsiada "Medyczny Rygor i Bezpieczeństwo"). */
+  align-items:start;
 }
 .value-item:nth-child(1){ grid-column:1; grid-row:1; }
 .value-item:nth-child(2){ grid-column:2; grid-row:1; }
