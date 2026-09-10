@@ -3415,6 +3415,15 @@ p .price-row-badges{ margin-left:10px; }
   font-family:"Inter",sans-serif; font-size:16px; font-weight:600; line-height:19.2px;
   color:var(--a-ink-warm); margin:30px 0 10px;
 }
+/* Numerowany ranking (np. "Ranking najskuteczniejszych laserów") — pozycja jako
+   stonowany numer obok nagłówka podsekcji, zamiast gołego h3. Reużywa wzorca
+   liczb .treatment-benefit-num (waga/kolor), dopasowany do rozmiaru h3 wpisu. */
+.blog-rank-item{ display:flex; align-items:baseline; gap:16px; margin:30px 0 10px; }
+.blog-rank-item h3{ margin:0; }
+.blog-rank-num{
+  font-family:"Inter",sans-serif; font-weight:600; font-size:20px; line-height:19.2px;
+  color:var(--a-gray); flex:0 0 auto;
+}
 .blog-article-body ul{ list-style:disc; margin:0 0 20px; padding-left:20px; }
 .blog-article-body ol{ list-style:decimal; margin:0 0 20px; padding-left:20px; }
 .blog-article-body li{
