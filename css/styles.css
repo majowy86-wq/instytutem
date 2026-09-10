@@ -3500,7 +3500,6 @@ p .price-row-badges{ margin-left:10px; }
 }
 .about-tab-panel li:last-child{ margin-bottom:0; }
 .about-tab-panel strong{ font-weight:700; }
-.about-tab-panel em{ font-style:italic; }
 
 /* Siatka "Nasze Wartości" — układ schodkowy zmierzony bezpośrednio na archon.au
    (getBoundingClientRect 4 kart w 4-kolumnowym gridzie 1440px: 01/02 w rzędzie 1
@@ -3528,7 +3527,7 @@ p .price-row-badges{ margin-left:10px; }
   color:var(--a-ink-warm); margin:0 0 10px;
 }
 .value-item p{
-  font-family:"Inter",sans-serif; font-size:16px; font-weight:400; font-style:italic; line-height:27.2px;
+  font-family:"Inter",sans-serif; font-size:16px; font-weight:400; line-height:27.2px;
   color:var(--a-ink-warm); margin:0;
 }
 @media (max-width:767px){
