@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../css/styles.css?v=195">
+<link rel="stylesheet" href="../css/styles.css?v=196">
 <!-- TODO: favicon / logo mark asset not yet available -->
 </head>
 <body>
@@ -75,10 +75,12 @@
     </div>
   </section>
 
-  <!-- MARQUEE — te same 5 fraz co na stronie głównej (już polskie tłumaczenie
-       dokładnie tych samych fraz, które archon.au pokazuje na tej samej podstronie
-       /about/about-us: "FALL IN LOVE WITH YOUR SKIN AND BODY" itd.) -->
-  <div class="section--cream marquee" aria-hidden="true">
+  <!-- MARQUEE — te same 5 fraz co na stronie głównej, ale tło zmierzone bezpośrednio
+       NA TEJ podstronie archon.au: sekcja "section dark-cream" (rgb(214,208,197) =
+       nasze --a-taupe), NIE cream jak na stronie głównej — archon reużywa tego
+       komponentu z różnym tłem per strona, więc zmierzone osobno, nie zgadnięte
+       z analogii do homepage. -->
+  <div class="marquee o-nas-marquee" aria-hidden="true">
     <div class="marquee-track" id="marqueeTrack">
       <span class="marquee-phrase">Zakochaj Się w Swojej Skórze i Ciele</span><span class="marquee-dot"></span>
       <span class="marquee-phrase">Bezpłatne Konsultacje + Porady Pielęgnacyjne</span><span class="marquee-dot"></span>
@@ -88,8 +90,11 @@
     </div>
   </div>
 
-  <!-- NASZE WARTOŚCI — jasne tło, .treatment-intro-grid + siatka 4 wartości w układzie
-       schodkowym (patrz komentarz w CSS). -->
+  <!-- NASZE WARTOŚCI — zmierzone ponownie na żywej archon.au: siatka 4 wartości NIE
+       jest zagnieżdżona w wąskiej prawej kolumnie .treatment-intro-grid (błąd
+       pierwszej wersji) — to osobny, PEŁNOSZEROKI blok, rodzeństwo .treatment-intro-grid
+       (który zawiera tylko H2+lede, bez siatki). Stąd .value-grid tu POZA drugą
+       kolumną, bezpośrednio w .container. -->
   <section class="section--cream section-pad">
     <div class="container">
       <div class="treatment-intro-title-line" data-reveal="slide">
@@ -98,30 +103,28 @@
       </div>
       <div class="treatment-intro-grid">
         <h2>W co wierzymy</h2>
-        <div>
-          <p class="lede">Wierzymy w synergię medycznej precyzji, certyfikowanych technologii i autentycznej troski. Tworzymy przestrzeń, w której dbamy o zdrowie Twojej skóry bez dróg na skróty i bez pustych obietnic.</p>
-          <div class="value-grid">
-            <div class="value-item">
-              <p class="value-num">01</p>
-              <h3>Medyczny Rygor i Bezpieczeństwo</h3>
-              <p>Pracujemy wyłącznie na certyfikowanych urządzeniach medycznych i zachowujemy bezwzględne standardy aseptyki. Bezpieczeństwo Twojej tkanki jest dla nas nienaruszalnym priorytetem na każdym etapie terapii.</p>
-            </div>
-            <div class="value-item">
-              <p class="value-num">02</p>
-              <h3>Butikowy Komfort i Troska</h3>
-              <p>Zdejmujemy z zabiegów stres i lęk przed bólem. Dbamy o intymną atmosferę, pełną dyskrecję i czas dedykowany wyłącznie Tobie — od progu instytutu aż po stałą opiekę pozabiegową.</p>
-            </div>
-            <div class="value-item">
-              <p class="value-num">03</p>
-              <h3>Niezależność i Autorskie Protokoły</h3>
-              <p>Działamy całkowicie na własnych zasadach, wolni od korporacyjnych szablonów. Pozwala nam to tworzyć autorskie protokoły zabiegowe i dobierać technologie, które przynoszą realne, bezdyskusyjne rezultaty.</p>
-            </div>
-            <div class="value-item">
-              <p class="value-num">04</p>
-              <h3>Naturalność i Etyka</h3>
-              <p>Nie zmieniamy rysów i nie obiecujemy cudów po jednej nocy. Wydobywamy Twoje naturalne, świeże piękno i kierujemy się żelazną zasadą: potrafimy profesjonalnie doradzić, ale kiedy trzeba — uczciwie odradzić zabieg.</p>
-            </div>
-          </div>
+        <p class="lede">Wierzymy w synergię medycznej precyzji, certyfikowanych technologii i autentycznej troski. Tworzymy przestrzeń, w której dbamy o zdrowie Twojej skóry bez dróg na skróty i bez pustych obietnic.</p>
+      </div>
+      <div class="value-grid">
+        <div class="value-item">
+          <p class="value-num">01</p>
+          <h3>Medyczny Rygor i Bezpieczeństwo</h3>
+          <p>Pracujemy wyłącznie na certyfikowanych urządzeniach medycznych i zachowujemy bezwzględne standardy aseptyki. Bezpieczeństwo Twojej tkanki jest dla nas nienaruszalnym priorytetem na każdym etapie terapii.</p>
+        </div>
+        <div class="value-item">
+          <p class="value-num">02</p>
+          <h3>Butikowy Komfort i Troska</h3>
+          <p>Zdejmujemy z zabiegów stres i lęk przed bólem. Dbamy o intymną atmosferę, pełną dyskrecję i czas dedykowany wyłącznie Tobie — od progu instytutu aż po stałą opiekę pozabiegową.</p>
+        </div>
+        <div class="value-item">
+          <p class="value-num">03</p>
+          <h3>Niezależność i Autorskie Protokoły</h3>
+          <p>Działamy całkowicie na własnych zasadach, wolni od korporacyjnych szablonów. Pozwala nam to tworzyć autorskie protokoły zabiegowe i dobierać technologie, które przynoszą realne, bezdyskusyjne rezultaty.</p>
+        </div>
+        <div class="value-item">
+          <p class="value-num">04</p>
+          <h3>Naturalność i Etyka</h3>
+          <p>Nie zmieniamy rysów i nie obiecujemy cudów po jednej nocy. Wydobywamy Twoje naturalne, świeże piękno i kierujemy się żelazną zasadą: potrafimy profesjonalnie doradzić, ale kiedy trzeba — uczciwie odradzić zabieg.</p>
         </div>
       </div>
     </div>

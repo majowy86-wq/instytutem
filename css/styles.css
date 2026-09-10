@@ -611,6 +611,10 @@ div[data-partial]{ display:contents; }
   /* the reference site's real .text-rotator-first: padding-top/bottom 20px */
   padding:20px 0;
 }
+/* tło paska na /o-nas — zmierzone bezpośrednio NA TEJ podstronie archon.au
+   (.section.dark-cream, rgb(214,208,197)) — inne niż tło paska na stronie głównej
+   (tam cream), bo archon reużywa tego komponentu z różnym tłem per strona. */
+.o-nas-marquee{ background:var(--a-taupe); }
 .marquee-track{
   display:flex;
   align-items:center;
@@ -3505,10 +3509,14 @@ p .price-row-badges{ margin-left:10px; }
    (getBoundingClientRect 4 kart w 4-kolumnowym gridzie 1440px: 01/02 w rzędzie 1
    (kolumny 1-2), 03/04 w rzędzie 2 przesunięte o jedną kolumnę w prawo (kolumny 2-3)
    — nie zwykła siatka 2x2). Numery/nagłówki/opisy kolory ink-warm (mierzone na
-   .section--cream, tej samej, na której cała sekcja tu siedzi). */
+   .section--cream, tej samej, na której cała sekcja tu siedzi). POPRAWKA: siatka
+   NIE jest zagnieżdżona w wąskiej (828px) prawej kolumnie .treatment-intro-grid —
+   to osobny, PEŁNOSZEROKI blok bezpośrednio w .container, rodzeństwo
+   .treatment-intro-grid (który tu zawiera tylko H2+lede). Zmierzony odstęp między
+   dołem tego gridu a górem siatki wartości: 0px (bezpośrednio przylegają). */
 .value-grid{
   display:grid; grid-template-columns:repeat(4,1fr); column-gap:40px; row-gap:64px;
-  margin-top:40px;
+  margin-top:0;
 }
 .value-item:nth-child(1){ grid-column:1; grid-row:1; }
 .value-item:nth-child(2){ grid-column:2; grid-row:1; }
