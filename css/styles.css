@@ -3479,6 +3479,16 @@ p .price-row-badges{ margin-left:10px; }
    — na ciemnej sekcji "Nasza Historia" musi być cream, tak jak eyebrow/divider już mają
    swoje istniejące .section--olive .treatment-intro-* override'y wyżej w pliku. */
 .section--olive .treatment-intro-grid h2{ color:var(--a-cream); }
+/* Odstęp eyebrow→H2 na TEJ konkretnej stronie zmierzony jako 73px CAŁKOWITE (nie 55px
+   z bazowej .treatment-intro-grid, ustalonych na innych stronach — np. blog/FAQ) —
+   potwierdzone dwukrotnie (sekcja Historia i Nasze Wartości dają identyczny wynik na
+   żywym archon.au, PO odczekaniu na zakończenie animacji wejścia — pierwszy pomiar
+   złapał stan w trakcie [data-reveal], dający fałszywie ujemny/za duży wynik, ten sam
+   błąd co już udokumentowany w DOKUMENTACJA.md). 73px to already uwzględnia istniejący
+   .treatment-intro-title-line .eyebrow{margin-bottom:20px} + divider (1px) — więc
+   margin-top na samym gridzie to różnica: 73-20-1=52px, nie 73px wprost (inaczej
+   sumowałoby się z tamtym marginesem i dawało 94px zamiast 73px). */
+#historia .treatment-intro-grid, #wartosci .treatment-intro-grid{ margin-top:52px; }
 
 /* Zakładki "Nasza Historia" — REUŻYWA istniejącego mechanizmu .care-tab/.care-panel
    (main.js, ta sama logika przełączania co na stronach zabiegów) — łącznie z jego
@@ -3491,10 +3501,10 @@ p .price-row-badges{ margin-left:10px; }
    brak górnego/dolnego marginesu 104px/50px (tu zakładki siedzą od razu pod H2 "Nasza
    Historia" w prawej kolumnie .treatment-intro-grid, nie pod osobnym nagłówkiem sekcji). */
 .about-tabs.care-tabs{ margin:0; }
-.about-tab-panel{ margin-top:30px; }
+.about-tab-panel{ margin-top:50px; }
 .about-tab-panel p{
   font-family:"Inter",sans-serif; font-size:16px; font-weight:400; line-height:27.2px;
-  color:var(--a-cream); margin:0 0 20px;
+  color:var(--a-cream); margin:0 0 10px;
 }
 .about-tab-panel p:last-child{ margin-bottom:0; }
 .about-tab-panel ul{ list-style:disc; margin:0; padding-left:24px; }
