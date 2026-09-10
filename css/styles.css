@@ -3444,3 +3444,86 @@ p .price-row-badges{ margin-left:10px; }
   .blog-content-row .blog-spacer{ display:none; }
   .blog-post-header h1{ font-size:36px; line-height:41px; letter-spacing:-1px; }
 }
+
+/* ============ STRONA "O NAS" (2026-09-10) — 1:1 z archon.au /about/about-us ============
+   Struktura zmierzona bezpośrednio na żywej archon.au: ciemne hero (.section--olive)
+   z wyśrodkowanym eyebrow+H1+lede, potem zdjęcie, potem dalej na ciemnym tle sekcja
+   "HISTORY" (H2 statyczny + 3 zakładki), potem marquee (jasne tło), potem "OUR VALUES"
+   (jasne tło, siatka 4 wartości w układzie schodkowym), potem baner CTA (.cta-banner,
+   już istniejący komponent .section-parallax), newsletter, stopka.
+   Świadome odejście od 1:1: hero na żywej archon.au ma zdjęcie jako background-image
+   całej (bardzo wysokiej) sekcji hero z overlayem — u nasto osobny blok zdjęcia
+   bezpośrednio pod tekstem hero, bo realne zdjęcie dostarczone przez użytkownika jest
+   w orientacji pionowej (portret gabinetu), nie nadaje się na szerokie tło całej sekcji. */
+.about-hero-intro{ max-width:640px; margin:0 auto; text-align:center; }
+.about-hero-intro .eyebrow{ margin-bottom:20px; }
+.about-hero-heading{
+  font-family:"Inter",sans-serif; font-weight:500; font-size:60px; line-height:60px;
+  letter-spacing:-2px; margin:0 0 35px;
+}
+.about-hero-intro .lede{ margin:0 auto; }
+.about-hero-photo{
+  margin-top:64px; border-radius:20px; overflow:hidden; aspect-ratio:3/2;
+}
+.about-hero-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
+@media (max-width:767px){
+  .about-hero-heading{ font-size:36px; line-height:41px; letter-spacing:-1px; }
+  .about-hero-photo{ margin-top:40px; aspect-ratio:4/5; }
+}
+
+/* nagłówek h2 w .treatment-intro-grid jest domyślnie ink-warm (myślany pod .section--cream)
+   — na ciemnej sekcji "Nasza Historia" musi być cream, tak jak eyebrow/divider już mają
+   swoje istniejące .section--olive .treatment-intro-* override'y wyżej w pliku. */
+.section--olive .treatment-intro-grid h2{ color:var(--a-cream); }
+
+/* Zakładki "Nasza Historia" — REUŻYWA istniejącego mechanizmu .care-tab/.care-panel
+   (main.js, ta sama logika przełączania co na stronach zabiegów) — tylko pionowy
+   układ listy zamiast poziomego rzędu równej szerokości, zmierzony 1:1 z archon.au
+   (border-bottom 1px, aktywna zakładka pogrubiona + cream, dokładnie jak już
+   zmierzone kolory .care-tab na ciemnym tle — bez potrzeby nowych wartości koloru). */
+.about-tabs.care-tabs{ display:flex; flex-direction:column; gap:0; margin:0; }
+.about-tabs .care-tab{ flex:none; text-align:left; }
+.about-tab-panel{ margin-top:30px; }
+.about-tab-panel p{
+  font-family:"Inter",sans-serif; font-size:16px; font-weight:400; line-height:27.2px;
+  color:var(--a-cream); margin:0 0 20px;
+}
+.about-tab-panel p:last-child{ margin-bottom:0; }
+
+/* Siatka "Nasze Wartości" — układ schodkowy zmierzony bezpośrednio na archon.au
+   (getBoundingClientRect 4 kart w 4-kolumnowym gridzie 1440px: 01/02 w rzędzie 1
+   (kolumny 1-2), 03/04 w rzędzie 2 przesunięte o jedną kolumnę w prawo (kolumny 2-3)
+   — nie zwykła siatka 2x2). Numery/nagłówki/opisy kolory ink-warm (mierzone na
+   .section--cream, tej samej, na której cała sekcja tu siedzi). */
+.value-grid{
+  display:grid; grid-template-columns:repeat(4,1fr); column-gap:40px; row-gap:64px;
+  margin-top:40px;
+}
+.value-item:nth-child(1){ grid-column:1; grid-row:1; }
+.value-item:nth-child(2){ grid-column:2; grid-row:1; }
+.value-item:nth-child(3){ grid-column:2; grid-row:2; }
+.value-item:nth-child(4){ grid-column:3; grid-row:2; }
+.value-num{
+  font-family:"Inter",sans-serif; font-weight:400; font-size:15px; line-height:1;
+  color:var(--a-ink-warm); margin:0 0 20px;
+}
+.value-item h3{
+  font-family:"Inter",sans-serif; font-weight:700; font-size:15px; line-height:1.2;
+  color:var(--a-ink-warm); margin:0 0 10px;
+}
+.value-item p{
+  font-family:"Inter",sans-serif; font-size:16px; font-weight:400; line-height:27.2px;
+  color:var(--a-ink-warm); margin:0;
+}
+@media (max-width:767px){
+  .value-grid{ grid-template-columns:1fr; row-gap:40px; }
+  .value-item:nth-child(1), .value-item:nth-child(2), .value-item:nth-child(3), .value-item:nth-child(4){
+    grid-column:1; grid-row:auto;
+  }
+}
+
+/* Baner CTA "Umów się na bezpłatną konsultację" — ten sam .cta-banner co na stronach
+   zabiegów, tylko wyższy (600px, zmierzone bezpośrednio na tej konkretnej sekcji
+   archon.au — inne strony/instancje tego komponentu mają zmierzone 400px, więc
+   nadpisujemy scoped klasą zamiast zmieniać bazową .cta-banner). */
+.o-nas-cta.cta-banner{ height:600px; }
