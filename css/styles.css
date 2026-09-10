@@ -3805,15 +3805,14 @@ p .price-row-badges{ margin-left:10px; }
    (np. LPG ma wbudowane czarne tło w pliku źródłowym). Hebe nie ma jeszcze
    dostarczonego logotypu — kafel tekstowy zamiast obrazka, ten sam styl co
    .marquee-phrase na innych podstronach. */
-.salon-tech-marquee{ margin-top:40px; background:var(--a-cream); }
+.salon-tech-marquee{ margin-top:40px; background:var(--a-white); }
 .salon-tech-marquee .marquee-logo{
   display:flex; align-items:center; justify-content:center;
-  height:64px; padding:0 28px;
-  background:#fff; border-radius:12px;
+  height:64px; margin:0 28px;
   flex:0 0 auto;
 }
 .salon-tech-marquee .marquee-logo img{
-  display:block; max-height:26px; width:auto;
+  display:block; max-height:32px; width:auto;
 }
 .salon-tech-marquee .marquee-logo-text{
   font-family:"Inter",sans-serif; font-weight:600; text-transform:uppercase;
