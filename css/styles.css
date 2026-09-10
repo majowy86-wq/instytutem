@@ -3400,7 +3400,7 @@ p .price-row-badges{ margin-left:10px; }
 .blog-content-row{ display:grid; grid-template-columns:1fr 2fr; column-gap:40px; }
 .blog-content-row .blog-spacer{ display:block; }
 .blog-article-body .blog-lede{
-  font-family:"Inter",sans-serif; font-size:20.8px; font-weight:500; line-height:35.36px;
+  font-family:"Inter",sans-serif; font-size:28px; font-weight:500; line-height:40px;
   color:var(--a-ink-warm); margin:0 0 10px;
 }
 .blog-article-body p{
