@@ -3407,15 +3407,16 @@ p .price-row-badges{ margin-left:10px; }
   font-family:"Inter",sans-serif; font-size:16px; font-weight:400; line-height:27.2px;
   color:var(--a-ink-warm); margin:0 0 10px;
 }
-.blog-article-body h3{
+.blog-article-body h2{
   font-family:"Inter",sans-serif; font-size:24px; font-weight:500; line-height:28.8px;
   letter-spacing:-0.5px; color:var(--a-ink-warm); margin:60px 0 20px;
 }
-.blog-article-body h4{
+.blog-article-body h3{
   font-family:"Inter",sans-serif; font-size:16px; font-weight:600; line-height:19.2px;
   color:var(--a-ink-warm); margin:30px 0 10px;
 }
-.blog-article-body ul, .blog-article-body ol{ margin:0 0 20px; padding-left:20px; }
+.blog-article-body ul{ list-style:disc; margin:0 0 20px; padding-left:20px; }
+.blog-article-body ol{ list-style:decimal; margin:0 0 20px; padding-left:20px; }
 .blog-article-body li{
   font-family:"Inter",sans-serif; font-size:16px; font-weight:400; line-height:27.2px;
   color:var(--a-ink-warm); margin-bottom:6px;
