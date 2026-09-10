@@ -3544,7 +3544,12 @@ p .price-row-badges{ margin-left:10px; }
   font-family:"Inter",sans-serif; font-weight:700; font-size:15px; line-height:1.2;
   color:var(--a-ink-warm); margin:0 0 10px;
 }
-.value-item p{
+/* :not(.value-num) — bez tego ta reguła (ta sama specyficzność co .value-num,
+   ale zdefiniowana później) nadpisywała font-size/line-height/margin numeru
+   pozycji, bo <p class="value-num"> pasuje też do zwykłego selektora .value-item p.
+   Realny błąd znaleziony przy weryfikacji odstępu num→h3 (wychodziło 0px
+   zamiast zmierzonych na archon.au 20px). */
+.value-item p:not(.value-num){
   font-family:"Inter",sans-serif; font-size:16px; font-weight:400; line-height:27.2px;
   color:var(--a-ink-warm); margin:0;
 }
