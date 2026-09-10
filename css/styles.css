@@ -3432,9 +3432,12 @@ p .price-row-badges{ margin-left:10px; }
 }
 .blog-article-body li::marker{ color:var(--a-rust); }
 /* linki w treści wpisu — sitewide wzorzec spod .legal-content a: domyślnie
-   podkreślenie w kolorze tekstu, kolor rdzawy (--a-rust) dopiero na hover */
-.blog-article-body a{ color:inherit; text-decoration:underline; text-underline-offset:2px; }
-.blog-article-body a:hover{ color:var(--a-rust); }
+   podkreślenie w kolorze tekstu, kolor rdzawy (--a-rust) dopiero na hover.
+   :not(.abtn) wyklucza przycisk CTA (.blog-cta a) — ten ma wyglądać i
+   zachowywać się 1:1 jak przycisk "Rezerwuj online" w headerze, bez
+   podkreślenia tekstu. */
+.blog-article-body a:not(.abtn){ color:inherit; text-decoration:underline; text-underline-offset:2px; }
+.blog-article-body a:not(.abtn):hover{ color:var(--a-rust); }
 .blog-article-body .blog-cta{ margin-top:32px; }
 @media (max-width:767px){
   .blog-post-header, .blog-byline-row, .blog-content-row{ grid-template-columns:1fr; column-gap:0; }
