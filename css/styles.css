@@ -3422,7 +3422,7 @@ p .price-row-badges{ margin-left:10px; }
 .blog-rank-item h3{ margin:0; }
 .blog-rank-num{
   font-family:"Inter",sans-serif; font-weight:600; font-size:20px; line-height:19.2px;
-  color:var(--a-gray); flex:0 0 auto;
+  color:var(--a-rust); flex:0 0 auto;
 }
 .blog-article-body ul{ list-style:disc; margin:0 0 20px; padding-left:20px; }
 .blog-article-body ol{ list-style:decimal; margin:0 0 20px; padding-left:20px; }
@@ -3430,6 +3430,11 @@ p .price-row-badges{ margin-left:10px; }
   font-family:"Inter",sans-serif; font-size:16px; font-weight:400; line-height:27.2px;
   color:var(--a-ink-warm); margin-bottom:6px;
 }
+.blog-article-body li::marker{ color:var(--a-rust); }
+/* linki w treści wpisu — sitewide wzorzec spod .legal-content a: domyślnie
+   podkreślenie w kolorze tekstu, kolor rdzawy (--a-rust) dopiero na hover */
+.blog-article-body a{ color:inherit; text-decoration:underline; text-underline-offset:2px; }
+.blog-article-body a:hover{ color:var(--a-rust); }
 .blog-article-body .blog-cta{ margin-top:32px; }
 @media (max-width:767px){
   .blog-post-header, .blog-byline-row, .blog-content-row{ grid-template-columns:1fr; column-gap:0; }
