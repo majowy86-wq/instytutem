@@ -3755,9 +3755,18 @@ p .price-row-badges{ margin-left:10px; }
    całym serwisie. Zdjęcia realne, dostarczone przez użytkownika (sesja "Sesja salon
    2026"), sprzęt podpisany wyłącznie zweryfikowanymi, już ustalonymi w projekcie
    nazwami marek (LightSheer®/cooltech®/Dermalux®) — bez zgadywania nienazwanych
-   urządzeń widocznych na innych zdjęciach z sesji. */
+   urządzeń widocznych na innych zdjęciach z sesji.
+   Odstępy siatek (2026-09-11, „za ciasno, dodaj powietrza jak na innych stronach"):
+   pierwotne 24px column/row-gap były wartością wymyśloną od zera (brak odpowiednika
+   na archon.au dla tej strony) i wyraźnie węższą niż ustalony sitewide rytm siatek
+   kart z opisem — .team-grid/.value-grid używają 40px/64px wszędzie indziej.
+   .salon-equipment-grid (karty ze zdjęciem+h3+opisem, ta sama struktura co
+   .team-card) podniesiony do DOKŁADNIE tych samych 40px/64px; .salon-gallery (czyste
+   zdjęcia bez tekstu pod spodem, mniej potrzebują pionowego oddechu niż karty z
+   tekstem) do umiarkowanych 32px/32px — więcej powietrza niż pierwotne 24px, ale
+   celowo mniej niż 64px, żeby nie rozjechać czystej siatki zdjęć pustym miejscem. */
 .salon-gallery{
-  display:grid; grid-template-columns:repeat(4,1fr); column-gap:24px; row-gap:24px;
+  display:grid; grid-template-columns:repeat(4,1fr); column-gap:32px; row-gap:32px;
   margin-top:52px;
 }
 .salon-photo{
@@ -3775,13 +3784,13 @@ p .price-row-badges{ margin-left:10px; }
 }
 
 .salon-equipment-grid{
-  display:grid; grid-template-columns:repeat(4,1fr); column-gap:24px; row-gap:40px;
+  display:grid; grid-template-columns:repeat(4,1fr); column-gap:40px; row-gap:64px;
   margin-top:52px;
 }
-.salon-equipment-card .salon-photo{ margin-bottom:20px; }
+.salon-equipment-card .salon-photo{ margin-bottom:24px; }
 .salon-equipment-card h3{
   font-family:"Tenor Sans",Georgia,serif; font-weight:500; font-size:20px; line-height:1.2;
-  color:var(--a-ink-warm); margin:0 0 4px;
+  color:var(--a-ink-warm); margin:0 0 8px;
 }
 .salon-equipment-card p{
   font-family:"Inter",sans-serif; font-size:14px; font-weight:400; line-height:1.5;
