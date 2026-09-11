@@ -3839,6 +3839,12 @@ p .price-row-badges{ margin-left:10px; }
 }
 .salon-tech-marquee .marquee-logo img{
   display:block; width:auto;
+  /* Skala szarości (2026-09-11, na prośbę użytkownika) — loga dostarczone przez
+     użytkownika są w oryginalnych kolorach marek (granat LightSheer, turkus
+     cooltech/Lumiderm, czarno-białe LPG/SkinPen) — ujednolicone na wyciszony,
+     monochromatyczny pasek, ten sam kierunek co filtr grayscale/sepia już
+     użyty na wszystkich zdjęciach w serwisie (spójny, stonowany ton). */
+  filter:grayscale(100%);
 }
 /* Wysokości dobrane per-logo, NIE jedna wspólna max-height — każdy plik ma
    inny udział właściwego napisu w wysokości całego kadru (np. lightsheer.png
@@ -3846,8 +3852,13 @@ p .price-row-badges{ margin-left:10px; }
    wokół napisu, skinpen.webp dopisek "PRECISION" pod głównym kursywnym
    wordmarkiem) — zmierzone wprost pasami pikseli (PIL, gęstość alfa/jasność
    na wiersz), żeby sam widoczny napis wychodził optycznie w tym samym
-   rozmiarze u wszystkich, zamiast całego obrazka. */
-.logo-lightsheer{ height:55px; }
+   rozmiarze u wszystkich, zamiast całego obrazka.
+   lightsheer: 55px→40px (2026-09-11, użytkownik: "lightsheer jest ewidentnie
+   za duży w stosunku do innych") — dopasowana wysokość samego NAPISU nie
+   uwzględniała, że duży abstrakcyjny znak NAD nim wciąż dodaje wizualną "masę"
+   nieproporcjonalną do reszty paska (płaskie wordmarki bez ikon) — skorygowane
+   w dół empirycznie (zrzut ekranu po każdej zmianie), nie przeliczone wzorem. */
+.logo-lightsheer{ height:40px; }
 .logo-cooltech{ height:15px; }
 .logo-lpg{ height:39px; }
 .logo-skinpen{ height:21px; }
