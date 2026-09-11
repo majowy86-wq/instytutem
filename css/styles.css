@@ -3478,6 +3478,23 @@ p .price-row-badges{ margin-left:10px; }
   position:absolute; top:-80px; left:0; width:100%; height:calc(100% + 160px);
   object-fit:cover; display:block; will-change:transform;
 }
+/* Kadr wideo /salon (2026-09-11, użytkownik: "wykadruj ten film tak żeby było
+   widać twarz i głowę Julii bo teraz ją obcina") — domyślne object-position:50%
+   50% (center) + silna paralaksa powyżej (-80px w spoczynku, patrz main.js) razem
+   ucinały górę kadru: źródłowe wideo 1080×1920 (pion) wewnątrz szerokiego,
+   niskiego kontenera .about-hero-photo (3:2 desktop, 4:5 mobile) jest i tak mocno
+   przycinane przez object-fit:cover, a paralaksa w spoczynku dodatkowo przesuwa
+   widoczne okno w górę o ~80px — zmierzone bezpośrednio (przewijanie <video> do
+   różnych klatek + zrzuty ekranu): przy domyślnym center najgorszy moment (t≈2s,
+   ujęcie szerokie przed zbliżeniem) obcinał całą głowę Julii powyżej brwi na
+   desktopie. object-position:center 20% (zamiast 50%) przesuwa widoczne okno w
+   dół względem źródła — z zapasem na ten sam -80px odjazd paralaksy w spoczynku —
+   zweryfikowane na obu breakpointach i kilku klatkach (0.1s/2s/4s/6s), że twarz
+   widoczna przez cały 8-sekundowy loop, nie tylko w pojedynczej klatce. Dotyczy
+   wyłącznie <video> (jedyne bieżące użycie na /salon) — <img> na /o-nas i /zespol
+   bez zmian, tam nie ma tego problemu (statyczne, wcześniej zweryfikowane zdjęcia
+   dobrze wykadrowane pod center). */
+.about-hero-photo video{ object-position:center 20%; }
 @media (max-width:767px){
   .about-hero-heading{ font-size:36px; line-height:41px; letter-spacing:-1px; }
   .about-hero-photo{ margin-top:40px; aspect-ratio:4/5; }
