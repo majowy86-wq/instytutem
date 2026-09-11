@@ -3474,7 +3474,7 @@ p .price-row-badges{ margin-left:10px; }
    scroll w main.js), ale z większym zapasem (160px zamiast 100/180px gdzie indziej)
    i mocniejszym współczynnikiem (-0.4 zamiast standardowych -0.22), żeby ruch był
    wyraźnie odczuwalny, nie subtelny jak w pozostałych miejscach. */
-.about-hero-photo img{
+.about-hero-photo img, .about-hero-photo video{
   position:absolute; top:-80px; left:0; width:100%; height:calc(100% + 160px);
   object-fit:cover; display:block; will-change:transform;
 }

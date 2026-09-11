@@ -1092,7 +1092,7 @@
      querySelectorAll) bo współczynnik jest świadomie mocniejszy (-0.4 zamiast
      -0.22) tylko dla tego jednego zdjęcia, nie dla całego bloga. */
   (function () {
-    var images = document.querySelectorAll(".about-hero-photo img");
+    var images = document.querySelectorAll(".about-hero-photo img, .about-hero-photo video");
     if (!images.length || reduceMotion) return;
     var entries = Array.prototype.map.call(images, function (img) {
       return { img: img, section: img.closest(".about-hero-photo") };

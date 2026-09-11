@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../css/styles.css?v=225">
+<link rel="stylesheet" href="../css/styles.css?v=226">
 <!-- TODO: favicon / logo mark asset not yet available -->
 </head>
 <body>
@@ -33,8 +33,20 @@
         <h1 class="about-hero-heading">Medyczny rygor w butikowej oprawie.</h1>
         <p class="lede">Stworzyliśmy przestrzeń, która łączy rygorystyczne standardy kliniczne z absolutnym wyciszeniem. Żadnego pośpiechu, anonimowości czy chłodnej szpitalnej atmosfery — tylko intymność, czas i pełne skupienie na Twojej skórze.</p>
       </div>
+      <!-- Wideo zamiast statycznego zdjęcia (2026-09-11, na prośbę użytkownika) —
+           materiał WYGENEROWANY/PRZETWORZONY PRZEZ AI (użytkownik potwierdził wprost
+           po pytaniu — nazwa pliku "Transition_between_clinic_scenes" i pierwsza
+           klatka z realnie wyglądającą osobą przy recepcji wzbudziły podejrzenie,
+           tak jak wcześniej Gemini_Generated_Image_* w tym projekcie), NIE surowe
+           nagranie kamery. .about-hero-photo/video selektor w CSS i paralaksa w
+           main.js rozszerzone o <video> (wcześniej tylko <img>) — reszta komponentu
+           (rounded-rect, object-fit:cover, mocna pionowa paralaksa -0.4) bez zmian,
+           1:1 reużyta z /o-nas i /zespol. autoplay/muted/loop/playsinline — ten sam
+           wzorzec co .hero-video na stronie głównej. -->
       <div class="about-hero-photo">
-        <img src="../assets/images/salon/recepcja.jpg" alt="Recepcja INSTYTUTem.™ w Płocku">
+        <video autoplay muted loop playsinline aria-hidden="true">
+          <source src="../assets/video/salon-hero.mp4" type="video/mp4">
+        </video>
       </div>
     </div>
   </section>
@@ -173,6 +185,6 @@
 
 <footer class="site-footer section--cream" data-partial="../partials/footer.html?v=4" data-partial-root="../"></footer>
 
-<script src="../js/main.js?v=48"></script>
+<script src="../js/main.js?v=49"></script>
 </body>
 </html>
