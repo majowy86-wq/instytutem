@@ -2018,6 +2018,17 @@ div[data-partial]{ display:contents; }
 #cellulit-phases .treatment-accordion summary{ opacity:.8; transition:opacity .2s; }
 #cellulit-phases .treatment-accordion summary:hover{ opacity:1; }
 
+/* Subtelny mostek sprzedażowy na końcu "Fazy włóknistej" (2026-09-14, treść i
+   pomysł dostarczone przez użytkownika) — odnośnik kotwicowy do sekcji zabiegów
+   niżej na tej samej stronie (#zabiegi-na-cellulit). */
+#cellulit-phases .inline-cta-link{
+  font-weight:700;
+  color:var(--a-olive);
+  text-decoration:underline;
+  text-underline-offset:2px;
+}
+#cellulit-phases .inline-cta-link:hover{ color:var(--a-olive-black); }
+
 /* archon.au's real #concerns (measured directly, live): heading→list gap is
    64px at every width (not the sitewide --sp-24=24px this had before); each
    item's divider is a LEADING element (border-top, same pattern as #faq's
