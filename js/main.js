@@ -119,7 +119,7 @@
   }
 
   /* ---------- mega menu ---------- */
-  var megaMenus = ["konsultacje", "problem", "zabiegi", "onas"].map(function (name) {
+  var megaMenus = ["problem", "zabiegi", "onas"].map(function (name) {
     return {
       btn: document.getElementById(name + "MenuBtn"),
       panel: document.getElementById(name + "MegaPanel")

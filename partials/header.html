@@ -23,22 +23,17 @@
     <div class="nav-right">
     <nav aria-label="Główna">
       <ul class="nav-links">
-        <li>
-          <button class="nav-link" id="konsultacjeMenuBtn" aria-expanded="false" aria-controls="konsultacjeMegaPanel">
-            <span class="nav-type">Konsultacje</span><svg class="caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <div class="mega-panel" id="konsultacjeMegaPanel" hidden>
-            <div class="mega-group">
-              <div class="cat">Dla Twarzy i Ciała</div>
-              <ul>
-                <li><a href="__ROOT__konsultacje/dermokonsultacja">Dermokonsultacja</a></li>
-                <li><a href="__ROOT__konsultacje/konsultacja-zabiegowa">Konsultacja zabiegowa</a></li>
-                <li><a href="__ROOT__konsultacje/wizyta-kontrolna">Wizyta kontrolna</a></li>
-                <li><a href="__ROOT__konsultacje/konsultacja-trychologiczna">Konsultacja trychologiczna</a></li>
-              </ul>
-            </div>
-          </div>
-        </li>
+        <!-- Konsultacje — zwinięte z rozwijanego mega-menu do pojedynczego linku (2026-09-14,
+             na wyraźną prośbę użytkownika). Wcześniej 4 pozycje: Dermokonsultacja (jedyna
+             faktycznie zbudowana), Konsultacja zabiegowa (okazała się dotyczyć wyłącznie
+             depilacji laserowej — realnie już istnieje jako "Konsultacja kwalifikująca do
+             zabiegu depilacji laserowej" na /zabiegi/depilacja-laserowa-plock-lightsheer#cennik,
+             więc nie potrzebuje własnej podstrony/linku w menu), Wizyta kontrolna (użytkownik:
+             nie potrzebuje osobnej podstrony — dodana jako pozycja 0 zł w cenniku
+             Dermokonsultacji zamiast), Konsultacja trychologiczna (świadomie odłożona,
+             "na razie nie robimy"). Etykieta "DERMOkonsultacja" — dokładna stylizacja z
+             realnej nazwy usługi na Fresha, na wyraźną prośbę użytkownika. -->
+        <li><a class="nav-link" href="__ROOT__konsultacje/dermokonsultacja"><span class="nav-type">DERMOkonsultacja</span></a></li>
         <li>
           <button class="nav-link" id="problemMenuBtn" aria-expanded="false" aria-controls="problemMegaPanel">
             <span class="nav-type">Problem</span><svg class="caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -166,18 +161,7 @@
 <div class="mobile-drawer" id="mobileDrawer" hidden>
   <nav aria-label="Mobilna">
     <ul>
-      <li>
-        <details>
-          <summary class="nav-link"><span class="nav-type">Konsultacje</span><svg class="caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
-          <ul>
-            <li class="cat-label">Dla Twarzy i Ciała</li>
-            <li><a href="__ROOT__konsultacje/dermokonsultacja">Dermokonsultacja</a></li>
-            <li><a href="__ROOT__konsultacje/konsultacja-zabiegowa">Konsultacja zabiegowa</a></li>
-            <li><a href="__ROOT__konsultacje/wizyta-kontrolna">Wizyta kontrolna</a></li>
-            <li><a href="__ROOT__konsultacje/konsultacja-trychologiczna">Konsultacja trychologiczna</a></li>
-          </ul>
-        </details>
-      </li>
+      <li><a class="nav-link" href="__ROOT__konsultacje/dermokonsultacja"><span class="nav-type">DERMOkonsultacja</span></a></li>
       <li>
         <details>
           <summary class="nav-link"><span class="nav-type">Problem</span><svg class="caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
