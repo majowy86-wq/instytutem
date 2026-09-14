@@ -1640,6 +1640,12 @@ div[data-partial]{ display:contents; }
     padding-top:0;
     padding-bottom:0;
   }
+  /* Strony bez .treatment-financing-wrap (na razie tylko /konsultacje/dermokonsultacja,
+     na wyraźną prośbę użytkownika: "usuńmy dopisek o mediratach" — nie dotyczy
+     usługi za 149 zł) — 160px zakłada 2 rzędy po 80px (cena + raty), z jednym
+     rzędem zostawiałoby to pustą, czarną przestrzeń pod separatorem. */
+  .treatment-price-strip.no-financing .treatment-price-strip-inner{ height:80px; }
+  .treatment-price-strip.no-financing .treatment-price-strip-row{ border-bottom:none; }
   .treatment-price-strip-row{
     height:80px;
     border-bottom:1px solid var(--a-gray);
