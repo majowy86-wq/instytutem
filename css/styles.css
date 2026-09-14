@@ -3884,27 +3884,19 @@ p .price-row-badges{ margin-left:10px; }
    strony zabiegu (na wyraźną prośbę użytkownika: "zaproponuj cos innego niz
    strona zabiegu") — zamiast jednego zabiegu na jednym urządzeniu, strona
    prezentuje KILKA różnych zabiegów adresujących ten sam problem, każdy
-   linkujący do swojej pełnej, już istniejącej strony zabiegu. Karty
-   reużywają dokładnie ten sam język wizualny co .salon-equipment-card
-   (.salon-photo: rounded-rect 4:5, border-radius 20px, grayscale/sepia) —
-   spójny ton fotografii w całym serwisie, zero nowego CSS dla samych zdjęć. */
-.problem-treatments-grid{
-  display:grid; grid-template-columns:repeat(2,1fr); column-gap:40px; row-gap:40px;
-  margin-top:52px;
-}
-.problem-treatments-grid.grid-3{ grid-template-columns:repeat(3,1fr); }
-.problem-treatment-card .salon-photo{ margin-bottom:24px; }
-.problem-treatment-card h3{
-  font-family:"Tenor Sans",Georgia,serif; font-weight:500; font-size:20px; line-height:1.2;
-  color:var(--a-ink-warm); margin:0 0 8px;
-}
-.problem-treatment-card p{
-  font-family:"Inter",sans-serif; font-size:14px; font-weight:400; line-height:1.5;
-  color:var(--a-gray); margin:0 0 16px;
-}
-@media (max-width:1023px){
-  .problem-treatments-grid, .problem-treatments-grid.grid-3{ grid-template-columns:repeat(2,1fr); }
-}
-@media (max-width:479px){
-  .problem-treatments-grid, .problem-treatments-grid.grid-3{ grid-template-columns:1fr; }
+   linkujący do swojej pełnej, już istniejącej strony zabiegu.
+   Karty zabiegów: pierwotnie własny komponent (.problem-treatments-grid/
+   .problem-treatment-card, reużywający .salon-photo) — zastąpiony w kolejnej
+   rundzie tego samego dnia dokładnym, już istniejącym .treatment-cards/
+   .treatment-card (S/M/L na /zabiegi/depilacja-laserowa-plock-lightsheer,
+   zmierzony 1:1 z archon.au), na wyraźną prośbę użytkownika o spójny styl —
+   stary komponent usunięty stąd jako martwy kod, żadna strona już go nie używa. */
+.grayscale-photos .treatment-card-image{
+  /* na wyraźną prośbę użytkownika (2026-09-14): sekcja "Cellulit jako
+     dodatkowy efekt" na /problem/cellulit ma zachować filtr grayscale/sepia,
+     który te 3 zdjęcia miały już wcześniej (ten sam ton co .salon-photo i
+     reszta fotografii w serwisie) — scoped modyfikator, NIE zmiana bazowej
+     .treatment-card-image (używanej bez filtra na S/M/L depilacji laserowej
+     i w sekcji "Zabiegi ukierunkowane" tej samej strony). */
+  filter:grayscale(85%) sepia(8%);
 }

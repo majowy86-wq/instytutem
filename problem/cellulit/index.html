@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../css/styles.css?v=230">
+<link rel="stylesheet" href="../../css/styles.css?v=231">
 <!-- TODO: favicon / logo mark asset not yet available -->
 </head>
 <body>
@@ -117,18 +117,37 @@
 
   <!-- CELLULIT JAKO DODATKOWY EFEKT — 3 zabiegi, gdzie redukcja cellulitu jest
        JEDNYM z kilku efektów opisanych na ich własnych stronach (nie głównym
-       wskazaniem) — potwierdzone bezpośrednio treścią tamtych stron. -->
+       wskazaniem) — potwierdzone bezpośrednio treścią tamtych stron. Na wyraźną
+       prośbę użytkownika (2026-09-14): dokładnie ten sam komponent
+       .treatment-cards/.treatment-card co sekcja "Zabiegi ukierunkowane" wyżej
+       (i strona depilacji laserowej) — jedyna świadoma różnica to zachowany
+       filtr grayscale/sepia na zdjęciach (`.grayscale-photos`, nowy, scoped
+       modyfikator w css/styles.css), bo te 3 zdjęcia miały go już wcześniej
+       (ten sam ton co reszta fotografii w serwisie) i użytkownik poprosił
+       wprost o jego zachowanie. Ceny/czasy — realne, z cenników tamtych 3
+       stron: Mezoterapia Igłowa nie ma tam żadnej pozycji dotyczącej ciała
+       (wszystkie warianty to Twarz/Twarz+szyja/Twarz+szyja+dekolt/Light Eyes),
+       więc pokazana ogólna cena startowa strony ("Cena już od: 399 zł") i
+       zakres czasu wszystkich wariantów (35–50 min), zamiast fałszywie
+       przypisywać jeden konkretny wariant do kontekstu cellulitu. Kriolipoliza
+       cooltech® — realna pozycja "Przyłożenie 1 głowicy" (790 zł/1 godz. 30
+       min), jedyny i wprost pasujący wariant. SkinPen® — realna pozycja
+       "Blizny potrądzikowe (twarz)" (od 699 zł/45 min), z zachowanym "od" bo
+       tak brzmi ta pozycja na źródłowej stronie. -->
   <section class="section--olive section-pad">
     <div class="container" data-reveal="slide">
       <p class="eyebrow">Dodatkowy efekt</p>
       <h2 class="h-section">Zabiegi, które pomagają przy okazji</h2>
-      <div class="problem-treatments-grid grid-3">
-        <div class="problem-treatment-card">
-          <a class="salon-photo" href="../../zabiegi/mezoterapia-iglowa-plock">
-            <img src="../../assets/images/treatments/mezoterapia-iglowa.jpg" alt="Zabieg mezoterapii igłowej">
+      <div class="treatment-cards grayscale-photos">
+        <div class="treatment-card">
+          <a class="treatment-card-image-link" href="../../zabiegi/mezoterapia-iglowa-plock">
+            <img class="treatment-card-image" src="../../assets/images/treatments/mezoterapia-iglowa.jpg" alt="Zabieg mezoterapii igłowej">
           </a>
-          <h3>Mezoterapia Igłowa</h3>
-          <p>Wszechstronny zabieg iniekcyjny — obok zmarszczek, blizn i rozstępów, łagodzi też cellulit indywidualnie dobranym koktajlem.</p>
+          <h3 data-reveal>Mezoterapia Igłowa</h3>
+          <div class="treatment-card-divider" data-reveal="grow"></div>
+          <p class="treatment-card-price">od 399 zł</p>
+          <p class="treatment-card-time">35–50 minut</p>
+          <p class="treatment-card-desc" data-reveal>Wszechstronny zabieg iniekcyjny — obok zmarszczek, blizn i rozstępów, łagodzi też cellulit indywidualnie dobranym koktajlem.</p>
           <a class="treatment-card-cta" href="../../zabiegi/mezoterapia-iglowa-plock">
             <span class="treatment-card-cta-title-wrap">
               <span>Dowiedz się więcej</span>
@@ -137,12 +156,15 @@
             <span class="treatment-card-cta-underline"></span>
           </a>
         </div>
-        <div class="problem-treatment-card">
-          <a class="salon-photo" href="../../zabiegi/kriolipoliza-plock-cooltech">
-            <img src="../../assets/images/treatments/kriolipoliza-cooltech.jpg" alt="Zabieg kriolipolizy cooltech®">
+        <div class="treatment-card">
+          <a class="treatment-card-image-link" href="../../zabiegi/kriolipoliza-plock-cooltech">
+            <img class="treatment-card-image" src="../../assets/images/treatments/kriolipoliza-cooltech.jpg" alt="Zabieg kriolipolizy cooltech®">
           </a>
-          <h3>Kriolipoliza cooltech®</h3>
-          <p>Głowica jednocześnie schładza i wykonuje masaż próżniowy — redukuje miejscową tkankę tłuszczową i dodatkowo zmniejsza cellulit w miejscu zabiegowym.</p>
+          <h3 data-reveal>Kriolipoliza cooltech®</h3>
+          <div class="treatment-card-divider" data-reveal="grow"></div>
+          <p class="treatment-card-price">790 zł</p>
+          <p class="treatment-card-time">1 godz. i 30 min</p>
+          <p class="treatment-card-desc" data-reveal>Głowica jednocześnie schładza i wykonuje masaż próżniowy — redukuje miejscową tkankę tłuszczową i dodatkowo zmniejsza cellulit w miejscu zabiegowym.</p>
           <a class="treatment-card-cta" href="../../zabiegi/kriolipoliza-plock-cooltech">
             <span class="treatment-card-cta-title-wrap">
               <span>Dowiedz się więcej</span>
@@ -151,12 +173,15 @@
             <span class="treatment-card-cta-underline"></span>
           </a>
         </div>
-        <div class="problem-treatment-card">
-          <a class="salon-photo" href="../../zabiegi/skinpen-plock-mikronakluwanie">
-            <img src="../../assets/images/treatments/mikronaklowanie-skinpen.jpg" alt="Zabieg mikronakłuwania SkinPen®">
+        <div class="treatment-card">
+          <a class="treatment-card-image-link" href="../../zabiegi/skinpen-plock-mikronakluwanie">
+            <img class="treatment-card-image" src="../../assets/images/treatments/mikronaklowanie-skinpen.jpg" alt="Zabieg mikronakłuwania SkinPen®">
           </a>
-          <h3>Mikronakłuwanie SkinPen®</h3>
-          <p>Medyczny microneedling pobudzający kolagen — redukuje cellulit, rozstępy i blizny, przebudowując strukturę skóry od wewnątrz.</p>
+          <h3 data-reveal>Mikronakłuwanie SkinPen®</h3>
+          <div class="treatment-card-divider" data-reveal="grow"></div>
+          <p class="treatment-card-price">od 699 zł</p>
+          <p class="treatment-card-time">45 minut</p>
+          <p class="treatment-card-desc" data-reveal>Medyczny microneedling pobudzający kolagen — redukuje cellulit, rozstępy i blizny, przebudowując strukturę skóry od wewnątrz.</p>
           <a class="treatment-card-cta" href="../../zabiegi/skinpen-plock-mikronakluwanie">
             <span class="treatment-card-cta-title-wrap">
               <span>Dowiedz się więcej</span>
