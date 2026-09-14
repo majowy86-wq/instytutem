@@ -2006,6 +2006,18 @@ div[data-partial]{ display:contents; }
 #faq .treatment-accordion summary{ opacity:.8; transition:opacity .2s; }
 #faq .treatment-accordion summary:hover{ opacity:1; }
 
+/* "Dlaczego powstaje" faza-accordion (#cellulit-phases, 2026-09-14): numerowane
+   prefiksy "01."/"02."/"03." w przyciszonym kolorze + ten sam hover-wzorzec co
+   #faq (opacity .8→1) — scoped przez #cellulit-phases, żeby nie dotknąć
+   .treatment-accordion gdzie indziej (FAQ ma już własny hover, cennik żadnego). */
+#cellulit-phases .accordion-num{
+  color:var(--a-gray);
+  font-weight:500;
+  margin-right:4px;
+}
+#cellulit-phases .treatment-accordion summary{ opacity:.8; transition:opacity .2s; }
+#cellulit-phases .treatment-accordion summary:hover{ opacity:1; }
+
 /* archon.au's real #concerns (measured directly, live): heading→list gap is
    64px at every width (not the sitewide --sp-24=24px this had before); each
    item's divider is a LEADING element (border-top, same pattern as #faq's

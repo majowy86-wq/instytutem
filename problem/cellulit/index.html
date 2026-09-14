@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../css/styles.css?v=234">
+<link rel="stylesheet" href="../../css/styles.css?v=235">
 <!-- TODO: favicon / logo mark asset not yet available -->
 </head>
 <body>
@@ -42,7 +42,7 @@
        przez użytkownika: 3 fazy cellulitu). Akordeon zamiast ściany tekstu —
        reużyty DOKŁADNIE ten sam komponent .treatment-accordion co w sekcji FAQ
        niżej na tej samej stronie (zero nowego CSS). -->
-  <section class="section--cream section-pad">
+  <section class="section--cream section-pad" id="cellulit-phases">
     <div class="container">
       <div data-reveal="slide">
       <div class="treatment-intro-title-line">
@@ -54,9 +54,9 @@
         <div>
           <p class="lede">Cellulit (lipodystrofia) to nie tylko kwestia estetyki, ale przede wszystkim złożony problem strukturalny skóry i tkanki podskórnej. Zrozumienie jego faz pozwala nam skutecznie dobrać technologię zabiegową.</p>
           <div class="treatment-accordion" style="margin-top:32px">
-            <details>
+            <details open>
               <summary>
-                <h3 class="treatment-accordion-q">Faza wodna (Początki)</h3>
+                <h3 class="treatment-accordion-q"><span class="accordion-num">01.</span> Faza wodna (Początki)</h3>
                 <svg class="caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </summary>
               <div class="treatment-accordion-body">
@@ -65,7 +65,7 @@
             </details>
             <details>
               <summary>
-                <h3 class="treatment-accordion-q">Faza lipidowa (Rozrost)</h3>
+                <h3 class="treatment-accordion-q"><span class="accordion-num">02.</span> Faza lipidowa (Rozrost)</h3>
                 <svg class="caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </summary>
               <div class="treatment-accordion-body">
@@ -74,7 +74,7 @@
             </details>
             <details>
               <summary>
-                <h3 class="treatment-accordion-q">Faza włóknista (Utrwalenie)</h3>
+                <h3 class="treatment-accordion-q"><span class="accordion-num">03.</span> Faza włóknista (Utrwalenie)</h3>
                 <svg class="caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </summary>
               <div class="treatment-accordion-body">
