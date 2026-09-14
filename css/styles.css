@@ -3900,3 +3900,21 @@ p .price-row-badges{ margin-left:10px; }
      i w sekcji "Zabiegi ukierunkowane" tej samej strony). */
   filter:grayscale(85%) sepia(8%);
 }
+/* Cross-selling — lista linków do pokrewnych stron "Problem" (2026-09-14, na
+   prośbę użytkownika). Prosty, dedykowany wrapper zamiast nadużywania
+   .treatment-cards (ta klasa zakłada dzieci .treatment-card w konkretnym
+   układzie flex-wrap z min/max-width — .treatment-card-cta samodzielnie,
+   bez rodzica-karty, nie potrzebuje tamtej logiki). */
+.problem-related-links{
+  display:flex; flex-wrap:wrap; column-gap:56px; row-gap:24px;
+  margin-top:40px;
+}
+/* Sekcja "autorytetu" (cytat Eweliny) — podpis pod cytatem na ciemnym tle.
+   Celowo NIE .team-tags (ten komponent jest skalibrowany pod jasne tło —
+   .section--cream na /zespol, `color:var(--a-gray)` nieczytelny na
+   --a-olive-black) — ten sam muted-cream odcień co .treatment-card-time/
+   .treatment-card-desc już używają na ciemnych sekcjach. */
+.problem-signature{
+  font-family:"Inter",sans-serif; font-size:14px; font-weight:700;
+  color:rgba(241,237,231,.8); margin:24px 0 0;
+}
