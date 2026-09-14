@@ -3907,8 +3907,21 @@ p .price-row-badges{ margin-left:10px; }
    bez rodzica-karty, nie potrzebuje tamtej logiki). */
 .problem-related-links{
   display:flex; flex-wrap:wrap; column-gap:56px; row-gap:24px;
-  margin-top:40px;
+  margin-top:64px;
 }
+/* "Powietrze" nagłówek→treść na stronach "Problem" (2026-09-14, na prośbę
+   użytkownika: "zachowaj w projekcie tej podstrony ilość powietrza jak na
+   innych podstronach") — .treatment-cards ma własne margin-top:24px, ale to
+   wartość zmierzona z archon.au dla kontekstu "PO akapicie lede" (tak stoi na
+   stronach zabiegów, skąd ten komponent jest reużyty). Na stronach "Problem"
+   siatka idzie bezpośrednio po eyebrow+h-section, BEZ lede pomiędzy — ten sam
+   strukturalny wzorzec co już ustalone sitewide .treatment-benefits (eyebrow+
+   h-section→grid wskazań, bez lede, 64px — używane na ~20 stronach zabiegów),
+   więc dociągnięte do tej samej wartości zamiast zostawiać za ciasny odstęp
+   z niepasującego kontekstu. Scoped do .problem-treatments-section (nowa
+   klasa na obu sekcjach kart tej strony) — nie zmienia bazowej .treatment-cards
+   używanej poprawnie gdzie indziej. */
+.problem-treatments-section .treatment-cards{ margin-top:64px; }
 /* Sekcja "autorytetu" (cytat Eweliny) — podpis pod cytatem na ciemnym tle.
    Celowo NIE .team-tags (ten komponent jest skalibrowany pod jasne tło —
    .section--cream na /zespol, `color:var(--a-gray)` nieczytelny na
