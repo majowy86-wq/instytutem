@@ -3088,6 +3088,13 @@ p .price-row-badges{ margin-left:10px; }
   background:#1E1D1D;
   margin-bottom:22px;
 }
+/* Ten sam ustalony fix co .section--olive .treatment-intro-divider (linia ~1882) —
+   #1E1D1D na tle --a-olive-black (#161810) ma kontrast bliski zeru, więc jest
+   praktycznie niewidoczny. Ta reguła istniała dla .treatment-intro-divider od
+   dawna, ale nigdy nie została powielona dla .treatment-split-divider — usterka
+   ujawniła się dopiero na /problem/cellulit, ale dotyczy WSZYSTKICH stron
+   używających współdzielonego partiala #promo na .section--olive (2026-09-14). */
+.section--olive .treatment-split-divider{ background:var(--a-taupe); }
 @media (min-width:992px){ .treatment-split-divider{ margin-bottom:27px; } }
 .treatment-split-heading{
   font-family:"Tenor Sans",Georgia,serif;
@@ -3953,4 +3960,20 @@ p .price-row-badges{ margin-left:10px; }
 .problem-signature{
   font-family:"Inter",sans-serif; font-size:14px; font-weight:700;
   color:rgba(241,237,231,.8); margin:24px 0 0;
+}
+/* Eyebrow→h-section "powietrze" na stronach "Problem" (2026-09-14, na prośbę
+   użytkownika: były "znacznie za blisko"). Bazowa .eyebrow nie ma własnego
+   margin-bottom — każdy kontekst dostarcza go osobno; te 4 nowe sekcje
+   (2× .problem-treatments-section, cross-selling, autorytet) go nie miały.
+   Wartość 47px/17px NIE nowa — to już ustalona, zmierzona z archon.au
+   konwencja dla DOKŁADNIE tego samego wzorca (goły eyebrow+h-section, bez
+   lede pomiędzy), używana od dawna na #wskazania i #postepowanie na
+   stronach zabiegów. */
+.problem-treatments-section .eyebrow,
+#cross-selling-cellulit .eyebrow,
+#autorytet-cellulit .eyebrow{ margin-bottom:47px; }
+@media (max-width:767px){
+  .problem-treatments-section .eyebrow,
+  #cross-selling-cellulit .eyebrow,
+  #autorytet-cellulit .eyebrow{ margin-bottom:17px; }
 }

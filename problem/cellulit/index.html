@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../css/styles.css?v=236">
+<link rel="stylesheet" href="../../css/styles.css?v=237">
 <!-- TODO: favicon / logo mark asset not yet available -->
 </head>
 <body>
@@ -100,9 +100,17 @@
        CTA celowo "Dowiedz się więcej" (nie "Rezerwuj teraz" jak na stronie
        depilacji) i linkuje do pełnej strony zabiegu, nie bezpośrednio do Fresha —
        inny cel karty (nawigacja do informacji, nie natychmiastowa rezerwacja
-       konkretnego wariantu), ale identyczny styl wizualny. Ceny/czasy z realnych,
-       już zweryfikowanych wartości na stronach tych 2 zabiegów (269 zł/35 min,
-       179 zł/25 min), nie zgadywane. -->
+       konkretnego wariantu), ale identyczny styl wizualny. Cena "od" + zakres
+       czasu pojedynczego zabiegu (2026-09-14, na prośbę użytkownika) zamiast
+       jednego stałego wariantu — realne z cenników tamtych 2 stron: LPG®
+       Alliance ma 3 realne warianty sesji pojedynczego zabiegu (Sesja 20 min
+       →179 zł/25 min realnego czasu, Sesja 40 min→299 zł/45 min, Sesja 60
+       min→349 zł/1 godz. 5 min) — grupowy badge tamtej strony to "od 179 zł",
+       górna granica czasu z najdłuższego wariantu; Karboksyterapia ma jedną
+       cenę dla wariantu "Ciało" (269 zł) ale własny lede tamtej strony mówi
+       wprost "Zabieg trwa od 30 do 90 minut, w zależności od obszaru" — ten
+       realny zakres użyty zamiast pojedynczej wartości "35 min" (to tylko
+       długość slotu rezerwacyjnego Fresha, nie realny czas zabiegu). -->
   <section class="section--cream section-pad problem-treatments-section" id="zabiegi-na-cellulit">
     <div class="container" data-reveal="slide">
       <p class="eyebrow">Zabiegi ukierunkowane</p>
@@ -114,8 +122,8 @@
           </a>
           <h3 data-reveal>Oryginalna Endermologia LPG® Alliance</h3>
           <div class="treatment-card-divider" data-reveal="grow"></div>
-          <p class="treatment-card-price">179 zł</p>
-          <p class="treatment-card-time">25 minut</p>
+          <p class="treatment-card-price">od 179 zł</p>
+          <p class="treatment-card-time">25–65 minut</p>
           <p class="treatment-card-desc" data-reveal>W 100% naturalny, bezinwazyjny zabieg, który mechanicznie stymuluje tkanki. Przyspiesza metabolizm komórkowy, rozbija zastoje wodne i silnie ujędrnia skórę. Złoty standard i fundament w terapiach antycellulitowych.</p>
           <a class="treatment-card-cta" href="../../zabiegi/endermologia-plock-lpg-alliance">
             <span class="treatment-card-cta-title-wrap">
@@ -131,8 +139,8 @@
           </a>
           <h3 data-reveal>Karboksyterapia</h3>
           <div class="treatment-card-divider" data-reveal="grow"></div>
-          <p class="treatment-card-price">269 zł</p>
-          <p class="treatment-card-time">35 minut</p>
+          <p class="treatment-card-price">od 269 zł</p>
+          <p class="treatment-card-time">30–90 minut</p>
           <p class="treatment-card-desc" data-reveal>Terapia dwutlenkiem węgla, która drastycznie poprawia ukrwienie i dotlenienie komórek. Doskonale radzi sobie z opornym cellulitem, stymulując produkcję nowego kolagenu i elastyny.</p>
           <a class="treatment-card-cta" href="../../zabiegi/karboksyterapia-plock">
             <span class="treatment-card-cta-title-wrap">
@@ -234,7 +242,7 @@
        jeszcze nie zbudowane (jak reszta kategorii "Problem" poza /problem/cellulit),
        ten sam, już zaakceptowany w projekcie stan co pozostałe niezbudowane
        linki nawigacji. -->
-  <section class="section--cream section-pad">
+  <section class="section--cream section-pad" id="cross-selling-cellulit">
     <div class="container" data-reveal="slide">
       <p class="eyebrow">Zobacz też</p>
       <h2 class="h-section">W czym jeszcze pomagają nasze terapie na ciało</h2>
@@ -269,7 +277,7 @@
        zaakceptowany tekst, nie wymyślony. Tytuły "magister kosmetologii i
        pielęgniarka" zgodne z już zweryfikowanymi faktami użytymi na /zespol
        (.team-tags: "założycielka · pielęgniarka · mgr kosmetologii"). -->
-  <section class="section--olive section-pad">
+  <section class="section--olive section-pad" id="autorytet-cellulit">
     <div class="container" data-reveal="slide">
       <p class="eyebrow">Twój ekspert</p>
       <h2 class="h-section">Twoje ciało w bezpiecznych rękach.</h2>
