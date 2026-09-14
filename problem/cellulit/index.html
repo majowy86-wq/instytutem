@@ -59,21 +59,33 @@
 
   <!-- ZABIEGI UKIERUNKOWANE — 2 zabiegi, dla których redukcja cellulitu jest
        GŁÓWNYM wskazaniem na ich własnych, już istniejących stronach (potwierdzone
-       tytułem/H1 tamtych stron, nie zgadywane). Karty reużywają 1:1 język wizualny
-       .salon-equipment-card (.salon-photo — rounded-rect 4:5, border-radius 20px,
-       grayscale/sepia), zdjęcia reużyte z istniejących stron zabiegów (bez
-       generowania nowych). -->
+       tytułem/H1 tamtych stron, nie zgadywane). Karty na wyraźną prośbę użytkownika
+       (2026-09-14: "niech maja styl 1:1 jak boksy zabiegow ze strony depilacji
+       laserowej") reużywają DOKŁADNIE komponent .treatment-cards/.treatment-card —
+       ten sam, zmierzony 1:1 z archon.au (`.treatment-cards-wrapper`, karty
+       15-Minute/30-Minute/1-Hour Block), już użyty na
+       /zabiegi/depilacja-laserowa-plock-lightsheer dla wariantów S/M/L. Zero nowego
+       CSS — `.section--cream .treatment-card-*` warianty jasnego tła już istnieją.
+       CTA celowo "Dowiedz się więcej" (nie "Rezerwuj teraz" jak na stronie
+       depilacji) i linkuje do pełnej strony zabiegu, nie bezpośrednio do Fresha —
+       inny cel karty (nawigacja do informacji, nie natychmiastowa rezerwacja
+       konkretnego wariantu), ale identyczny styl wizualny. Ceny/czasy z realnych,
+       już zweryfikowanych wartości na stronach tych 2 zabiegów (269 zł/35 min,
+       179 zł/25 min), nie zgadywane. -->
   <section class="section--cream section-pad">
     <div class="container" data-reveal="slide">
       <p class="eyebrow">Zabiegi ukierunkowane</p>
       <h2 class="h-section">Zaprojektowane właśnie na cellulit</h2>
-      <div class="problem-treatments-grid grid-3">
-        <div class="problem-treatment-card">
-          <a class="salon-photo" href="../../zabiegi/karboksyterapia-plock">
-            <img src="../../assets/images/treatments/karboksyterapia.jpg" alt="Zabieg karboksyterapii — redukcja cellulitu">
+      <div class="treatment-cards">
+        <div class="treatment-card">
+          <a class="treatment-card-image-link" href="../../zabiegi/karboksyterapia-plock">
+            <img class="treatment-card-image" src="../../assets/images/treatments/karboksyterapia.jpg" alt="Zabieg karboksyterapii — redukcja cellulitu">
           </a>
-          <h3>Karboksyterapia</h3>
-          <p>Zabieg z użyciem medycznego dwutlenku węgla (CO₂), poprawiający mikrokrążenie i redukujący cellulit oraz rozstępy.</p>
+          <h3 data-reveal>Karboksyterapia</h3>
+          <div class="treatment-card-divider" data-reveal="grow"></div>
+          <p class="treatment-card-price">269 zł</p>
+          <p class="treatment-card-time">35 minut</p>
+          <p class="treatment-card-desc" data-reveal>Zabieg z użyciem medycznego dwutlenku węgla (CO₂), poprawiający mikrokrążenie i redukujący cellulit oraz rozstępy.</p>
           <a class="treatment-card-cta" href="../../zabiegi/karboksyterapia-plock">
             <span class="treatment-card-cta-title-wrap">
               <span>Dowiedz się więcej</span>
@@ -82,12 +94,15 @@
             <span class="treatment-card-cta-underline"></span>
           </a>
         </div>
-        <div class="problem-treatment-card">
-          <a class="salon-photo" href="../../zabiegi/endermologia-plock-lpg-alliance">
-            <img src="../../assets/images/treatments/endermologia-lpg-alliance.jpg" alt="Zabieg endermologii LPG® Alliance — modelowanie sylwetki i redukcja cellulitu">
+        <div class="treatment-card">
+          <a class="treatment-card-image-link" href="../../zabiegi/endermologia-plock-lpg-alliance">
+            <img class="treatment-card-image" src="../../assets/images/treatments/endermologia-lpg-alliance.jpg" alt="Zabieg endermologii LPG® Alliance — modelowanie sylwetki i redukcja cellulitu">
           </a>
-          <h3>Endermologia LPG® Alliance</h3>
-          <p>Masaż podciśnieniowy najnowszej generacji z Francji — redukuje cellulit, modeluje sylwetkę i ujędrnia skórę, bez bólu i siniaków.</p>
+          <h3 data-reveal>Endermologia LPG® Alliance</h3>
+          <div class="treatment-card-divider" data-reveal="grow"></div>
+          <p class="treatment-card-price">179 zł</p>
+          <p class="treatment-card-time">25 minut</p>
+          <p class="treatment-card-desc" data-reveal>Masaż podciśnieniowy najnowszej generacji z Francji — redukuje cellulit, modeluje sylwetkę i ujędrnia skórę, bez bólu i siniaków.</p>
           <a class="treatment-card-cta" href="../../zabiegi/endermologia-plock-lpg-alliance">
             <span class="treatment-card-cta-title-wrap">
               <span>Dowiedz się więcej</span>
