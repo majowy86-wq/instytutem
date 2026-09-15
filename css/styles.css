@@ -3996,18 +3996,17 @@ p .price-row-badges{ margin-left:10px; }
    nowa — to już ustalona, zmierzona z archon.au konwencja dla DOKŁADNIE
    tego samego wzorca (goły eyebrow+h-section, bez lede/dividera pomiędzy),
    używana od dawna na #wskazania i #postepowanie na stronach zabiegów.
-   #zabiegi-na-cellulit CELOWO usunięty stąd (2026-09-15, na prośbę
-   użytkownika: eyebrow+separator jak w "Dlaczego powstaje") — ta sekcja ma
-   teraz .treatment-intro-title-line, który dostarcza WŁASNY, inny odstęp
-   (20px, patrz jego definicja) — dwie reguły o tej samej specyficzności
-   walczyłyby o tę samą regułę; zostawienie #zabiegi-na-cellulit tutaj
-   nadpisywałoby 20px z powrotem na 47px tylko dlatego, że ta reguła jest
-   zadeklarowana niżej w pliku (kolejność w kaskadzie, nie specyficzność). */
-#dodatkowy-efekt-cellulit .eyebrow,
+   #zabiegi-na-cellulit i #dodatkowy-efekt-cellulit CELOWO usunięte stąd
+   (2026-09-15 — kolejno: eyebrow+separator jak w "Dlaczego powstaje", potem
+   ten sam lead-wzorzec dodany też tutaj) — obie sekcje mają teraz
+   .treatment-intro-title-line, który dostarcza WŁASNY, inny odstęp (20px,
+   patrz jego definicja) — dwie reguły o tej samej specyficzności
+   walczyłyby o tę samą regułę; zostawienie ich tutaj nadpisywałoby 20px
+   z powrotem na 47px tylko dlatego, że ta reguła jest zadeklarowana niżej
+   w pliku (kolejność w kaskadzie, nie specyficzność). */
 #cross-selling-cellulit .eyebrow,
 #autorytet-cellulit .eyebrow{ margin-bottom:47px; }
 @media (max-width:767px){
-  #dodatkowy-efekt-cellulit .eyebrow,
   #cross-selling-cellulit .eyebrow,
   #autorytet-cellulit .eyebrow{ margin-bottom:17px; }
 }
