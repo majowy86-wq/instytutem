@@ -23,26 +23,29 @@
   <!-- HERO — pierwsza strona nowego typu "Problem" (2026-09-14, na wyraźną prośbę
        użytkownika o coś INNEGO niż szablon strony zabiegu). Brak odpowiednika na
        archon.au (sprawdzone: cała nawigacja archon.au to wyłącznie
-       /treatments/<kategoria>/<slug>, zero stron typu "problem"/"concern") —
-       układ zaprojektowany od zera z tokenów DESIGN-SYSTEM.md, ten sam wzorzec
-       hero co /o-nas i /zespol (.section--olive, wyśrodkowane eyebrow+H1+lede).
-       Zdjęcie (2026-09-15, na wyraźną prośbę użytkownika): dodane .about-hero-photo
-       — DOKŁADNIE ten sam komponent co na /o-nas (parallax, JS z main.js podłącza
-       się automatycznie przez selektor klasy, zero nowego kodu) — lipoliza-iniekcyjna.jpg,
-       to samo zdjęcie, które w tej chwili jest ustawione jako hero na
+       /treatments/<kategoria>/<slug>, zero stron typu "problem"/"concern").
+       Layout (2026-09-15, na wyraźną prośbę użytkownika: "hero w problemie niech
+       wyglada jak hero w zabiegu czyli zdjecie jest pod tekstem") — zmienione z
+       .about-hero-photo (zdjęcie jako osobny blok POD tekstem w pionie, wzorzec
+       /o-nas) na DOKŁADNIE ten sam komponent .treatment-hero/.treatment-hero-bg
+       co na stronach zabiegów (np. /zabiegi/karboksyterapia-plock) — zdjęcie w tle,
+       tekst wyśrodkowany na nim z ciemnym overlay. Brak .treatment-hero-ctas/
+       .treatment-price-strip celowo — ta strona nie ma jednej ceny/rezerwacji do
+       wypchnięcia w hero, tylko listę kilku zabiegów niżej. lipoliza-iniekcyjna.jpg
+       — to samo zdjęcie, które w tej chwili jest ustawione jako hero na
        /zabiegi/karboksyterapia-plock. -->
-  <section class="section--olive section-pad">
+  <div class="treatment-hero-wrap">
+  <section class="treatment-hero">
+    <div class="treatment-hero-bg" style="background-image:url('../../assets/images/treatments/lipoliza-iniekcyjna.jpg')" role="img" aria-label="Zabieg redukujący cellulit — biodro i boczek"></div>
     <div class="container">
-      <div class="about-hero-intro" data-reveal="slide">
+      <div class="treatment-hero-inner" data-reveal="slide">
         <p class="eyebrow">Problem</p>
-        <h1 class="about-hero-heading">Cellulit — jak skutecznie go zredukować</h1>
+        <h1>Cellulit — jak skutecznie go zredukować</h1>
         <p class="lede">Cellulit to zmiana strukturalna tkanki tłuszczowej pod skórą — dotyczy większości kobiet, niezależnie od wagi czy wieku, i nie jest chorobą. W INSTYTUTem.™ podchodzimy do niego wieloma metodami naraz, dobranymi do stopnia zaawansowania i Twoich celów.</p>
-      </div>
-      <div class="about-hero-photo">
-        <img src="../../assets/images/treatments/lipoliza-iniekcyjna.jpg" alt="Zabieg redukujący cellulit — biodro i boczek">
       </div>
     </div>
   </section>
+  </div>
 
   <!-- WYJAŚNIENIE — rozbudowane pod SEO (2026-09-14, treść dostarczona wprost
        przez użytkownika: 3 fazy cellulitu). Akordeon zamiast ściany tekstu —
