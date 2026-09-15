@@ -2013,13 +2013,20 @@ div[data-partial]{ display:contents; }
 #faq .treatment-accordion summary{ opacity:.8; transition:opacity .2s; }
 #faq .treatment-accordion summary:hover{ opacity:1; }
 
-/* "Dlaczego powstaje" faza-accordion (#cellulit-phases, 2026-09-14): numerowane
-   prefiksy "01."/"02."/"03." w przyciszonym kolorze + ten sam hover-wzorzec co
-   #faq (opacity .8→1) — scoped przez #cellulit-phases, żeby nie dotknąć
-   .treatment-accordion gdzie indziej (FAQ ma już własny hover, cennik żadnego). */
-#cellulit-phases .accordion-num{
-  color:var(--a-gray);
+/* "Dlaczego powstaje" faza/przyczyna-accordion (2026-09-14, rozszerzone
+   2026-09-15 na prośbę użytkownika: "zrob bez . na koncu i w rdzawym kolorze...
+   moga tez byc 25% wieksze jak zrobimy tutaj to wszedzie zastosujesz") —
+   .accordion-num ODSCOPED z #cellulit-phases na globalny selektor, żeby
+   automatycznie objąć każdą kolejną stronę "Problem" reużywającą ten sam
+   wzorzec (np. #wiotka-skora-phases), nie tylko cellulit. Kropka na końcu
+   ("01." itd.) usunięta z treści HTML (nie generowana przez CSS) w obu
+   dotychczasowych plikach. Rozmiar 20px = 16px bazowego .treatment-accordion-q
+   × 1.25 (użytkownik: "25% wieksze"), kolor `--a-rust` zamiast dawnego
+   przyciszonego `--a-gray`. */
+.accordion-num{
+  color:var(--a-rust);
   font-weight:500;
+  font-size:20px;
   margin-right:4px;
 }
 #cellulit-phases .treatment-accordion summary{ opacity:.8; transition:opacity .2s; }
