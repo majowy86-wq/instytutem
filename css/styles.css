@@ -486,6 +486,22 @@ div[data-partial]{ display:contents; }
   opacity:1;
   transform:translateX(4px);
 }
+/* Wyszarzona, nieaktywna pozycja menu (np. "Program lojalnościowy" — strona
+   jeszcze nie gotowa) — <span> zamiast <a>, bez href, ten sam wzorzec co
+   .abtn.outline-dark.is-disabled (kolor --a-gray, pointer-events:none). Brak
+   strzałki-reveal, bo to nie .mega-group a — nic dodatkowego do wyłączania. */
+.mega-group li.is-disabled .nav-disabled,
+.mobile-drawer li.is-disabled .nav-disabled{
+  display:flex;
+  align-items:center;
+  padding:4px 0;
+  font-size:14px;
+  font-weight:500;
+  line-height:1.3;
+  color:var(--a-gray);
+  cursor:default;
+  pointer-events:none;
+}
 
 /* breakpoint measured against the real content width of the desktop nav (logo +
    6 links + 2 CTA buttons + the .nav-row floor gap, ~892px unconstrained) — below
@@ -3999,3 +4015,101 @@ p .price-row-badges{ margin-left:10px; }
    stronach). .problem-signature/#autorytet-cellulit były używane WYŁĄCZNIE
    w tej sekcji (sprawdzone grep) — usunięte stąd całkowicie jako martwy kod,
    nie tylko przestylowane. */
+
+/* ============================================================
+   Kontakt (/kontakt) — 1:1 z archon.au /contact-us, wszystkie wartości
+   zmierzone bezpośrednio getComputedStyle na żywej stronie (2026-09-15).
+   ============================================================ */
+.kontakt-hero{
+  text-align:center;
+  max-width:600px;
+  margin:0 auto;
+}
+/* Realny kolor eyebrow na TEJ konkretnej stronie archon.au to --a-ink-warm
+   (rgb(63,61,59)), NIE bazowe --a-gray bazowego .eyebrow (zmierzone wprost,
+   różni się od domyślnego użycia gdzie indziej) — stąd scoped override,
+   nie zmiana globalnej .eyebrow. margin-bottom 20px też zmierzone. */
+.kontakt-hero .eyebrow{ color:var(--a-ink-warm); margin-bottom:20px; }
+.kontakt-hero .h-hero{ margin-bottom:0; }
+
+.kontakt-grid{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:16px 50px;
+  margin-top:var(--sp-64);
+}
+@media (max-width:900px){
+  .kontakt-grid{ grid-template-columns:1fr; gap:24px; }
+}
+/* .kontakt-box border/padding/radius zmierzone wprost z .kontakt-box na
+   archon.au (1px solid --a-gray, ~20px padding, radius 0 — realny brak
+   zaokrąglenia, inaczej niż większość reszty strony). */
+.kontakt-box{
+  border:1px solid var(--a-gray);
+  padding:20px;
+}
+.kontakt-box h3{
+  font-family:"Tenor Sans",serif;
+  font-size:20px;
+  font-weight:500;
+  margin-bottom:12px;
+}
+.kontakt-box p{
+  font-size:14px;
+  line-height:1.5;
+  color:var(--a-ink-warm);
+  margin-bottom:20px;
+}
+.kontakt-box .abtn{ width:100%; }
+
+.kontakt-hours{ margin-top:var(--sp-64); }
+.kontakt-hours-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:20px 0;
+  border-bottom:1px solid rgba(122,119,114,.41);
+}
+.kontakt-hours-row:last-child{ border-bottom:none; }
+.kontakt-hours-day{ font-size:15px; color:var(--a-ink-warm); }
+.kontakt-hours-time{ font-size:15px; font-weight:700; color:var(--a-ink-warm); }
+
+.kontakt-form-section{ margin-top:var(--sp-64); }
+.kontakt-form{
+  display:flex;
+  flex-direction:column;
+  gap:24px;
+  max-width:640px;
+  margin-top:32px;
+}
+/* Input/textarea zmierzone wprost: bez ramki dookoła, tylko border-bottom
+   1px --a-gray, tło transparentne, 16px Inter — celowo INNY styl niż
+   .newsletter-form input (tam pigułka z obwódką) — to jest realny,
+   inny komponent formularza na tej konkretnej stronie referencyjnej. */
+.kontakt-form input,
+.kontakt-form textarea{
+  width:100%;
+  background:transparent;
+  border:0;
+  border-bottom:1px solid var(--a-gray);
+  padding:8px 0;
+  font-family:"Inter",sans-serif;
+  font-size:16px;
+  color:var(--a-ink-warm);
+  border-radius:0;
+}
+.kontakt-form textarea{ min-height:140px; resize:vertical; padding-top:12px; }
+.kontakt-form input::placeholder,
+.kontakt-form textarea::placeholder{ color:var(--a-gray); }
+.kontakt-form input:focus,
+.kontakt-form textarea:focus{ outline:none; border-bottom-color:var(--a-olive-black); }
+.kontakt-form-consent{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  font-size:13px;
+  color:var(--a-ink-warm);
+}
+.kontakt-form-consent input{ margin-top:3px; width:auto; flex-shrink:0; }
+.kontakt-form-consent a{ text-decoration:underline; }
+.kontakt-form .abtn{ align-self:flex-start; }

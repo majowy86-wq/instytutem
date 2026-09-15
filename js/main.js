@@ -313,6 +313,20 @@
     });
   }
 
+  /* ---------- contact form (/kontakt) — no backend, ten sam uczciwy wzorzec co
+     formularz newslettera powyżej, nie fałszywy sukces ---------- */
+  var contactForm = document.getElementById("contactForm");
+  var contactFormStatus = document.getElementById("contactFormStatus");
+
+  if (contactForm && contactFormStatus) {
+    contactForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      contactFormStatus.hidden = false;
+      contactFormStatus.textContent =
+        "Formularz nie jest jeszcze podłączony — wymaga usługi e-mail (np. Formspree) po stronie serwera, zanim będzie mógł wysyłać wiadomości. W międzyczasie zadzwoń lub napisz bezpośrednio na adres podany wyżej.";
+    });
+  }
+
   /* ---------- footer year ---------- */
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());

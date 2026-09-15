@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow"><!-- wersja robocza (GitHub Pages) — usunąć dopiero przy właściwym wdrożeniu na instytutem.pl, patrz CLAUDE.md -->
+<title>Kontakt | INSTYTUTem.™ Płock</title>
+<meta name="description" content="Skontaktuj się z INSTYTUTem.™ w Płocku — zadzwoń, napisz lub odwiedź nas przy ul. 1 Maja 6. Sprawdź godziny otwarcia i wyślij wiadomość.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/styles.css?v=250">
+<!-- TODO: favicon / logo mark asset not yet available -->
+</head>
+<body>
+
+<div class="progress-bar" aria-hidden="true"></div>
+
+<div data-partial="../partials/header.html?v=8" data-partial-root="../"></div>
+
+<main id="main">
+
+  <!-- HERO — 1:1 z archon.au /contact-us, wszystkie wartości zmierzone
+       bezpośrednio (getComputedStyle na żywej stronie, 2026-09-15): eyebrow
+       12px/Inter/600/uppercase/0.5px, kolor --a-ink-warm (nie bazowe --a-gray
+       .eyebrow — realna różnica na TEJ stronie referencyjnej), H1 60px/Tenor
+       Sans/500/-2px/wyśrodkowany — reużyty istniejący .h-hero.center (już
+       dokładnie ten komponent, zmierzony wcześniej w innym kontekście). Zero
+       zdjęcia w tle — archon.au na tej stronie ma czysto tekstowe hero, bez
+       obrazu. -->
+  <section class="section--cream section-pad">
+    <div class="container">
+      <div class="kontakt-hero" data-reveal="slide">
+        <p class="eyebrow">Kontakt</p>
+        <h1 class="h-hero center">Cześć, jak możemy pomóc?</h1>
+      </div>
+
+      <!-- 3 KARTY KONTAKTOWE — 1:1 z archon.au (Call us / Visit Us / Send an
+           Email), wartości zmierzone: .kontakt-box border 1px solid --a-gray,
+           padding ~20px, brak zaokrąglenia; przycisk to dokładnie istniejąca
+           klasa .abtn.primary-black (tło --a-olive-black, tekst biały, radius
+           2px, padding 0 27px — porównane 1:1 z pomiarem "Get Directions" na
+           żywej stronie, identyczne wartości), tylko z dodanym width:100% w
+           tym kontekście. Treść: realne dane kontaktowe z partials/footer.html
+           (telefon, e-mail, adres, link do Map — nie zgadywane). -->
+      <div class="kontakt-grid" data-reveal="slide">
+        <div class="kontakt-box">
+          <h3>Zadzwoń</h3>
+          <p>Masz pytanie? Zadzwoń, a pomożemy najlepiej jak możemy. Jeśli akurat jesteśmy z klientką, zostaw wiadomość.</p>
+          <a class="abtn primary-black" href="tel:+48737836092">737 836 092</a>
+        </div>
+        <div class="kontakt-box">
+          <h3>Odwiedź nas</h3>
+          <p>ul. 1 Maja 6<br>09-402 Płock</p>
+          <a class="abtn primary-black" href="https://goo.gl/maps/upRkkPpan7BiD86L9" target="_blank" rel="noopener">Wyznacz trasę</a>
+        </div>
+        <div class="kontakt-box">
+          <h3>Napisz e-mail</h3>
+          <p>Masz pytanie o skórę, zabieg lub rezerwację? Napisz do nas wiadomość i/lub zdjęcie — odpowiemy najszybciej jak się da.</p>
+          <a class="abtn primary-black" href="mailto:recepcja@instytutem.pl">Napisz e-mail</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GODZINY OTWARCIA — 1:1 z archon.au (nagłówek + lista dni z podziałem),
+       ale z REALNYMI godzinami INSTYTUTem.™ (partials/footer.html), nie
+       skopiowanymi z Australii — u nas nie ma osobnego rozbicia
+       poniedziałek/wtorek-czwartek/piątek jak na archon.au, bo nasze
+       godziny są prostsze (pon–pt jedna wspólna pula, sob osobno, niedziela
+       zamknięte) — struktura listy 1:1, treść wyłącznie prawdziwa. .h-section
+       reużyty (już dokładnie 30px/Tenor Sans/500, zmierzone wcześniej w innym
+       kontekście, identyczne z pomiarem "Opening Hours" na żywej stronie). -->
+  <section class="section--cream section-pad">
+    <div class="container">
+      <div class="kontakt-hours" data-reveal="slide">
+        <h2 class="h-section">Godziny otwarcia — niedziela nieczynne</h2>
+        <div class="kontakt-hours-row">
+          <p class="kontakt-hours-day">Poniedziałek – piątek</p>
+          <p class="kontakt-hours-time">08:00 – 21:00</p>
+        </div>
+        <div class="kontakt-hours-row">
+          <p class="kontakt-hours-day">Sobota</p>
+          <p class="kontakt-hours-time">08:00 – 16:00</p>
+        </div>
+        <div class="kontakt-hours-row">
+          <p class="kontakt-hours-day">Niedziela</p>
+          <p class="kontakt-hours-time">Nieczynne</p>
+        </div>
+      </div>
+
+      <!-- FORMULARZ — 1:1 z archon.au ("Send us a message:" + Imię/Email/
+           Telefon/Wiadomość + zgoda na Regulamin + Submit). Underline-style
+           inputy zmierzone wprost (border-bottom 1px --a-gray, tło
+           transparentne, 16px Inter) — celowo INNY komponent niż
+           .newsletter-form (tam pigułka z pełną obwódką), bo to realnie inny
+           styl formularza na tej konkretnej stronie referencyjnej. BEZ
+           backendu — ten sam uczciwy wzorzec co formularz newslettera
+           (js/main.js), żaden fałszywy komunikat sukcesu. Link do
+           Regulaminu — ten sam realny link Google Docs co w stopce. -->
+      <div class="kontakt-form-section" data-reveal="slide">
+        <h2 class="h-section">Wyślij nam wiadomość:</h2>
+        <form class="kontakt-form" id="contactForm" novalidate>
+          <div>
+            <label class="visually-hidden" for="contactName">Imię i nazwisko</label>
+            <input type="text" id="contactName" name="name" placeholder="Imię i nazwisko" required>
+          </div>
+          <div>
+            <label class="visually-hidden" for="contactEmail">Adres e-mail</label>
+            <input type="email" id="contactEmail" name="email" placeholder="Adres e-mail" required>
+          </div>
+          <div>
+            <label class="visually-hidden" for="contactPhone">Numer telefonu</label>
+            <input type="tel" id="contactPhone" name="phone" placeholder="Numer telefonu">
+          </div>
+          <div>
+            <label class="visually-hidden" for="contactMessage">Wiadomość</label>
+            <textarea id="contactMessage" name="message" placeholder="Treść wiadomości..." required></textarea>
+          </div>
+          <label class="kontakt-form-consent">
+            <input type="checkbox" id="contactConsent" name="consent" required>
+            <span>Akceptuję <a href="https://docs.google.com/document/d/1gJknVSpb_ITyZ_C-ZBZk7X8aNDPnU59sXCnRYLT98cA/edit" target="_blank" rel="noopener">Regulamin świadczenia usług</a></span>
+          </label>
+          <button class="abtn primary-black" type="submit">Wyślij</button>
+        </form>
+        <p class="form-status" id="contactFormStatus" hidden></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROMOCJA — prawdziwy, jeden współdzielony partial, bez zmian per-strona. -->
+  <section class="section--olive" id="promo" data-partial="../partials/pakiet-powitalny.html?v=6" data-partial-root="../"></section>
+
+  <!-- NEWSLETTER — dokładnie ten sam komponent co wszystkie inne strony (DRY). -->
+  <section class="section--olive">
+    <div class="newsletter-box" data-reveal="slide">
+      <div class="newsletter-title">
+        <div class="eyebrow">Newsletter</div>
+        <p class="newsletter-heading">Bądź na bieżąco z premierami zabiegowymi i wiedzą o skórze INSTYTUTem.™</p>
+      </div>
+
+      <form class="newsletter-form" id="newsletterForm" novalidate>
+        <label class="visually-hidden" for="newsletterEmail">Adres e-mail</label>
+        <input type="email" id="newsletterEmail" name="email" placeholder="Twój adres e-mail" required>
+        <button class="abtn primary-olive" type="submit">Zapisz się</button>
+      </form>
+      <p class="form-status" id="newsletterStatus" hidden></p>
+      <p class="form-note">Zapisz się, aby otrzymywać nowości, promocje i informacje o ofertach specjalnych INSTYTUTem.™<br>Zapisując się, akceptujesz naszą <a href="../polityka-prywatności">Politykę Prywatności</a>.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer section--cream" data-partial="../partials/footer.html?v=5" data-partial-root="../"></footer>
+
+<script src="../js/main.js?v=51"></script>
+</body>
+</html>
