@@ -4115,11 +4115,15 @@ p .price-row-badges{ margin-left:10px; }
 .kontakt-hours-time{ font-size:15px; font-weight:700; color:var(--a-ink-warm); }
 
 .kontakt-form-section{ margin-top:150px; }
+/* POPRAWKA (2026-09-15, trzecia weryfikacja): formularz na archon.au wypełnia
+   CAŁĄ szerokość kontenera treści (zmierzone: formWidth === containerWidth,
+   1280px na 1440px viewport) — pierwsza wersja miała wymyślone max-width:640px,
+   za wąskie. Usunięte, formularz teraz zajmuje pełną szerokość .container jak
+   w oryginale. gap:24px potwierdzone pomiarem (odstęp między kolejnymi polami). */
 .kontakt-form{
   display:flex;
   flex-direction:column;
   gap:24px;
-  max-width:640px;
   margin-top:32px;
 }
 /* Input/textarea zmierzone wprost: bez ramki dookoła, tylko border-bottom
@@ -4145,11 +4149,38 @@ p .price-row-badges{ margin-left:10px; }
 .kontakt-form textarea:focus{ outline:none; border-bottom-color:var(--a-olive-black); }
 .kontakt-form-consent{
   display:flex;
-  align-items:flex-start;
-  gap:10px;
+  align-items:center;
+  gap:8px;
   font-size:13px;
   color:var(--a-ink-warm);
 }
-.kontakt-form-consent input{ margin-top:3px; width:auto; flex-shrink:0; }
+/* Checkbox niestandardowy — na archon.au to WCALE NIE natywny checkbox
+   przeglądarki: prawdziwy `<input>` jest wizualnie ukryty (opacity:0), a
+   widoczny kwadrat to osobny, stylowany element (18×18px, border 1px solid
+   --a-ink-warm, brak zaokrąglenia, tło transparentne — zmierzone wprost).
+   Zaznaczony stan pokazuje ikonę checkmark jako background-image (zmierzone:
+   ich własny, hostowany na Webflow CDN SVG — tu odtworzony jako analogiczna,
+   własna inline SVG w tym samym stylu co strzałki `.abtn`/`.treatment-card-
+   cta` gdzie indziej na stronie, nie hotlinkowana). `appearance:none` +
+   stylowanie bezpośrednio na `<input>` (bez dodatkowego węzła DOM) — prostsze
+   niż odtwarzanie 2-elementowej struktury Webflow, identyczny efekt wizualny. */
+.kontakt-form-consent input[type="checkbox"]{
+  appearance:none;
+  -webkit-appearance:none;
+  width:18px;
+  height:18px;
+  margin:0;
+  border:1px solid var(--a-ink-warm);
+  border-radius:0;
+  background-color:transparent;
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:11px 9px;
+  flex-shrink:0;
+  cursor:pointer;
+}
+.kontakt-form-consent input[type="checkbox"]:checked{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 12'%3E%3Cpath d='M1 6L6 11L15 1' fill='none' stroke='%233F3D3B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
 .kontakt-form-consent a{ text-decoration:underline; }
 .kontakt-form .abtn{ align-self:flex-start; }
