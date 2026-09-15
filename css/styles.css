@@ -2027,12 +2027,17 @@ div[data-partial]{ display:contents; }
 
 /* Subtelny mostek sprzedażowy na końcu "Fazy włóknistej" (2026-09-14, treść i
    pomysł dostarczone przez użytkownika) — odnośnik kotwicowy do sekcji zabiegów
-   niżej na tej samej stronie (#zabiegi-na-cellulit). */
+   niżej na tej samej stronie (#zabiegi-na-cellulit). Kolor (2026-09-15, na
+   wyraźną prośbę użytkownika: "w kolorze rdzawym i bez pogrubienia i
+   podkreslenia... jak kazdy rdzawy link na stronie") — zwykła waga (400,
+   nie 700) i `--a-rust`, sitewide akcentowy kolor linków (dotąd używany
+   jako hover-only na większości linków, tutaj świadomie jako kolor
+   spoczynkowy, bo o to poprosił użytkownik), bez podkreślenia w żadnym
+   stanie. */
 #cellulit-phases .inline-cta-link{
-  font-weight:700;
-  color:var(--a-olive);
-  text-decoration:underline;
-  text-underline-offset:2px;
+  font-weight:400;
+  color:var(--a-rust);
+  text-decoration:none;
 }
 #cellulit-phases .inline-cta-link:hover{ color:var(--a-olive-black); }
 
