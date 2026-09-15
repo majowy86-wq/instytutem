@@ -4049,9 +4049,16 @@ p .price-row-badges{ margin-left:10px; }
 /* .kontakt-box border/padding/radius zmierzone wprost z .kontakt-box na
    archon.au (1px solid --a-gray, ~20px padding, radius 0 — realny brak
    zaokrąglenia, inaczej niż większość reszty strony). */
+/* display:flex + margin-top:auto na przycisku (niżej) — przyciski wszystkich
+   3 kart trzymają wspólną linię bazową NIEZALEŻNIE od długości opisu (karty
+   są już i tak równej wysokości dzięki domyślnemu stretch w .kontakt-grid),
+   zamiast ręcznego dopasowywania liczby linii tekstu przy każdej zmianie
+   treści — odporne na przyszłe edycje. */
 .kontakt-box{
   border:1px solid var(--a-gray);
   padding:20px;
+  display:flex;
+  flex-direction:column;
 }
 /* POPRAWKA (2026-09-15, druga weryfikacja): pierwszy pomiar tego nagłówka był
    błędny (złapał inny element / złą regułę CSS) — realnie to WCALE NIE
@@ -4076,7 +4083,7 @@ p .price-row-badges{ margin-left:10px; }
   color:var(--a-ink-warm);
   margin-bottom:20px;
 }
-.kontakt-box .abtn{ width:100%; }
+.kontakt-box .abtn{ width:100%; margin-top:auto; }
 
 /* Godziny otwarcia — na archon.au to siatka KOLUMN dzień-obok-dnia (4 kolumny
    na desktopie, 1 na mobile), NIE stos poziomych wierszy jak w pierwszej
