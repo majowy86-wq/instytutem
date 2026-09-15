@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../css/styles.css?v=245">
+<link rel="stylesheet" href="../../css/styles.css?v=246">
 <!-- TODO: favicon / logo mark asset not yet available -->
 </head>
 <body>
@@ -289,15 +289,26 @@
        zaakceptowany tekst, nie wymyślony. Tytuły "magister kosmetologii i
        pielęgniarka" zgodne z już zweryfikowanymi faktami użytymi na /zespol
        (.team-tags: "założycielka · pielęgniarka · mgr kosmetologii").
-       Tło (2026-09-15, na wyraźną prośbę użytkownika): zmienione z .section--olive
-       na .section--cream — "Zobacz też" (dawniej między tą sekcją a poprzednią)
-       zostało usunięte, więc ta sekcja przejęła jej jasny styl. Zdjęcie Eweliny
-       DO DODANIA — użytkownik szuka odpowiedniego zdjęcia, jeszcze nie dostarczone. -->
-  <section class="section--cream section-pad" id="autorytet-cellulit">
-    <div class="container" data-reveal="slide">
+       Layout (2026-09-15, na wyraźną prośbę użytkownika: zdjęcie w tle całej
+       sekcji, "jak hero") — reużyty DOKŁADNIE komponent .cta-banner (baner CTA
+       "Nie wiesz, który zabieg wybrać?" niżej na tej samej stronie, i
+       .o-nas-cta na /o-nas) zamiast .treatment-hero — ten drugi jest
+       zaprojektowany na PEŁNĄ wysokość viewportu (100vh-80px), za duży na
+       śródstronicową sekcję cytatu. Scoped klasa .problem-authority-banner
+       (wzorzec 1:1 z .o-nas-cta) podnosi bazową wysokość 400px, za ciasną na
+       eyebrow+h2+lede+podpis. Zdjęcie: ewelina-ekspert.jpg — zdjęcie AI
+       (ChatGPT/ChatGPT Images), twarz zachowana z realnego zdjęcia Eweliny
+       (assets/images/zespol/ewelina.jpg, edycja minimalna z zachowaniem
+       twarzy), włosy spięte zamiast rozpuszczonych, tło rozszerzone
+       (outpainting) do kwadratu pod ten układ. Brak osobnego ciemnego
+       overlay — ten sam, zmierzony na żywym archon.au fakt co przy .cta-banner
+       (real #Solution nie ma overlay, w pełni przezroczyste). -->
+  <section class="cta-banner problem-authority-banner" id="autorytet-cellulit">
+    <img class="cta-banner-image" src="../../assets/images/zespol/ewelina-ekspert.jpg" alt="Ewelina Majchrzak, właścicielka INSTYTUTem.™">
+    <div class="cta-banner-content" data-reveal="slide">
       <p class="eyebrow">Twój ekspert</p>
       <h2 class="h-section">Twoje ciało w bezpiecznych rękach.</h2>
-      <p class="lede" style="max-width:640px">Praca z sylwetką wymaga wiedzy anatomii i precyzji. Jako magister kosmetologii i pielęgniarka, stawiam wyłącznie na technologie poparte badaniami klinicznymi. Do każdego problemu podchodzimy holistycznie, sprawdzając przeciwwskazania i dobierając parametry tak, aby osiągnąć naturalne rezultaty bez ryzyka dla Twojego zdrowia.</p>
+      <p class="lede" style="max-width:640px;margin:0 auto">Praca z sylwetką wymaga wiedzy anatomii i precyzji. Jako magister kosmetologii i pielęgniarka, stawiam wyłącznie na technologie poparte badaniami klinicznymi. Do każdego problemu podchodzimy holistycznie, sprawdzając przeciwwskazania i dobierając parametry tak, aby osiągnąć naturalne rezultaty bez ryzyka dla Twojego zdrowia.</p>
       <p class="problem-signature">Ewelina Majchrzak, właścicielka INSTYTUTem.™</p>
     </div>
   </section>

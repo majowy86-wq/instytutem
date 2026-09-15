@@ -3811,6 +3811,28 @@ p .price-row-badges{ margin-left:10px; }
    nadpisujemy scoped klasą zamiast zmieniać bazową .cta-banner). */
 .o-nas-cta.cta-banner{ height:600px; }
 
+/* "Twój ekspert" na /problem/cellulit (2026-09-15, na wyraźną prośbę
+   użytkownika: zdjęcie w tle sekcji, jak hero) — reużyty .cta-banner, ale z
+   WIĘCEJ treści niż gdziekolwiek indziej gdzie ten komponent występuje
+   (eyebrow+h2+lede+podpis, nie tylko krótki nagłówek+przycisk) — brak
+   odpowiednika na archon.au do zmierzenia (ta sekcja to autorska treść, nie
+   1:1 z reference site), więc wysokość dobrana empirycznie tak, żeby cały
+   tekst mieścił się bez overflow (zweryfikowane bezpośrednio w przeglądarce
+   po wdrożeniu), nie zgadywana z sufitu. */
+.problem-authority-banner.cta-banner{ height:640px; }
+@media (max-width:767px){
+  .problem-authority-banner.cta-banner{ height:auto; min-height:520px; padding:64px 0; }
+}
+/* Tekst jasny na zdjęciu — sekcja NIE jest .section--olive/.section--cream
+   (to samodzielny baner z obrazem, nie standardowa naprzemienna sekcja), więc
+   .eyebrow/.h-section/.lede potrzebują tu własnych, jawnych override'ów
+   (inaczej dziedziczyłyby domyślny ciemny kolor tekstu, niewidoczny na
+   zdjęciu). .problem-signature ma już własny, poprawny ciemny-tło wariant
+   (rgba cream .8) jako WARTOŚĆ BAZOWĄ — nietknięty tutaj. */
+.problem-authority-banner .eyebrow{ color:var(--a-cream); }
+.problem-authority-banner .h-section{ color:var(--a-cream); margin-bottom:var(--sp-16); }
+.problem-authority-banner .lede{ color:var(--a-cream); }
+
 /* Salon (/salon) — nowa strona, brak odpowiednika na archon.au (ten sam przypadek co
    /zespol — sprawdzone wcześniej, że grupa "About" nie ma osobnej podstrony
    lokalizacji/wnętrza). Hero-photo reużywa 1:1 .about-hero-photo (ta sama klasa —
