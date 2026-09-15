@@ -25,15 +25,21 @@
        archon.au (sprawdzone: cała nawigacja archon.au to wyłącznie
        /treatments/<kategoria>/<slug>, zero stron typu "problem"/"concern") —
        układ zaprojektowany od zera z tokenów DESIGN-SYSTEM.md, ten sam wzorzec
-       hero co /o-nas i /zespol (.section--olive, wyśrodkowane eyebrow+H1+lede),
-       świadomie bez zdjęcia — to strona o problemie, nie o jednym miejscu/osobie,
-       więc żadne pojedyncze zdjęcie nie reprezentowałoby jej trafniej niż tekst. -->
+       hero co /o-nas i /zespol (.section--olive, wyśrodkowane eyebrow+H1+lede).
+       Zdjęcie (2026-09-15, na wyraźną prośbę użytkownika): dodane .about-hero-photo
+       — DOKŁADNIE ten sam komponent co na /o-nas (parallax, JS z main.js podłącza
+       się automatycznie przez selektor klasy, zero nowego kodu) — lipoliza-iniekcyjna.jpg,
+       to samo zdjęcie, które w tej chwili jest ustawione jako hero na
+       /zabiegi/karboksyterapia-plock. -->
   <section class="section--olive section-pad">
     <div class="container">
       <div class="about-hero-intro" data-reveal="slide">
         <p class="eyebrow">Problem</p>
         <h1 class="about-hero-heading">Cellulit — jak skutecznie go zredukować</h1>
         <p class="lede">Cellulit to zmiana strukturalna tkanki tłuszczowej pod skórą — dotyczy większości kobiet, niezależnie od wagi czy wieku, i nie jest chorobą. W INSTYTUTem.™ podchodzimy do niego wieloma metodami naraz, dobranymi do stopnia zaawansowania i Twoich celów.</p>
+      </div>
+      <div class="about-hero-photo">
+        <img src="../../assets/images/treatments/lipoliza-iniekcyjna.jpg" alt="Zabieg redukujący cellulit — biodro i boczek">
       </div>
     </div>
   </section>
