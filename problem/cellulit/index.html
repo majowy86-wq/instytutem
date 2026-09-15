@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../css/styles.css?v=246">
+<link rel="stylesheet" href="../../css/styles.css?v=247">
 <!-- TODO: favicon / logo mark asset not yet available -->
 </head>
 <body>
@@ -284,32 +284,79 @@
     </div>
   </section>
 
-  <!-- AUTORYTET — cytat i podpis Eweliny Majchrzak, treść dosłownie podana przez
-       użytkownika w czacie (2026-09-14), NIE napisana przez Claude — realny,
-       zaakceptowany tekst, nie wymyślony. Tytuły "magister kosmetologii i
-       pielęgniarka" zgodne z już zweryfikowanymi faktami użytymi na /zespol
-       (.team-tags: "założycielka · pielęgniarka · mgr kosmetologii").
-       Layout (2026-09-15, na wyraźną prośbę użytkownika: zdjęcie w tle całej
-       sekcji, "jak hero") — reużyty DOKŁADNIE komponent .cta-banner (baner CTA
-       "Nie wiesz, który zabieg wybrać?" niżej na tej samej stronie, i
-       .o-nas-cta na /o-nas) zamiast .treatment-hero — ten drugi jest
-       zaprojektowany na PEŁNĄ wysokość viewportu (100vh-80px), za duży na
-       śródstronicową sekcję cytatu. Scoped klasa .problem-authority-banner
-       (wzorzec 1:1 z .o-nas-cta) podnosi bazową wysokość 400px, za ciasną na
-       eyebrow+h2+lede+podpis. Zdjęcie: ewelina-ekspert.jpg — zdjęcie AI
-       (ChatGPT/ChatGPT Images), twarz zachowana z realnego zdjęcia Eweliny
-       (assets/images/zespol/ewelina.jpg, edycja minimalna z zachowaniem
-       twarzy), włosy spięte zamiast rozpuszczonych, tło rozszerzone
-       (outpainting) do kwadratu pod ten układ. Brak osobnego ciemnego
-       overlay — ten sam, zmierzony na żywym archon.au fakt co przy .cta-banner
-       (real #Solution nie ma overlay, w pełni przezroczyste). -->
-  <section class="cta-banner problem-authority-banner" id="autorytet-cellulit">
-    <img class="cta-banner-image" src="../../assets/images/zespol/ewelina-ekspert.jpg" alt="Ewelina Majchrzak, właścicielka INSTYTUTem.™">
-    <div class="cta-banner-content" data-reveal="slide">
-      <p class="eyebrow">Twój ekspert</p>
-      <h2 class="h-section">Twoje ciało w bezpiecznych rękach.</h2>
-      <p class="lede" style="max-width:640px;margin:0 auto">Praca z sylwetką wymaga wiedzy anatomii i precyzji. Jako magister kosmetologii i pielęgniarka, stawiam wyłącznie na technologie poparte badaniami klinicznymi. Do każdego problemu podchodzimy holistycznie, sprawdzając przeciwwskazania i dobierając parametry tak, aby osiągnąć naturalne rezultaty bez ryzyka dla Twojego zdrowia.</p>
-      <p class="problem-signature">Ewelina Majchrzak, właścicielka INSTYTUTem.™</p>
+  <!-- TESTIMONIALS — zastąpiło sekcję "Twój ekspert" (2026-09-15, na wyraźną
+       prośbę użytkownika: "za duzo zdjec" na tej stronie — usunięte zdjęcie
+       Eweliny, zdecydowano o sekcji BEZ zdjęć). Ten sam komponent i te same
+       realne opinie co na pozostałych ~25 stronach witryny (jedyna strona,
+       która ich dotąd nie miała) — zero nowego kodu/treści, czysto tekstowe
+       karty z gwiazdkami. -->
+  <section class="section--cream section-pad testimonial-section" aria-label="Opinie klientów">
+    <div class="container" data-reveal="slide">
+      <h2 class="h-section">Opinie naszych Klientów</h2>
+
+      <div class="t-shell">
+        <button class="t-arrow t-arrow--prev" id="tPrev" type="button" aria-label="Poprzednia opinia">
+          <svg class="t-arrow-icon" viewBox="0 0 22 16" aria-hidden="true"><path d="M8 1 1 8l7 7M1 8h20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <div class="t-mask" id="tMask">
+          <div class="t-track" id="testimonialTrack">
+            <div class="t-slide" role="group" aria-roledescription="slajd" aria-label="1 z 7">
+              <blockquote>"Szeroki wybór zabiegów, zabiegi dostosowane do potrzeb klientek, fachowa pomoc i porada ze strony pracowników, ceny adekwatne do jakości wykonywanych zabiegów, pełen profesjonalizm i przemiła obsługa, polecam w 100%!"</blockquote>
+              <div class="testimonial-name">Magdalena G.</div>
+              <div class="t-stars" aria-hidden="true"></div>
+              <div class="t-source">Opinia Google - 5 Gwiazdek</div>
+            </div>
+            <div class="t-slide" role="group" aria-roledescription="slajd" aria-label="2 z 7">
+              <blockquote>"Super obsługa, miła, dbająca o komfort klienta podczas zabiegu. Dodatkowo ogromna wiedza pracowników, która pozwala na udzielenie odpowiedzi na każde zadane pytanie. Polecam!"</blockquote>
+              <div class="testimonial-name">Karolina P.</div>
+              <div class="t-stars" aria-hidden="true"></div>
+              <div class="t-source">Opinia Google - 5 Gwiazdek</div>
+            </div>
+            <div class="t-slide" role="group" aria-roledescription="slajd" aria-label="3 z 7">
+              <blockquote>"Wspaniała atmosfera. Przesympatyczne i kompetentne Panie Kosmetolog. Pełny wywiad przed zabiegiem, pełne doinformowanie o ewentualnych siniakach po zabiegu. Zabiegi wykonane profesjonalnie, z dokładnością. Panie słuchają i rozumieją klienta, a nie tylko przytakują. Jestem zadowolona z wodorowego oczyszczania, peelingu chemicznego i pielęgnacji końcowej. Z przyjemnością wrócę ponownie. Polecam - 11/10."</blockquote>
+              <div class="testimonial-name">Katarzyna M.</div>
+              <div class="t-stars" aria-hidden="true"></div>
+              <div class="t-source">Opinia Google - 5 Gwiazdek</div>
+            </div>
+            <div class="t-slide" role="group" aria-roledescription="slajd" aria-label="4 z 7">
+              <blockquote>"Jak zawsze miło i profesjonalnie. Zabieg na najwyższym poziomie."</blockquote>
+              <div class="testimonial-name">Małgorzata C.</div>
+              <div class="t-stars" aria-hidden="true"></div>
+              <div class="t-source">Opinia Fresha - 5 Gwiazdek</div>
+            </div>
+            <div class="t-slide" role="group" aria-roledescription="slajd" aria-label="5 z 7">
+              <blockquote>"Kolejna wizyta utwierdza mnie, że jest to profesjonalny gabinet. Pani Ewelina ma dużo wiedzy i potrafi doradzić lub odradzić zabieg."</blockquote>
+              <div class="testimonial-name">Marzena D.</div>
+              <div class="t-stars" aria-hidden="true"></div>
+              <div class="t-source">Opinia Fresha - 5 Gwiazdek</div>
+            </div>
+            <div class="t-slide" role="group" aria-roledescription="slajd" aria-label="6 z 7">
+              <blockquote>"Polecam wszystkim, profesjonalne podejście do klienta i doradztwo, które spełnia oczekiwania."</blockquote>
+              <div class="testimonial-name">Elżbieta Ż.</div>
+              <div class="t-stars" aria-hidden="true"></div>
+              <div class="t-source">Opinia Fresha - 5 Gwiazdek</div>
+            </div>
+            <div class="t-slide" role="group" aria-roledescription="slajd" aria-label="7 z 7">
+              <blockquote>"Jak zawsze fantastycznie. Dziękuję!"</blockquote>
+              <div class="testimonial-name">Jolanta Z.</div>
+              <div class="t-stars" aria-hidden="true"></div>
+              <div class="t-source">Opinia Fresha - 5 Gwiazdek</div>
+            </div>
+          </div>
+        </div>
+
+        <button class="t-arrow t-arrow--next" id="tNext" type="button" aria-label="Następna opinia">
+          <svg class="t-arrow-icon" viewBox="0 0 22 16" aria-hidden="true"><path d="M14 1l7 7-7 7M21 8H1" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <div class="t-dots" id="tDots" role="tablist" aria-label="Wybierz opinię"></div>
+
+      <div class="t-cta">
+        <a class="abtn outline-dark" href="https://www.google.com/search?q=instytutem&oq=instytutem+&aqs=chrome.0.69i59l2j69i60l6.3854j0j1&sourceid=chrome&ie=UTF-8#lrd=0x471c709c13cb9da7:0x14c59205a379dc9a,1,,," target="_blank" rel="noopener">Więcej Opinii</a>
+        <a class="abtn primary-olive" href="https://g.page/r/CZrceaMFksUUEB0/review" target="_blank" rel="noopener">Zostaw Opinię</a>
+      </div>
     </div>
   </section>
 
