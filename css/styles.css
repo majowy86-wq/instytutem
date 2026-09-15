@@ -3960,15 +3960,26 @@ p .price-row-badges{ margin-left:10px; }
    klasa na obu sekcjach kart tej strony) — nie zmienia bazowej .treatment-cards
    używanej poprawnie gdzie indziej. */
 .problem-treatments-section .treatment-cards{ margin-top:64px; }
-/* "Zabiegi ukierunkowane" (#zabiegi-na-cellulit) dostało lead pod H2
-   (2026-09-15, na prośbę użytkownika) — kontekst wrócił do tego, dla którego
-   .treatment-cards' bazowe margin-top:24px zostało pierwotnie zmierzone
-   (eyebrow+h-section+LEDE→siatka, dokładnie jak na stronach zabiegów).
+/* "Zabiegi ukierunkowane" (#zabiegi-na-cellulit) dostało lead obok H2
+   (2026-09-15, na prośbę użytkownika: "ten lead jak w sekcji Dlaczego
+   powstaje czyli po prawej stronie") — h2+lede przebudowane z gołego
+   .h-section+.lede (jeden pod drugim) na reużyty .treatment-intro-grid
+   (2-kolumnowa siatka 1fr/2fr, DOKŁADNIE ten sam komponent co w sekcji
+   "Dlaczego powstaje" na tej samej stronie). Kontekst dla .treatment-cards
+   wrócił do tego, dla którego jego bazowe margin-top:24px zostało pierwotnie
+   zmierzone (eyebrow+h-section+LEDE→siatka, jak na stronach zabiegów).
    Selektor po id (wyższa specyficzność niż .problem-treatments-section)
    cofa scoped override z reguły wyżej z powrotem do bazowych 24px, WYŁĄCZNIE
    dla tej jednej sekcji — "Dodatkowy efekt" niżej na tej samej stronie nadal
    nie ma lede, więc zostaje przy 64px. */
 #zabiegi-na-cellulit .treatment-cards{ margin-top:24px; }
+/* .treatment-intro-grid ma własne bazowe margin-top:55px (zmierzone dla
+   kontekstu divider→grid, patrz komentarz przy definicji) — ta sekcja ma
+   goły eyebrow bez dividera (ten sam wzorzec co #faq na tej samej stronie,
+   patrz #faq .treatment-intro-grid{margin-top:0} niżej), więc zerowane
+   identycznie — odstęp eyebrow→grid zapewnia już istniejące
+   .problem-treatments-section .eyebrow{margin-bottom:47px}. */
+#zabiegi-na-cellulit .treatment-intro-grid{ margin-top:0; }
 /* Sekcja "autorytetu" (cytat Eweliny) — podpis pod cytatem na ciemnym tle.
    Celowo NIE .team-tags (ten komponent jest skalibrowany pod jasne tło —
    .section--cream na /zespol, `color:var(--a-gray)` nieczytelny na
