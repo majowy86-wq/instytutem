@@ -2890,6 +2890,15 @@ p .price-row-badges{ margin-left:10px; }
   background-color:rgba(255,255,255,.66);
   box-shadow:0 12px 14px -7px rgba(122,119,114,.26);
 }
+/* /problem/utrata-jedrnosci-biustu: 4 zabiegi w "Zabiegi ukierunkowane", na
+   życzenie użytkownika ("zrob 2 boksy w jednym wierszu") wymuszone dokładnie
+   2 karty na wiersz zamiast bazowych 3 (min-width:31%) — 44% + gap zapewnia,
+   że trzecia karta się nie zmieści. Wrapped w min-width:480px, żeby NIE
+   nadpisywać bazowego mobile breakpointu niżej (479px, 1 karta na wiersz) —
+   selektor ID i tak by go pokonał specyficznością, media query to unika. */
+@media (min-width:480px){
+  #zabiegi-na-utrate-jedrnosci-biustu .treatment-card{ min-width:44%; max-width:50%; }
+}
 @media (max-width:479px){
   /* the reference site's real breakpoint (measured: still 31%/50% at 480px,
      switches to 100%/100% exactly at 479px) — same tier used sitewide for
