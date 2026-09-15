@@ -491,8 +491,15 @@ div[data-partial]{ display:contents; }
    6 links + 2 CTA buttons + the .nav-row floor gap, ~892px unconstrained) — below
    ~991px the row runs out of room and would overflow/compress, so the switch to
    hamburger happens with a small margin (~33px) to spare rather than at the exact
-   pixel it starts breaking, without giving up more horizontal-nav range than needed */
-@media (max-width:1024px){
+   pixel it starts breaking, without giving up more horizontal-nav range than needed.
+   Pushed from 1024px to 1130px (2026-09-15, user report: "Kup Kartę Podarunkową"
+   cut off at the widest tablet viewport, e.g. iPad Pro 11" landscape 1112px) —
+   "Konsultacje" collapsed into "DERMOkonsultacja" made the single nav link LONGER,
+   not shorter, so the row now needs real content width up to ~1100px (measured live:
+   button clips below 1100px, fits with ~0px to spare exactly at 1100px) — the old
+   1024px cutoff sat well inside that now-wider unconstrained width. New breakpoint
+   keeps the same ~30px safety-margin convention as the original (1100+30). */
+@media (max-width:1130px){
   .nav-links, .nav-ctas .abtn.outline-dark{ display:none; }
   .hamburger{ display:block; }
   /* dock "Rezerwuj online" right next to the hamburger instead of letting
@@ -2359,10 +2366,11 @@ p .price-row-badges{ margin-left:10px; }
    is no longer part of the transition either since it no longer changes.
    (2) (hover:hover) and (pointer:fine) alone still let the expand trigger at
    any width on a real desktop browser — e.g. a narrow, resized window still
-   has a mouse — so added min-width:1025px, the site's own real desktop
+   has a mouse — so added min-width:1131px, the site's own real desktop
    breakpoint (.nav-links's own switch point, see the comment above its
-   @media (max-width:1024px) rule) rather than a made-up number, so "desktop"
-   means the same thing here as it does for the nav itself. */
+   @media (max-width:1130px) rule, pushed from 1024px on 2026-09-15) rather
+   than a made-up number, so "desktop" means the same thing here as it does
+   for the nav itself. */
 .accordion-info-link-label{
   font-family:"Inter",sans-serif;
   font-size:11px;
@@ -2372,7 +2380,7 @@ p .price-row-badges{ margin-left:10px; }
   color:var(--a-gray);
   padding:0 10px 0 6px;
 }
-@media (hover:hover) and (pointer:fine) and (min-width:1025px){
+@media (hover:hover) and (pointer:fine) and (min-width:1131px){
   .accordion-info-link:hover,
   .accordion-info-link:focus-visible{ max-width:220px; }
 }
