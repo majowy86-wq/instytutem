@@ -725,6 +725,34 @@ Ustalone w Rundzie 123 na wyraźną prośbę użytkownika — `zabiegi/depilacja
 
 **6. Weryfikacja przed uznaniem za gotowe:** pełny „Stały proces weryfikacji" z CLAUDE.md/DOKUMENTACJA.md (pomiar → kod → ponowny pomiar, nigdy sam zrzut ekranu jako dowód) plus specyficznie dla klona: `fetch()` wszystkich nowych zasobów zwraca `200`, brak błędów konsoli, test względnych ścieżek realną symulacją podścieżki GitHub Pages (patrz Runda 118/121 — serwer uruchomiony z katalogu nadrzędnego repo), i dopisanie nowej pozycji do „Listy zabiegów" (status zdjęcia) razem z logiem rundy tutaj.
 
+### Proces: budowa nowej strony "Problem" z szablonu (klonowanie `/problem/cellulit`)
+
+Ustalone 2026-09-14/15 przy budowie `/problem/cellulit` (pierwsza strona) i `/problem/wiotka-skora` (druga, po iteracjach na pierwszej — ta wersja jest FINALNA, cofnięte zmiany typu sekcja "Twój ekspert" NIE wchodzą do szablonu). Świadomie INNY układ niż szablon strony zabiegu (`depilacja-laserowa-plock-lightsheer`) — strona "Problem" prezentuje KILKA realnych zabiegów adresujących dany problem, nie jeden zabieg.
+
+**1. Struktura sekcji (kolejność 1:1 z `/problem/wiotka-skora`, aktualny wzorzec):**
+
+0. Nagłówek/stopka jako partiale (identycznie jak strony zabiegów).
+1. Hero (`.treatment-hero`/`.treatment-hero-bg`) — zdjęcie w tle, tekst wyśrodkowany, BEZ `.treatment-hero-ctas`/`.treatment-price-strip` w hero (te elementy są osobno, patrz pkt 2) — strona nie reprezentuje jednego zabiegu, więc nie podlega zasadzie CLAUDE.md pkt 10 (box=hero własnej podstrony), zdjęcie dobiera się tematycznie (realny obszar ciała/twarzy, nie zgadywane).
+2. Pasek "Cena już od" + MediRaty (`.treatment-price-strip`) — cena to najniższa realna wartość spośród WSZYSTKICH zabiegów wymienionych na całej stronie (łącznie z sekcją "Dodatkowy efekt"), nie zgadywana. Tekst MediRaty: "Dostępne dla wybranych zabiegów..." (liczba mnoga, nie "tego zabiegu").
+3. "Dlaczego powstaje" (`.treatment-intro-title-line`+`.treatment-intro-grid`+`.treatment-accordion`) — eyebrow+divider+h2+lede+akordeon 2-3 realnych, ogólnie znanych przyczyn problemu. **NIE wymyślać pseudo-medycznego etapowania na siłę** (jak "fazy cellulitu") — tylko jeśli dla danego problemu faktycznie istnieje taki podział; w przeciwnym razie zwykłe, niezależne przyczyny. Numeracja pozycji akordeonu: `<span class="accordion-num">01</span>` (BEZ kropki na końcu, klasa GLOBALNA w CSS — kolor `--a-rust`, `font-size:20px`, `font-weight:500` — stosować zawsze przy tym wzorcu, nic dodatkowego do zrobienia w CSS, tylko użyć tej samej klasy w HTML).
+4. "Zabiegi ukierunkowane" (`.problem-treatments-section`, `.treatment-intro-title-line`+`.treatment-intro-grid`+`.treatment-cards`) — 1-3 zabiegi, dla których problem jest GŁÓWNYM, potwierdzonym wskazaniem NA ICH WŁASNEJ stronie (zweryfikowane bezpośrednio w treści tamtej strony — cytat, nie domysł z nazwy zabiegu). Karty = dokładnie komponent `.treatment-cards`/`.treatment-card` (ten sam co warianty S/M/L na depilacji laserowej), cena "od X zł" + zakres czasu pojedynczego zabiegu (realne z cennika źródłowej strony), CTA "Dowiedz się więcej" linkujące do pełnej strony zabiegu (NIE bezpośrednio do Fresha).
+5. "Dodatkowy efekt" (analogiczna struktura, `.section--olive`) — zabiegi, gdzie problem jest jednym z KILKU efektów, nie głównym wskazaniem. **Tylko tyle kart, ile ma realne, potwierdzone dopasowanie — NIE dopełniać sztucznie do 3.** `/problem/wiotka-skora` ma tu tylko 1 kartę, to poprawne i akceptowalne.
+6. Opinie klientów (`.testimonial-section`) — ten sam, w pełni współdzielony blok 7 opinii co na ~25 innych stronach (kopiować 1:1, nie generować nowych).
+7. Promo Pakietu Powitalnego (`#promo`) — partial, bez zmian.
+8. FAQ (`#faq`) — 4 pytania sformułowane WYŁĄCZNIE z faktów już potwierdzonych wyżej na tej samej stronie, bez nowych twierdzeń medycznych.
+9. CTA banner (`.cta-banner`) — generyczny wzorzec "Nie wiesz, który zabieg wybrać? Umów się na DERMOkonsultację." (współdzielony, bez zmian).
+10. Newsletter — w 100% współdzielony, bez zmian.
+
+**Świadomie USUNIĘTE z szablonu** (były na `/problem/cellulit`, cofnięte 2026-09-15): sekcja cross-sellingowa "Zobacz też" do innych stron "Problem" (usunięta — świadoma decyzja, NIE dodawać na nowych stronach) i sekcja "autorytetu" ze zdjęciem/cytatem Eweliny (usunięta — "za dużo zdjęć" na stronie; opinie klientów pełnią teraz tę samą rolę zaufania, bez dodatkowego zdjęcia).
+
+**2. Research zabiegów — twarda zasada, nie zgadywanie:** przed wyborem, które zabiegi trafiają do "Zabiegi ukierunkowane"/"Dodatkowy efekt", sprawdzić bezpośrednio treść WŁASNEJ strony każdego kandydata (lede, Wskazania, cennik) pod kątem realnej wzmianki o danym problemie — najlepiej przez subagenta Explore, jeśli kandydatów jest dużo (>5). Wzmianka o powiązanym efekcie WYŁĄCZNIE w kontekście twarzy nie kwalifikuje zabiegu do strony "Problem" dotyczącej ciała, i odwrotnie. Cena/czas do karty: realna wartość za ODPOWIEDNI obszar (ciało vs twarz) z cennika źródłowej strony, nie generyczna wartość "od" bez sprawdzenia kontekstu.
+
+**3. Ścieżki:** `problem/<slug>/index.html`, 2 poziomy głębiej niż korzeń — `../../` wszędzie, identycznie jak strony zabiegów.
+
+**4. Cache-busting:** nowy plik startuje z aktualnym numerem `?v=` (sprawdzić na `/problem/cellulit` przed klonowaniem), nie od zera.
+
+**5. Weryfikacja:** balans tagów (Python HTMLParser), brak błędów konsoli, wszystkie zasoby → 200 (`read_network_requests`), zrzuty ekranu każdej sekcji (hero→newsletter), pomiar `getComputedStyle`/`getBoundingClientRect` po wymuszeniu `is-revealed` na `[data-reveal]` (elementy poniżej pierwszego ekranu nie mają jeszcze wyzwolonej animacji scroll-reveal przy świeżym `navigate` — fałszywie ujemne/zerowe wartości przy pomiarze na nieujawnionym elemencie, patrz DOKUMENTACJA.md niżej dla przykładu tego błędu).
+
 ### Zamknięcie kategorii: Zabiegi Hi-Tech (11/11, Rundy 159–213, 2026-09-04 → 2026-09-08)
 
 Wszystkie 11 pozycji z mega-menu „Zabiegi" → „Zabiegi Hi-Tech" (patrz „Lista zabiegów" wyżej) mają teraz w pełni zbudowaną, zweryfikowaną podstronę zgodną z procesem opisanym wyżej. Kategoria „Zabiegi Iniekcyjne" (10 pozycji) i „Zabiegi Manualne" (3 pozycje) pozostają do zrobienia — patrz PLAN.md.
