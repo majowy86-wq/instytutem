@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../css/styles.css?v=250">
+<link rel="stylesheet" href="../css/styles.css?v=251">
 <!-- TODO: favicon / logo mark asset not yet available -->
 </head>
 <body>
@@ -63,29 +63,34 @@
     </div>
   </section>
 
-  <!-- GODZINY OTWARCIA — 1:1 z archon.au (nagłówek + lista dni z podziałem),
-       ale z REALNYMI godzinami INSTYTUTem.™ (partials/footer.html), nie
-       skopiowanymi z Australii — u nas nie ma osobnego rozbicia
-       poniedziałek/wtorek-czwartek/piątek jak na archon.au, bo nasze
-       godziny są prostsze (pon–pt jedna wspólna pula, sob osobno, niedziela
-       zamknięte) — struktura listy 1:1, treść wyłącznie prawdziwa. .h-section
-       reużyty (już dokładnie 30px/Tenor Sans/500, zmierzone wcześniej w innym
-       kontekście, identyczne z pomiarem "Opening Hours" na żywej stronie). -->
+  <!-- GODZINY OTWARCIA — 1:1 z archon.au: siatka KOLUMN dzień-obok-dnia (nie
+       stos wierszy), zmierzone wprost (._4-column-grid: columnGap 40px,
+       rowGap 64px, każda kolumna padding-bottom 32px + border-bottom 1px).
+       U nas 3 kolumny, nie 4 jak na archon.au — bo to realna liczba pozycji
+       naszego, prostszego grafiku (pon–pt jedna wspólna pula, sob osobno,
+       niedziela zamknięta), nie wymyślona redukcja. Treść wyłącznie
+       prawdziwa (partials/footer.html), nie skopiowana z Australii. Kolor
+       obramowania --a-ink-warm zamiast zmierzonego rgb(0,0,0) — świadome
+       odejście zgodne z nadrzędną zasadą projektu "jedna czerń na stronie".
+       .h-section reużyty (30px/Tenor Sans/500, własne margin-bottom:24px —
+       dokładnie zmierzony odstęp nagłówek→siatka na żywej stronie). -->
   <section class="section--cream section-pad">
     <div class="container">
       <div class="kontakt-hours" data-reveal="slide">
         <h2 class="h-section">Godziny otwarcia — niedziela nieczynne</h2>
-        <div class="kontakt-hours-row">
-          <p class="kontakt-hours-day">Poniedziałek – piątek</p>
-          <p class="kontakt-hours-time">08:00 – 21:00</p>
-        </div>
-        <div class="kontakt-hours-row">
-          <p class="kontakt-hours-day">Sobota</p>
-          <p class="kontakt-hours-time">08:00 – 16:00</p>
-        </div>
-        <div class="kontakt-hours-row">
-          <p class="kontakt-hours-day">Niedziela</p>
-          <p class="kontakt-hours-time">Nieczynne</p>
+        <div class="kontakt-hours-grid">
+          <div class="kontakt-hours-col">
+            <p class="kontakt-hours-day">Poniedziałek – piątek</p>
+            <p class="kontakt-hours-time">08:00 – 21:00</p>
+          </div>
+          <div class="kontakt-hours-col">
+            <p class="kontakt-hours-day">Sobota</p>
+            <p class="kontakt-hours-time">08:00 – 16:00</p>
+          </div>
+          <div class="kontakt-hours-col">
+            <p class="kontakt-hours-day">Niedziela</p>
+            <p class="kontakt-hours-time">Nieczynne</p>
+          </div>
         </div>
       </div>
 

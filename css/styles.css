@@ -4032,14 +4032,19 @@ p .price-row-badges{ margin-left:10px; }
 .kontakt-hero .eyebrow{ color:var(--a-ink-warm); margin-bottom:20px; }
 .kontakt-hero .h-hero{ margin-bottom:0; }
 
+/* Gap eyebrow→H1→siatka kart: 150px, zmierzone wprost (element "spacer xlarge"
+   na archon.au między H1 a siatką — DOKŁADNIE ta sama wartość co już
+   udokumentowana wcześniej dla .contact-grid na stronie głównej, patrz
+   komentarz przy tamtej regule). Odtworzone jako margin-top, nie osobny div —
+   identyczny efekt wizualny, prostszy kod. */
 .kontakt-grid{
   display:grid;
   grid-template-columns:repeat(3, 1fr);
   gap:16px 50px;
-  margin-top:var(--sp-64);
+  margin-top:150px;
 }
-@media (max-width:900px){
-  .kontakt-grid{ grid-template-columns:1fr; gap:24px; }
+@media (max-width:767px){
+  .kontakt-grid{ grid-template-columns:1fr; gap:24px; margin-top:64px; }
 }
 /* .kontakt-box border/padding/radius zmierzone wprost z .kontakt-box na
    archon.au (1px solid --a-gray, ~20px padding, radius 0 — realny brak
@@ -4062,19 +4067,36 @@ p .price-row-badges{ margin-left:10px; }
 }
 .kontakt-box .abtn{ width:100%; }
 
-.kontakt-hours{ margin-top:var(--sp-64); }
-.kontakt-hours-row{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:20px 0;
-  border-bottom:1px solid rgba(122,119,114,.41);
+/* Godziny otwarcia — na archon.au to siatka KOLUMN dzień-obok-dnia (4 kolumny
+   na desktopie, 1 na mobile), NIE stos poziomych wierszy jak w pierwszej
+   wersji tej strony — zmierzone wprost (._4-column-grid, columnGap:40px,
+   rowGap:64px). U nas 3 kolumny (pon–pt/sob/niedziela), nie 4 — bo to realna
+   liczba pozycji naszego, prostszego grafiku, nie wymyślona redukcja.
+   margin-top sekcji 150px (ten sam spacer co hero→siatka kart). Nagłówek
+   .h-section ma już własne margin-bottom:24px — DOKŁADNIE zmierzony odstęp
+   nagłówek→siatka godzin (24px), zero dodatkowego marginesu potrzebne. */
+.kontakt-hours{ margin-top:150px; }
+.kontakt-hours-grid{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  column-gap:40px;
+  row-gap:64px;
 }
-.kontakt-hours-row:last-child{ border-bottom:none; }
-.kontakt-hours-day{ font-size:15px; color:var(--a-ink-warm); }
+@media (max-width:767px){
+  .kontakt-hours-grid{ grid-template-columns:1fr; row-gap:32px; }
+}
+/* Kolor obramowania na archon.au to dosłownie rgb(0,0,0) (zmierzone), ale
+   projekt ma stałą zasadę "jedna czerń na stronie — --a-ink-warm, nigdy
+   surowy #000" (patrz pamięć projektu) — świadome odejście od 1:1 tutaj,
+   zgodne z nadrzędną, już wcześniej ustaloną regułą projektu. */
+.kontakt-hours-col{
+  padding-bottom:32px;
+  border-bottom:1px solid var(--a-ink-warm);
+}
+.kontakt-hours-day{ font-size:15px; font-weight:400; color:var(--a-ink-warm); margin-bottom:20px; }
 .kontakt-hours-time{ font-size:15px; font-weight:700; color:var(--a-ink-warm); }
 
-.kontakt-form-section{ margin-top:var(--sp-64); }
+.kontakt-form-section{ margin-top:150px; }
 .kontakt-form{
   display:flex;
   flex-direction:column;
