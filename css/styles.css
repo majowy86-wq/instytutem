@@ -4053,15 +4053,26 @@ p .price-row-badges{ margin-left:10px; }
   border:1px solid var(--a-gray);
   padding:20px;
 }
+/* POPRAWKA (2026-09-15, druga weryfikacja): pierwszy pomiar tego nagłówka był
+   błędny (złapał inny element / złą regułę CSS) — realnie to WCALE NIE
+   Tenor Sans, tylko Inter 700/15px, zmierzone bezpośrednio na `<h2 class="
+   heading h3">Call us</h2>` (`getComputedStyle` na box.querySelector('h2')):
+   fontFamily "Inter, sans-serif", fontWeight "700", fontSize "15px",
+   letterSpacing "normal". Świadomy wyjątek od sitewide konwencji "nagłówki =
+   Tenor Sans" — na TEJ stronie referencyjnej małe nagłówki kart kontaktowych
+   używają pogrubionego Inter, nie serifowego Tenor Sans jak duże nagłówki
+   sekcji. margin-bottom 20px też zmierzone (gap nagłówek→akapit). */
 .kontakt-box h3{
-  font-family:"Tenor Sans",serif;
-  font-size:20px;
-  font-weight:500;
-  margin-bottom:12px;
+  font-family:"Inter",sans-serif;
+  font-size:15px;
+  font-weight:700;
+  margin-bottom:20px;
 }
+/* line-height 23.8px przy font-size 14px = dokładnie 1.7 — zmierzone wprost
+   (pierwsza wersja miała zgadnięte 1.5). */
 .kontakt-box p{
   font-size:14px;
-  line-height:1.5;
+  line-height:1.7;
   color:var(--a-ink-warm);
   margin-bottom:20px;
 }
