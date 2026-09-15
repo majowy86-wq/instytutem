@@ -3973,13 +3973,12 @@ p .price-row-badges{ margin-left:10px; }
    dla tej jednej sekcji — "Dodatkowy efekt" niżej na tej samej stronie nadal
    nie ma lede, więc zostaje przy 64px. */
 #zabiegi-na-cellulit .treatment-cards{ margin-top:24px; }
-/* .treatment-intro-grid ma własne bazowe margin-top:55px (zmierzone dla
-   kontekstu divider→grid, patrz komentarz przy definicji) — ta sekcja ma
-   goły eyebrow bez dividera (ten sam wzorzec co #faq na tej samej stronie,
-   patrz #faq .treatment-intro-grid{margin-top:0} niżej), więc zerowane
-   identycznie — odstęp eyebrow→grid zapewnia już istniejące
-   .problem-treatments-section .eyebrow{margin-bottom:47px}. */
-#zabiegi-na-cellulit .treatment-intro-grid{ margin-top:0; }
+/* .treatment-intro-grid ma własne bazowe margin-top:55px, zmierzone dokładnie
+   dla kontekstu divider→grid — ta sekcja od 2026-09-15 MA już
+   .treatment-intro-title-line+.treatment-intro-divider (patrz niżej), więc
+   ten kontekst teraz pasuje 1:1 i baza 55px zostaje bez zmian, zero
+   override'u tutaj (poprzedni margin-top:0 z rundy "goły eyebrow" usunięty,
+   bo przestał być prawdziwy). */
 /* Sekcja "autorytetu" (cytat Eweliny) — podpis pod cytatem na ciemnym tle.
    Celowo NIE .team-tags (ten komponent jest skalibrowany pod jasne tło —
    .section--cream na /zespol, `color:var(--a-gray)` nieczytelny na
@@ -3991,17 +3990,22 @@ p .price-row-badges{ margin-left:10px; }
 }
 /* Eyebrow→h-section "powietrze" na stronach "Problem" (2026-09-14, na prośbę
    użytkownika: były "znacznie za blisko"). Bazowa .eyebrow nie ma własnego
-   margin-bottom — każdy kontekst dostarcza go osobno; te 4 nowe sekcje
-   (2× .problem-treatments-section, cross-selling, autorytet) go nie miały.
-   Wartość 47px/17px NIE nowa — to już ustalona, zmierzona z archon.au
-   konwencja dla DOKŁADNIE tego samego wzorca (goły eyebrow+h-section, bez
-   lede pomiędzy), używana od dawna na #wskazania i #postepowanie na
-   stronach zabiegów. */
-.problem-treatments-section .eyebrow,
+   margin-bottom — każdy kontekst dostarcza go osobno. Wartość 47px/17px NIE
+   nowa — to już ustalona, zmierzona z archon.au konwencja dla DOKŁADNIE
+   tego samego wzorca (goły eyebrow+h-section, bez lede/dividera pomiędzy),
+   używana od dawna na #wskazania i #postepowanie na stronach zabiegów.
+   #zabiegi-na-cellulit CELOWO usunięty stąd (2026-09-15, na prośbę
+   użytkownika: eyebrow+separator jak w "Dlaczego powstaje") — ta sekcja ma
+   teraz .treatment-intro-title-line, który dostarcza WŁASNY, inny odstęp
+   (20px, patrz jego definicja) — dwie reguły o tej samej specyficzności
+   walczyłyby o tę samą regułę; zostawienie #zabiegi-na-cellulit tutaj
+   nadpisywałoby 20px z powrotem na 47px tylko dlatego, że ta reguła jest
+   zadeklarowana niżej w pliku (kolejność w kaskadzie, nie specyficzność). */
+#dodatkowy-efekt-cellulit .eyebrow,
 #cross-selling-cellulit .eyebrow,
 #autorytet-cellulit .eyebrow{ margin-bottom:47px; }
 @media (max-width:767px){
-  .problem-treatments-section .eyebrow,
+  #dodatkowy-efekt-cellulit .eyebrow,
   #cross-selling-cellulit .eyebrow,
   #autorytet-cellulit .eyebrow{ margin-bottom:17px; }
 }
